@@ -47,7 +47,6 @@ print( des.shape )
 
 `brief.getDescriptorSize()`获取$n_d$的大小（以字节为单位）。默认值是32。接下来要做的事就是匹配，我们将会在另外一章中介绍它。
 
-## 更多资源
 
 [^1]: http://icwww.epfl.ch/~lepetit/papers/calonder_eccv10.pdf 
 [^2]: https://zh.wikipedia.org/wiki/尺度不變特徵轉換
