@@ -17,6 +17,10 @@
 
     当图像的大小变化时，Harris角点检测不够好。Lowe发现了一个突破性的方法来发现尺度不变的特征，这个方法称为SIFT。
 
+-   @subpage tutorial_py_surf_intro
+
+    SIFT真的很好用，但它不够快，所以人们想出了一个更快速的版本叫SURF。
+
 -   @subpage tutorial_py_fast
 
     所有上面这些特征检测的方法都很好。但是对于像SLAM这样的实时应用程序来说它们都不够快。所以就有了FAST算法，它真的很“FAST”。
