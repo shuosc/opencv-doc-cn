@@ -33,16 +33,11 @@ From the figure, you can see that only when \f$\lambda_1\f$ and \f$\lambda_2\f$ 
 Code
 ----
 
-OpenCV has a function, **cv2.goodFeaturesToTrack()**. It finds N strongest corners in the image by
-Shi-Tomasi method (or Harris Corner Detection, if you specify it). As usual, image should be a
-grayscale image. Then you specify number of corners you want to find. Then you specify the quality
-level, which is a value between 0-1, which denotes the minimum quality of corner below which
-everyone is rejected. Then we provide the minimum euclidean distance between corners detected.
+OpenCV has a function, **cv2.goodFeaturesToTrack()**. It finds N strongest corners in the image by Shi-Tomasi method (or Harris Corner Detection, if you specify it). As usual, image should be a grayscale image. Then you specify number of corners you want to find. Then you specify the quality
+level, which is a value between 0-1, which denotes the minimum quality of corner below which everyone is rejected. Then we provide the minimum euclidean distance between corners detected.
 
-With all these informations, the function finds corners in the image. All corners below quality
-level are rejected. Then it sorts the remaining corners based on quality in the descending order.
-Then function takes first strongest corner, throws away all the nearby corners in the range of
-minimum distance and returns N strongest corners.
+With all these informations, the function finds corners in the image. All corners below quality level are rejected. Then it sorts the remaining corners based on quality in the descending order.
+Then function takes first strongest corner, throws away all the nearby corners in the range of minimum distance and returns N strongest corners.
 
 In below example, we will try to find 25 best corners:
 @code{.py}
