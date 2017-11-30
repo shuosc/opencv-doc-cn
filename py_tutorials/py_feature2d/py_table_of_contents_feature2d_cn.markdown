@@ -5,6 +5,10 @@
 
     图像中的主要特征是什么？如果找出对我们来说有用的特征？
 
+-   @subpage tutorial_py_features_harris
+
+    好吧, 边角是好的特征。但我们该如何找到它们呢？ 
+
 -   @subpage tutorial_py_fast
 
     所有上面这些特征检测的方法都很好。但是对于像SLAM这样的实时应用程序来说它们都不够快。所以就有了FAST算法，它真的很“FAST”。

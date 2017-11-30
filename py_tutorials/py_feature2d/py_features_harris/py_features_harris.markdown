@@ -31,8 +31,7 @@ refer any standard text books you like for full derivation), we get the final eq
 
 where
 
-\f[M = \sum_{x,y} w(x,y) \begin{bmatrix}I_x I_x & I_x I_y \\
-                                     I_x I_y & I_y I_y \end{bmatrix}\f]
+\f[M = \sum_{x,y} w(x,y) \begin{bmatrix}I_x I_x & I_x I_y \\ I_x I_y & I_y I_y \end{bmatrix}\f]
 
 Here, \f$I_x\f$ and \f$I_y\f$ are image derivatives in x and y directions respectively. (Can be easily found
 out using **cv2.Sobel()**).
@@ -51,7 +50,7 @@ So the values of these eigen values decide whether a region is corner, edge or f
 
 -   When \f$|R|\f$ is small, which happens when \f$\lambda_1\f$ and \f$\lambda_2\f$ are small, the region is
     flat.
--   When \f$R<0\f$, which happens when \f$\lambda_1 >> \lambda_2\f$ or vice versa, the region is edge.
+-   When \f$R<0\f​$, which happens when \f$\lambda_1 >> \lambda_2\f​$ or vice versa, the region is edge.
 -   When \f$R\f$ is large, which happens when \f$\lambda_1\f$ and \f$\lambda_2\f$ are large and
     \f$\lambda_1 \sim \lambda_2\f$, the region is a corner.
 
@@ -59,8 +58,7 @@ It can be represented in a nice picture as follows:
 
 ![image](images/harris_region.jpg)
 
-So the result of Harris Corner Detection is a grayscale image with these scores. Thresholding for a
-suitable give you the corners in the image. We will do it with a simple image.
+So the result of Harris Corner Detection is a grayscale image with these scores. Thresholding for a suitable give you the corners in the image. We will do it with a simple image.
 
 Harris Corner Detector in OpenCV
 --------------------------------
@@ -101,14 +99,7 @@ Below are the three results:
 Corner with SubPixel Accuracy
 -----------------------------
 
-Sometimes, you may need to find the corners with maximum accuracy. OpenCV comes with a function
-**cv2.cornerSubPix()** which further refines the corners detected with sub-pixel accuracy. Below is
-an example. As usual, we need to find the harris corners first. Then we pass the centroids of these
-corners (There may be a bunch of pixels at a corner, we take their centroid) to refine them. Harris
-corners are marked in red pixels and refined corners are marked in green pixels. For this function,
-we have to define the criteria when to stop the iteration. We stop it after a specified number of
-iteration or a certain accuracy is achieved, whichever occurs first. We also need to define the size
-of neighbourhood it would search for corners.
+Sometimes, you may need to find the corners with maximum accuracy. OpenCV comes with a function **cv2.cornerSubPix()** which further refines the corners detected with sub-pixel accuracy. Below is an example. As usual, we need to find the harris corners first. Then we pass the centroids of these corners (There may be a bunch of pixels at a corner, we take their centroid) to refine them. Harris corners are marked in red pixels and refined corners are marked in green pixels. For this function, we have to define the criteria when to stop the iteration. We stop it after a specified number of iteration or a certain accuracy is achieved, whichever occurs first. We also need to define the size of neighbourhood it would search for corners.
 @code{.py}
 import cv2
 import numpy as np
