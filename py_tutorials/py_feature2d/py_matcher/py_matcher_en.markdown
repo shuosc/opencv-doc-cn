@@ -11,16 +11,9 @@ In this chapter
 Basics of Brute-Force Matcher
 -----------------------------
 
-Brute-Force matcher is simple. It takes the descriptor of one feature in first set and is matched
-with all other features in second set using some distance calculation. And the closest one is
-returned.
+Brute-Force matcher is simple. It takes the descriptor of one feature in first set and is matched with all other features in second set using some distance calculation. And the closest one is returned.
 
-For BF matcher, first we have to create the BFMatcher object using **cv2.BFMatcher()**. It takes two
-optional params. First one is normType. It specifies the distance measurement to be used. By
-default, it is cv2.NORM_L2. It is good for SIFT, SURF etc (cv2.NORM_L1 is also there). For binary
-string based descriptors like ORB, BRIEF, BRISK etc, cv2.NORM_HAMMING should be used, which used
-Hamming distance as measurement. If ORB is using WTA_K == 3 or 4, cv2.NORM_HAMMING2 should be
-used.
+For BF matcher, first we have to create the BFMatcher object using **cv2.BFMatcher()**. It takes two optional params. First one is normType. It specifies the distance measurement to be used. By default, it is cv2.NORM_L2. It is good for SIFT, SURF etc (cv2.NORM_L1 is also there). For binary string based descriptors like ORB, BRIEF, BRISK etc, cv2.NORM_HAMMING should be used, which used Hamming distance as measurement. If ORB is using WTA_K == 3 or 4, cv2.NORM_HAMMING2 should be used.
 
 Second param is boolean variable, crossCheck which is false by default. If it is true, Matcher
 returns only those matches with value (i,j) such that i-th descriptor in set A has j-th descriptor
@@ -42,12 +35,10 @@ Let's see one example for each of SURF and ORB (Both use different distance meas
 
 ### Brute-Force Matching with ORB Descriptors
 
-Here, we will see a simple example on how to match features between two images. In this case, I have
-a queryImage and a trainImage. We will try to find the queryImage in trainImage using feature
+Here, we will see a simple example on how to match features between two images. In this case, I have a queryImage and a trainImage. We will try to find the queryImage in trainImage using feature
 matching. ( The images are /samples/c/box.png and /samples/c/box_in_scene.png)
 
-We are using ORB descriptors to match features. So let's start with loading images, finding
-descriptors etc.
+We are using ORB descriptors to match features. So let's start with loading images, finding descriptors etc.
 @code{.py}
 import numpy as np
 import cv2
@@ -138,15 +129,9 @@ See the result below:
 FLANN based Matcher
 -------------------
 
-FLANN stands for Fast Library for Approximate Nearest Neighbors. It contains a collection of
-algorithms optimized for fast nearest neighbor search in large datasets and for high dimensional
-features. It works more faster than BFMatcher for large datasets. We will see the second example
-with FLANN based matcher.
+FLANN stands for Fast Library for Approximate Nearest Neighbors. It contains a collection of algorithms optimized for fast nearest neighbor search in large datasets and for high dimensional features. It works more faster than BFMatcher for large datasets. We will see the second example with FLANN based matcher.
 
-For FLANN based matcher, we need to pass two dictionaries which specifies the algorithm to be used,
-its related parameters etc. First one is IndexParams. For various algorithms, the information to be
-passed is explained in FLANN docs. As a summary, for algorithms like SIFT, SURF etc. you can pass
-following:
+For FLANN based matcher, we need to pass two dictionaries which specifies the algorithm to be used, its related parameters etc. First one is IndexParams. For various algorithms, the information to be passed is explained in FLANN docs. As a summary, for algorithms like SIFT, SURF etc. you can pass following:
 @code{.py}
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
@@ -160,9 +145,7 @@ index_params= dict(algorithm = FLANN_INDEX_LSH,
                    key_size = 12,     # 20
                    multi_probe_level = 1) #2
 @endcode
-Second dictionary is the SearchParams. It specifies the number of times the trees in the index
-should be recursively traversed. Higher values gives better precision, but also takes more time. If
-you want to change the value, pass search_params = dict(checks=100).
+Second dictionary is the SearchParams. It specifies the number of times the trees in the index should be recursively traversed. Higher values gives better precision, but also takes more time. If you want to change the value, pass search_params = dict(checks=100).
 
 With these informations, we are good to go.
 @code{.py}
