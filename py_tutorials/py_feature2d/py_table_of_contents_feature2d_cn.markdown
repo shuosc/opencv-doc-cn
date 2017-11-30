@@ -1,6 +1,14 @@
 特征检测和描述符 {#tutorial_py_table_of_contents_feature2d}
 =================================
 
+-   @subpage tutorial_py_features_meaning
+
+    图像中的主要特征是什么？如果找出对我们来说有用的特征？
+
+-   @subpage tutorial_py_fast
+
+    所有上面这些特征检测的方法都很好。但是对于像SLAM这样的实时应用程序来说它们都不够快。所以就有了FAST算法，它真的很“FAST”。
+
 -   @subpage tutorial_py_brief
 
     SIFT使用了一个包含128个浮点数的特征描述符。

@@ -39,9 +39,7 @@ interesting. For example, take below image:
 
 ![image](images/feature_building.jpg)
 
-The image is very simple. At the top of image, six small image patches are given. Question for you is to
-find the exact location of these patches in the original image. How many correct results can you
-find?
+The image is very simple. At the top of image, six small image patches are given. Question for you is to find the exact location of these patches in the original image. How many correct results can you find?
 
 A and B are flat surfaces and they are spread over a lot of area. It is difficult to find the exact
 location of these patches.
