@@ -31,9 +31,9 @@ Open Python IDLE (or IPython) and type following codes in Python terminal.
 @code{.py}
 >>> import cv2
 >>> print( cv2.__version__ )
-@endcode
-If the results are printed out without any errors, congratulations !!! You have installed
-OpenCV-Python successfully.
+>>> @endcode
+>>> If the results are printed out without any errors, congratulations !!! You have installed
+>>> OpenCV-Python successfully.
 
 It is quite easy. But there is a problem with this. Yum repositories may not contain the latest
 version of OpenCV always. For example, at the time of writing this tutorial, yum repository contains
@@ -47,11 +47,9 @@ if you want to contribute to OpenCV, you will need this.
 Installing OpenCV from source
 -----------------------------
 
-Compiling from source may seem a little complicated at first, but once you succeeded in it, there is
-nothing complicated.
+Compiling from source may seem a little complicated at first, but once you succeeded in it, there is nothing complicated.
 
-First we will install some dependencies. Some are compulsory, some are optional. Optional
-dependencies, you can leave if you don't want.
+First we will install some dependencies. Some are compulsory, some are optional. Optional dependencies, you can leave if you don't want.
 
 ### Compulsory Dependencies
 
@@ -73,13 +71,10 @@ yum install gstreamer-plugins-base-devel
 @endcode
 ### Optional Dependencies
 
-Above dependencies are sufficient to install OpenCV in your fedora machine. But depending upon your
-requirements, you may need some extra dependencies. A list of such optional dependencies are given
-below. You can either leave it or install it, your call :)
+Above dependencies are sufficient to install OpenCV in your fedora machine. But depending upon your requirements, you may need some extra dependencies. A list of such optional dependencies are given below. You can either leave it or install it, your call :)
 
-OpenCV comes with supporting files for image formats like PNG, JPEG, JPEG2000, TIFF, WebP etc. But
-it may be a little old. If you want to get latest libraries, you can install development files for
-these formats.
+OpenCV comes with supporting files for image formats like PNG, JPEG, JPEG2000, TIFF, WebP etc. But it may be a little old. If you want to get latest libraries, you can install development files for these formats.
+
 @code{.sh}
 yum install libpng-devel
 yum install libjpeg-turbo-devel
@@ -88,67 +83,50 @@ yum install openexr-devel
 yum install libtiff-devel
 yum install libwebp-devel
 @endcode
-Several OpenCV functions are parallelized with **Intel's Threading Building Blocks** (TBB). But if
-you want to enable it, you need to install TBB first. ( Also while configuring installation with
-CMake, don't forget to pass -D WITH_TBB=ON. More details below.)
+Several OpenCV functions are parallelized with **Intel's Threading Building Blocks** (TBB). But if you want to enable it, you need to install TBB first. ( Also while configuring installation with CMake, don't forget to pass -D WITH_TBB=ON. More details below.)
 @code{.sh}
 yum install tbb-devel
 @endcode
-OpenCV uses another library **Eigen** for optimized mathematical operations. So if you have Eigen
-installed in your system, you can exploit it. ( Also while configuring installation with CMake,
-don't forget to pass -D WITH_EIGEN=ON. More details below.)
+OpenCV uses another library **Eigen** for optimized mathematical operations. So if you have Eigen installed in your system, you can exploit it. ( Also while configuring installation with CMake, on't forget to pass -D WITH_EIGEN=ON. More details below.)
 @code{.sh}
 yum install eigen3-devel
 @endcode
-If you want to build **documentation** ( *Yes, you can create offline version of OpenCV's complete
-official documentation in your system in HTML with full search facility so that you need not access
-internet always if any question, and it is quite FAST!!!* ), you need to install **Doxygen** (a
-documentation generation tool).
+If you want to build **documentation** (Yes, you can create offline version of OpenCV's complete official documentation in your system in HTML with full search facility so that you need not access internet always if any question, and it is quite FAST!!!), you need to install **Doxygen** (a documentation generation tool).
 @code{.sh}
 yum install doxygen
 @endcode
 ### Downloading OpenCV
 
-Next we have to download OpenCV. You can download the latest release of OpenCV from [sourceforge
-site](http://sourceforge.net/projects/opencvlibrary/). Then extract the folder.
+Next we have to download OpenCV. You can download the latest release of OpenCV from [sourceforge site](http://sourceforge.net/projects/opencvlibrary/). Then extract the folder.
 
-Or you can download latest source from OpenCV's github repo. (If you want to contribute to OpenCV,
-choose this. It always keeps your OpenCV up-to-date). For that, you need to install **Git** first.
+Or you can download latest source from OpenCV's github repo. (If you want to contribute to OpenCV, choose this. It always keeps your OpenCV up-to-date). For that, you need to install **Git** first.
 @code{.sh}
 yum install git
 git clone https://github.com/opencv/opencv.git
 @endcode
-It will create a folder OpenCV in home directory (or the directory you specify). The cloning may
-take some time depending upon your internet connection.
+It will create a folder OpenCV in home directory (or the directory you specify). The cloning may take some time depending upon your internet connection.
 
-Now open a terminal window and navigate to the downloaded OpenCV folder. Create a new build folder
-and navigate to it.
+Now open a terminal window and navigate to the downloaded OpenCV folder. Create a new build folder and navigate to it.
+
 @code{.sh}
 mkdir build
 cd build
 @endcode
 ### Configuring and Installing
 
-Now we have installed all the required dependencies, let's install OpenCV. Installation has to be
-configured with CMake. It specifies which modules are to be installed, installation path, which
-additional libraries to be used, whether documentation and examples to be compiled etc. Below
-command is normally used for configuration (executed from build folder).
+Now we have installed all the required dependencies, let's install OpenCV. Installation has to be configured with CMake. It specifies which modules are to be installed, installation path, which additional libraries to be used, whether documentation and examples to be compiled etc. Below command is normally used for configuration (executed from build folder).
 @code{.sh}
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
 @endcode
-It specifies that build type is "Release Mode" and installation path is /usr/local. Observe the -D
-before each option and .. at the end. In short, this is the format:
+It specifies that build type is "Release Mode" and installation path is /usr/local. Observe the -D before each option and .. at the end. In short, this is the format:
 @code{.sh}
 cmake [-D <flag>] [-D <flag>] ..
 @endcode
 You can specify as many flags you want, but each flag should be preceded by -D.
 
-So in this tutorial, we are installing OpenCV with TBB and Eigen support. We also build the
-documentation, but we exclude Performance tests and building samples. We also disable GPU related
-modules (since we use OpenCV-Python, we don't need GPU related modules. It saves us some time).
+So in this tutorial, we are installing OpenCV with TBB and Eigen support. We also build the documentation, but we exclude Performance tests and building samples. We also disable GPU related modules (since we use OpenCV-Python, we don't need GPU related modules. It saves us some time).
 
-*(All the below commands can be done in a single cmake statement, but it is split here for better
-understanding.)*
+*(All the below commands can be done in a single cmake statement, but it is split here for better understanding.)*
 
 -   Enable TBB and Eigen support:
     @code{.sh}
@@ -166,15 +144,13 @@ understanding.)*
     @code{.sh}
     cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
     @endcode
-Each time you enter cmake statement, it prints out the resulting configuration setup. In the final
-setup you got, make sure that following fields are filled (below is the some important parts of
-configuration I got). These fields should be filled appropriately in your system also. Otherwise
-some problem has happened. So check if you have correctly performed above steps.
-@code{.sh}
-...
---   GUI:
---     GTK+ 2.x:                    YES (ver 2.24.19)
---     GThread :                    YES (ver 2.36.3)
+    Each time you enter cmake statement, it prints out the resulting configuration setup. In the final setup you got, make sure that following fields are filled (below is the some important parts of configuration I got). These fields should be filled appropriately in your system also. Otherwise
+    some problem has happened. So check if you have correctly performed above steps.
+    @code{.sh}
+    ...
+    --   GUI:
+    --     GTK+ 2.x:                    YES (ver 2.24.19)
+    --     GThread :                    YES (ver 2.36.3)
 
 --   Video I/O:
 --     DC1394 2.x:                  YES (ver 2.2.0)
@@ -207,19 +183,16 @@ some problem has happened. So check if you have correctly performed above steps.
 @endcode
 Many other flags and settings are there. It is left for you for further exploration.
 
-Now you build the files using make command and install it using make install command. make install
-should be executed as root.
+Now you build the files using make command and install it using make install command. make install should be executed as root.
+
 @code{.sh}
 make
-su
-make install
+su make install
 @endcode
-Installation is over. All files are installed in /usr/local/ folder. But to use it, your Python
-should be able to find OpenCV module. You have two options for that.
+Installation is over. All files are installed in /usr/local/ folder. But to use it, your Python should be able to find OpenCV module. You have two options for that.
 
 -#  **Move the module to any folder in Python Path** : Python path can be found out by entering
-    `import sys; print(sys.path)` in Python terminal. It will print out many locations. Move
-    /usr/local/lib/python2.7/site-packages/cv2.so to any of this folder. For example,
+`import sys; print(sys.path)` in Python terminal. It will print out many locations. Move /usr/local/lib/python2.7/site-packages/cv2.so to any of this folder. For example,
     @code{.sh}
     su mv /usr/local/lib/python2.7/site-packages/cv2.so /usr/lib/python2.7/site-packages
     @endcode
