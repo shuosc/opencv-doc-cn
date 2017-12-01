@@ -3,8 +3,7 @@ Gui Features in OpenCV {#tutorial_py_table_of_contents_gui}
 
 -   @subpage tutorial_py_image_display
 
-    Learn to load an
-    image, display it and save it back
+    Learn to load an image, display it and save it back
 
 -   @subpage tutorial_py_video_display
 
