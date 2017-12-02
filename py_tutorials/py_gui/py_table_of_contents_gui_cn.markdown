@@ -11,3 +11,8 @@
 - @subpage tutorial_py_drawing_functions
 
   学习使用OpenCV画线、矩形、椭圆、圆等图形。
+
+- @subpage tutorial_py_mouse_handling
+
+  用鼠标画东西
+

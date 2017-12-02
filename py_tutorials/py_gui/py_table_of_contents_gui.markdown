@@ -21,3 +21,4 @@ Gui Features in OpenCV {#tutorial_py_table_of_contents_gui}
 -   @subpage tutorial_py_trackbar
 
     Create trackbar to control certain parameters
+
