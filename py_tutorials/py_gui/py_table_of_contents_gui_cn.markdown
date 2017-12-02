@@ -4,3 +4,7 @@
 
   学习加载一副图像，显示它和保存它。
 
+- @subpage tutorial_py_video_display
+
+  学习播放视频、用摄像头拍摄视频和保存一段视频。
+
