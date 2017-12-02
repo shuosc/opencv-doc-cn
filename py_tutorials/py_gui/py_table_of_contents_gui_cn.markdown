@@ -16,3 +16,6 @@
 
   用鼠标画东西
 
+- @subpage tutorial_py_trackbar
+
+  创建滑块控制条来控制特定的参数
