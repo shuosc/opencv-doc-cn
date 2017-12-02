@@ -12,15 +12,12 @@ Gui Features in OpenCV {#tutorial_py_table_of_contents_gui}
 
 -   @subpage tutorial_py_drawing_functions
 
-    Learn to draw lines,
-    rectangles, ellipses, circles etc with OpenCV
+    Learn to draw lines, rectangles, ellipses, circles etc with OpenCV
 
 -   @subpage tutorial_py_mouse_handling
 
-    Draw stuffs with your
-    mouse
+    Draw stuffs with your mouse
 
 -   @subpage tutorial_py_trackbar
 
-    Create trackbar to
-    control certain parameters
+    Create trackbar to control certain parameters
