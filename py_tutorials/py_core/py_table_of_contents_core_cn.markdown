@@ -4,3 +4,8 @@
 
   学习读取和编辑像素的值，使用图像的ROI和其他基本操作。
 
+- @subpage tutorial_py_image_arithmetics
+
+  对图像进行算术操作。
+
+- ​

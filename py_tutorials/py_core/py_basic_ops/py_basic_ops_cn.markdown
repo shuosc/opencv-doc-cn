@@ -158,4 +158,7 @@ plt.subplot(236),plt.imshow(constant,'gray'),plt.title('CONSTANT')
 plt.show()
 ```
 
-结果如下（由于使用Matplotlib显示图像，红色和蓝色被交换了）。
+结果如下（由于使用Matplotlib显示图像，红色和蓝色被交换了）:
+
+![image](images/border.jpg)
+

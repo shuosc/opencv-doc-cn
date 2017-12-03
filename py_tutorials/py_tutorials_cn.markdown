@@ -15,4 +15,3 @@
 - @subpage tutorial_py_table_of_contents_feature2d
 
   在这一章中你会学到一些关于特征检测器和描述子的知识
-
