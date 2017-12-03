@@ -10,7 +10,7 @@
 
 - @subpage tutorial_py_table_of_contents_core
 
-  在这一章中你会学到图片上的基本操作，例如像素编辑、几何变换、代码优化、一些数学工具等等
+  在这一章中你会学到图片上的基本操作，例如像素编辑、几何变换、代码优化、一些数学工具等等。
 
 - @subpage tutorial_py_table_of_contents_feature2d
 
