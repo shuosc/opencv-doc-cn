@@ -3,8 +3,7 @@ Core Operations {#tutorial_py_table_of_contents_core}
 
 -   @subpage tutorial_py_basic_ops
 
-    Learn to read and
-    edit pixel values, working with image ROI and other basic operations.
+    Learn to read and edit pixel values, working with image ROI and other basic operations.
 
 -   @subpage tutorial_py_image_arithmetics
 

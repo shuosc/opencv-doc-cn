@@ -11,9 +11,7 @@ OpenCV-Python Tutorials {#tutorial_py_root}
 
 -   @subpage tutorial_py_table_of_contents_core
 
-    In this section you
-    will learn basic operations on image like pixel editing, geometric transformations, code
-    optimization, some mathematical tools etc.
+    In this section you will learn basic operations on image like pixel editing, geometric transformations, code optimization, some mathematical tools etc.
 
 -   @subpage tutorial_py_table_of_contents_imgproc
 
