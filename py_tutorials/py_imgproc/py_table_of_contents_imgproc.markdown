@@ -12,9 +12,7 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_thresholding
 
-    Learn
-    to convert images to binary images using global thresholding, Adaptive thresholding, Otsu's
-    binarization etc
+    Learn to convert images to binary images using global thresholding, Adaptive thresholding, Otsu's binarization etc
 
 -   @subpage tutorial_py_filtering
 
