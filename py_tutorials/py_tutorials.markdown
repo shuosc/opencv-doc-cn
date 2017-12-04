@@ -15,8 +15,7 @@ OpenCV-Python Tutorials {#tutorial_py_root}
 
 -   @subpage tutorial_py_table_of_contents_imgproc
 
-    In this section
-    you will learn different image processing functions inside OpenCV.
+    In this section you will learn different image processing functions inside OpenCV.
 
 -   @subpage tutorial_py_table_of_contents_feature2d
 

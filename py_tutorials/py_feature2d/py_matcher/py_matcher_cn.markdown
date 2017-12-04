@@ -51,7 +51,7 @@ matches = bf.match(des1,des2)
 # 按照距离排序
 matches = sorted(matches, key = lambda x:x.distance)
 # 画出前10个匹配
-mg3 = cv2.drawMatches(img1,kp1,img2,kp2,matches[:10], flags=2)
+img3 = cv2.drawMatches(img1,kp1,img2,kp2,matches[:10], flags=2)
 plt.imshow(img3)
 plt.show()
 ```
