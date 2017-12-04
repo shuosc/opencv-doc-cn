@@ -6,3 +6,6 @@
 
   另外，我们还将学习在一段视频中追踪一个有颜色的物体。
 
+- @subpage tutorial_py_geometric_transformations
+
+  学习对图像进行不同的几何变换，像旋转、平移等等。
