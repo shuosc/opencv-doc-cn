@@ -13,3 +13,8 @@
 - @subpage tutorial_py_thresholding
 
   学习使用全局二值化，自适应二值化，Otsu二值化等将图像转换为二值图像。
+
+- @subpage tutorial_py_filtering
+
+  学习模糊图像，使用自定义内核过滤图像等。
+

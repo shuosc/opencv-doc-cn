@@ -16,8 +16,7 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_filtering
 
-    Learn
-    to blur the images, filter the images with custom kernels etc.
+    Learn to blur the images, filter the images with custom kernels etc.
 
 -   @subpage tutorial_py_morphological_ops
 
