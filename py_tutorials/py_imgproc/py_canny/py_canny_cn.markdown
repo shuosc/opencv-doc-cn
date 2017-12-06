@@ -74,7 +74,7 @@ plt.show()
 
 ![image](images/canny1.jpg)
 
-## 其他资源
+## 更多资源
 
 - [Wikipedia](https://zh.wikipedia.org/wiki/Canny算子)上的Canny边缘检测。
 - [Canny边缘检测教程](http://dasl.mem.drexel.edu/alumni/bGreen/www.pages.drexel.edu/_weg22/can_tut.html) by Bill Green, 2002。

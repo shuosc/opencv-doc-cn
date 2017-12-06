@@ -30,4 +30,8 @@
 
   学习使用Canny边缘检测来查找图像的边缘。
 
+- @subpage tutorial_py_pyramids
+
+  了解图像金字塔以及如何使用它们进行图像混合。
+
   ​
