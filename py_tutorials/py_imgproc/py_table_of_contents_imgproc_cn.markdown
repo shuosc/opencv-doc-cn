@@ -18,3 +18,6 @@
 
   学习模糊图像，使用自定义内核过滤图像等。
 
+- @subpage tutorial_py_morphological_ops
+
+  学习形态学转换，如腐蚀，膨胀，开启，闭合等。
