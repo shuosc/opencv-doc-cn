@@ -21,3 +21,9 @@
 - @subpage tutorial_py_morphological_ops
 
   学习形态学转换，如腐蚀，膨胀，开启，闭合等。
+
+- @subpage tutorial_py_gradients
+
+  学习寻找图像梯度，边缘等。
+
+  ​

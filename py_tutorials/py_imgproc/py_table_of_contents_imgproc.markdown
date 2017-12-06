@@ -24,13 +24,11 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_gradients
 
-    Learn
-    to find image gradients, edges etc.
+    Learn to find image gradients, edges etc.
 
 -   @subpage tutorial_py_canny
 
-    Learn
-    to find edges with Canny Edge Detection
+    Learn to find edges with Canny Edge Detection
 
 -   @subpage tutorial_py_pyramids
 
@@ -38,13 +36,11 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_table_of_contents_contours
 
-    All
-    about Contours in OpenCV
+    All about Contours in OpenCV
 
 -   @subpage tutorial_py_table_of_contents_histograms
 
-    All
-    about histograms in OpenCV
+    All about histograms in OpenCV
 
 -   @subpage tutorial_py_table_of_contents_transforms
 
