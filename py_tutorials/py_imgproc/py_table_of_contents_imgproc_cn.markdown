@@ -26,4 +26,8 @@
 
   学习寻找图像梯度，边缘等。
 
+- @subpage tutorial_py_canny
+
+  学习使用Canny边缘检测来查找图像的边缘。
+
   ​
