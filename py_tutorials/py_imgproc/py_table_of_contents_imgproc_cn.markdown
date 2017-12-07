@@ -34,4 +34,8 @@
 
   了解图像金字塔以及如何使用它们进行图像混合。
 
+- @subpage tutorial_py_table_of_contents_contours
+
+  所有关于OpenCV中的轮廓的知识。
+
   ​
