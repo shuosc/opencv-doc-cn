@@ -11,4 +11,11 @@
 
      学习如何找到不同的轮廓特性，如：密度，平均强度等。
 
-- 学习找出凸面缺陷，测试一个点是否在一个多边形中，匹配不同的形状等。
+- @subpage tutorial_py_contours_more_functions
+
+     学习找出凸面缺陷，测试一个点是否在一个多边形中，匹配不同的形状等。
+
+- @subpage tutorial_py_contours_hierarchy
+
+     了解轮廓层次结构。
+
