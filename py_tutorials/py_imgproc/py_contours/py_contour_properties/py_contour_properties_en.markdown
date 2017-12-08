@@ -1,19 +1,18 @@
 Contour Properties {#tutorial_py_contour_properties}
 ==================
 
-Here we will learn to extract some frequently used properties of objects like Solidity, Equivalent
-Diameter, Mask image, Mean Intensity etc. More features can be found at [Matlab regionprops
-documentation](http://www.mathworks.in/help/images/ref/regionprops.html).
+Here we will learn to extract some frequently used properties of objects like Solidity, Equivalent Diameter, Mask image, Mean Intensity etc. More features can be found at [Matlab regionprops documentation](http://www.mathworks.in/help/images/ref/regionprops.html).
 
-*(NB : Centroid, Area, Perimeter etc also belong to this category, but we have seen it in last
-chapter)*
+*(NB : Centroid, Area, Perimeter etc also belong to this category, but we have seen it in last chapter)*
 
 1. Aspect Ratio
 ---------------
 
 It is the ratio of width to height of bounding rect of the object.
 
-\f[Aspect \; Ratio = \frac{Width}{Height}\f]
+$$
+Aspect \; Ratio = \frac{Width}{Height}
+$$
 @code{.py}
 x,y,w,h = cv2.boundingRect(cnt)
 aspect_ratio = float(w)/h
@@ -24,7 +23,9 @@ aspect_ratio = float(w)/h
 
 Extent is the ratio of contour area to bounding rectangle area.
 
-\f[Extent = \frac{Object \; Area}{Bounding \; Rectangle \; Area}\f]
+$$
+Extent = \frac{Object \; Area}{Bounding \; Rectangle \; Area}
+$$
 @code{.py}
 area = cv2.contourArea(cnt)
 x,y,w,h = cv2.boundingRect(cnt)
@@ -37,7 +38,9 @@ extent = float(area)/rect_area
 
 Solidity is the ratio of contour area to its convex hull area.
 
-\f[Solidity = \frac{Contour \; Area}{Convex \; Hull \; Area}\f]
+$$
+Solidity = \frac{Contour \; Area}{Convex \; Hull \; Area}
+$$
 @code{.py}
 area = cv2.contourArea(cnt)
 hull = cv2.convexHull(cnt)
@@ -50,7 +53,9 @@ solidity = float(area)/hull_area
 
 Equivalent Diameter is the diameter of the circle whose area is same as the contour area.
 
-\f[Equivalent \; Diameter = \sqrt{\frac{4 \times Contour \; Area}{\pi}}\f]
+$$
+Equivalent \; Diameter = \sqrt{\frac{4 \times Contour \; Area}{\pi}}
+$$
 @code{.py}
 area = cv2.contourArea(cnt)
 equi_diameter = np.sqrt(4*area/np.pi)
@@ -75,10 +80,8 @@ cv2.drawContours(mask,[cnt],0,255,-1)
 pixelpoints = np.transpose(np.nonzero(mask))
 #pixelpoints = cv2.findNonZero(mask)
 @endcode
-Here, two methods, one using Numpy functions, next one using OpenCV function (last commented line)
-are given to do the same. Results are also same, but with a slight difference. Numpy gives
-coordinates in **(row, column)** format, while OpenCV gives coordinates in **(x,y)** format. So
-basically the answers will be interchanged. Note that, **row = x** and **column = y**.
+Here, two methods, one using Numpy functions, next one using OpenCV function (last commented line) are given to do the same. Results are also same, but with a slight difference. Numpy gives
+coordinates in **(row, column)** format, while OpenCV gives coordinates in **(x,y)** format. So basically the answers will be interchanged. Note that, **row = x** and **column = y**.
 
 7. Maximum Value, Minimum Value and their locations
 ---------------------------------------------------
