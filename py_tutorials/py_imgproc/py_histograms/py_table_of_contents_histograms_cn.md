@@ -12,3 +12,7 @@
 
   学习找到和绘制二维直方图。
 
+- @subpage tutorial_py_histogram_backprojection
+
+  学习直方图反投影以分割彩色对象。
+
