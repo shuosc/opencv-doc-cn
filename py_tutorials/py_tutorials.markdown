@@ -24,8 +24,7 @@ OpenCV-Python Tutorials {#tutorial_py_root}
 
 -   @subpage tutorial_py_table_of_contents_video
 
-    In this section you
-    will learn different techniques to work with videos like object tracking etc.
+    In this section you will learn different techniques to work with videos like object tracking etc.
 
 -   @subpage tutorial_py_table_of_contents_calib3d
 

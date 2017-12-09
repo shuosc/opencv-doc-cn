@@ -38,4 +38,6 @@
 
   所有关于OpenCV中的轮廓的知识。
 
-  ​
+- @subpage tutorial_py_table_of_contents_histograms
+
+  所有关于OpenCV中的直方图的知识。

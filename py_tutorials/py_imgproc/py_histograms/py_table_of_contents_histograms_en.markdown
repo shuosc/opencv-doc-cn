@@ -3,7 +3,7 @@ Histograms in OpenCV {#tutorial_py_table_of_contents_histograms}
 
 -   @subpage tutorial_py_histogram_begins
 
-    Learn to find and draw Contours
+    Learn to find and draw Histograms
 
 -   @subpage tutorial_py_histogram_equalization
 
