@@ -8,4 +8,7 @@
 
   学习直方图均衡化以获得更好的图像对比度。
 
+- @subpage tutorial_py_2d_histogram
+
+  学习找到和绘制二维直方图。
 
