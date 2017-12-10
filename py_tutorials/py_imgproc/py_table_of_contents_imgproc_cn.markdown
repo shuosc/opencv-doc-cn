@@ -49,3 +49,7 @@
 - @subpage tutorial_py_template_matching
 
   学习使用“模板匹配”在图像中搜索对象。
+
+- @subpage tutorial_py_houghlines
+
+  学习在图片中检测直线。
