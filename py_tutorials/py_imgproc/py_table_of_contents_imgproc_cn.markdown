@@ -61,3 +61,7 @@
 - @subpage tutorial_py_watershed
 
   学习使用分水岭分割来分割图像。
+
+- @subpage tutorial_py_grabcut
+
+  学习使用GrabCut算法提取前景。
