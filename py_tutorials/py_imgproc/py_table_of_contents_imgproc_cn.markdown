@@ -53,3 +53,7 @@
 - @subpage tutorial_py_houghlines
 
   学习在图片中检测直线。
+
+- @subpage tutorial_py_houghcircles
+
+  学习在图片中检测圆。
