@@ -57,3 +57,7 @@
 - @subpage tutorial_py_houghcircles
 
   学习在图片中检测圆。
+
+- @subpage tutorial_py_watershed
+
+  学习使用分水岭分割来分割图像。
