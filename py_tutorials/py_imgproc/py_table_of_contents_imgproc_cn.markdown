@@ -45,3 +45,7 @@
 - @subpage tutorial_py_table_of_contents_transforms
 
   在OpenCV中不同的图像变换，如傅立叶变换，余弦变换等。
+
+- @subpage tutorial_py_template_matching
+
+  学习使用“模板匹配”在图像中搜索对象。

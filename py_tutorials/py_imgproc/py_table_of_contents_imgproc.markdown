@@ -48,8 +48,7 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_template_matching
 
-    Learn
-    to search for an object in an image using Template Matching
+    Learn to search for an object in an image using Template Matching
 
 -   @subpage tutorial_py_houghlines
 
