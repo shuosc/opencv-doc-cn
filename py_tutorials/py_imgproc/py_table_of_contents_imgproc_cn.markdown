@@ -41,3 +41,7 @@
 - @subpage tutorial_py_table_of_contents_histograms
 
   所有关于OpenCV中的直方图的知识。
+
+- @subpage tutorial_py_table_of_contents_transforms
+
+  在OpenCV中不同的图像变换，如傅立叶变换，余弦变换等。

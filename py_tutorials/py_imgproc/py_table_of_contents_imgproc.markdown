@@ -44,8 +44,7 @@ Image Processing in OpenCV {#tutorial_py_table_of_contents_imgproc}
 
 -   @subpage tutorial_py_table_of_contents_transforms
 
-    Meet
-    different Image Transforms in OpenCV like Fourier Transform, Cosine Transform etc.
+    Meet different Image Transforms in OpenCV like Fourier Transform, Cosine Transform etc.
 
 -   @subpage tutorial_py_template_matching
 
