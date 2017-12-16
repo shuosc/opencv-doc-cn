@@ -28,3 +28,8 @@
 
   在本节中，我们将学习相机校准，立体成像等。
 
+- @subpage tutorial_py_table_of_contents_ml
+
+  在这一章中你将会学会OpenCV中不同的图像处理功能。
+
+
