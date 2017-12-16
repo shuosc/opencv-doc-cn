@@ -15,5 +15,4 @@ Camera Calibration and 3D Reconstruction {#tutorial_py_table_of_contents_calib3d
 
 -   @subpage tutorial_py_depthmap
 
-    Extract depth
-    information from 2D images.
+    Extract depth information from 2D images.

@@ -12,4 +12,8 @@
 
   让我们来了解极线几何和极线约束。
 
+- @subpage tutorial_py_depthmap
+
+  从2D图像中提取深度信息。
+
 
