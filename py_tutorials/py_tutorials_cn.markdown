@@ -20,3 +20,11 @@
 
   在这一章中你会学到一些关于特征检测器和描述子的知识。
 
+- @subpage tutorial_py_table_of_contents_video
+
+  在这一章中你将会学到视频中使用的技术，如对象追踪等等。
+
+- @subpage tutorial_py_table_of_contents_calib3d
+
+  在本节中，我们将学习相机校准，立体成像等。
+

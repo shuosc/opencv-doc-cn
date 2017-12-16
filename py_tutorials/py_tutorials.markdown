@@ -28,8 +28,7 @@ OpenCV-Python Tutorials {#tutorial_py_root}
 
 -   @subpage tutorial_py_table_of_contents_calib3d
 
-    In this section we
-    will learn about camera calibration, stereo imaging etc.
+    In this section we will learn about camera calibration, stereo imaging etc.
 
 -   @subpage tutorial_py_table_of_contents_ml
 
