@@ -4,3 +4,7 @@
 
   了解SVM的基本知识。
 
+- @subpage tutorial_py_svm_opencv
+
+  学习使用OpenCV中的SVM功能。
+
