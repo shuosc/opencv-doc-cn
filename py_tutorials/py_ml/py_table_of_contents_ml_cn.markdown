@@ -6,3 +6,7 @@
 
   同时学习编写一个基于kNN的手写字符识别程序。
 
+- @subpage tutorial_py_svm_index
+
+  理解SVM的概念。
+
