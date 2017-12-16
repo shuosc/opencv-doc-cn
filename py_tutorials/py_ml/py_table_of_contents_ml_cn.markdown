@@ -10,3 +10,9 @@
 
   理解SVM的概念。
 
+- @subpage tutorial_py_kmeans_index
+
+  学习使用K-Means聚类将数据分组到多个集合中。
+
+  另外我们会学习使用K-Means聚类进行颜色量化。
+
