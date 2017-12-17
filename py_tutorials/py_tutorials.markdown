@@ -36,13 +36,11 @@ OpenCV-Python Tutorials {#tutorial_py_root}
 
 -   @subpage tutorial_py_table_of_contents_photo
 
-    In this section you
-    will learn different computational photography techniques like image denoising etc.
+    In this section you will learn different computational photography techniques like image denoising etc.
 
 -   @subpage tutorial_py_table_of_contents_objdetect
 
-    In this section you
-    will object detection techniques like face detection etc.
+    In this section you will learn object detection techniques like face detection etc.
 
 -   @subpage tutorial_py_table_of_contents_bindings
 

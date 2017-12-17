@@ -32,4 +32,15 @@
 
   在这一章中你将会学会OpenCV中不同的图像处理功能。
 
+- @subpage tutorial_py_table_of_contents_photo
+
+  在本节中，您将学习不同的计算摄影技术，如图像去噪等。
+
+- @subpage tutorial_py_table_of_contents_objdetect
+
+  在本节中，您将会学会物体检测技术，例如人脸检测等。
+
+- @subpage tutorial_py_table_of_contents_bindings
+
+  在本节中，我们将看到OpenCV-Python绑定是如何生成的。
 
