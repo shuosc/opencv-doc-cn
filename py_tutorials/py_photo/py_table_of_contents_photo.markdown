@@ -9,9 +9,7 @@ Here you will learn different OpenCV functionalities related to Computational Ph
 
 -   @subpage tutorial_py_inpainting
 
-    Do you have a old
-    degraded photo with many black spots and strokes on it? Take it. Let's try to restore them with a
-    technique called image inpainting.
+    Do you have a old degraded photo with many black spots and strokes on it? Take it. Let's try to restore them with a technique called image inpainting.
 
 -   @subpage tutorial_py_hdr
 
