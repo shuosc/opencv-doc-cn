@@ -1,9 +1,8 @@
-OpenCV-Python Tutorials {#tutorial_py_root}
-=======================
+# OpenCV-Python Tutorials {#tutorial_py_root_en}
 
--   @subpage tutorial_py_table_of_contents_setup
+- @subpage tutorial_py_table_of_contents_setup_en
 
-    Learn how to setup OpenCV-Python on your computer!
+  Learn how to setup OpenCV-Python on your computer!
 
 -   @subpage tutorial_py_table_of_contents_gui
 

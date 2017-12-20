@@ -2,11 +2,11 @@
 
 - @subpage tutorial_py_image_display
 
-  学习加载一副图像，显示它和保存它。
+  学习加载，显示和保存图像。
 
 - @subpage tutorial_py_video_display
 
-  学习播放视频、用摄像头拍摄视频和保存一段视频。
+  学习播放、用摄像头拍摄和保存一段视频。
 
 - @subpage tutorial_py_drawing_functions
 
@@ -14,8 +14,8 @@
 
 - @subpage tutorial_py_mouse_handling
 
-  用鼠标画东西
+  用鼠标画东西。
 
 - @subpage tutorial_py_trackbar
 
-  创建滑块控制条来控制特定的参数
+  创建滑块控制条来控制特定的参数。
