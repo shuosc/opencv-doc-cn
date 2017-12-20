@@ -19,14 +19,14 @@ Accessing and Modifying pixel values
 ------------------------------------
 
 Let's load a color image first:
-@code{.py}
+```python
 >>> import cv2
 >>> import numpy as np
 
 >>> img = cv2.imread('messi5.jpg')
->>> @endcode
->>> You can access a pixel value by its row and column coordinates. For BGR image, it returns an array of Blue, Green, Red values. For grayscale image, just corresponding intensity is returned.
->>> @code{.py}
+```
+You can access a pixel value by its row and column coordinates. For BGR image, it returns an array of Blue, Green, Red values. For grayscale image, just corresponding intensity is returned.
+```python
 >>> px = img[100,100]
 >>> print( px )
 >>> [157 166 200]
@@ -35,13 +35,13 @@ Let's load a color image first:
 >>> blue = img[100,100,0]
 >>> print( blue )
 >>> 157
->>> @endcode
->>> You can modify the pixel values the same way.
->>> @code{.py}
+```
+You can modify the pixel values the same way.
+```python
 >>> img[100,100] = [255,255,255]
 >>> print( img[100,100] )
 >>> [255 255 255]
->>> @endcode
+```
 
 **warning**
 
@@ -50,7 +50,7 @@ Numpy is a optimized library for fast array calculations. So simply accessing ea
 @note Above mentioned method is normally used for selecting a region of array, say first 5 rows and last 3 columns like that. For individual pixel access, Numpy array methods, array.item() and array.itemset() is considered to be better. But it always returns a scalar. So if you want to access all B,G,R values, you need to call array.item() separately for all.
 
 Better pixel accessing and editing method :
-@code{.py}
+```python
 # accessing RED value
 >>> img.item(10,10,2)
 >>> 59
@@ -59,89 +59,85 @@ Better pixel accessing and editing method :
 >>> img.itemset((10,10,2),100)
 >>> img.item(10,10,2)
 >>> 100
->>> @endcode
+```
 
-Accessing Image Properties
---------------------------
+## Accessing Image Properties
 
 Image properties include number of rows, columns and channels, type of image data, number of pixels etc.
 
 Shape of image is accessed by img.shape. It returns a tuple of number of rows, columns and channels (if image is color):
-@code{.py}
+```python
 >>> print( img.shape )
 >>> (342, 548, 3)
->>> @endcode
+```
 
 @note If image is grayscale, tuple returned contains only number of rows and columns. So it is a good method to check if loaded image is grayscale or color image.
 
 Total number of pixels is accessed by `img.size`:
-@code{.py}
+```python
 >>> print( img.size )
 >>> 562248
->>> @endcode
->>> Image datatype is obtained by \`img.dtype\`:
->>> @code{.py}
+```
+Image datatype is obtained by `img.dtype`:
+```python
 >>> print( img.dtype )
 >>> uint8
->>> @endcode
+```
 
 @note img.dtype is very important while debugging because a large number of errors in OpenCV-Python code is caused by invalid datatype.
 
-Image ROI
----------
+##Image ROI
 
 Sometimes, you will have to play with certain region of images. For eye detection in images, first face detection is done all over the image and when face is obtained, we select the face region alone and search for eyes inside it instead of searching whole image. It improves accuracy (because eyes are always on faces :D ) and performance (because we search for a small area)
 
 ROI is again obtained using Numpy indexing. Here I am selecting the ball and copying it to another region in the image:
-@code{.py}
+```python
 >>> ball = img[280:340, 330:390]
 >>> img[273:333, 100:160] = ball
->>> @endcode
->>> Check the results below:
+```
+Check the results below:
 
 ![image](images/roi.jpg)
 
-Splitting and Merging Image Channels
-------------------------------------
+## Splitting and Merging Image Channels
 
 Sometimes you will need to work separately on B,G,R channels of image. Then you need to split the BGR images to single planes. Or another time, you may need to join these individual channels to BGR image. You can do it simply by:
-@code{.py}
+```python
 >>> b,g,r = cv2.split(img)
 >>> img = cv2.merge((b,g,r))
->>> @endcode
->>> Or
->>> @code
+```
+Or
+```python
 >>> b = img[:,:,0]
->>> @endcode
->>> Suppose, you want to make all the red pixels to zero, you need not split like this and put it equal to zero. You can simply use Numpy indexing, and that is more faster.
->>> @code{.py}
+```
+Suppose, you want to make all the red pixels to zero, you need not split like this and put it equal to zero. You can simply use Numpy indexing, and that is more faster.
+```python
 >>> img[:,:,2] = 0
->>> @endcode
+```
 
 **warning**
 
-cv2.split() is a costly operation (in terms of time). So do it only if you need it. Otherwise go for Numpy indexing.
+`cv2.split()` is a costly operation (in terms of time). So do it only if you need it. Otherwise go for Numpy indexing.
 
-Making Borders for Images (Padding)
------------------------------------
+## Making Borders for Images (Padding)
 
-If you want to create a border around the image, something like a photo frame, you can use **cv2.copyMakeBorder()** function. But it has more applications for convolution operation, zero padding etc. This function takes following arguments:
+If you want to create a border around the image, something like a photo frame, you can use `cv2.copyMakeBorder() `function. But it has more applications for convolution operation, zero padding etc. This function takes following arguments:
 
--   **src** - input image
--   **top**, **bottom**, **left**, **right** - border width in number of pixels in corresponding
+-   `src` - input image
+-   `top`, `bottom`, `left`, `right` - border width in number of pixels in corresponding
     directions
 
--   **borderType** - Flag defining what kind of border to be added. It can be following types:
-    -   **cv2.BORDER_CONSTANT** - Adds a constant colored border. The value should be given as next argument.
-    -   **cv2.BORDER_REFLECT** - Border will be mirror reflection of the border elements, like this : *fedcba|abcdefgh|hgfedcb*
-    -   **cv2.BORDER_REFLECT_101** or **cv2.BORDER_DEFAULT** - Same as above, but with a  slight change, like this : *gfedcb|abcdefgh|gfedcba*
-    -   **cv2.BORDER_REPLICATE** - Last element is replicated throughout, like this: *aaaaaa|abcdefgh|hhhhhhh*
-    -   **cv2.BORDER_WRAP** - Can't explain, it will look like this : *cdefgh|abcdefgh|abcdefg*
+-   `borderType` - Flag defining what kind of border to be added. It can be following types:
+    -   `cv2.BORDER_CONSTANT` - Adds a constant colored border. The value should be given as next argument.
+    -   `cv2.BORDER_REFLECT` - Border will be mirror reflection of the border elements, like this : *fedcba|abcdefgh|hgfedcb*
+    -   `cv2.BORDER_REFLECT_101` or `cv2.BORDER_DEFAULT` - Same as above, but with a  slight change, like this : *gfedcb|abcdefgh|gfedcba*
+    -   `cv2.BORDER_REPLICATE` - Last element is replicated throughout, like this: *aaaaaa|abcdefgh|hhhhhhh*
+    -   `cv2.BORDER_WRAP` - Can't explain, it will look like this : *cdefgh|abcdefgh|abcdefg*
 
--   **value** - Color of border if border type is cv2.BORDER_CONSTANT
+-   `value` - Color of border if border type is `cv2.BORDER_CONSTANT`
 
 Below is a sample code demonstrating all these border types for better understanding:
-@code{.py}
+```python
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -164,13 +160,7 @@ plt.subplot(235),plt.imshow(wrap,'gray'),plt.title('WRAP')
 plt.subplot(236),plt.imshow(constant,'gray'),plt.title('CONSTANT')
 
 plt.show()
-@endcode
+```
 See the result below. (Image is displayed with matplotlib. So RED and BLUE planes will be interchanged):
 
 ![image](images/border.jpg)
-
-Additional Resources
---------------------
-
-Exercises
----------

@@ -2,7 +2,7 @@
 
 - @subpage tutorial_py_basic_ops
 
-  学习读取和编辑像素的值，使用图像的ROI和其他基本操作。
+  学习读取和编辑像素的值，提取图像的ROI和其他基本操作。
 
 - @subpage tutorial_py_image_arithmetics
 
