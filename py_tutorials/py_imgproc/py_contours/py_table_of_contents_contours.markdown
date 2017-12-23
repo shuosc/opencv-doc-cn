@@ -1,23 +1,21 @@
-Contours in OpenCV {#tutorial_py_table_of_contents_contours}
-==================
+# Contours in OpenCV {#tutorial_py_table_of_contents_contours_en}
 
--   @subpage tutorial_py_contours_begin
+- @subpage tutorial_py_contours_begin_en
 
-    Learn to find and draw Contours
+  Learn to find and draw Contours
 
--   @subpage tutorial_py_contour_features
+- @subpage tutorial_py_contour_features_en
 
-    Learn to find different features of contours like area, perimeter, bounding rectangle etc.
+  Learn to find different features of contours like area, perimeter, bounding rectangle etc.
 
--   @subpage tutorial_py_contour_properties
+- @subpage tutorial_py_contour_properties_en
 
-    Learn to find different properties of contours like Solidity, Mean Intensity etc.
+  Learn to find different properties of contours like Solidity, Mean Intensity etc.
 
--   @subpage tutorial_py_contours_more_functions
+- @subpage tutorial_py_contours_more_functions_en
 
-    Learn to find convexity defects, pointPolygonTest, match different shapes etc.
+  Learn to find convexity defects, pointPolygonTest, match different shapes etc.
 
--   @subpage tutorial_py_contours_hierarchy
+- @subpage tutorial_py_contours_hierarchy_en
 
-    Learn about Contour Hierarchy
-
+  Learn about Contour Hierarchy

@@ -1,13 +1,10 @@
-Contours Hierarchy {#tutorial_py_contours_hierarchy}
-==================
+# Contours Hierarchy {#tutorial_py_contours_hierarchy_en}
 
-Goal
-----
+## Goal
 
 This time, we learn about the hierarchy of contours, i.e. the parent-child relationship in Contours.
 
-Theory
-------
+## Theory
 
 In the last few articles on contours, we have worked with several functions related to contours provided by OpenCV. But when we found the contours in image using **cv2.findContours()** function, we have passed an argument, **Contour Retrieval Mode**. We usually passed **cv2.RETR_LIST** or **cv2.RETR_TREE** and it worked nice. But what does it actually mean ?
 
@@ -58,8 +55,7 @@ It is just opposite of **First_Child**. Both for contour-4 and contour-5, parent
 
 So now we know about the hierarchy style used in OpenCV, we can check into Contour Retrieval Modes in OpenCV with the help of same image given above. ie what do flags like cv2.RETR_LIST, cv2.RETR_TREE, cv2.RETR_CCOMP, cv2.RETR_EXTERNAL etc mean?
 
-Contour Retrieval Mode
-----------------------
+## Contour Retrieval Mode
 
 ### 1. RETR_LIST
 
@@ -68,7 +64,7 @@ This is the simplest of the four flags (from explanation point of view). It simp
 So here, 3rd and 4th term in hierarchy array is always -1. But obviously, Next and Previous terms will have their corresponding values. Just check it yourself and verify it.
 
 Below is the result I got, and each row is hierarchy details of corresponding contour. For eg, first row corresponds to contour 0. Next contour is contour 1. So Next = 1. There is no previous contour, so Previous = -1. And the remaining two, as told before, it is -1.
-@code{.py}
+```python
 >>> hierarchy
 >>> array([[[ 1, -1, -1, -1],
         [ 2,  0, -1, -1],
@@ -78,7 +74,7 @@ Below is the result I got, and each row is hierarchy details of corresponding co
         [ 6,  4, -1, -1],
         [ 7,  5, -1, -1],
         [-1,  6, -1, -1]]])
-@endcode
+```
 This is the good choice to use in your code, if you are not using any hierarchy features.
 
 ### 2. RETR_EXTERNAL
@@ -86,12 +82,12 @@ This is the good choice to use in your code, if you are not using any hierarchy 
 If you use this flag, it returns only extreme outer flags. All child contours are left behind. **We can say, under this law, Only the eldest in every family is taken care of. It doesn't care about other members of the family :)**.
 
 So, in our image, how many extreme outer contours are there? ie at hierarchy-0 level?. Only 3, ie contours 0,1,2, right? Now try to find the contours using this flag. Here also, values given to each element is same as above. Compare it with above result. Below is what I got :
-@code{.py}
+```python
 >>> hierarchy
 >>> array([[[ 1, -1, -1, -1],
         [ 2,  0, -1, -1],
         [-1,  1, -1, -1]]])
-@endcode
+```
 You can use this flag if you want to extract only the outer contours. It might be useful in some cases.
 
 ### 3. RETR_CCOMP
@@ -115,7 +111,7 @@ Contour - 3 : Next in hierarchy-1 is contour-5. Previous is contour-0. Child is 
 Contour - 4 : It is in hierarchy 2 under contour-3 and it has no sibling. So no next, no previous, no child, parent is contour-3. So array is [-1,-1,-1,3].
 
 Remaining you can fill up. This is the final answer I got:
-@code{.py}
+```python
 >>> hierarchy
 >>> array([[[ 3, -1,  1, -1],
         [ 2, -1, -1,  0],
@@ -126,7 +122,7 @@ Remaining you can fill up. This is the final answer I got:
         [-1, -1, -1,  5],
         [ 8,  5, -1, -1],
         [-1,  7, -1, -1]]])
-@endcode
+```
 
 ### 4. RETR_TREE
 
@@ -142,7 +138,7 @@ Take contour-2 : It is in hierarchy-1. No contour in same level. No previous one
 
 And remaining, try yourself. Below is the full answer:
 
-@code{.py}
+```python
 
 >>> hierarchy
 >>> array([[[ 7, -1,  1, -1],
@@ -154,10 +150,4 @@ And remaining, try yourself. Below is the full answer:
         [-1,  5, -1,  4],
         [ 8,  0, -1, -1],
         [-1,  7, -1, -1]]])
-@endcode
-
-Additional Resources
---------------------
-
-Exercises
----------
+```

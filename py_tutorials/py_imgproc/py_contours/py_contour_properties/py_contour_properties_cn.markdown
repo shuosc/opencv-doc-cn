@@ -2,11 +2,11 @@
 
 在这里，我们将学习提取对象的一些常用属性，像Solidity，Equivalent Diameter，Mask image，Mean Intensity等。更多的特性可以在Matlab的regionprops文档中找到。
 
-（另外：Centroid，Area，Perimeter等也属于这个类别，但是我们在上一章已经学过了）
+（另外：Centroid，Area，Perimeter等也属于这个类别，但是这些我们在上一章已经学过了）
 
 1. 长宽比
 
-   它是对象边界矩的宽高比。
+   它是对象边界矩形的宽高比。
    $$
    Aspect \; Ratio = \frac{Width}{Height}
    $$
@@ -59,7 +59,7 @@
 
 5. 方向
 
-   方向是物体指向的角度。以下的方法也给出了长轴和短轴的长度。
+   方向是物体指向的角度。下面的方法也给出了长轴和短轴的长度。
 
    ```python
    (x,y),(MA,ma),angle = cv2.fitEllipse(cnt)
@@ -75,8 +75,6 @@
    pixelpoints = np.transpose(np.nonzero(mask))
    # pixelpoints = cv2.findNonZero(mask)
    ```
-
-   ​
 
    这里有两个方法，一个使用Numpy函数，另一个使用OpenCV函数（最后一个注释行）它们所做的事情基本相同。结果也几乎是一样的，只有一个微小的差别。 Numpy给出**(row, column)**的坐标，而OpenCV以**(x,y)**格式给出坐标。所以答案会反。请注意，**row = x**，**column = y**。
 
