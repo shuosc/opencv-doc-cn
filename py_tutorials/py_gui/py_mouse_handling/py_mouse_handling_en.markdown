@@ -1,4 +1,4 @@
-# Mouse as a Paint-Brush {#tutorial_py_mouse_handling}
+# Mouse as a Paint-Brush {#tutorial_py_mouse_handling_en}
 
 Goal
 ----

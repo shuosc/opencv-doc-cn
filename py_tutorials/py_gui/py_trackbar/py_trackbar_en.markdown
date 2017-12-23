@@ -1,4 +1,4 @@
-#Trackbar as the Color Palette {#tutorial_py_trackbar}
+#Trackbar as the Color Palette {#tutorial_py_trackbar_en}
 
 ##Goal
 - Learn to bind trackbar to OpenCV windows

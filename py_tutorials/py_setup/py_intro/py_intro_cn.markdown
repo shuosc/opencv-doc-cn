@@ -2,7 +2,7 @@
 
 ## OpenCV
 
-OpenCV于1999年由**Gary Bradsky**在英特尔开始开发，2000年首次发布。
+OpenCV于1999年由**Gary Bradsky**在英特尔开始开发，于2000年首次发布。
 
 **Vadim Pisarevsky**加入了Gary Bradsky来管理俄罗斯英特尔软件OpenCV团队。 在赢得2005年DARPA大挑战的车辆Stanley上使用了OpenCV。后来，在Willow Garage的支持和在Gary Bradsky、Vadim Pisarevsky的领导下这个项目继续活跃发展。 OpenCV现在支持多种与计算机视觉和机器学习有关的算法，并且正在日益扩大。
 
@@ -16,7 +16,7 @@ OpenCV-Python是为解决计算机视觉问题而设计的Python绑定库。
 
 Python是一种通用编程语言，由**Guido van Rossum**开发，它很快变得非常流行，主要是因为它的简单性和代码可读性。它使程序员能够用更少的代码行表达想法，而不会降低可读性。
 
-与C/C ++等语言相比，Python更慢。但是Python可以很容易地用C/C++进行扩展，这允许我们用C/C++编写计算密集的代码，并创建作为Python模块使用的Python包装器。这带给我们两个好处：第一，代码和原来的C/C ++代码一样快（因为在后台工作的实际上是C++代码），第二，写Python比写C/C++代码更容易。 OpenCV-Python是原始OpenCV C++实现的Python包装器。
+与C/C ++等语言相比，Python更慢。但是Python可以很容易地用C/C++进行扩展，这允许我们用C/C++编写计算密集的代码，并创建作为Python模块使用的Python包装器。这带给我们两个好处：第一，代码和原来的C/C++代码一样快（因为在后台工作的实际上是C++代码），第二，写Python比写C/C++代码更容易。 OpenCV-Python是原始OpenCV C++实现的Python包装器。
 
 OpenCV-Python使用了**Numpy**，一个高度优化的数组操作库，它使用MATLAB风格的语法。所有的OpenCV数组结构都转换会转换成Numpy数组或自Numpy数组转换而来。
 

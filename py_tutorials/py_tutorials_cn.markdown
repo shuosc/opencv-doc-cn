@@ -8,11 +8,11 @@
 
   在这里你将学习如何显示和保存图像和视频、响应鼠标事件和创建滑块控制条。
 
-- @subpage tutorial_py_table_of_contents_core
+- @subpage tutorial_py_table_of_contents_core_cn
 
   在这一章中你会学到图片上的基本操作，例如像素编辑、几何变换、代码优化、一些数学工具等等。
 
-- @subpage tutorial_py_table_of_contents_imgproc
+- @subpage tutorial_py_table_of_contents_imgproc_cn
 
   在这一章中你将会学会OpenCV中不同的图像处理功能。
 

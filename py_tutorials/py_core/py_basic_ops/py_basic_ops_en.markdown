@@ -1,8 +1,6 @@
-Basic Operations on Images {#tutorial_py_basic_ops}
-==========================
+# Basic Operations on Images {#tutorial_py_basic_ops_en}
 
-Goal
-----
+##Goal
 
 Learn to:
 
@@ -15,8 +13,7 @@ Almost all the operations in this section is mainly related to Numpy rather than
 
 *( Examples will be shown in Python terminal since most of them are just single line codes )*
 
-Accessing and Modifying pixel values
-------------------------------------
+## Accessing and Modifying pixel values
 
 Let's load a color image first:
 ```python

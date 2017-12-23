@@ -1,4 +1,4 @@
-# Drawing Functions in OpenCV {#tutorial_py_drawing_functions}
+# Drawing Functions in OpenCV {#tutorial_py_drawing_functions_en}
 
 ##Goal
 

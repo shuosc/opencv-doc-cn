@@ -6,7 +6,7 @@
 
 Debian及由其派生出的Ubuntu作为普及度较广的Linux发行版之一，应该有一篇针对Debian家族的OpenCV-Python环境配置的文档。
 
-本文档采用OpenCV 3.3+Python 3的配置，因为Python3是Python的未来，文档中有少部分代码只能用于Python 2，请使用者注意。
+本文档采用OpenCV 3.3+Python 3的配置，因为Python3是Python的未来，教程其他部分中有少部分代码只能用于Python 2（虽然将其改成合法Python 3代码十分方便），请使用者注意。
 
 如果你坚持要使用Python 2，只需将CMake这里的选项稍作修改即可。
 
@@ -167,7 +167,7 @@ make install # （这里需要root权限）
 
 ## 练习
 
-在你的Debian（Ubuntu）机器上从源码构建安装OpenCV-Python。
+- 在你的Debian（Ubuntu）机器上从源码构建安装OpenCV-Python。
 
 
 

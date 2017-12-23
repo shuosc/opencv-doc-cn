@@ -1,4 +1,4 @@
-# Getting Started with Images {#tutorial_py_image_display}
+# Getting Started with Images {#tutorial_py_image_display_en}
 
 ## Goals
 

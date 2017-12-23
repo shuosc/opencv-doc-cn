@@ -1,22 +1,18 @@
-Getting Started with Videos {#tutorial_py_video_display}
-===========================
+# Getting Started with Videos {#tutorial_py_video_display_en}
 
-Goal
-----
-
+## Goal
 -   Learn to read video, display video and save video.
 -   Learn to capture from Camera and display it.
 -   You will learn these functions : **cv2.VideoCapture()**, **cv2.VideoWriter()**
 
-Capture Video from Camera
--------------------------
+## Capture Video from Camera
 
 Often, we have to capture live stream with camera. OpenCV provides a very simple interface to this.
 Let's capture a video from the camera (I am using the in-built webcam of my laptop), convert it into grayscale video and display it. Just a simple task to get started.
 
 To capture a video, you need to create a **VideoCapture** object. Its argument can be either the device index or the name of a video file. Device index is just the number to specify which camera.
 Normally one camera will be connected (as in my case). So I simply pass 0 (or -1). You can select the second camera by passing 1 and so on. After that, you can capture frame-by-frame. But at the end, don't forget to release the capture.
-@code{.py}
+```python
 import numpy as np
 import cv2
 
@@ -37,7 +33,7 @@ while(True):
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-@endcode
+```
 `cap.read()` returns a bool (`True`/`False`). If frame is read correctly, it will be `True`. So you can check end of the video by checking this return value.
 
 Sometimes, cap may not have initialized the capture. In that case, this code shows error. You can check whether it is initialized or not by the method **cap.isOpened()**. If it is `True`, OK.
@@ -51,12 +47,10 @@ For example, I can check the frame width and height by `cap.get(cv2.CAP_PROP_FRA
 @note If you are getting error, make sure camera is working fine using any other camera application
 (like Cheese in Linux).
 
-Playing Video from file
------------------------
+## Playing Video from file
 
-It is same as capturing from Camera, just change camera index with video file name. Also while displaying the frame, use appropriate time for `cv2.waitKey()`. If it is too less, video will be very fast and if it is too high, video will be slow (Well, that is how you can display videos in slow
-motion). 25 milliseconds will be OK in normal cases.
-@code{.py}
+It is same as capturing from Camera, just change camera index with video file name. Also while displaying the frame, use appropriate time for `cv2.waitKey()`. If it is too less, video will be very fast and if it is too high, video will be slow (Well, that is how you can display videos in slow motion). 25 milliseconds will be OK in normal cases.
+```python
 import numpy as np
 import cv2
 
@@ -73,12 +67,11 @@ while(cap.isOpened()):
 
 cap.release()
 cv2.destroyAllWindows()
-@endcode
+```
 
 @note Make sure proper versions of ffmpeg or gstreamer is installed. Sometimes, it is a headache to work with Video Capture mostly due to wrong installation of ffmpeg/gstreamer.
 
-Saving a Video
---------------
+## Saving a Video
 
 So we capture a video, process it frame-by-frame and we want to save that video. For images, it is very simple, just use `cv2.imwrite()`. Here a little more work is required.
 
@@ -90,11 +83,10 @@ This time we create a **VideoWriter** object. We should specify the output file 
 -   In Windows: DIVX (More to be tested and added)
 -   In OSX: MJPG (.mp4), DIVX (.avi), X264 (.mkv).
 
-FourCC code is passed as `cv2.VideoWriter_fourcc('M','J','P','G')` or
-`cv2.VideoWriter_fourcc(*'MJPG')` for MJPG.
+FourCC code is passed as `cv2.VideoWriter_fourcc('M','J','P','G')` or `cv2.VideoWriter_fourcc(*'MJPG')` for MJPG.
 
 Below code capture from a Camera, flip every frame in vertical direction and saves it.
-@code{.py}
+```python
 import numpy as np
 import cv2
 
@@ -122,10 +114,4 @@ while(cap.isOpened()):
 cap.release()
 out.release()
 cv2.destroyAllWindows()
-@endcode
-
-Additional Resources
---------------------
-
-Exercises
----------
+```

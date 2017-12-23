@@ -4,17 +4,17 @@
 
   Learn how to setup OpenCV-Python on your computer!
 
--   @subpage tutorial_py_table_of_contents_gui
+- @subpage tutorial_py_table_of_contents_gui_en
 
-    Here you will learn how to display and save images and videos, control mouse events and create trackbar.
+  Here you will learn how to display and save images and videos, control mouse events and create trackbar.
 
--   @subpage tutorial_py_table_of_contents_core
+- @subpage tutorial_py_table_of_contents_core_en
 
-    In this section you will learn basic operations on image like pixel editing, geometric transformations, code optimization, some mathematical tools etc.
+  In this section you will learn basic operations on image like pixel editing, geometric transformations, code optimization, some mathematical tools etc.
 
--   @subpage tutorial_py_table_of_contents_imgproc
+- @subpage tutorial_py_table_of_contents_imgproc_en
 
-    In this section you will learn different image processing functions inside OpenCV.
+  In this section you will learn different image processing functions inside OpenCV.
 
 -   @subpage tutorial_py_table_of_contents_feature2d
 

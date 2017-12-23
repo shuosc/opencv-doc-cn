@@ -1,4 +1,4 @@
-# Arithmetic Operations on Images {#tutorial_py_image_arithmetics}
+# Arithmetic Operations on Images {#tutorial_py_image_arithmetics_en}
 
 ##Goal
 - Learn several arithmetic operations on images like addition, subtraction, bitwise operations etc.

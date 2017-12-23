@@ -1,5 +1,9 @@
 # 在Docker中安装OpenCV-Python{#tutorial_py_setup_in_fedora_cn}
 
+## 注
+
+英文文档无此章节
+
 ## 目标
 
 在这个教程中：

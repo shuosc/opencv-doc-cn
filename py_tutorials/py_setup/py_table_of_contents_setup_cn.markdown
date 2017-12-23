@@ -1,4 +1,4 @@
-# 介绍Open CV{#tutorial_py_table_of_contents_setup_cn}
+# 介绍OpenCV{#tutorial_py_table_of_contents_setup_cn}
 
 - @subpage tutorial_py_intro_cn
 
@@ -19,4 +19,8 @@
 - @subpage tutorial_py_setup_in_docker_cn
 
   创建一个配置了OpenCV-Python开发环境的Docker容器
+
+- @subpage tutorial_py_setup_in_raspbian_cn
+
+  在树莓派上配置OpenCV-Python开发环境
 
