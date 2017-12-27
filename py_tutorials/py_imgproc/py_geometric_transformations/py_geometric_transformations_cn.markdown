@@ -7,13 +7,13 @@
 
 ## 变换
 
-OpenCV提供了两个转换函数，`cv2.warpAffine`和`cv2.warpPerspective`，可以进行各种转换。 `cv2.warpAffine`采用2x3变换矩阵，而`cv2.warpPerspective`采用3x3变换矩阵作为输入。
+OpenCV提供了两个转换函数，`cv2.warpAffine`和`cv2.warpPerspective`，可以进行各种变换。 `cv2.warpAffine`采用2x3变换矩阵，而`cv2.warpPerspective`采用3x3变换矩阵作为输入。
 
 ### 缩放
 
 缩放只是调整图像的大小。 OpenCV为此提供了一个函数`cv2.resize()`。 图像的大小可以手动指定，也可以指定比例因子。
 
-可以使用不同的插值方法。 优选的插值方法是用`cv2.INTER_AREA`缩小，`cv2.INTER_CUBIC`（慢）和用`cv2.INTER_LINEAR`来放大。 默认情况下，所有调整大小的插值方法都是`cv2.INTER_LINEAR`。 您可以使用以下方法调整输入图像大小：
+可以使用不同的插值方法。 优选的插值方法是用`cv2.INTER_AREA`来缩小图像，用`cv2.INTER_CUBIC`（慢）和用`cv2.INTER_LINEAR`来放大图像。 默认情况下，所有调整大小的插值方法都是`cv2.INTER_LINEAR`。 您可以使用以下方法调整输入图像大小：
 
 ```python
 import cv2
@@ -22,18 +22,18 @@ img = cv2.imread('messi5.jpg')
 res = cv2.resize(img,None,fx=2, fy=2, interpolation = cv2.INTER_CUBIC)
 # 或者
 height, width = img.shape[:2]
-res = cv2.resize(img,(2width, 2height), interpolation = cv2.INTER_CUBIC)
+res = cv2.resize(img,(2*width, 2*height), interpolation = cv2.INTER_CUBIC)
 ```
 
 ### 平移
 
-平移就是移动对象的位置。 如果你知道了$(x,y)$方向上移动的距离，假设它是$(t_x,t_y)$，则可以创建如下的变换矩阵$\textbf {M}$：
+平移就是移动对象的位置。 如果你知道了$(x,y)$方向上移动的距离是$(t_x,t_y)$，则可以创建如下的变换矩阵$\textbf {M}$：
 
 $$
-M = \begin{bmatrix} 1 & 0 & t_x \\ 0 & 1 & t_y  \end{bmatrix}
+\textbf M = \begin{bmatrix} 1 & 0 & t_x \\ 0 & 1 & t_y  \end{bmatrix}
 $$
 
-你可以把它变成np.float32类型的Numpy数组，并将它传递给`cv2.warpAffine()`函数。 看下面移动$(100,50)$的例子：
+你可以把它变成`np.float32`类型的Numpy数组，并将它传递给`cv2.warpAffine()`函数。 下面是移动$(100,50)$的例子：
 
 ```python
 import cv2
@@ -50,7 +50,7 @@ cv2.destroyAllWindows()
 
 **警告**
 
-`cv2.warpAffine()`函数的第三个参数是输出图像的大小，它应该是(width,height)的形式。 记住width=列数，height=行数。
+`cv2.warpAffine()`函数的第三个参数是输出图像的大小，它应该是`(width,height)`的形式。 其中width是列数，height是行数。
 
 下面是平移的结果：
 
@@ -76,7 +76,7 @@ $$
 
 在仿射变换中，原始图像中的所有平行线在输出图像中仍然是平行的。 为了找到变换矩阵，我们需要输入图像中的三个点和它们在输出图像中的相应位置。 然后`cv2.getAffineTransform`将创建一个2x3矩阵，将其传递给`cv2.warpAffine`。
 
-看下面的例子，并看看我选择的点（用绿色标记）：
+看下面的例子，并且可以看看我选择的点（用绿色标记）：
 
 ```python
 img = cv2.imread('drawing.png')
@@ -96,7 +96,7 @@ plt.show()
 
 ### 透视变换
 
-对于透视变换，您需要一个3x3变换矩阵。 即使在变换之后，直线仍为直线。 要找到这个变换矩阵，你需要输入图像上的4个点和输出图像上的对应点。 在这4点中，应该不存在三点共线。 然后可以通过函数`cv2.getPerspectiveTransform`找到变换矩阵。 然后将`cv2.warpPerspective`应用于这个3x3转换矩阵。
+对于透视变换，您需要一个3x3变换矩阵。 即使在变换之后，直线仍为直线。 要找到这个变换矩阵，你需要输入图像上的4个点和输出图像上的对应点。 在这4点中，不能有三点共线。 然后可以通过函数`cv2.getPerspectiveTransform`找到变换矩阵。 然后将`cv2.warpPerspective`应用于这个3x3转换矩阵。
 
 请看下面的代码：
 
