@@ -1,35 +1,32 @@
-Image Pyramids {#tutorial_py_pyramids}
-==============
+# Image Pyramids {#tutorial_py_pyramids_en}
 
-Goal
-----
+## Goal
 
 In this chapter,
 -   We will learn about Image Pyramids
 -   We will use Image pyramids to create a new fruit, "Orapple"
--   We will see these functions: **cv2.pyrUp()**, **cv2.pyrDown()**
+-   We will see these functions: `cv2.pyrUp()`, `cv2.pyrDown()`
 
-Theory
-------
+## Theory
 
 Normally, we used to work with an image of constant size. But in some occassions, we need to work with images of different resolution of the same image. For example, while searching for something in an image, like face, we are not sure at what size the object will be present in the image. In that case, we will need to create a set of images with different resolution and search for object in all the images. These set of images with different resolution are called Image Pyramids (because when they are kept in a stack with biggest image at bottom and smallest image at top look like a pyramid).
 
 There are two kinds of Image Pyramids. 1) Gaussian Pyramid and 2) Laplacian Pyramids
 
 Higher level (Low resolution) in a Gaussian Pyramid is formed by removing consecutive rows and columns in Lower level (higher resolution) image. Then each pixel in higher level is formed by the contribution from 5 pixels in underlying level with gaussian weights. By doing so, a $M \times N$ image becomes $\frac M 2 \times \frac N 2$ image. So area reduces to one-fourth of original area. It is called an Octave. The same pattern continues as we go upper in pyramid (ie, resolution decreases). Similarly while expanding, area becomes 4 times in each level. We can find Gaussian pyramids using
-**cv2.pyrDown()** and **cv2.pyrUp()** functions.
-@code{.py}
+`cv2.pyrDown()` and `cv2.pyrUp()` functions.
+```python
 img = cv2.imread('messi5.jpg')
 lower_reso = cv2.pyrDown(higher_reso)
-@endcode
+```
 Below is the 4 levels in an image pyramid.
 
 ![image](images/messipyr.jpg)
 
 Now you can go down the image pyramid with **cv2.pyrUp()** function.
-@code{.py}
+```python
 higher_reso2 = cv2.pyrUp(lower_reso)
-@endcode
+```
 Remember, higher_reso2 is not equal to higher_reso, because once you decrease the resolution, you loose the information. Below image is 3 level down the pyramid created from smallest image in previous case. Compare it with original image:
 
 ![image](images/messiup.jpg)
@@ -38,8 +35,7 @@ Laplacian Pyramids are formed from the Gaussian Pyramids. There is no exclusive 
 
 ![image](images/lap.jpg)
 
-Image Blending using Pyramids
------------------------------
+## Image Blending using Pyramids
 
 One application of Pyramids is Image Blending. For example, in image stitching, you will need to stack two images together, but it may not look good due to discontinuities between images. In that case, image blending with Pyramids gives you seamless blending without leaving much data in the images. One classical example of this is the blending of two fruits, Orange and Apple. See the result now itself to understand what I am saying:
 
@@ -49,15 +45,15 @@ Please check first reference in additional resources, it has full diagramatic de
 
 1. Load the two images of apple and orange
 
-2.  Find the Gaussian Pyramids for apple and orange (in this particular example, number of levels
+2. Find the Gaussian Pyramids for apple and orange (in this particular example, number of levels
     is 6)
-3.  From Gaussian Pyramids, find their Laplacian Pyramids
-4.  Now join the left half of apple and right half of orange in each levels of Laplacian Pyramids
-5.  Finally from this joint image pyramids, reconstruct the original image.
+3. From Gaussian Pyramids, find their Laplacian Pyramids
+4. Now join the left half of apple and right half of orange in each levels of Laplacian Pyramids
+5. Finally from this joint image pyramids, reconstruct the original image.
 
 Below is the full code. (For sake of simplicity, each step is done separately which may take more
 memory. You can optimize it if you want so).
-@code{.py}
+```python
 import cv2
 import numpy as np,sys
 
@@ -110,11 +106,8 @@ real = np.hstack((A[:,:cols/2],B[:,cols/2:]))
 
 cv2.imwrite('Pyramid_blending2.jpg',ls_)
 cv2.imwrite('Direct_blending.jpg',real)
-@endcode
-Additional Resources
---------------------
+```
+## Additional Resources
 
--#  [Image Blending](http://pages.cs.wisc.edu/~csverma/CS766_09/ImageMosaic/imagemosaic.html)
+- [Image Blending](http://pages.cs.wisc.edu/~csverma/CS766_09/ImageMosaic/imagemosaic.html)
 
-Exercises
----------

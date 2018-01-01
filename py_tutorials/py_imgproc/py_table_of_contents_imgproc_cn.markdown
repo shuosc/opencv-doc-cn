@@ -12,7 +12,7 @@
 
 - @subpage tutorial_py_thresholding_cn
 
-  学习使用全局二值化，自适应二值化，Otsu二值化等将图像转换为二值图像。
+  学习使用全局二值化，自适应二值化，Otsu二值化等方法将图像转换为二值图像。
 
 - @subpage tutorial_py_filtering_cn
 

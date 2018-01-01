@@ -1,16 +1,12 @@
-Image Gradients {#tutorial_py_gradients}
-===============
+# Image Gradients {#tutorial_py_gradients_en}
 
-Goal
-----
-
+## Goal
 In this chapter, we will learn to:
 
 -   Find Image gradients, edges etc
--   We will see following functions : **cv2.Sobel()**, **cv2.Scharr()**, **cv2.Laplacian()** etc
+-   We will see following functions : `cv2.Sobel()`, `cv2.Scharr()`, `cv2.Laplacian()` etc
 
-Theory
-------
+## Theory
 
 OpenCV provides three types of gradient filters or High-pass filters, Sobel, Scharr and Laplacian.
 We will see each one of them.
@@ -26,11 +22,10 @@ It calculates the Laplacian of the image given by the relation, $\Delta src = \f
 $$
 kernel = \begin{bmatrix} 0 & 1 & 0 \\ 1 & -4 & 1 \\ 0 & 1 & 0  \end{bmatrix}
 $$
-Code
-----
+## Code
 
 Below code shows all operators in a single diagram. All kernels are of 5x5 size. Depth of output image is passed -1 to get the result in np.uint8 type.
-@code{.py}
+```python
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -51,19 +46,18 @@ plt.subplot(2,2,4),plt.imshow(sobely,cmap = 'gray')
 plt.title('Sobel Y'), plt.xticks([]), plt.yticks([])
 
 plt.show()
-@endcode
+```
 Result:
 
 ![image](images/gradients.jpg)
 
-One Important Matter!
----------------------
+## One Important Matter!
 
 In our last example, output datatype is cv2.CV_8U or np.uint8. But there is a slight problem with that. Black-to-White transition is taken as Positive slope (it has a positive value) while White-to-Black transition is taken as a Negative slope (It has negative value). So when you convert data to np.uint8, all negative slopes are made zero. In simple words, you miss that edge.
 
 If you want to detect both edges, better option is to keep the output datatype to some higher forms, like cv2.CV_16S, cv2.CV_64F etc, take its absolute value and then convert back to cv2.CV_8U.
 Below code demonstrates this procedure for a horizontal Sobel filter and difference in results.
-@code{.py}
+```python
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -86,13 +80,8 @@ plt.subplot(1,3,3),plt.imshow(sobel_8u,cmap = 'gray')
 plt.title('Sobel abs(CV_64F)'), plt.xticks([]), plt.yticks([])
 
 plt.show()
-@endcode
+```
 Check the result below:
 
 ![image](images/double_edge.jpg)
 
-Additional Resources
---------------------
-
-Exercises
----------

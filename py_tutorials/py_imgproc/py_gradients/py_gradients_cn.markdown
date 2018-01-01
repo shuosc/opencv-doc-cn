@@ -9,13 +9,17 @@
 
 ## 理论基础
 
+OpenCV提供了三种类型的梯度滤波器或高通滤波器，Sobel，Scharr和Laplacian。
+
+我们会一一介绍它们。
+
 ### 1. Sobel和Scharr导数
 
-Sobel算子是一个联合了Gausssian平滑和差分的运算，因此它更能抵抗噪声。 您可以指定要取导数的方向，垂直或者水平（分别通过参数`yorder`和`xorder`）。 你也可以通过参数`ksize`来指定内核的大小。 如果ksize = -1，则使用3x3 Scharr滤波器，其结果比3x3 Sobel滤波器更好。 请参阅所用内核的文档。
+Sobel算子是一个联合了高斯平滑和差分的运算，因此它更能抵抗噪声。 您可以指定要取导数的方向，垂直方向或者水平方向（分别通过参数`yorder`和`xorder`）。 你也可以通过参数`ksize`来指定内核的大小。 如果`ksize = -1`，则使用3x3 Scharr滤波器，其结果比3x3 Sobel滤波器更好。 请参阅文档来看看使用的内核的特性。
 
 ### 2. 拉普拉斯导数
 
-它计算由 $\Delta src = \frac{\partial ^2{src}}{\partial x^2} + \frac{\partial ^2{src}}{\partial y^2}$给出的图像的拉普拉斯算子，其中每个导数都是用Sobel导数计算的，如果`ksize=1`，则使用以下内核进行过滤：
+它计算由 $\Delta src = \frac{\partial ^2{src}}{\partial x^2} + \frac{\partial ^2{src}}{\partial y^2}$给出的，图像的拉普拉斯算子，其中每个导数都是用Sobel导数计算的，如果`ksize=1`，则使用以下内核进行过滤：
 $$
 kernel = \begin{bmatrix} 0 & 1 & 0 \\ 1 & -4 & 1 \\ 0 & 1 & 0  \end{bmatrix}
 $$
@@ -85,3 +89,7 @@ plt.show()
 
 ![image](images/double_edge.jpg)
 
+## 更多资源
+
+- [索贝尔算子](https://zh.wikipedia.org/wiki/索貝爾算子)
+- [拉普拉斯算子](https://zh.wikipedia.org/wiki/拉普拉斯算子)

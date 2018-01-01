@@ -1,4 +1,4 @@
-# Smoothing Images {#tutorial_py_filtering}
+# Smoothing Images {#tutorial_py_filtering_en}
 
 ## Goals
 
