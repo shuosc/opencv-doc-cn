@@ -13,7 +13,7 @@ In this chapter, we will learn about
 
 We saw what is convex hull in second chapter about contours. Any deviation of the object from this hull can be considered as convexity defect.
 
-OpenCV comes with a ready-made function to find this, **cv2.convexityDefects()**. A basic function call would look like below:
+OpenCV comes with a ready-made function to find this, `cv2.convexityDefects()`. A basic function call would look like below:
 ```python
 hull = cv2.convexHull(cnt,returnPoints = False)
 defects = cv2.convexityDefects(cnt,hull)
@@ -64,7 +64,7 @@ In the function, third argument is measureDist. If it is True, it finds the sign
 
 ### 3. Match Shapes
 
-OpenCV comes with a function **cv2.matchShapes()** which enables us to compare two shapes, or two contours and returns a metric showing the similarity. The lower the result, the better match it is.
+OpenCV comes with a function `cv2.matchShapes()` which enables us to compare two shapes, or two contours and returns a metric showing the similarity. The lower the result, the better match it is.
 It is calculated based on the hu-moment values. Different measurement methods are explained in the docs.
 ```python
 import cv2
@@ -100,5 +100,5 @@ See, even image rotation doesn't affect much on this comparison.
 
 ## Exercises
 
-- Check the documentation for **cv2.pointPolygonTest()**, you can find a nice image in Red and Blue color. It represents the distance from all pixels to the white curve on it. All pixels inside curve is blue depending on the distance. Similarly outside points are red. Contour edges are marked with White. So problem is simple. Write a code to create such a representation of distance.
-- Compare images of digits or letters using **cv2.matchShapes()**. ( That would be a simple step towards OCR )
+- Check the documentation for `cv2.pointPolygonTest()`, you can find a nice image in Red and Blue color. It represents the distance from all pixels to the white curve on it. All pixels inside curve is blue depending on the distance. Similarly outside points are red. Contour edges are marked with White. So problem is simple. Write a code to create such a representation of distance.
+- Compare images of digits or letters using `cv2.matchShapes()`. ( That would be a simple step towards OCR )

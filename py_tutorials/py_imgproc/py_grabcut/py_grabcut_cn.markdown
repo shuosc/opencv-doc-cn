@@ -7,9 +7,9 @@
 - 我们将看到GrabCut算法提取图像中的前景
 - 我们将为此创建一个交互式应用程序。
 
-理论
+## 理论基础
 
-GrabCut算法由英国剑桥微软研究院的Carsten Rother，Vladimir Kolmogorov和Andrew Blake设计。在他们的论文["GrabCut": interactive foreground extraction using iterated graph cuts](http://dl.acm.org/citation.cfm?id=1015720)中。如果你需要一个只需要最少量用户交互的前景提取算法，那么GrabCut就是你所需要的。
+GrabCut算法由英国剑桥微软研究院的Carsten Rother，Vladimir Kolmogorov和Andrew Blake设计，并发表在他们的论文《["GrabCut": interactive foreground extraction using iterated graph cuts](http://dl.acm.org/citation.cfm?id=1015720)》中。如果你一个只需要最少量用户交互的前景提取算法，那么GrabCut就是你所需要的。
 
 从用户的角度来看它是如何工作的？最初用户围绕着前景区域绘制一个矩形（前景区域应该完全在矩形内）。然后算法对其进行迭代分割以获得最佳结果。但在某些情况下，分割不会很好，例如，它可能标记了一些前景区域作为背景，或反之。在这种情况下，用户需要做一些修改。只需在图像上点击一些错误的结果就可以了。基本上是这样的：“嘿，这个区域应该是前景的，你把它标记为背景，在下一次迭代中纠正它”，或者对于背景来说正相反。然后在下一次迭代中，你会得到更好的结果。
 
@@ -45,7 +45,7 @@ GrabCut算法由英国剑桥微软研究院的Carsten Rother，Vladimir Kolmogor
 - `iterCount` - 算法应该运行的迭代次数。
 - `mode` - 它应该是`cv2.GC_INIT_WITH_RECT`或`cv2.GC_INIT_WITH_MASK`或其组合，这个参数决定我们是否绘制矩形或最终的触觉笔触。
 
-首先让我们看看`GC_INIT_WITH_RECT`模式。我们加载图像，创建一个类似的蒙版图像。我们创建`fgdModel`和`bgdModel`。我们给矩形参数。这些都是是直截了当的。让算法运行5次。由于我们使用的是矩形，所以模式应该是`cv2.GC_INIT_WITH_RECT`。然后运行grabCut。它会修改蒙版图像。在新的蒙版图像中，像素将被标记为具有如上所述的表示背景/前景的四个标记。所以我们修改mask，使所有的0像素和2像素被置为0（即背景），并且所有1像素和3像素被置于1（即前景像素）。现在我们最后的mask已经准备好了，只要将它与输入图像相乘即可获得分割过的图像。
+首先让我们看看`GC_INIT_WITH_RECT`模式。我们加载图像，创建一个类似的蒙版图像。我们创建`fgdModel`和`bgdModel`。我们给矩形参数。这些都是是直截了当的。让算法运行5次。由于我们使用的是矩形，所以模式应该是`cv2.GC_INIT_WITH_RECT`。然后运行grabCut。它会修改蒙版图像。在新的mask图像中，像素将被标记为具有如上所述的表示背景/前景的四个标记。所以我们修改mask，使所有的0像素和2像素被置为0（即背景），并且所有1像素和3像素被置于1（即前景像素）。现在我们最后的mask已经准备好了，只要将它与输入图像相乘即可获得分割过的图像。
 
 ```python
 import numpy as np

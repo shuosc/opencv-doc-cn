@@ -1,17 +1,14 @@
-Fourier Transform {#tutorial_py_fourier_transform}
-=================
+# Fourier Transform {#tutorial_py_fourier_transform_en}
 
-Goal
-----
+## Goal
 
 In this section, we will learn
 -   To find the Fourier Transform of images using OpenCV
 -   To utilize the FFT functions available in Numpy
 -   Some applications of Fourier Transform
--   We will see following functions : **cv2.dft()**, **cv2.idft()** etc
+-   We will see following functions : `cv2.dft()`, `cv2.idft()` etc
 
-Theory
-------
+## Theory
 
 Fourier Transform is used to analyze the frequency characteristics of various filters. For images, **2D Discrete Fourier Transform (DFT)** is used to find the frequency domain. A fast algorithm called **Fast Fourier Transform (FFT)** is used for calculation of DFT. Details about these can be found in any image processing or signal processing textbooks. Please see Additional Resources section.
 
@@ -21,13 +18,12 @@ More intuitively, for the sinusoidal signal, if the amplitude varies so fast in 
 
 Now we will see how to find the Fourier Transform.
 
-Fourier Transform in Numpy
---------------------------
+## Fourier Transform in Numpy
 
-First we will see how to find Fourier Transform using Numpy. Numpy has an FFT package to do this. **np.fft.fft2()** provides us the frequency transform which will be a complex array. Its first argument is the input image, which is grayscale. Second argument is optional which decides the size of output array. If it is greater than size of input image, input image is padded with zeros before calculation of FFT. If it is less than input image, input image will be cropped. If no arguments passed, Output array size will be same as input.
+First we will see how to find Fourier Transform using Numpy. Numpy has an FFT package to do this. `np.fft.fft2()` provides us the frequency transform which will be a complex array. Its first argument is the input image, which is grayscale. Second argument is optional which decides the size of output array. If it is greater than size of input image, input image is padded with zeros before calculation of FFT. If it is less than input image, input image will be cropped. If no arguments passed, Output array size will be same as input.
 
-Now once you got the result, zero frequency component (DC component) will be at top left corner. If you want to bring it to center, you need to shift the result by $\frac{N}{2}$ in both the directions. This is simply done by the function, **np.fft.fftshift()**. (It is more easier to analyze). Once you found the frequency transform, you can find the magnitude spectrum.
-@code{.py}
+Now once you got the result, zero frequency component (DC component) will be at top left corner. If you want to bring it to center, you need to shift the result by $\frac{N}{2}$ in both the directions. This is simply done by the function, `np.fft.fftshift()`. (It is more easier to analyze). Once you found the frequency transform, you can find the magnitude spectrum.
+```python
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -42,15 +38,15 @@ plt.title('Input Image'), plt.xticks([]), plt.yticks([])
 plt.subplot(122),plt.imshow(magnitude_spectrum, cmap = 'gray')
 plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
 plt.show()
-@endcode
+```
 Result look like below:
 
 ![image](images/fft1.jpg)
 
 See, You can see more whiter region at the center showing low frequency content is more.
 
-So you found the frequency transform Now you can do some operations in frequency domain, like high pass filtering and reconstruct the image, ie find inverse DFT. For that you simply remove the low frequencies by masking with a rectangular window of size 60x60. Then apply the inverse shift using **np.fft.ifftshift()** so that DC component again come at the top-left corner. Then find inverse FFT using **np.ifft2()** function. The result, again, will be a complex number. You can take its absolute value.
-@code{.py}
+So you found the frequency transform Now you can do some operations in frequency domain, like high pass filtering and reconstruct the image, ie find inverse DFT. For that you simply remove the low frequencies by masking with a rectangular window of size 60x60. Then apply the inverse shift using `np.fft.ifftshift()` so that DC component again come at the top-left corner. Then find inverse FFT using `np.ifft2()` function. The result, again, will be a complex number. You can take its absolute value.
+```python
 rows, cols = img.shape
 crow,ccol = rows/2 , cols/2
 fshift[crow-30:crow+30, ccol-30:ccol+30] = 0
@@ -66,7 +62,7 @@ plt.subplot(133),plt.imshow(img_back)
 plt.title('Result in JET'), plt.xticks([]), plt.yticks([])
 
 plt.show()
-@endcode
+```
 Result look like below:
 
 ![image](images/fft2.jpg)
@@ -75,11 +71,10 @@ The result shows High Pass Filtering is an edge detection operation. This is wha
 
 If you closely watch the result, especially the last image in JET color, you can see some artifacts (One instance I have marked in red arrow). It shows some ripple like structures there, and it is called **ringing effects**. It is caused by the rectangular window we used for masking. This mask is converted to sinc shape which causes this problem. So rectangular windows is not used for filtering. Better option is Gaussian Windows.
 
-Fourier Transform in OpenCV
----------------------------
+## Fourier Transform in OpenCV
 
-OpenCV provides the functions **cv2.dft()** and **cv2.idft()** for this. It returns the same result as previous, but with two channels. First channel will have the real part of the result and second channel will have the imaginary part of the result. The input image should be converted to np.float32 first. We will see how to do it.
-@code{.py}
+OpenCV provides the functions `cv2.dft()` and `cv2.idft()` for this. It returns the same result as previous, but with two channels. First channel will have the real part of the result and second channel will have the imaginary part of the result. The input image should be converted to np.float32 first. We will see how to do it.
+```python
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -96,13 +91,13 @@ plt.title('Input Image'), plt.xticks([]), plt.yticks([])
 plt.subplot(122),plt.imshow(magnitude_spectrum, cmap = 'gray')
 plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
 plt.show()
-@endcode
+```
 
-@note You can also use **cv2.cartToPolar()** which returns both magnitude and phase in a single shot
+@note You can also use `cv2.cartToPolar()` which returns both magnitude and phase in a single shot
 
 So, now we have to do inverse DFT. In previous session, we created a HPF, this time we will see how to remove high frequency contents in the image, ie we apply LPF to image. It actually blurs the image. For this, we create a mask first with high value (1) at low frequencies, ie we pass the LF content, and 0 at HF region.
 
-@code{.py}
+```python
 rows, cols = img.shape
 crow,ccol = rows/2 , cols/2
 
@@ -121,20 +116,19 @@ plt.title('Input Image'), plt.xticks([]), plt.yticks([])
 plt.subplot(122),plt.imshow(img_back, cmap = 'gray')
 plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
 plt.show()
-@endcode
+```
 See the result:
 
 ![image](images/fft4.jpg)
 
-@note As usual, OpenCV functions **cv2.dft()** and **cv2.idft()** are faster than Numpy counterparts. But Numpy functions are more user-friendly. For more details about performance issues, see below section.
+@note As usual, OpenCV functions `cv2.dft()` and `cv2.idft()` are faster than Numpy counterparts. But Numpy functions are more user-friendly. For more details about performance issues, see below section.
 
-Performance Optimization of DFT
-===============================
+## Performance Optimization of DFT
 
 Performance of DFT calculation is better for some array size. It is fastest when array size is power of two. The arrays whose size is a product of 2’s, 3’s, and 5’s are also processed quite efficiently. So if you are worried about the performance of your code, you can modify the size of the array to any optimal size (by padding zeros) before finding DFT. For OpenCV, you have to manually pad zeros. But for Numpy, you specify the new size of FFT calculation, and it will automatically pad zeros for you.
 
-So how do we find this optimal size ? OpenCV provides a function, **cv2.getOptimalDFTSize()** for this. It is applicable to both **cv2.dft()** and **np.fft.fft2()**. Let's check their performance using IPython magic command %timeit.
-@code{.py}
+So how do we find this optimal size ? OpenCV provides a function, `cv2.getOptimalDFTSize()` for this. It is applicable to both `cv2.dft()` and `np.fft.fft2()`. Let's check their performance using IPython magic command %timeit.
+```python
 In [16]: img = cv2.imread('messi5.jpg',0)
 In [17]: rows,cols = img.shape
 In [18]: print("{} {}".format(rows,cols))
@@ -144,40 +138,39 @@ In [19]: nrows = cv2.getOptimalDFTSize(rows)
 In [20]: ncols = cv2.getOptimalDFTSize(cols)
 In [21]: print("{} {}".format(nrows,ncols))
 360 576
-@endcode
-See, the size (342,548) is modified to (360, 576). Now let's pad it with zeros (for OpenCV) and find their DFT calculation performance. You can do it by creating a new big zero array and copy the data to it, or use **cv2.copyMakeBorder()**.
-@code{.py}
+```
+See, the size (342,548) is modified to (360, 576). Now let's pad it with zeros (for OpenCV) and find their DFT calculation performance. You can do it by creating a new big zero array and copy the data to it, or use `cv2.copyMakeBorder()`.
+```python
 nimg = np.zeros((nrows,ncols))
 nimg[:rows,:cols] = img
-@endcode
+```
 OR:
-@code{.py}
+```python
 right = ncols - cols
 bottom = nrows - rows
 bordertype = cv2.BORDER_CONSTANT #just to avoid line breakup in PDF file
 nimg = cv2.copyMakeBorder(img,0,bottom,0,right,bordertype, value = 0)
-@endcode
+```
 Now we calculate the DFT performance comparison of Numpy function:
-@code{.py}
+```python
 In [22]: %timeit fft1 = np.fft.fft2(img)
 10 loops, best of 3: 40.9 ms per loop
 In [23]: %timeit fft2 = np.fft.fft2(img,[nrows,ncols])
 100 loops, best of 3: 10.4 ms per loop
-@endcode
+```
 It shows a 4x speedup. Now we will try the same with OpenCV functions.
-@code{.py}
+```python
 In [24]: %timeit dft1= cv2.dft(np.float32(img),flags=cv2.DFT_COMPLEX_OUTPUT)
 100 loops, best of 3: 13.5 ms per loop
 In [27]: %timeit dft2= cv2.dft(np.float32(nimg),flags=cv2.DFT_COMPLEX_OUTPUT)
 100 loops, best of 3: 3.11 ms per loop
-@endcode
+```
 It also shows a 4x speed-up. You can also see that OpenCV functions are around 3x faster than Numpy functions. This can be tested for inverse FFT also, and that is left as an exercise for you.
 
-Why Laplacian is a High Pass Filter?
-------------------------------------
+## Why Laplacian is a High Pass Filter?
 
 A similar question was asked in a forum. The question is, why Laplacian is a high pass filter? Why Sobel is a HPF? etc. And the first answer given to it was in terms of Fourier Transform. Just take the fourier transform of Laplacian for some higher size of FFT. Analyze it:
-@code{.py}
+```python
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -219,19 +212,15 @@ for i in xrange(6):
     plt.title(filter_name[i]), plt.xticks([]), plt.yticks([])
 
 plt.show()
-@endcode
+```
 See the result:
 
 ![image](images/fft5.jpg)
 
 From image, you can see what frequency region each kernel blocks, and what region it passes. From that information, we can say why each kernel is a HPF or a LPF
 
-Additional Resources
---------------------
+## Additional Resources
 
--#  [An Intuitive Explanation of Fourier Theory](http://cns-alumni.bu.edu/~slehar/fourier/fourier.html) by Steven Lehar
-2.  [Fourier Transform](http://homepages.inf.ed.ac.uk/rbf/HIPR2/fourier.htm) at HIPR
-3.  [What does frequency domain denote in case of images?](http://dsp.stackexchange.com/q/1637/818)
-
-Exercises
----------
+- [An Intuitive Explanation of Fourier Theory](http://cns-alumni.bu.edu/~slehar/fourier/fourier.html) by Steven Lehar
+- [Fourier Transform](http://homepages.inf.ed.ac.uk/rbf/HIPR2/fourier.htm) at HIPR
+- [What does frequency domain denote in case of images?](http://dsp.stackexchange.com/q/1637/818)

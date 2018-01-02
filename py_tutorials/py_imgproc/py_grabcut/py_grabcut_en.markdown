@@ -1,15 +1,12 @@
-Interactive Foreground Extraction using GrabCut Algorithm {#tutorial_py_grabcut}
-=========================================================
+# Interactive Foreground Extraction using GrabCut Algorithm {#tutorial_py_grabcut_en}
 
-Goal
-----
+## Goal
 
 In this chapter
 -   We will see GrabCut algorithm to extract foreground in images
 -   We will create an interactive application for this.
 
-Theory
-------
+## Theory
 
 GrabCut algorithm was designed by Carsten Rother, Vladimir Kolmogorov & Andrew Blake from Microsoft Research Cambridge, UK. in their paper, ["GrabCut": interactive foreground extraction using iterated graph cuts](http://dl.acm.org/citation.cfm?id=1015720) . An algorithm was needed for foreground extraction with minimal user interaction, and the result was GrabCut.
 
@@ -42,20 +39,19 @@ It is illustrated in below image (Image Courtesy: <http://www.cs.ru.ac.za/resear
 
 ![image](images/grabcut_scheme.jpg)
 
-Demo
-----
+## Demo
 
 Now we go for grabcut algorithm with OpenCV. OpenCV has the function, **cv2.grabCut()** for this. Wewill see its arguments first:
 
--   *img* - Input image
--   *mask* - It is a mask image where we specify which areas are background, foreground or probable background/foreground etc. It is done by the following flags, **cv2.GC_BGD, cv2.GC_FGD, cv2.GC_PR_BGD, cv2.GC_PR_FGD**, or simply pass 0,1,2,3 to image.
--   *rect* - It is the coordinates of a rectangle which includes the foreground object in the format (x,y,w,h)
--   *bdgModel*, *fgdModel* - These are arrays used by the algorithm internally. You just create two np.float64 type zero arrays of size (1,65).
--   *iterCount* - Number of iterations the algorithm should run.
--   *mode* - It should be **cv2.GC_INIT_WITH_RECT** or **cv2.GC_INIT_WITH_MASK** or combined which decides whether we are drawing rectangle or final touchup strokes.
+- `img` - Input image
+- `mask` - It is a mask image where we specify which areas are background, foreground or probable background/foreground etc. It is done by the following flags, `cv2.GC_BGD`, `cv2.GC_FGD`, `cv2.GC_PR_BGD`, `cv2.GC_PR_FGD`, or simply pass 0,1,2,3 to image.
+- `rect` - It is the coordinates of a rectangle which includes the foreground object in the format (x,y,w,h)
+- `bdgModel`, `fgdModel` - These are arrays used by the algorithm internally. You just create two np.float64 type zero arrays of size (1,65).
+- `iterCount` - Number of iterations the algorithm should run.
+- `mode` - It should be `cv2.GC_INIT_WITH_RECT` or `cv2.GC_INIT_WITH_MASK` or combined which decides whether we are drawing rectangle or final touchup strokes.
 
-First let's see with rectangular mode. We load the image, create a similar mask image. We create *fgdModel* and *bgdModel*. We give the rectangle parameters. It's all straight-forward. Let the algorithm run for 5 iterations. Mode should be *cv2.GC_INIT_WITH_RECT* since we are using rectangle. Then run the grabcut. It modifies the mask image. In the new mask image, pixels will be marked with four flags denoting background/foreground as specified above. So we modify the mask such that all 0-pixels and 2-pixels are put to 0 (ie background) and all 1-pixels and 3-pixels are put to 1(ie foreground pixels). Now our final mask is ready. Just multiply it with input image to get the segmented image.
-@code{.py}
+First let's see with rectangular mode. We load the image, create a similar mask image. We create `fgdModel` and `bgdModel`. We give the rectangle parameters. It's all straight-forward. Let the algorithm run for 5 iterations. Mode should be `cv2.GC_INIT_WITH_RECT` since we are using rectangle. Then run the grabcut. It modifies the mask image. In the new mask image, pixels will be marked with four flags denoting background/foreground as specified above. So we modify the mask such that all 0-pixels and 2-pixels are put to 0 (ie background) and all 1-pixels and 3-pixels are put to 1(ie foreground pixels). Now our final mask is ready. Just multiply it with input image to get the segmented image.
+```python
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -73,7 +69,7 @@ mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 img = img*mask2[:,:,np.newaxis]
 
 plt.imshow(img),plt.colorbar(),plt.show()
-@endcode
+```
 See the results below:
 
 ![image](images/grabcut_rect.jpg)
@@ -81,7 +77,7 @@ See the results below:
 Oops, Messi's hair is gone. *Who likes Messi without his hair?* We need to bring it back. So we will give there a fine touchup with 1-pixel (sure foreground). At the same time, Some part of ground has come to picture which we don't want, and also some logo. We need to remove them. There we give some 0-pixel touchup (sure background). So we modify our resulting mask in previous case as we told now.
 
 *What I actually did is that, I opened input image in paint application and added another layer to the image. Using brush tool in the paint, I marked missed foreground (hair, shoes, ball etc) with white and unwanted background (like logo, ground etc) with black on this new layer. Then filled remaining background with gray. Then loaded that mask image in OpenCV, edited original mask image we got with corresponding values in newly added mask image. Check the code below:*
-@code{.py}
+```python
 # newmask is the mask image I manually labelled
 newmask = cv2.imread('newmask.png',0)
 
@@ -95,18 +91,14 @@ mask, bgdModel, fgdModel = cv2.grabCut(img,mask,None,bgdModel,fgdModel,5,cv2.GC_
 mask = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 img = img*mask[:,:,np.newaxis]
 plt.imshow(img),plt.colorbar(),plt.show()
-@endcode
+```
 See the result below:
 
 ![image](images/grabcut_mask.jpg)
 
 So that's it. Here instead of initializing in rect mode, you can directly go into mask mode. Just mark the rectangle area in mask image with 2-pixel or 3-pixel (probable background/foreground). Then mark our sure_foreground with 1-pixel as we did in second example. Then directly apply the grabCut function with mask mode.
 
-Additional Resources
---------------------
+## Exercises
 
-Exercises
----------
-
--#  OpenCV samples contain a sample grabcut.py which is an interactive tool using grabcut. Check it. Also watch this [youtube video](http://www.youtube.com/watch?v=kAwxLTDDAwU) on how to use it.
--#  Here, you can make this into a interactive sample with drawing rectangle and strokes with mouse, create trackbar to adjust stroke width etc.
+- OpenCV samples contain a sample grabcut.py which is an interactive tool using grabcut. Check it. Also watch this [youtube video](http://www.youtube.com/watch?v=kAwxLTDDAwU) on how to use it.
+- Here, you can make this into a interactive sample with drawing rectangle and strokes with mouse, create trackbar to adjust stroke width etc.

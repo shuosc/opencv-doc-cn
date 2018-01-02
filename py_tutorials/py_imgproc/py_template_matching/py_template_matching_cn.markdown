@@ -9,11 +9,11 @@
 
 ## 理论基础
 
-模板匹配是一种在较大图像中搜索和查找模板图像位置的方法。 OpenCV为此提供了一个函数`cv2.matchTemplate()`。它只是将模板图​​像滑过输入图像（就像2D卷积那样），并将模板图像和输入图像的一小块进行比较。在OpenCV中实现了几种比较方法。 （您可以查看文档了解更多详情）。它返回一个灰度图像，其中每个像素表示该像素的邻域与模板匹配多少。
+模板匹配是一种在较大图像中搜索和查找模板图像位置的方法。 OpenCV为此提供了一个函数`cv2.matchTemplate()`。它只是将模板图像滑过输入图像（就像2D卷积那样），并将模板图像和输入图像的一小块进行比较。在OpenCV中实现了几种比较方法。 （您可以查看文档了解更多详情）。它返回一个灰度图像，其中每个像素表示该像素的邻域与模板匹配多少。
 
 如果输入图像的大小(WxH)和模板图像的大小(wxh)，输出图像的大小为（W-w + 1，H-h + 1）。一旦得到结果，就可以使用`cv2.minMaxLoc()`函数来查找最大值/最小值。将其作为矩形的左上角，并将（w，h）作为矩形的宽度和高度。那个矩形就是你模板的区域。
 
-如果您使用cv2.TM_SQDIFF作为比较方法，最小值会给出最佳匹配。
+如果您使用`cv2.TM_SQDIFF`作为比较方法，最小值会给出最佳匹配。
 
 ## OpenCV中的模板匹配
 
@@ -65,31 +65,30 @@ for meth in methods:
 
 下面是结果：
 
-- cv2.TM_CCOEFF
+- `cv2.TM_CCOEFF`
 
   ![image](images/template_ccoeff_1.jpg)
 
 
 
-- cv2.TM_CCOEFF_NORMED
+- `cv2.TM_CCOEFF_NORMED`
 
   ![image](images/template_ccoeffn_2.jpg)
 
 
 
-- cv2.TM_CCORR
+- `cv2.TM_CCORR`
 
   ![image](images/template_ccorr_3.jpg)
 
 
-
-- cv2.TM_CCORR_NORMED
+- `cv2.TM_CCORR_NORMED`
 
   ![image](images/template_ccorrn_4.jpg)
 
 
 
-- cv2.TM_SQDIFF
+- `cv2.TM_SQDIFF`
 
   ![image](images/template_sqdiff_5.jpg)
 

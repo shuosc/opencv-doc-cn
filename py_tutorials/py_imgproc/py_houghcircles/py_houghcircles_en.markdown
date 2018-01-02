@@ -1,20 +1,17 @@
-Hough Circle Transform {#tutorial_py_houghcircles}
-======================
+# Hough Circle Transform {#tutorial_py_houghcircles_en}
 
-Goal
-----
+## Goal
 
 In this chapter,
 -   We will learn to use Hough Transform to find circles in an image.
--   We will see these functions: **cv2.HoughCircles()**
+-   We will see these functions: `cv2.HoughCircles()`
 
-Theory
-------
+## Theory
 
 A circle is represented mathematically as $(x-x_{center})^2 + (y - y_{center})^2 = r^2$ where $(x_{center},y_{center})$ is the center of the circle, and $r$ is the radius of the circle. From equation, we can see we have 3 parameters, so we need a 3D accumulator for hough transform, which would be highly ineffective. So OpenCV uses more trickier method, **Hough Gradient Method** which uses the gradient information of edges.
 
-The function we use here is **cv2.HoughCircles()**. It has plenty of arguments which are well explained in the documentation. So we directly go to the code.
-@code{.py}
+The function we use here is `cv2.HoughCircles()`. It has plenty of arguments which are well explained in the documentation. So we directly go to the code.
+```python
 import cv2
 import numpy as np
 
@@ -35,13 +32,7 @@ for i in circles[0,:]:
 cv2.imshow('detected circles',cimg)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-@endcode
+```
 Result is shown below:
 
 ![image](images/houghcircles2.jpg)
-
-Additional Resources
---------------------
-
-Exercises
----------

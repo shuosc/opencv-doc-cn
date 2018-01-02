@@ -10,7 +10,7 @@ In this article, we will learn
 ## 1. Moments
 Image moments help you to calculate some features like center of mass of the object, area of the object etc. Check out the wikipedia page on [Image Moments](http://en.wikipedia.org/wiki/Image_moment)
 
-The function **cv2.moments()** gives a dictionary of all moment values calculated. See below:
+The function `cv2.moments()` gives a dictionary of all moment values calculated. See below:
 ```python
 import cv2
 import numpy as np
@@ -59,7 +59,7 @@ Third image shows the same for epsilon = 1% of the arc length. Third argument sp
 
 ## 5. Convex Hull
 
-Convex Hull will look similar to contour approximation, but it is not (Both may provide same results in some cases). Here, **cv2.convexHull()** function checks a curve for convexity defects and corrects it. Generally speaking, convex curves are the curves which are always bulged out, or at-least flat. And if it is bulged inside, it is called convexity defects. For example, check the below image of hand. Red line shows the convex hull of hand. The double-sided arrow marks shows the convexity defects, which are the local maximum deviations of hull from contours.
+Convex Hull will look similar to contour approximation, but it is not (Both may provide same results in some cases). Here, `cv2.convexHull()` function checks a curve for convexity defects and corrects it. Generally speaking, convex curves are the curves which are always bulged out, or at-least flat. And if it is bulged inside, it is called convexity defects. For example, check the below image of hand. Red line shows the convex hull of hand. The double-sided arrow marks shows the convexity defects, which are the local maximum deviations of hull from contours.
 
 ![image](images/convexitydefects.jpg)
 
@@ -89,7 +89,7 @@ You will see it again when we discuss about convexity defects.
 
 ## 6. Checking Convexity
 
-There is a function to check if a curve is convex or not, **cv2.isContourConvex()**. It just return whether True or False. Not a big deal.
+There is a function to check if a curve is convex or not, `cv2.isContourConvex()`. It just return whether True or False. Not a big deal.
 ```python
 k = cv2.isContourConvex(cnt)
 ```
@@ -100,7 +100,7 @@ There are two types of bounding rectangles.
 
 ### 7.a. Straight Bounding Rectangle
 
-It is a straight rectangle, it doesn't consider the rotation of the object. So area of the bounding rectangle won't be minimum. It is found by the function **cv2.boundingRect()**.
+It is a straight rectangle, it doesn't consider the rotation of the object. So area of the bounding rectangle won't be minimum. It is found by the function `cv2.boundingRect()`.
 
 Let (x,y) be the top-left coordinate of the rectangle and (w,h) be its width and height.
 ```python
@@ -110,7 +110,7 @@ cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
 
 ### 7.b. Rotated Rectangle
 
-Here, bounding rectangle is drawn with minimum area, so it considers the rotation also. The function used is **cv2.minAreaRect()**. It returns a Box2D structure which contains following detals - (center (x,y), (width, height), angle of rotation ). But to draw this rectangle, we need 4 corners of the rectangle. It is obtained by the function **cv2.boxPoints()**
+Here, bounding rectangle is drawn with minimum area, so it considers the rotation also. The function used is `cv2.minAreaRect()`. It returns a Box2D structure which contains following detals - (center (x,y), (width, height), angle of rotation ). But to draw this rectangle, we need 4 corners of the rectangle. It is obtained by the function `cv2.boxPoints()`
 ```python
 rect = cv2.minAreaRect(cnt)
 box = cv2.boxPoints(rect)
@@ -123,7 +123,7 @@ Both the rectangles are shown in a single image. Green rectangle shows the norma
 
 ## 8. Minimum Enclosing Circle
 
-Next we find the circumcircle of an object using the function **cv2.minEnclosingCircle()**. It is a circle which completely covers the object with minimum area.
+Next we find the circumcircle of an object using the function `cv2.minEnclosingCircle()`. It is a circle which completely covers the object with minimum area.
 ```python
 (x,y),radius = cv2.minEnclosingCircle(cnt)
 center = (int(x),int(y))

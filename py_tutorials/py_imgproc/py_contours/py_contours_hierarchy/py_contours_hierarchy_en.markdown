@@ -6,7 +6,7 @@ This time, we learn about the hierarchy of contours, i.e. the parent-child relat
 
 ## Theory
 
-In the last few articles on contours, we have worked with several functions related to contours provided by OpenCV. But when we found the contours in image using **cv2.findContours()** function, we have passed an argument, **Contour Retrieval Mode**. We usually passed **cv2.RETR_LIST** or **cv2.RETR_TREE** and it worked nice. But what does it actually mean ?
+In the last few articles on contours, we have worked with several functions related to contours provided by OpenCV. But when we found the contours in image using `cv2.findContours()` function, we have passed an argument, **Contour Retrieval Mode**. We usually passed `cv2.RETR_LIST` or `cv2.RETR_TREE` and it worked nice. But what does it actually mean ?
 
 Also, in the output, we got three arrays, first is the image, second is our contours, and one more output which we named as **hierarchy** (Please checkout the codes in previous articles). But we never used this hierarchy anywhere. Then what is this hierarchy and what is it for ? What is its relationship with the previous mentioned function argument ?
 
@@ -14,7 +14,7 @@ That is what we are going to deal in this article.
 
 ### What is Hierarchy?
 
-Normally we use the **cv2.findContours()** function to detect objects in an image, right ? Sometimes objects are in different locations. But in some cases, some shapes are inside other shapes. Just like nested figures. In this case, we call outer one as **parent** and inner one as **child**. This way, contours in an image has some relationship to each other. And we can specify how one contour is connected to each other, like, is it child of some other contour, or is it a parent etc.
+Normally we use the `cv2.findContours()` function to detect objects in an image, right ? Sometimes objects are in different locations. But in some cases, some shapes are inside other shapes. Just like nested figures. In this case, we call outer one as **parent** and inner one as **child**. This way, contours in an image has some relationship to each other. And we can specify how one contour is connected to each other, like, is it child of some other contour, or is it a parent etc.
 Representation of this relationship is called the **Hierarchy**.
 
 Consider an example image below :
@@ -31,7 +31,7 @@ I mentioned these things to understand terms like **same hierarchy level**, **ex
 
 ### Hierarchy Representation in OpenCV
 
-So each contour has its own information regarding what hierarchy it is, who is its child, who is its parent etc. OpenCV represents it as an array of four values : **[Next, Previous, First_Child, Parent]**
+So each contour has its own information regarding what hierarchy it is, who is its child, who is its parent etc. OpenCV represents it as an array of four values : `[Next, Previous, First_Child, Parent]`
 
 <center>*"Next denotes next contour at the same hierarchical level."*</center>
 

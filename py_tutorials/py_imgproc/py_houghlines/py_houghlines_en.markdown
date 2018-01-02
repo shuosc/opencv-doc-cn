@@ -1,16 +1,13 @@
-Hough Line Transform {#tutorial_py_houghlines}
-====================
+# Hough Line Transform {#tutorial_py_houghlines_en}
 
-Goal
-----
+## Goal
 
 In this chapter,
 -   We will understand the concept of the Hough Transform.
 -   We will see how to use it to detect lines in an image.
 -   We will see the following functions: **cv2.HoughLines()**, **cv2.HoughLinesP()**
 
-Theory
-------
+## Theory
 
 The Hough Transform is a popular technique to detect any shape, if you can represent that shape in a mathematical form. It can detect the shape even if it is broken or distorted a little bit. We will see how it works for a line.
 
@@ -32,8 +29,7 @@ This is how hough transform works for lines. It is simple, and may be you can im
 
 ![](images/houghlines2.jpg)
 
-Hough Transform in OpenCV
-=========================
+## Hough Transform in OpenCV
 
 Everything explained above is encapsulated in the OpenCV function, **cv2.HoughLines()**. It simply returns an array of :math:(rho, theta)\` values. $\rho$ is measured in pixels and $\theta$ is measured in radians. First parameter, Input image should be a binary image, so apply threshold or use canny edge detection before applying hough transform. Second and third parameters are $\rho$ and $\theta$ accuracies respectively. Fourth argument is the threshold, which means the minimum vote it should get to be considered as a line. Remember, number of votes depends upon the number of points on the line. So it represents the minimum length of line that should be detected.
 @include hough_line_transform.py
@@ -41,16 +37,15 @@ Check the results below:
 
 ![image](images/houghlines3.jpg)
 
-Probabilistic Hough Transform
------------------------------
+## Probabilistic Hough Transform
 
 In the hough transform, you can see that even for a line with two arguments, it takes a lot of computation. Probabilistic Hough Transform is an optimization of the Hough Transform we saw. It doesn't take all the points into consideration. Instead, it takes only a random subset of points which is sufficient for line detection. Just we have to decrease the threshold. See image below which compares Hough Transform and Probabilistic Hough Transform in Hough space. (Image Courtesy:Franck Bettinger's home page](http://phdfb1.free.fr/robot/mscthesis/node14.html) )
 
 ![image](images/houghlines4.png)
 
-OpenCV implementation is based on Robust Detection of Lines Using the Progressive Probabilistic Hough Transform by Matas, J. and Galambos, C. and Kittler, J.V. @cite Matas00. The function used is **cv2.HoughLinesP()**. It has two new arguments.
--   **minLineLength** - Minimum length of line. Line segments shorter than this are rejected.
--   **maxLineGap** - Maximum allowed gap between line segments to treat them as a single line.
+OpenCV implementation is based on Robust Detection of Lines Using the Progressive Probabilistic Hough Transform by Matas, J. and Galambos, C. and Kittler, J.V. @cite Matas00. The function used is `cv2.HoughLinesP()`. It has two new arguments.
+-   `minLineLength` - Minimum length of line. Line segments shorter than this are rejected.
+-   `maxLineGap` - Maximum allowed gap between line segments to treat them as a single line.
 
 Best thing is that, it directly returns the two endpoints of lines. In previous case, you got only the parameters of lines, and you had to find all the points. Here, everything is direct and simple.
 @include probabilistic_hough_line_transform.py
@@ -58,10 +53,6 @@ See the results below:
 
 ![image](images/houghlines5.jpg)
 
-Additional Resources
---------------------
+## Additional Resources
 
 - [Hough Transform on Wikipedia](http://en.wikipedia.org/wiki/Hough_transform)
-
-Exercises
----------
