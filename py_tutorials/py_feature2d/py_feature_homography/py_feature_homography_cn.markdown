@@ -48,7 +48,7 @@ for m,n in matches:
     	good.append(m)
 ```
 
-现在我们设置一个条件，至少有10个匹配（由MIN_MATCH_COUNT定义）才能确定找到了对象。 否则，只需显示一条消息，告诉用户不存在足够的匹配。
+现在我们设置一个条件，至少有10个匹配（由`MIN_MATCH_COUNT`定义）才能确定找到了对象。 否则，只需显示一条消息，告诉用户不存在足够的匹配。
 
 如果找到足够的匹配，我们提取两个图像中匹配关键点的位置。 寻找他们之间的变换关系。 一旦我们得到这个3x3转换矩阵，我们用它来将queryImage的角点转换成trainImage中相应的点。 然后我们绘制它。
 
@@ -75,7 +75,7 @@ matchesMask = None
 ```python
 draw_params = dict(matchColor = (0,255,0), # 用绿色画出匹配点
 					singlePointColor = None,
-               		matchesMask = matchesMask, # draw only inliers
+               		matchesMask = matchesMask, # 只画出inliers
                		flags = 2)
 img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)
 plt.imshow(img3, 'gray'),plt.show()

@@ -1,19 +1,14 @@
-ORB (Oriented FAST and Rotated BRIEF) {#tutorial_py_orb}
-=====================================
+# ORB (Oriented FAST and Rotated BRIEF) {#tutorial_py_orb_en}
 
-Goal
-----
+## Goal
 
 In this chapter,
-    -   We will see the basics of ORB
+-   We will see the basics of ORB
 
-Theory
-------
+## Theory
 
 As an OpenCV enthusiast, the most important thing about the ORB is that it came from "OpenCV Labs".
-This algorithm was brought up by Ethan Rublee, Vincent Rabaud, Kurt Konolige and Gary R. Bradski in
-their paper **ORB: An efficient alternative to SIFT or SURF** in 2011. As the title says, it is a
-good alternative to SIFT and SURF in computation cost, matching performance and mainly the patents.
+This algorithm was brought up by Ethan Rublee, Vincent Rabaud, Kurt Konolige and Gary R. Bradski in their paper **ORB: An efficient alternative to SIFT or SURF** in 2011. As the title says, it is a good alternative to SIFT and SURF in computation cost, matching performance and mainly the patents.
 Yes, SIFT and SURF are patented and you are supposed to pay them for its use. But ORB is not !!!
 
 ORB is basically a fusion of FAST keypoint detector and BRIEF descriptor with many modifications to enhance the performance. First it use FAST to find keypoints, then apply Harris corner measure to find top N points among them. It also use pyramid to produce multiscale-features. But one problem is that, FAST doesn't compute the orientation. So what about rotation invariance? Authors came up with following modification.
@@ -31,14 +26,13 @@ The result is called **rBRIEF**.
 
 For descriptor matching, multi-probe LSH which improves on the traditional LSH, is used. The paper says ORB is much faster than SURF and SIFT and ORB descriptor works better than SURF. ORB is a good choice in low-power devices for panorama stitching etc.
 
-ORB in OpenCV
--------------
+## ORB in OpenCV
 
-As usual, we have to create an ORB object with the function, **cv2.ORB()** or using feature2d common interface. It has a number of optional parameters. Most useful ones are `nFeatures` which denotes maximum number of features to be retained (by default 500), `scoreType` which denotes whether Harris score or FAST score to rank the features (by default, Harris score) etc. Another parameter, WTA_K decides number of points that produce each element of the oriented BRIEF descriptor. By default it is two, ie selects two points at a time. In that case, for matching, `NORM_HAMMING` distance is used.
+As usual, we have to create an ORB object with the function, `cv2.ORB()` or using feature2d common interface. It has a number of optional parameters. Most useful ones are `nFeatures` which denotes maximum number of features to be retained (by default 500), `scoreType` which denotes whether Harris score or FAST score to rank the features (by default, Harris score) etc. Another parameter, `WTA_K `decides number of points that produce each element of the oriented BRIEF descriptor. By default it is two, ie selects two points at a time. In that case, for matching, `NORM_HAMMING` distance is used.
 If WTA_K is 3 or 4, which takes 3 or 4 points to produce BRIEF descriptor, then matching distance is defined by `NORM_HAMMING2.`
 
 Below is a simple code which shows the use of ORB.
-@code{.py}
+```python
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -57,18 +51,13 @@ kp, des = orb.compute(img, kp)
 # draw only keypoints location,not size and orientation
 img2 = cv2.drawKeypoints(img, kp, None, color=(0,255,0), flags=0)
 plt.imshow(img2), plt.show()
-@endcode
+```
 See the result below:
 
 ![image](images/orb_kp.jpg)
 
 ORB feature matching, we will do in another chapter.
 
-Additional Resources
---------------------
+## Additional Resources
 
--#  Ethan Rublee, Vincent Rabaud, Kurt Konolige, Gary R. Bradski: ORB: An efficient alternative to
-    SIFT or SURF. ICCV 2011: 2564-2571.
-
-Exercises
----------
+- Ethan Rublee, Vincent Rabaud, Kurt Konolige, Gary R. Bradski: ORB: An efficient alternative to SIFT or SURF. ICCV 2011: 2564-2571.

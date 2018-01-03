@@ -33,13 +33,13 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 img = cv2.imread('simple.jpg',0)
-# Initiate FAST detector
+# 初始化Star检测器
 star = cv2.xfeatures2d.StarDetector_create()
-# Initiate BRIEF extractor
+# 初始化BRIEF提取器
 brief = cv2.xfeatures2d.BriefDescriptorExtractor_create()
-# find the keypoints with STAR
+# 用STAR找到关键点
 kp = star.detect(img,None)
-# compute the descriptors with BRIEF
+# 计算出BRIEF描述符
 kp, des = brief.compute(img, kp)
 print( brief.descriptorSize() )
 print( des.shape )

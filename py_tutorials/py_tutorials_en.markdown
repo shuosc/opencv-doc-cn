@@ -16,7 +16,7 @@
 
   In this section you will learn different image processing functions inside OpenCV.
 
--   @subpage tutorial_py_table_of_contents_feature2d
+-   @subpage tutorial_py_table_of_contents_feature2d_en
 
     In this section
     you will learn about feature detectors and descriptors

@@ -12,7 +12,7 @@
 蛮力匹配器很简单。 它采用第一组中的一个特征的描述符并且使用一些距离计算与第二组中的所有其他特征匹配。 返回最接近的一个。
 对于BF匹配器，首先我们必须使用`cv2.BFMatcher()`来创建`BFMatcher`对象。 它需要两个可选的参数。 首先是`normType`。 它指定要使用的距离测量方法。 默认情况下，它是`cv2.NORM_L2`。 对于SIFT，SURF等（`cv2.NORM_L1`也在这些之中）。 对于像ORB，BRIEF，BRISK等基于二进制字符串的描述符，应该使用`cv2.NORM_HAMMING`，它使用汉明距离作为度量。 如果ORB使用`WTA_K == 3`或4，则应使用`cv2.NORM_HAMMING2`。
 
-第二个参数是布尔变量，`crossCheck`默认为false。 如果是，Matcher只返回值为$(i,j)$的那些匹配，使得集合A中的第i个描述符在集合B中具有第j个描述符作为最佳匹配，反之亦然。 也就是说，两组中的两个特征应该相互匹配。 它提供了一致的结果，是D.Lowe在SIFT论文中提出的比率测试的一个很好的选择。
+第二个参数是布尔变量`crossCheck`，其默认为false。 如果它为true，Matcher只返回值为$(i,j)$的那些匹配，使得集合A中的第i个描述符在集合B中具有第j个描述符作为最佳匹配，反之亦然。 也就是说，两组中的两个特征应该相互匹配。 它提供了一致的结果，这是D.Lowe在SIFT论文中提出的比率测试的一个很好的替代品。
 
 一旦一个`BFMatcher`对象被创建，两个重要的方法是`BFMatcher.match()`和`BFMatcher.knnMatch()`。 第一个返回最佳匹配。 第二个返回k个最佳匹配，其中k由用户指定。当我们需要做额外的工作时，这可能是有用的。
 
@@ -56,7 +56,7 @@ plt.imshow(img3)
 plt.show()
 ```
 
-下面是我的到的结果：
+下面是我得到的结果：
 
 ![image](images/matcher_result1.jpg)
 
@@ -64,10 +64,10 @@ plt.show()
 
 `matches = bf.match(des1,des2)`这行的结果是DMatch对象的列表。 DMatch对象具有以下属性：
 
-- DMatch.distance - 描述符之间的距离。 越低表示匹配地越好。
-- DMatch.trainIdx - 训练集中描述符的索引。
-- DMatch.queryIdx - 查询集中描述符的索引。
-- DMatch.imgIdx - 训练图片的索引。
+- `DMatch.distance` - 描述符之间的距离。 越低表示匹配地越好。
+- `DMatch.trainIdx` - 训练集中描述符的索引。
+- `DMatch.queryIdx` - 查询集中描述符的索引。
+- `DMatch.imgIdx` - 训练图片的索引。
 
 ## 用SIFT描述符进行蛮力匹配和比率测试
 
@@ -104,9 +104,9 @@ plt.show()
 
 ## 基于FLANN的Matcher
 
-FLANN，即快速近似最邻近库。 它包含一组经过优化的算法，用于大数据集中的快速最近邻搜索以及高维特征。 对于大数据集，它的工作速度比BFMatcher快。 我们将看到基于FLANN的匹配器的第二个例子。
+FLANN，即快速近似最邻近库。 它包含一组经过优化的算法，用于大数据集以及高维特征数据集中的快速最近邻搜索。 对于大数据集，它的工作速度比BFMatcher快。 我们将看到基于FLANN的匹配器的第二个例子。
 
-对于基于FLANN的匹配器，我们需要传递两个字典，指定要使用的算法，相关的参数等。首先是IndexParams。 对于各种算法，要传递的信息在FLANN文档中进行了解释。 总而言之，对于像SIFT，SURF等算法，您可以传入以下这些东西：
+对于基于FLANN的匹配器，我们需要传递两个字典，指定要使用的算法，相关的参数等。首先是`IndexParams`。 对于各种算法，要传递的信息在FLANN文档中进行了解释。 总而言之，对于像SIFT，SURF等算法，您可以传入以下这些东西：
 
 ```python
 FLANN_INDEX_KDTREE = 1
@@ -123,7 +123,7 @@ index_params= dict(algorithm = FLANN_INDEX_LSH,
               	 	multi_probe_level = 1) #2
 ```
 
-第二个字典是SearchParams。 它指定了索引中的树应递归遍历的次数。 更高的值会提高精度，但也需要更多的时间。 如果你想改变这个值，传入`search_params = dict（checks = 100）`。
+第二个字典是`SearchParams`。 它指定了索引中的树应递归遍历的次数。 更高的值会提高精度，但也需要更多的时间。 如果你想改变这个值，传入`search_params = dict(checks = 100)`。
 
 有了这些信息，我们就准备好了。
 

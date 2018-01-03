@@ -16,7 +16,7 @@
 
   在这一章中你将会学会OpenCV中不同的图像处理功能。
 
-- @subpage tutorial_py_table_of_contents_feature2d
+- @subpage tutorial_py_table_of_contents_feature2d_cn
 
   在这一章中你会学到一些关于特征检测器和描述子的知识。
 
