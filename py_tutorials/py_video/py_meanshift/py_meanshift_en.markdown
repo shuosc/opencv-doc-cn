@@ -1,17 +1,14 @@
-Meanshift and Camshift {#tutorial_py_meanshift}
-======================
+# Meanshift and Camshift {#tutorial_py_meanshift}
 
-Goal
-----
+## Goal
 
 In this chapter,
 
--   We will learn about Meanshift and Camshift algorithms to find and track objects in videos.
+- We will learn about Meanshift and Camshift algorithms to find and track objects in videos.
 
-Meanshift
----------
+## Meanshift
 
-The intuition behind the meanshift is simple. Consider you have a set of points. (It can be a pixel distribution like histogram backprojection). You are given a small window ( may be a circle) and you have to move that window to the area of maximum pixel density (or maximum number of points). It is illustrated in the simple image given below:
+The intuition behind the meanshift is simple. Consider you have a set of points. (It can be a pixel distribution like histogram backprojection). You are given a small window (may be a circle) and you have to move that window to the area of maximum pixel density (or maximum number of points). It is illustrated in the simple image given below:
 
 ![image](images/meanshift_basics.jpg)
 
@@ -78,8 +75,7 @@ Three frames in a video I used is given below:
 
 ![image](images/meanshift_result.jpg)
 
-Camshift
---------
+## Camshift
 
 Did you closely watch the last result? There is a problem. Our window always has the same size when car is farther away and it is very close to camera. That is not good. We need to adapt the window size with size and rotation of the target. Once again, the solution came from "OpenCV Labs" and it is called CAMshift (Continuously Adaptive Meanshift) published by Gary Bradsky in his paper "Computer Vision Face Tracking for Use in a Perceptual User Interface" in 1988.
 
@@ -90,7 +86,7 @@ It applies meanshift first. Once meanshift converges, it updates the size of the
 ### Camshift in OpenCV
 
 It is almost same as meanshift, but it returns a rotated rectangle (that is our result) and box parameters (used to be passed as search window in next iteration). See the code below:
-```
+```python
 import numpy as np
 import cv2
 
@@ -145,13 +141,11 @@ Three frames of the result is shown below:
 
 ![image](images/camshift_result.jpg)
 
-Additional Resources
---------------------
+## Additional Resources
 
--#  French Wikipedia page on [Camshift](http://fr.wikipedia.org/wiki/Camshift). (The two animations are taken from here)
-2.  Bradski, G.R., "Real time face and object tracking as a component of a perceptual user interface," Applications of Computer Vision, 1998. WACV '98. Proceedings., Fourth IEEE Workshop on , vol., no., pp.214,219, 19-21 Oct 1998
+- French Wikipedia page on [Camshift](http://fr.wikipedia.org/wiki/Camshift). (The two animations are taken from here)
+- Bradski, G.R., "Real time face and object tracking as a component of a perceptual user interface," Applications of Computer Vision, 1998. WACV '98. Proceedings., Fourth IEEE Workshop on , vol., no., pp.214,219, 19-21 Oct 1998
 
-Exercises
----------
+## Exercises
 
--#  OpenCV comes with a Python sample on interactive demo of camshift. Use it, hack it, understand it.
+- OpenCV comes with a Python sample on interactive demo of camshift. Use it, hack it, understand it.

@@ -1,15 +1,12 @@
-Background Subtraction {#tutorial_py_bg_subtraction}
-======================
+# Background Subtraction {#tutorial_py_bg_subtraction}
 
-Goal
-----
+## Goal
 
 In this chapter,
 
--   We will familiarize with the background subtraction methods available in OpenCV.
+- We will familiarize with the background subtraction methods available in OpenCV.
 
-Basics
-------
+## Basics
 
 Background subtraction is a major preprocessing steps in many vision based applications. For example, consider the cases like visitor counter where a static camera takes the number of visitors entering or leaving the room, or a traffic camera extracting information about the vehicles etc. In all these cases, first you need to extract the person or vehicles alone. Technically, you need to extract the moving foreground from static background.
 
@@ -21,10 +18,10 @@ Several algorithms were introduced for this purpose. OpenCV has implemented thre
 
 It is a Gaussian Mixture-based Background/Foreground Segmentation Algorithm. It was introduced in the paper "An improved adaptive background mixture model for real-time tracking with shadow detection" by P. KadewTraKuPong and R. Bowden in 2001. It uses a method to model each background pixel by a mixture of K Gaussian distributions (K = 3 to 5). The weights of the mixture represent the time proportions that those colours stay in the scene. The probable background colours are the ones which stay longer and more static.
 
-While coding, we need to create a background object using the function, **cv2.createBackgroundSubtractorMOG()**. It has some optional parameters like length of history, number of gaussian mixtures, threshold etc. It is all set to some default values. Then inside the video loop, use backgroundsubtractor.apply() method to get the foreground mask.
+While coding, we need to create a background object using the function, `cv2.createBackgroundSubtractorMOG()`. It has some optional parameters like length of history, number of gaussian mixtures, threshold etc. It is all set to some default values. Then inside the video loop, use backgroundsubtractor.apply() method to get the foreground mask.
 
 See a simple example below:
-@code{.py}
+```python
 import numpy as np
 import cv2
 
@@ -44,7 +41,7 @@ while(1):
 
 cap.release()
 cv2.destroyAllWindows()
-@endcode
+```
 (All the results are shown at the end for comparison).
 
 ### BackgroundSubtractorMOG2
@@ -82,7 +79,7 @@ This algorithm combines statistical background image estimation and per-pixel Ba
 It uses first few (120 by default) frames for background modelling. It employs probabilistic foreground segmentation algorithm that identifies possible foreground objects using Bayesian inference. The estimates are adaptive; newer observations are more heavily weighted than old observations to accommodate variable illumination. Several morphological filtering operations like closing and opening are done to remove unwanted noise. You will get a black window during first few frames.
 
 It would be better to apply morphological opening to the result to remove the noises.
-```
+```python
 import numpy as np
 import cv2
 
@@ -105,8 +102,7 @@ while(1):
 cap.release()
 cv2.destroyAllWindows()
 ```
-Results
--------
+## Results
 
 **Original Frame**
 
@@ -129,9 +125,3 @@ Gray color region shows shadow region.
 Noise is removed with morphological opening.
 
 ![image](images/resgmg.jpg)
-
-Additional Resources
---------------------
-
-Exercises
----------

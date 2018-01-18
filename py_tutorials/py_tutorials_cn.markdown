@@ -20,7 +20,7 @@
 
   在这一章中你会学到一些关于特征检测器和描述子的知识。
 
-- @subpage tutorial_py_table_of_contents_video
+- @subpage tutorial_py_table_of_contents_video_cn
 
   在这一章中你将会学到视频中使用的技术，如对象追踪等等。
 

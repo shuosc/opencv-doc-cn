@@ -94,7 +94,7 @@ for meth in methods:
 
 
 
-- cv2.TM_SQDIFF_NORMED
+- `cv2.TM_SQDIFF_NORMED`
 
   ![image](images/template_sqdiffn_6.jpg)
 

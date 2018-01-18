@@ -21,7 +21,7 @@
     In this section
     you will learn about feature detectors and descriptors
 
--   @subpage tutorial_py_table_of_contents_video
+-   @subpage tutorial_py_table_of_contents_video_en
 
     In this section you will learn different techniques to work with videos like object tracking etc.
 

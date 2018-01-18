@@ -29,7 +29,7 @@
 $$
 I(x,y,t) = I(x+dx, y+dy, t+dt)
 $$
-对右边进行台了展开，移除常数项并除以$dt$，会得到：
+对右边进行泰勒展开，移除常数项并除以$dt$，会得到：
 $$
 f_x u + f_y v + f_t = 0\\
 where\\
@@ -119,13 +119,13 @@ cv2.destroyAllWindows()
 cap.release()
 ```
 
-（这个代码并没有检查下一个关键点的正确性，所以即使任何特征点在图像中消失了，光流也有可能找到可能看起来接近它的下一个点。所以要做一个健壮的追踪程序的话，就要在特定的时间间隔内检测一次角点，OpenCV示例中每隔5帧就会采集一次样本，找出特征点，并对所得到的光学流点进行反向检查，只选择好的样本点，见samples/python/lk_track.py）。
+（这个代码并没有检查下一个关键点的正确性，所以即使任何特征点在图像中消失了，光流也有可能找到可能看起来接近它的下一个点。所以要做一个健壮的追踪程序的话，就要在特定的时间间隔内检测一次角点，OpenCV示例中每隔5帧就会采集一次样本，找出特征点，并对所得到的光流点进行反向检查，只选择好的样本点，见samples/python/lk_track.py）。
 
 下面是我们的到的结果：
 
 ![image](images/opticalflow_lk.jpg)
 
-# OpenCV中的密集光流
+## OpenCV中的密集光流
 
 Lucas-Kanade方法计算稀疏特征集的光流（在我们的例子中，使用Shi-Tomasi算法检测角点）。 OpenCV提供了另一种算法来查找密集光流。它计算帧中所有点的光流。它基于Gunner Farneback的算法，该算法在Gunner Farneback于2003年的《Two-Frame Motion Estimation Based on Polynomial Expansion》中有所解释。
 

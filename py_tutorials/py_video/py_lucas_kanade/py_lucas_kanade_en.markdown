@@ -1,15 +1,12 @@
-Optical Flow {#tutorial_py_lucas_kanade}
-============
+# Optical Flow {#tutorial_py_lucas_kanade_en}
 
-Goal
-----
+## Goal
 
 In this chapter,
 -   We will understand the concepts of optical flow and its estimation using Lucas-Kanade method.
 -   We will use functions like **cv2.calcOpticalFlowPyrLK()** to track feature points in a video.
 
-Optical Flow
-------------
+## Optical Flow
 
 Optical flow is the pattern of apparent motion of image objects between two consecutive frames caused by the movemement of object or camera. It is 2D vector field where each vector is a displacement vector showing the movement of points from first frame to second. Consider the image below (Image Courtesy: [Wikipedia article on Optical Flow](http://en.wikipedia.org/wiki/Optical_flow)).
 
@@ -17,14 +14,14 @@ Optical flow is the pattern of apparent motion of image objects between two cons
 
 It shows a ball moving in 5 consecutive frames. The arrow shows its displacement vector. Optical flow has many applications in areas like :
 
--   Structure from Motion
--   Video Compression
--   Video Stabilization ...
+- Structure from Motion
+- Video Compression
+- Video Stabilization ...
 
 Optical flow works on several assumptions:
 
--  The pixel intensities of an object do not change between consecutive frames.
--  Neighbouring pixels have similar motion.
+- The pixel intensities of an object do not change between consecutive frames.
+- Neighbouring pixels have similar motion.
 
 Consider a pixel $I(x,y,t)$ in first frame (Check a new dimension, time, is added here. Earlier we were working with images only, so no need of time). It moves by distance $(dx,dy)$ in next frame taken after $dt$ time. So since those pixels are the same and intensity does not change, we can say,
 
@@ -69,10 +66,9 @@ $$
 
 So from user point of view, idea is simple, we give some points to track, we receive the optical flow vectors of those points. But again there are some problems. Until now, we were dealing with small motions. So it fails when there is large motion. So again we go for pyramids. When we go up in the pyramid, small motions are removed and large motions becomes small motions. So applying Lucas-Kanade there, we get optical flow along with the scale.
 
-Lucas-Kanade Optical Flow in OpenCV
------------------------------------
+## Lucas-Kanade Optical Flow in OpenCV
 
-OpenCV provides all these in a single function, **cv2.calcOpticalFlowPyrLK()**. Here, we create a simple application which tracks some points in a video. To decide the points, we use **cv2.goodFeaturesToTrack()**. We take the first frame, detect some Shi-Tomasi corner points in it, then we iteratively track those points using Lucas-Kanade optical flow. For the function **cv2.calcOpticalFlowPyrLK()** we pass the previous frame, previous points and next frame. It returns next points along with some status numbers which has a value of 1 if next point is found, else zero. We iteratively pass these next points as previous points in next step. See the code below:
+OpenCV provides all these in a single function, `cv2.calcOpticalFlowPyrLK()`. Here, we create a simple application which tracks some points in a video. To decide the points, we use `cv2.goodFeaturesToTrack()`. We take the first frame, detect some Shi-Tomasi corner points in it, then we iteratively track those points using Lucas-Kanade optical flow. For the function `cv2.calcOpticalFlowPyrLK()` we pass the previous frame, previous points and next frame. It returns next points along with some status numbers which has a value of 1 if next point is found, else zero. We iteratively pass these next points as previous points in next step. See the code below:
 ```python
 import numpy as np
 import cv2
@@ -138,8 +134,7 @@ See the results we got:
 
 ![image](images/opticalflow_lk.jpg)
 
-Dense Optical Flow in OpenCV
-----------------------------
+## Dense Optical Flow in OpenCV
 
 Lucas-Kanade method computes optical flow for a sparse feature set (in our example, corners detected using Shi-Tomasi algorithm). OpenCV provides another algorithm to find the dense optical flow. It computes the optical flow for all the points in the frame. It is based on Gunner Farneback's algorithm which is explained in "Two-Frame Motion Estimation Based on Polynomial Expansion" by Gunner Farneback in 2003.
 
@@ -183,11 +178,7 @@ See the result below:
 
 OpenCV comes with a more advanced sample on dense optical flow, please see samples/python/opt_flow.py.
 
-Additional Resources
---------------------
+## Exercises
 
-Exercises
----------
-
--  Check the code in samples/python/lk_track.py. Try to understand the code.
--  Check the code in samples/python/opt_flow.py. Try to understand the code.
+- Check the code in samples/python/lk_track.py. Try to understand the code.
+- Check the code in samples/python/opt_flow.py. Try to understand the code.

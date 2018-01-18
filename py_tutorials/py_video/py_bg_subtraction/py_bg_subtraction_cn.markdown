@@ -8,7 +8,7 @@
 
 ## 基本知识
 
-背景分割是许多基于视觉的应用程序中的主要预处理步骤。例如，考虑访客计数器，利用固定的摄像头统计访客进入和离开房间的数量，或利用交通摄像机提取有关车辆等信息的情况。在所有这些情况下，首先需要单独提取人员或车辆。从技术上讲，你需要从静态背景提取移动的前景。
+背景分割是许多基于视觉的应用程序中的主要预处理步骤。例如，在访客计数器程序中，我们需要利用固定的摄像头统计访客进入和离开房间的数量，或利用交通摄像机提取有关车辆等信息的情况。在所有这些情况下，首先需要单独提取人员或车辆。从技术上讲，你需要从静态背景提取移动的前景。
 
 如果已经有了背景图像，如没有游客的房间图像，没有车辆的道路图像等，这是一件容易的事情。只需从背景中减去新的图像。你就能得到前景物体。但在大多数情况下，您可能没有这样的图像，所以我们需要从我们拥有的任何图像中提取背景。车辆有阴影时变得更加复杂。由于阴影也在移动，简单的减法将会将其标记为前景。这使事情变得复杂。
 
@@ -18,9 +18,9 @@
 
 这是一个基于高斯混合的背景/前景分割算法。它是在P. KadewTraKuPong和R. Bowden于2001年在《An improved adaptive background mixture model for real-time tracking with shadow detection》一文中介绍的。它使用一种方法来模拟每个背景像素的混合K个高斯分布（ K为3到5）。混合物的权重表示这些颜色留在场景中的时间比例。可能的背景颜色是保持更长和更静态的颜色。
 
-在编码时，我们需要使用函数`cv2.createBackgroundSubtractorMOG()`创建一个背景对象。它有一些可选的参数，如历史长度，高斯混合的数量，阈值等。它们都被设置为一些默认值。然后在视频循环中，使用`backgroundsubtractor.apply()`方法获取前景mask。
+在写代码时，我们需要使用函数`cv2.createBackgroundSubtractorMOG()`创建一个背景对象。它有一些可选的参数，如历史长度，高斯混合的数量，阈值等。它们都被设置为一些默认值。然后在视频处理循环中，使用`backgroundsubtractor.apply()`方法获取前景mask。
 
-看一个简单的例子如下：
+一个简单的例子如下：
 
 ```python
 import numpy as np
@@ -39,7 +39,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-（所有算法的结果都显示在最后以便互相比较）
+（所有算法的结果都显示在文章最后以便互相比较）
 
 ### BackgroundSubtractorMOG2
 
@@ -72,9 +72,9 @@ cv2.destroyAllWindows()
 
 ### BackgroundSubtractorGMG
 
-该算法将统计背景图像估计和每像素贝叶斯分割相结合。这是由Andrew B. Godbehere，Akihiro Matsukawa，Ken Goldberg在2012年发表的《Visual Tracking of Human Visitors under Variable-Lighting Conditions for a Responsive Audio Art Installation》一文中介绍的一种响应式音频艺术装置。本文根据该论文，系统运行了一个成功的交互式音频艺术装置于2011年3月31日至31日在加利福尼亚旧金山当代犹太博物馆举行，名为“我们还在吗？”。
+该算法将统计背景图像估计和逐像素贝叶斯分割相结合。这是由Andrew B. Godbehere，Akihiro Matsukawa，Ken Goldberg在2012年发表的《Visual Tracking of Human Visitors under Variable-Lighting Conditions for a Responsive Audio Art Installation》一文中介绍的一种响应式音频艺术装置。有人根据该论文运行了一个成功的交互式音频艺术装置，这个装置的展示在2011年3月31日至31日在加利福尼亚旧金山当代犹太博物馆举行，名为“Are We There Yet?”。
 
-它使用前几个（默认为120）帧进行背景建模。它采用概率前景分割算法，使用贝叶斯推理来识别可能的前景对象。这个识别是适应性的，较新的观察值比旧的观察值更重，以适应可变照明。使用了闭合和开启几个形态学操作，以消除不必要的噪音。前几帧你会看到一个黑色的窗口。
+它使用前几个（默认为120）帧进行背景建模。它采用概率前景分割算法，使用贝叶斯推理来识别可能的前景对象。这个识别是适应性的，较新的观察值比旧的观察值更权重更大，以适应可变照明。使用了闭合和开启几个形态学操作，以消除不必要的噪音。前几帧你会看到一个黑色的窗口。
 
 将形态学开启应用于结果以消除噪音会更好。
 
@@ -122,7 +122,7 @@ cv2.destroyAllWindows()
 
 **Result of BackgroundSubtractorGMG**
 
-用形态学开放删除。
+已经用形态学开放去除噪音。
 
 ![image](images/resgmg.jpg)
 

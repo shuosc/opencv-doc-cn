@@ -47,10 +47,10 @@ Your set of negative window samples will be used to tell the machine learning st
 
 ### Positive Samples
 
-Positive samples are created by the opencv_createsamples application. They are used by the boosting process to define what the model should actually look for when trying to find your objects of interest. The application supports two ways of generating a positive sample dataset.
+Positive samples are created by the opencv_create samples application. They are used by the boosting process to define what the model should actually look for when trying to find your objects of interest. The application supports two ways of generating a positive sample dataset.
 
- 1. You can generate a bunch of positives from a single positive object image.
- 2. You can supply all the positives yourself and only use the tool to cut them out, resize them and put them in the opencv needed binary format.
+  1. You can generate a bunch of positives from a single positive object image.
+  2. You can supply all the positives yourself and only use the tool to cut them out, resize them and put them in the opencv needed binary format.
 
 While the first approach works decently for fixed objects, like very rigid logo's, it tends to fail rather soon for less rigid objects. In that case we do suggest to use the second approach. Many tutorials on the web even state that 100 real object images, can lead to a better model than 1000 artificially generated positives, by using the opencv_createsamples application. If you however do decide to take the first approach, keep some things in mind:
 
