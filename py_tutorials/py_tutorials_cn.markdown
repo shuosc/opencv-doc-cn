@@ -24,7 +24,7 @@
 
   在这一章中你将会学到视频中使用的技术，如对象追踪等等。
 
-- @subpage tutorial_py_table_of_contents_calib3d
+- @subpage tutorial_py_table_of_contents_calib3d_cn
 
   在本节中，我们将学习相机校准，立体成像等。
 

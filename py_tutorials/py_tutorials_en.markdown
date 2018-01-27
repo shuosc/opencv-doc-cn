@@ -25,7 +25,7 @@
 
     In this section you will learn different techniques to work with videos like object tracking etc.
 
--   @subpage tutorial_py_table_of_contents_calib3d
+-   @subpage tutorial_py_table_of_contents_calib3d_en
 
     In this section we will learn about camera calibration, stereo imaging etc.
 

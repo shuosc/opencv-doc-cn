@@ -1,15 +1,12 @@
-Camera Calibration {#tutorial_py_calibration}
-==================
+# Camera Calibration {#tutorial_py_calibration_en}
 
-Goal
-----
+## Goal
 
 In this section,
 -   We will learn about distortions in camera, intrinsic and extrinsic parameters of camera etc.
 -   We will learn to find these parameters, undistort images etc.
 
-Basics
-------
+## Basics
 
 Today's cheap pinhole cameras introduces a lot of distortion to images. Two major distortions are radial distortion and tangential distortion.
 
@@ -112,9 +109,9 @@ One image with pattern drawn on it is shown below:
 ### Calibration
 
 So now we have our object points and image points we are ready to go for calibration. For that we use the function, **cv2.calibrateCamera()**. It returns the camera matrix, distortion coefficients, rotation and translation vectors etc.
-@code{.py}
+```python
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-@endcode
+```
 ### Undistortion
 
 We have got what we were trying. Now we can take an image and undistort it. OpenCV comes with two methods, we will see both. But before that, we can refine the camera matrix based on a free scaling parameter using **cv2.getOptimalNewCameraMatrix()**. If the scaling parameter alpha=0, it returns undistorted image with minimum unwanted pixels. So it may even remove some pixels at image corners. If alpha=1, all pixels are retained with some extra black images. It also returns an image ROI which can be used to crop the result.
@@ -124,11 +121,11 @@ So we take a new image (left12.jpg in this case. That is the first image in this
 img = cv2.imread('left12.jpg')
 h,  w = img.shape[:2]
 newcameramtx, roi=cv2.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
-@endcode
+```
 #### 1. Using **cv2.undistort()**
 
 This is the shortest path. Just call the function and use ROI obtained above to crop the result.
-@code{.py}
+```python
 # undistort
 dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
 
@@ -171,10 +168,7 @@ for i in xrange(len(objpoints)):
 
 print( "total error: {}".format(mean_error/len(objpoints)) )
 ```
-Additional Resources
---------------------
-
 Exercises
 ---------
 
--#  Try camera calibration with circular grid.
+- Try camera calibration with circular grid.

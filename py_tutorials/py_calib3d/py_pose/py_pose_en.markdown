@@ -1,14 +1,12 @@
-Pose Estimation {#tutorial_py_pose}
-===============
+# Pose Estimation {#tutorial_py_pose_en}
 
-Goal
-----
+
+## Goal
 
 In this section,
 -   We will learn to exploit calib3d module to create some 3D effects in images.
 
-Basics
-------
+## Basics
 
 This is going to be a small section. During the last session on camera calibration, you have found the camera matrix, distortion coefficients etc. Given a pattern image, we can utilize the above information to calculate its pose, or how the object is situated in space, like how it is rotated, how it is displaced etc. For a planar object, we can assume Z=0, such that, the problem now becomes how camera is placed in space to see our pattern image. So, if we know how the object lies in the space, we can draw some 2D diagrams in it to simulate the 3D effect. Let's see how to do it.
 
@@ -24,7 +22,7 @@ import glob
 with np.load('B.npz') as X:
     mtx, dist, _, _ = [X[i] for i in ('mtx','dist','rvecs','tvecs')]
 ```
-Now let's create a function, draw which takes the corners in the chessboard (obtained using **cv2.findChessboardCorners()**) and **axis points** to draw a 3D axis.
+Now let's create a function, draw which takes the corners in the chessboard (obtained using `cv2.findChessboardCorners()`) and **axis points** to draw a 3D axis.
 ```python
 def draw(img, corners, imgpts):
     corner = tuple(corners[0].ravel())
@@ -41,7 +39,7 @@ objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 
 axis = np.float32([[3,0,0], [0,3,0], [0,0,-3]]).reshape(-1,3)
 ```
-Now, as usual, we load each image. Search for 7x6 grid. If found, we refine it with subcorner pixels. Then to calculate the rotation and translation, we use the function, **cv2.solvePnPRansac()**. Once we those transformation matrices, we use them to project our **axis points** to the image plane. In simple words, we find the points on image plane corresponding to each of (3,0,0),(0,3,0),(0,0,3) in 3D space. Once we get them, we draw lines from the first corner to each of these points using our draw() function. Done !!!
+Now, as usual, we load each image. Search for 7x6 grid. If found, we refine it with subcorner pixels. Then to calculate the rotation and translation, we use the function, `cv2.solvePnPRansac()`. Once we those transformation matrices, we use them to project our **axis points** to the image plane. In simple words, we find the points on image plane corresponding to each of (3,0,0),(0,3,0),(0,0,3) in 3D space. Once we get them, we draw lines from the first corner to each of these points using our `draw()` function. Done !!!
 ```python
 for fname in glob.glob('left*.jpg'):
     img = cv2.imread(fname)
@@ -99,9 +97,3 @@ And look at the result below:
 ![image](images/pose_2.jpg)
 
 If you are interested in graphics, augmented reality etc, you can use OpenGL to render more complicated figures.
-
-Additional Resources
---------------------
-
-Exercises
----------

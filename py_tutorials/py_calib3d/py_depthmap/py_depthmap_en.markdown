@@ -1,14 +1,12 @@
-Depth Map from Stereo Images {#tutorial_py_depthmap}
-============================
+# Depth Map from Stereo Images {#tutorial_py_depthmap_en}
 
-Goal
-----
+
+## Goal
 
 In this session,
 -   We will learn to create depth map from stereo images.
 
-Basics
-------
+## Basics
 
 In last session, we saw basic concepts like epipolar constraints and other related terms. We also saw that if we have two images of same scene, we can get depth information from that in an intuitive way. Below is an image and some simple mathematical formulas which proves that intuition. (Image Courtesy :
 
@@ -24,8 +22,7 @@ $x$ and $x'$ are the distance between points in image plane corresponding to the
 
 So it finds corresponding matches between two images. We have already seen how epiline constraint make this operation faster and accurate. Once it finds matches, it finds the disparity. Let's see how we can do it with OpenCV.
 
-Code
-----
+## Code
 
 Below code snippet shows a simple procedure to create disparity map.
 ```python
@@ -47,10 +44,6 @@ Below image contains the original image (left) and its disparity map (right). As
 
 @note More details to be added
 
-Additional Resources
---------------------
-
-Exercises
----------
+## Exercises
 
 - OpenCV samples contain an example of generating disparity map and its 3D reconstruction. Check stereo_match.py in OpenCV-Python samples.
