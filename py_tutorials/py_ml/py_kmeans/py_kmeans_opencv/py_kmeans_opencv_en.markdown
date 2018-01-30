@@ -1,45 +1,41 @@
-K-Means Clustering in OpenCV {#tutorial_py_kmeans_opencv}
-============================
+# K-Means Clustering in OpenCV {#tutorial_py_kmeans_opencv_en}
 
-Goal
-----
+## Goal
 
-- Learn to use **cv2.kmeans()** function in OpenCV for data clustering
+- Learn to use `cv2.kmeans()` function in OpenCV for data clustering
 
-Understanding Parameters
-------------------------
+## Understanding Parameters
 
 ### Input parameters
 
-- **samples** : It should be of **np.float32** data type, and each feature should be put in a single column.
-- **nclusters(K)** : Number of clusters required at end
-- **criteria** : It is the iteration termination criteria. When this criteria is satisfied, algorithm iteration stops. Actually, it should be a tuple of 3 parameters. They are `( type, max_iter, epsilon )`:
+- `samples` : It should be of `np.float32` data type, and each feature should be put in a single column.
+- `nclusters(K)` : Number of clusters required at end
+- `criteria` : It is the iteration termination criteria. When this criteria is satisfied, algorithm iteration stops. Actually, it should be a tuple of 3 parameters. They are `( type, max_iter, epsilon )`:
 - type of termination criteria. It has 3 flags as below:
-    - **cv2.TERM_CRITERIA_EPS** - stop the algorithm iteration if specified accuracy, *epsilon*, is reached.
-    - **cv2.TERM_CRITERIA_MAX_ITER** - stop the algorithm after the specified number of iterations, *max_iter*.
-    - **cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER** - stop the iteration when any of the above condition is met.
+    - `cv2.TERM_CRITERIA_EPS` - stop the algorithm iteration if specified accuracy, `epsilon`, is reached.
+    - `cv2.TERM_CRITERIA_MAX_ITER` - stop the algorithm after the specified number of iterations, `max_iter`.
+    - `cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER` - stop the iteration when any of the above condition is met.
     - max_iter - An integer specifying maximum number of iterations.
     - epsilon - Required accuracy
 
-- **attempts** : Flag to specify the number of times the algorithm is executed using different initial labellings. The algorithm returns the labels that yield the best compactness. This compactness is returned as output.
-- **flags** : This flag is used to specify how initial centers are taken. Normally two flags are used for this : **cv2.KMEANS_PP_CENTERS** and **cv2.KMEANS_RANDOM_CENTERS**.
+- `attempts` : Flag to specify the number of times the algorithm is executed using different initial labellings. The algorithm returns the labels that yield the best compactness. This compactness is returned as output.
+- `flags` : This flag is used to specify how initial centers are taken. Normally two flags are used for this : `cv2.KMEANS_PP_CENTERS` and `cv2.KMEANS_RANDOM_CENTERS`.
 
 ### Output parameters
 
-- **compactness** : It is the sum of squared distance from each point to their corresponding centers.
-- **labels** : This is the label array (same as 'code' in previous article) where each element
+- `compactness` : It is the sum of squared distance from each point to their corresponding centers.
+- `labels` : This is the label array (same as 'code' in previous article) where each element
     marked '0', '1'.....
-- **centers** : This is array of centers of clusters.
+- `centers` : This is array of centers of clusters.
 
 Now we will see how to apply K-Means algorithm with three examples.
 
-1. Data with Only One Feature
------------------------------
+## 1. Data with Only One Feature
 
 Consider, you have a set of data with only one feature, ie one-dimensional. For eg, we can take our t-shirt problem where you use only height of people to decide the size of t-shirt.
 
 So we start by creating data and plot it in Matplotlib
-@code{.py}
+```python
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -50,7 +46,7 @@ z = np.hstack((x,y))
 z = z.reshape((50,1))
 z = np.float32(z)
 plt.hist(z,256,[0,256]),plt.show()
-@endcode
+```
 So we have 'z' which is an array of size 50, and values ranging from 0 to 255. I have reshaped 'z' to a column vector. It will be more useful when more than one features are present. Then I made data of np.float32 type.
 
 We get following image :
@@ -85,8 +81,7 @@ Below is the output we got:
 
 ![image](images/oc_1d_clustered.png)
 
-2. Data with Multiple Features
-------------------------------
+## 2. Data with Multiple Features
 
 In previous example, we took only height for t-shirt problem. Here, we will take both height and weight, ie two features.
 
@@ -98,7 +93,7 @@ Check image below:
 ![image](images/oc_feature_representation.jpg)
 
 Now I am directly moving to the code:
-@code{.py}
+```python
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -124,19 +119,18 @@ plt.scatter(B[:,0],B[:,1],c = 'r')
 plt.scatter(center[:,0],center[:,1],s = 80,c = 'y', marker = 's')
 plt.xlabel('Height'),plt.ylabel('Weight')
 plt.show()
-@endcode
+```
 Below is the output we get:
 
 ![image](images/oc_2d_clustered.jpg)
 
-3. Color Quantization
----------------------
+## 3. Color Quantization
 
 Color Quantization is the process of reducing number of colors in an image. One reason to do so is to reduce the memory. Sometimes, some devices may have limitation such that it can produce only limited number of colors. In those cases also, color quantization is performed. Here we use k-means clustering for color quantization.
 
 There is nothing new to be explained here. There are 3 features, say, R,G,B. So we need to reshape the image to an array of Mx3 size (M is number of pixels in image). And after the clustering, we apply centroid values (it is also R,G,B) to all pixels, such that resulting image will have specified number of colors. And again we need to reshape it back to the shape of original image.
 Below is the code:
-@code{.py}
+```python
 import numpy as np
 import cv2
 
@@ -159,13 +153,7 @@ res2 = res.reshape((img.shape))
 cv2.imshow('res2',res2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-@endcode
+```
 See the result below for K=8:
 
 ![image](images/oc_color_quantization.jpg)
-
-Additional Resources
---------------------
-
-Exercises
----------

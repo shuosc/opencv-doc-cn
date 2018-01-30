@@ -1,13 +1,10 @@
-Understanding k-Nearest Neighbour {#tutorial_py_knn_understanding}
-=================================
+# Understanding k-Nearest Neighbour {#tutorial_py_knn_understanding_en}
 
-Goal
-----
+## Goal
 
 In this chapter, we will understand the concepts of k-Nearest Neighbour (kNN) algorithm.
 
-Theory
-------
+## Theory
 
 kNN is one of the simplest of classification algorithms available for supervised learning. The idea is to search for closest match of the test data in feature space. We will look into it with below image.
 
@@ -32,8 +29,7 @@ So what are some important things you see here?
 
 Now let's see it in OpenCV.
 
-kNN in OpenCV
--------------
+## kNN in OpenCV
 
 We will do a simple example here, with two families (classes), just like above. Then in the next chapter, we will do an even better example.
 
@@ -72,7 +68,7 @@ Then we will bring one new-comer and classify him to a family with the help of k
 3.  Corresponding distances from new-comer to each nearest neighbour.
 
 So let's see how it works. New comer is marked in green color.
-@code{.py}
+```python
 newcomer = np.random.randint(0,100,(1,2)).astype(np.float32)
 plt.scatter(newcomer[:,0],newcomer[:,1],80,'g','o')
 
@@ -85,13 +81,13 @@ print( "neighbours:  {}\n".format(neighbours) )
 print( "distance:  {}\n".format(dist) )
 
 plt.show()
-@endcode
+```
 I got the result as follows:
-@code{.py}
+```python
 result:  [[ 1.]]
 neighbours:  [[ 1.  1.  1.]]
 distance:  [[ 53.  58.  61.]]
-@endcode
+```
 It says our new-comer got 3 neighbours, all from Blue family. Therefore, he is labelled as Blue family. It is obvious from plot below:
 
 ![image](images/knn_simple.png)
@@ -103,10 +99,8 @@ newcomers = np.random.randint(0,100,(10,2)).astype(np.float32)
 ret, results,neighbours,dist = knn.findNearest(newcomer, 3)
 # The results also will contain 10 labels.
 ```
-Additional Resources
---------------------
 
--#  [NPTEL notes on Pattern Recognition, Chapter 11](http://www.nptel.iitm.ac.in/courses/106108057/12)
+## Additional Resources
 
-Exercises
----------
+-  [NPTEL notes on Pattern Recognition, Chapter 11](http://www.nptel.iitm.ac.in/courses/106108057/12)
+

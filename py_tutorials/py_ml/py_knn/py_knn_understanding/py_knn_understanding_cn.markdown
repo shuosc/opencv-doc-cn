@@ -1,4 +1,4 @@
-#了解k-最近邻算法{#tutorial_py_knn_understanding}
+#了解k-最近邻算法{#tutorial_py_knn_understanding_cn}
 
 ##目标
 

@@ -1,15 +1,12 @@
-OCR of Hand-written Data using kNN {#tutorial_py_knn_opencv}
-==================================
+# OCR of Hand-written Data using kNN {#tutorial_py_knn_opencv_en}
 
-Goal
-----
+## Goal
 
 In this chapter
 -   We will use our knowledge on kNN to build a basic OCR application.
 -   We will try with Digits and Alphabets data available that comes with OpenCV.
 
-OCR of Hand-written Digits
---------------------------
+## OCR of Hand-written Digits
 
 Our goal is to build an application which can read the handwritten digits. For this we need some train_data and test_data. OpenCV comes with an image digits.png (in the folder opencv/samples/data/) which has 5000 handwritten digits (500 for each digit). Each digit is a 20x20 image. So our first step is to split this image into 5000 different digits. For each digit, we flatten it into a single row with 400 pixels. That is our feature set, ie intensity values of all pixels. It is the simplest feature set we can create. We use first 250 samples of each digit as train_data, and next 250 samples as test_data. So let's prepare them first.
 ```python
@@ -47,7 +44,7 @@ correct = np.count_nonzero(matches)
 accuracy = correct*100.0/result.size
 print( accuracy )
 ```
-So our basic OCR app is ready. This particular example gave me an accuracy of 91%. One option improve accuracy is to add more data for training, especially the wrong ones. So instead of finding this training data everytime I start application, I better save it, so that next time, I directly read this data from a file and start classification. You can do it with the help of some Numpy functions like np.savetxt, np.savez, np.load etc. Please check their docs for more details.
+So our basic OCR app is ready. This particular example gave me an accuracy of 91%. One option improve accuracy is to add more data for training, especially the wrong ones. So instead of finding this training data everytime I start application, I better save it, so that next time, I directly read this data from a file and start classification. You can do it with the help of some Numpy functions like `np.savetxt`, `np.savez`, `np.load` etc. Please check their docs for more details.
 ```python
 # save the data
 np.savez('knn_data.npz',train=train, train_labels=train_labels)
@@ -60,8 +57,7 @@ with np.load('knn_data.npz') as data:
 ```
 In my system, it takes around 4.4 MB of memory. Since we are using intensity values (uint8 data) as features, it would be better to convert the data to np.uint8 first and then save it. It takes only 1.1 MB in this case. Then while loading, you can convert back into float32.
 
-OCR of English Alphabets
-------------------------
+## OCR of English Alphabets
 
 Next we will do the same for English alphabets, but there is a slight change in data and feature set. Here, instead of images, OpenCV comes with a data file, letter-recognition.data in opencv/samples/cpp/ folder. If you open it, you will see 20000 lines which may, on first sight, look like garbage. Actually, in each row, first column is an alphabet which is our label. Next 16 numbers following it are its different features. These features are obtained from [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/). You can find the details of these features in [this page](http://archive.ics.uci.edu/ml/datasets/Letter+Recognition).
 
@@ -92,9 +88,3 @@ accuracy = correct*100.0/10000
 print( accuracy )
 ```
 It gives me an accuracy of 93.22%. Again, if you want to increase accuracy, you can iteratively add error data in each level.
-
-Additional Resources
---------------------
-
-Exercises
----------

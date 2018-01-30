@@ -1,13 +1,10 @@
-Understanding K-Means Clustering {#tutorial_py_kmeans_understanding}
-================================
+# Understanding K-Means Clustering {#tutorial_py_kmeans_understanding_en}
 
-Goal
-----
+## Goal
 
 In this chapter, we will understand the concepts of K-Means Clustering, how it works etc.
 
-Theory
-------
+## Theory
 
 We will deal this with an example which is commonly used.
 
@@ -59,10 +56,7 @@ Final result almost looks like below :
 
 So this is just an intuitive understanding of K-Means Clustering. For more details and mathematical explanation, please read any standard machine learning textbooks or check links in additional resources. It is just a top layer of K-Means clustering. There are a lot of modifications to this algorithm like, how to choose the initial centroids, how to speed up the iteration process etc.
 
-Additional Resources
---------------------
+## Additional Resources
 
 - [Machine Learning Course](https://www.coursera.org/course/ml), Video lectures by Prof. Andrew Ng (Some of the images are taken from this)
 
-Exercises
----------

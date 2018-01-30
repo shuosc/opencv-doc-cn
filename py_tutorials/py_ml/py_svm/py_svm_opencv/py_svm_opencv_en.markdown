@@ -1,19 +1,17 @@
-OCR of Hand-written Data using SVM {#tutorial_py_svm_opencv}
-==================================
+# OCR of Hand-written Data using SVM {#tutorial_py_svm_opencv_en}
 
-Goal
-----
+
+## Goal
 
 In this chapter
 
 -   We will revisit the hand-written data OCR, but, with SVM instead of kNN.
 
-OCR of Hand-written Digits
---------------------------
+## OCR of Hand-written Digits
 
 In kNN, we directly used pixel intensity as the feature vector. This time we will use [Histogram of Oriented Gradients](http://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) (HOG) as feature vectors.
 
-Here, before finding the HOG, we deskew the image using its second order moments. So we first define a function **deskew()** which takes a digit image and deskew it. Below is the deskew() function:
+Here, before finding the HOG, we deskew the image using its second order moments. So we first define a function `deskew()` which takes a digit image and deskew it. Below is the deskew() function:
 
 @snippet samples/python/tutorial_code/ml/py_svm_opencv/hogsvm.py deskew
 
@@ -31,12 +29,10 @@ Finally, as in the previous case, we start by splitting our big dataset into ind
 
 This particular technique gave me nearly 94% accuracy. You can try different values for various parameters of SVM to check if higher accuracy is possible. Or you can read technical papers on this area and try to implement them.
 
-Additional Resources
---------------------
+## Additional Resources
 
 - [Histograms of Oriented Gradients Video](www.youtube.com/watch?v=0Zib1YEE4LU‎)
 
-Exercises
----------
+## Exercises
 
 - OpenCV samples contain digits.py which applies a slight improvement of the above method to get improved result. It also contains the reference. Check it and understand it.

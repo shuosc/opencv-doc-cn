@@ -11,11 +11,11 @@
 - `samples`：应该是`np.float32`数据类型，每个特征应放在一个单独的列中。
 - `nclusters`(K)：结束时所需的集群数量
 - `criteria`：这是迭代终止标准。当满足这个标准时，算法迭代停止。其实它应该是一个3个参数的元组。他们是`(type,max_iter,epsilon)`：
-  - 终止标准的类型。它有3个标志如下：
+  - `type` - 终止标准的类型。它有3个标志如下：
 
     `cv2.TERM_CRITERIA_EPS` - 如果达到了指定的精度`epsilon`，则停止算法迭代。
 
-    `cv2.TERM_CRITERIA_MAX_ITER` - 在指定的迭代次数max_iter之后停止算法。
+    `cv2.TERM_CRITERIA_MAX_ITER` - 在指定的迭代次数`max_iter`之后停止算法。
 
     `cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER` - 当满足上述任何条件时停止迭代。
    - `max_iter` - 指定最大迭代次数的整数。
@@ -26,8 +26,7 @@
 ###输出参数
 
 - `compactness`：它是从每个点到相应中心的平方距离的总和。
-- `labels`：这是标签数组（与上一篇文章中的'代码'部分相同）每个元素
-    标记为“0”，“1”......
+- `labels`：这是标签数组（与上一篇文章中的'代码'部分相同）每个元素标记为“0”，“1”......
 - `centers`：这是集群中心的数组。
 
 现在我们来看看如何应用K-Means算法和三个例子。

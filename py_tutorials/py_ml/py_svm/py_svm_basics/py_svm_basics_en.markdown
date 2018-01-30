@@ -1,14 +1,12 @@
-Understanding SVM {#tutorial_py_svm_basics}
-=================
+# Understanding SVM {#tutorial_py_svm_basics_en}
 
-Goal
-----
+
+## Goal
 
 In this chapter
 -   We will see an intuitive understanding of SVM
 
-Theory
-------
+## Theory
 
 ### Linearly Separable Data
 
@@ -25,7 +23,7 @@ So in above image, you can see plenty of such lines are possible. Which one we w
 
 So to find this Decision Boundary, you need training data. Do you need all? NO. Just the ones which are close to the opposite group are sufficient. In our image, they are the one blue filled circle and two red filled squares. We can call them **Support Vectors** and the lines passing through them are called **Support Planes**. They are adequate for finding our decision boundary. We need not worry about all the data. It helps in data reduction.
 
-What happened is, first two hyperplanes are found which best represents the data. For eg, blue data is represented by \f$w^Tx+b_0 > 1\f$ while red data is represented by \f$w^Tx+b_0 < -1\f$ where $w$ is **weight vector** ( \f$w=[w_1, w_2,..., w_n]\f$) and \f$x\f$ is the feature vector ($x = [x_1,x_2,..., x_n]$). $b_0$ is the **bias**. Weight vector decides the orientation of decision boundary while bias point decides its location. Now decision boundary is defined to be midway between these hyperplanes, so expressed as $w^Tx+b_0 = 0$. The minimum distance from support vector to the decision boundary is given by, $distance_{support \, vectors}=\frac{1}{||w||}$. Margin is twice this distance, and we need to maximize this margin. i.e. we need to minimize a new function $L(w, b_0)$ with some constraints which can expressed below:
+What happened is, first two hyperplanes are found which best represents the data. For eg, blue data is represented by \f$w^Tx+b_0 > 1\f$ while red data is represented by $w^Tx+b_0 < -1$ where $w$ is **weight vector** ( $w=[w_1, w_2,..., w_n]$) and $x$ is the feature vector ($x = [x_1,x_2,..., x_n]$). $b_0$ is the **bias**. Weight vector decides the orientation of decision boundary while bias point decides its location. Now decision boundary is defined to be midway between these hyperplanes, so expressed as $w^Tx+b_0 = 0$. The minimum distance from support vector to the decision boundary is given by, $distance_{support \, vectors}=\frac{1}{||w||}$. Margin is twice this distance, and we need to maximize this margin. i.e. we need to minimize a new function $L(w, b_0)$ with some constraints which can expressed below:
 
 $$
 \min_{w, b_0} L(w, b_0) = \frac{1}{2}||w||^2 \; \text{subject to} \; t_i(w^Tx+b_0) \geq 1 \; \forall i
@@ -84,10 +82,7 @@ How should the parameter C be chosen? It is obvious that the answer to this ques
 -   Large values of C give solutions with less misclassification errors but a smaller margin. Consider that in this case it is expensive to make misclassification errors. Since the aim of the optimization is to minimize the argument, few misclassifications errors are allowed.
 -   Small values of C give solutions with bigger margin and more classification errors. In this case the minimization does not consider that much the term of the sum so it focuses more on finding a hyperplane with big margin.
 
-Additional Resources
---------------------
+## Additional Resources
 
 -#  [NPTEL notes on Statistical Pattern Recognition, Chapters 25-29](http://www.nptel.ac.in/courses/106108057/26).
 
-Exercises
----------

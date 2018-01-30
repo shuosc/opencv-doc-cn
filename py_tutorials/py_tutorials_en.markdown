@@ -29,9 +29,9 @@
 
     In this section we will learn about camera calibration, stereo imaging etc.
 
--   @subpage tutorial_py_table_of_contents_ml
+-   @subpage tutorial_py_table_of_contents_ml_en
 
-    In this section you will learn different image processing functions inside OpenCV.
+    In this section you will learn different machine learing functions inside OpenCV.
 
 -   @subpage tutorial_py_table_of_contents_photo
 
