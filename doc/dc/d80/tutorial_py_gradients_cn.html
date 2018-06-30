@@ -1,0 +1,242 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图像梯度</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图像梯度 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中，我们将学习：</p>
+<ul>
+<li>查找图像梯度，边缘等。</li>
+<li>我们将学习以下函数：<code>cv2.Sobel()</code>，<code>cv2.Scharr()</code>，<code>cv2.Laplacian()</code>等。</li>
+</ul>
+<h2>理论基础</h2>
+<p>OpenCV提供了三种类型的梯度滤波器或高通滤波器，Sobel，Scharr和Laplacian。</p>
+<p>我们会一一介绍它们。</p>
+<h3>1. Sobel和Scharr导数</h3>
+<p>Sobel算子是一个联合了高斯平滑和差分的运算，因此它更能抵抗噪声。 您可以指定要取导数的方向，垂直方向或者水平方向（分别通过参数<code>yorder</code>和<code>xorder</code>）。 你也可以通过参数<code>ksize</code>来指定内核的大小。 如果<code>ksize = -1</code>，则使用3x3 Scharr滤波器，其结果比3x3 Sobel滤波器更好。 请参阅文档来看看使用的内核的特性。</p>
+<h3>2. 拉普拉斯导数</h3>
+<p>它计算由 $ src = { ^2{src}}{ x^2} + { ^2{src}}{ y^2}$给出的，图像的拉普拉斯算子，其中每个导数都是用Sobel导数计算的，如果<code>ksize=1</code>，则使用以下内核进行过滤： $$ kernel = {bmatrix} 0 &amp; 1 &amp; 0 \ 1 &amp; -4 &amp; 1 \ 0 &amp; 1 &amp; 0 {bmatrix} $$</p>
+<h2>代码</h2>
+<p>下面的代码在单个图表中显示了所有操作的运算结果。 所有内核都是5x5大小。 输出图像的深度传递-1以得到<code>np.uint8</code>类型的结果。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;dave.jpg&#39;,0)</div><div class="line">laplacian = cv2.Laplacian(img,cv2.CV_64F)</div><div class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)</div><div class="line">sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)</div><div class="line">plt.subplot(2,2,1),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Original&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,2),plt.imshow(laplacian,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Laplacian&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,3),plt.imshow(sobelx,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel X&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,4),plt.imshow(sobely,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel Y&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/gradients.jpg" alt="image"/>
+</div>
+<h2>一件重要的事</h2>
+<p>在我们的最后一个例子中，输出数据类型是<code>cv2.CV_8U</code>或<code>np.uint8</code>。 但是有一个小问题。 黑白转换为正斜率（正值），白转黑转换为负斜率（负值）。 所以当你把数据转换成np.uint8时，所有的负斜率都会变成零。 简而言之，你会忽略了这个边缘。</p>
+<p>如果黑到白和白到黑两边你都想检测，更好的选择是保持输出数据类型的一些更多位数的形式，如<code>cv2.CV16S</code>，<code>cv2.CV64F</code>等，取其绝对值，然后转换回<code>cv2.CV_8U</code>。</p>
+<p>下面的代码演示了水平Sobel滤波器的这个过程和结果的差异。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;box.png&#39;,0)</div><div class="line"></div><div class="line"># Output dtype = cv2.CV_8U</div><div class="line">sobelx8u = cv2.Sobel(img,cv2.CV_8U,1,0,ksize=5)</div><div class="line"></div><div class="line"># Output dtype = cv2.CV_64F. Then take its absolute and convert to cv2.CV_8U</div><div class="line">sobelx64f = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)</div><div class="line">abs_sobel64f = np.absolute(sobelx64f)</div><div class="line">sobel_8u = np.uint8(abs_sobel64f)</div><div class="line"></div><div class="line">plt.subplot(1,3,1),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Original&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(1,3,2),plt.imshow(sobelx8u,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel CV_8U&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(1,3,3),plt.imshow(sobel_8u,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel abs(CV_64F)&#39;), plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
+<div class="image">
+<img src="../../images/double_edge.jpg" alt="image"/>
+</div>
+<h2>更多资源</h2>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/索貝爾算子">索贝尔算子</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/拉普拉斯算子">拉普拉斯算子</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:11 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

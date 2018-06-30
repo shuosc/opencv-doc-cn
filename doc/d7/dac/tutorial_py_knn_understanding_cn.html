@@ -1,0 +1,253 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 了解k-最近邻算法</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d8/dea/tutorial_py_table_of_contents_ml_cn.html">机器学习</a></li><li class="navelem"><a class="el" href="../../d7/d0f/tutorial_py_knn_index_cn.html">K-最近邻算法</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">了解k-最近邻算法 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在本章中，我们将理解k-最近邻（kNN）算法的概念。</p>
+<h2>理论基础</h2>
+<p>kNN是可用于监督学习的最简单的分类算法之一。这个想法是在特征空间中搜索最接近的测试数据。我们用下面的图片来看看它是怎么工作的。</p>
+<div class="image">
+<img src="../../images/knn_theory.png" alt="image"/>
+</div>
+<p>在图像中，有两类家庭，蓝色方块和红色三角形。我们称每种家庭为一个为**Class**。他们的房子被显示在他们的城镇地图上，我们称之为特征空间。</p>
+<p>(您可以将一个特征空间视为所有数据投影的空间，例如，考虑一个二维坐标空间，每个数据有两个特征，x和y坐标，您可以在二维坐标空间中表示这个数据，对吗？现在想象一下，如果有三个特征，就需要3D空间，现在考虑N个特征，需要N维空间，对吗？这个N维空间就是它的特征空间。在我们的图像中，您可以将其视为具有两个特征的2D空间。)</p>
+<p>现在一个新成员来到这个城镇，创建一个新的家，这个家被表现为绿色的圆圈。他应该被添加到蓝色/红色这两类家庭之一。我们把这个过程称为**Classification**。我们该怎么做？由于我们正在学习kNN，让我们应用这个算法。</p>
+<p>一种方法是检查谁是他最近的邻居。从图象上来看，很明显是红三角家庭。所以他也被加入了红三角。这种方法被称为**简单最近邻**，因为分类只取决于最近的邻居。</p>
+<p>但是有一个问题。红三角可能是最近的。但是如果靠近他的地方有很多蓝色方块呢？那么蓝色方块比红色三角在当地有更多的实力。所以只检查最近的一个是不够的。相反，我们检查一些（K个）最近的家庭。他们中谁占大多数，新人就属于那个家庭。在我们的图像中，让我们取k = 3，即3个最近的家庭。他有两个红色和一个蓝色（有两个蓝色等距，但是因为k = 3，我们只拿其中一个），所以他应该再加上红色家族。但是如果我们取k = 7呢？然后他有5个蓝色家庭和2个红色家庭。现在他应该被添加到蓝色家庭。所以这一切都随k的值而变化。更有趣的是，如果k = 4呢？他有2个红色和2个蓝色的邻居。这是个平局！所以k最好取成一个奇数。</p>
+<p>所以这种方法称为**k-最近邻**，因为分类依赖于k个最近的邻居。</p>
+<p>接下来，在kNN中，我们考虑k个邻居，但我们同样重视所有的邻居，对吗？这对吗？例如，以k = 4的情况。我们说过这是一个平局。但是可以看到，这两个红色家庭比两个蓝色家庭更接近他。所以他更有资格加入到红色。那么我们如何数学解释呢？我们给每个家庭一些权重，取决于他们与新来者的距离。对于那些靠近他的人来说，获得更高的权重，而那些距离较远的人则获得更低的权重。然后我们分别对每个家庭的权重求和。谁拥有最高的总权重，新来者就会去那个家庭。这被称为**修改过的kNN**。</p>
+<p>那么你在这里看到了什么重要的事情呢？</p>
+<ul>
+<li>你需要了解城镇所有房屋的信息，对吧？因为，我们必须检查从新来者到所有现有房屋的距离，找到最近的邻居。如果有足够的房屋和家庭，需要大量的内存，还有更多的时间来计算。</li>
+<li>几乎没有任何训练或准备的时间。</li>
+</ul>
+<p>现在我们来看OpenCV中的kNN。</p>
+<h2>OpenCV中的kNN</h2>
+<p>我们将在这里做一个简单的例子，有两个家庭（Classes），就像上面一样。 下一章我们会做一个更好的例子。</p>
+<p>在这里，我们将红色家族标记为**Class-0**（用0表示），将蓝色家族标记为**Class-1**（用1表示）。 我们创建25个家庭或者说25个训练数据，并将其标记为Class-0或Class-1。 我们将Numpy的随机数生成器的帮助下完成所有这些工作。</p>
+<p>然后我们在Matplotlib的帮助下绘制它。 红色家庭显示为红色三角形，蓝色家庭显示为蓝色正方形。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">import matplotlib.pyplot as plt</div><div class="line"></div><div class="line"># 25个已知（训练用）数据的(x,y)值集合</div><div class="line">trainData = np.random.randint(0,100,(25,2)).astype(np.float32)</div><div class="line"></div><div class="line"># 给每一个数据一个label（0和1）</div><div class="line">responses = np.random.randint(0,2,(25,1)).astype(np.float32)</div><div class="line"></div><div class="line"># 取红色家族，绘制它们</div><div class="line">red = trainData[responses.ravel()==0]</div><div class="line">plt.scatter(red[:,0],red[:,1],80,&#39;r&#39;,&#39;^&#39;)</div><div class="line"></div><div class="line"># 取蓝色家族，绘制它们</div><div class="line">blue = trainData[responses.ravel()==1]</div><div class="line">plt.scatter(blue[:,0],blue[:,1],80,&#39;b&#39;,&#39;s&#39;)</div><div class="line"></div><div class="line">plt.show()</div></div><!-- fragment --><p>你会得到一个类似于我们的第一个图像的图像。由于你使用的是随机数字生成器，因此每次运行代码时都会得到不同的数据。</p>
+<p>接下来初始化kNN算法，并入<code>trainData</code>和<code>responses</code>来训练kNN（它构造一个搜索树）。</p>
+<p>然后，我们将在OpenCV中带来一位新来者，并在kNN的帮助下将他归类为一个家庭。在使用kNN之前，我们需要知道我们的测试数据（新来者的数据）。我们的数据应该是一个大小为$测试数据数量  特征数量$的浮点数组。然后我们找到新来者的最近邻居。我们可以指定我们想要的邻居数量。它返回：</p>
+<ol type="1">
+<li>给新来者的标签，这取决于我们之前看到的kNN理论。如果您想要使用简单最近邻算法，只需指定k = 1，其中k是邻居数。</li>
+<li>最近邻居的标签。</li>
+<li>从新来者到每个最近邻居的相应距离。</li>
+</ol>
+<p>那么让我们看看它是如何工作的。新来者被标记为绿色。</p>
+<div class="fragment"><div class="line">newcomer = np.random.randint(0,100,(1,2)).astype(np.float32)</div><div class="line">plt.scatter(newcomer[:,0],newcomer[:,1],80,&#39;g&#39;,&#39;o&#39;)</div><div class="line">knn = cv2.ml.KNearest_create()</div><div class="line">knn.train(trainData, cv2.ml.ROW_SAMPLE, responses)</div><div class="line">ret, results, neighbours ,dist = knn.findNearest(newcomer, 3)</div><div class="line">print( &quot;result:  {}\n&quot;.format(results) )</div><div class="line">print( &quot;neighbours:  {}\n&quot;.format(neighbours) )</div><div class="line">print( &quot;distance:  {}\n&quot;.format(dist) )</div><div class="line">plt.show()</div></div><!-- fragment --><p>我得到了下面的结果：</p>
+<div class="fragment"><div class="line">result:  [[ 1.]]</div><div class="line">neighbours:  [[ 1.  1.  1.]]</div><div class="line">distance:  [[ 53.  58.  61.]]</div></div><!-- fragment --><p>它说，我们新来的人有3个邻居，都来自蓝色家庭。 因此，他被称归类到蓝色家庭。 从下图可以看出：</p>
+<div class="image">
+<img src="../../images/knn_simple.png" alt="image"/>
+</div>
+<p>如果你有大量的数据，你可以将它作为数组传递。 相应的结果也可以作为数组获得。</p>
+<div class="fragment"><div class="line"># 10个新来的</div><div class="line">newcomers = np.random.randint(0,100,(10,2)).astype(np.float32)</div><div class="line">ret, results,neighbours,dist = knn.findNearest(newcomer, 3)</div><div class="line"># 结果也会包含10个labels</div></div><!-- fragment --><h2>更多资源</h2>
+<ul>
+<li><a href="http://www.nptel.iitm.ac.in/courses/106108057/12">NPTEL notes on Pattern Recognition, Chapter 11</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:11 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

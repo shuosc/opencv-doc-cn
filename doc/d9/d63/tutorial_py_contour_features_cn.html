@@ -1,0 +1,305 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 轮廓特征</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li><li class="navelem"><a class="el" href="../../d4/dd5/tutorial_py_table_of_contents_contours_cn.html">OpenCV中的轮廓</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">轮廓特征 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这篇文章中，我们将学习</p>
+<ul>
+<li>找出轮廓的不同特征，如面积，周长，质心，边界框等。</li>
+<li>您将看到许多与轮廓相关的功能。</li>
+</ul>
+<ol type="1">
+<li><p class="startli">特征矩</p>
+<p class="startli">图像的特征矩可帮助您计算一些特征，如对象的质心，对象的面积等。请查看<a href="http://en.wikipedia.org/wiki/Image_moment">特征矩</a>的维基百科页面。</p>
+<p class="startli">函数<code>cv2.moments()</code>返回计算出的所有特征矩的字典。</p>
+<p class="startli">见下面的代码：</p>
+</li>
+</ol>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;star.jpg&#39;,0)</div><div class="line">ret,thresh = cv2.threshold(img,127,255,0)</div><div class="line">im2,contours,hierarchy = cv2.findContours(thresh, 1, 2)</div><div class="line">cnt = contours[0]</div><div class="line">M = cv2.moments(cnt)</div><div class="line">print( M )</div></div><!-- fragment --><p>从这里你可以提取有用的数据，如面积，质心等。质心由关系：$C_x =  {M_ {10}} {M_ {00}}$和$C_y =  {M_ {01}} { M_ {00}}$给出。取质心可以用如下方法完成：</p>
+<div class="fragment"><div class="line">cx = int(M[&#39;m10&#39;]/M[&#39;m00&#39;])</div><div class="line">cy = int(M[&#39;m01&#39;]/M[&#39;m00&#39;])</div></div><!-- fragment --><ol type="1">
+<li><p class="startli">轮廓区域</p>
+<p class="startli">轮廓区域由函数<code>cv2.contourArea()</code>给出，或者可以从图像矩&lsquo;M ['m00&rsquo;]`中得到。</p>
+</li>
+</ol>
+<div class="fragment"><div class="line">area = cv2.contourArea(cnt)</div></div><!-- fragment --><ol type="1">
+<li>轮廓周长 它也被称为弧长。可以使用<code>cv2.arcLength()</code>函数找到它。第二个参数指定形状是封闭的轮廓（如果传入<code>True</code>），或者只是一条曲线。</li>
+</ol>
+<div class="fragment"><div class="line">perimeter = cv2.arcLength(cnt,True)</div></div><!-- fragment --><ol type="1">
+<li><p class="startli">轮廓近似 它根据我们指定的精度将轮廓形状近似为具有较少顶点数的其他形状。它是<a href="http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm">Douglas-Peucker算法</a>的一个实现。维基百科上有算法和演示。</p>
+<p class="startli">为了理解这一点，假设你试图在图像中找到一个正方形，但是由于图像中的一些问题，你没有得到一个完美的正方形，而是一个“坏形状”（如下图所示）。现在，您可以使用此函数来近似形状。在此，第二个参数称为<code>epsilon</code>，它是从轮廓到近似轮廓的最大距离。这是一个精确度参数。需要明智的选择<code>epsilon</code>来获得正确的输出。</p>
+<p class="startli">```python epsilon = 0.1*cv2.arcLength(cnt,True) approx = cv2.approxPolyDP(cnt,epsilon,True) ```</p>
+<p class="startli">下面，在第二个图像中，绿线显示 epsilon = 10％弧长的近似曲线。</p>
+<p class="startli">第三张图片显示了epsilon = 1％弧长的情况。</p>
+<p class="startli">第三个参数指定曲线是否关闭。</p>
+<div class="image">
+<img src="../../images/approx.jpg" alt="image"/>
+</div>
+</li>
+<li><p class="startli">凸包</p>
+<p class="startli">凸包看起来与轮廓近似类似，但它们不是完全一样的（虽然两者在某些情况下可能确实会给出相同的结果）。<code>cv2.convexHull()</code>函数用来检查曲线的凸度缺陷并纠正它。一般来说，凸曲线总是凸出或者至少是平坦的曲线。如果它向内部凸起，则称为凸面缺陷。例如，看看下面的图像中的手。红线显示手的凸包。双向箭头标记显示凸面缺陷，这是凸包与轮廓的局部最大偏差。</p>
+<div class="image">
+<img src="../../images/convexitydefects.jpg" alt="image"/>
+</div>
+<p class="startli">​</p>
+<p class="startli">关于这个函数的语法有一些事情要讨论：</p>
+<p class="startli">```python hull = cv2.convexHull(points[, hull[, clockwise[, returnPoints]] ```</p>
+<p class="startli">参数详情：</p><ul>
+<li><code>points</code>是我们传入的轮廓。</li>
+<li><code>hull</code>是输出，通常我们不使用这个参数（而使用返回值）。</li>
+<li><code>clockwise</code>：方向标志。如果为<code>True</code>，则输出顺时针方向的凸包。否则，输出逆时针方向的凸包。</li>
+<li><code>returnPoints</code>：默认情况下，为<code>True</code>。它会返回凸包的坐标。如果为<code>False</code>，返回凸包点对应的轮廓点的坐标。</li>
+</ul>
+<p class="startli">所以要得到如上图中的凸包，像以下这么做就足够了：</p>
+<p class="startli">```python hull = cv2.convexHull(cnt) ```</p>
+<p class="startli">但是如果你想找到凸包缺陷，你需要传递<code>returnPoints = False</code>。要理解这些内容，我们将采取上面的矩形图像。首先，我找到了它的轮廓cnt。现在我使用<code>returnPoints = True</code>找到它的凸包，我得到了以下值：</p>
+<p class="startli"><code>[[223]]，[[51 202]]，[[51 79]]，[[234 79]]</code>，这是矩形的四个角点。</p>
+<p class="startli">现在，如果使用<code>returnPoints = False</code>做同样的处理，会得到如下结果：<code>[[129]，[67]，[0]，[142]]</code>。</p>
+<p class="startli">这些是轮廓中对应点的坐标。例如，检查第一个值：</p>
+<p class="startli"><code>cnt [129] = [[234,202]]</code></p>
+<p class="startli">与第一个结果相同（其他点也是这样）。</p>
+<p class="startli">当我们讨论凸包缺陷时，你会再次看到它。</p>
+</li>
+<li><p class="startli">检查凸性</p>
+<p class="startli">有一个函数来检查曲线是否凸起，<code>cv2.isContourConvex()</code>。这个函数只返回<code>True</code>或<code>False</code>。这没什么特别的。</p>
+<p class="startli">```python k = cv2.isContourConvex(cnt) ```</p>
+</li>
+<li><p class="startli">边界框</p>
+<p class="startli">有两种类型的边界框。</p><ul>
+<li><p class="startli">竖直的边界矩形</p>
+<p class="startli">它是一个竖直的矩形，它不考虑对象的旋转。所以边界矩形的面积很可能不是最小的。它由函数<code>cv2.boundingRect()</code>发现。</p>
+<p class="startli">设(x,y)为矩形的左上角坐标，(w,h)为其宽度和高度。</p>
+<p class="startli">```python x,y,w,h = cv2.boundingRect(cnt) cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2) ```</p>
+</li>
+<li><p class="startli">旋转的边界矩形</p>
+<p class="startli">这里，边界矩形是根据最小面积绘制的，所以它也考虑了旋转。使用的函数是<code>cv2.minAreaRect()</code>。它返回一个Box2D结构，其中包含以下结构 - (center(x,y),(width，height), angle of rotation)。但要绘制这个矩形，我们需要矩形的四个角。它是通过函数<code>cv2.boxPoints()</code>获得的。</p>
+<p class="startli">```python rect = cv2.minAreaRect(cnt) box = cv2.boxPoints(rect) box = np.int0(box) cv2.drawContours(img,[box],0,(0,0,255),2) ```</p>
+<p class="startli">两个矩形都显示在一个图像中。绿色矩形显示正常的边界矩形。红色的矩形是旋转的矩形。</p>
+</li>
+</ul>
+</li>
+<li><p class="startli">最小闭圆</p>
+<p class="startli">接下来我们使用函数<code>cv2.minEnclosingCircle()</code>来找到对象的外接圆。 它是一个完全覆盖物体的面积最小的圆。</p>
+<p class="startli">```python (x,y),radius = cv2.minEnclosingCircle(cnt) center = (int(x),int(y)) radius = int(radius) cv2.circle(img,center,radius,(0,255,0),2) ```</p>
+<div class="image">
+<img src="../../images/circumcircle.png" alt="image"/>
+</div>
+</li>
+<li><p class="startli">拟合椭圆</p>
+<p class="startli">接下来是将椭圆拟合到一个对象。 它将返回椭圆所在的旋转矩形。</p>
+</li>
+</ol>
+<div class="fragment"><div class="line">ellipse = cv2.fitEllipse(cnt)</div><div class="line">cv2.ellipse(img,ellipse,(0,255,0),2)</div></div><!-- fragment --><div class="image">
+<img src="../../images/fitellipse.png" alt="image"/>
+</div>
+<ol type="1">
+<li>拟合一条线 同样，我们可以将一条线放在一组点上。 下面的图像包含一组白点。 我们可以拟合一条直线。</li>
+</ol>
+<div class="fragment"><div class="line">rows,cols = img.shape[:2]</div><div class="line">[vx,vy,x,y] = cv2.fitLine(cnt, cv2.DIST_L2,0,0.01,0.01)</div><div class="line">lefty = int((-x*vy/vx) + y)</div><div class="line">righty = int(((cols-x)*vy/vx)+y)</div><div class="line">cv2.line(img,(cols-1,righty),(0,lefty),(0,255,0),2)</div></div><!-- fragment --><div class="image">
+<img src="../../images/fitline.jpg" alt="image"/>
+</div>
+ </div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:11 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

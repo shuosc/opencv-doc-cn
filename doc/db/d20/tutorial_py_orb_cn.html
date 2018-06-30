@@ -1,0 +1,237 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: ORB特征描述符(Oriented FAST and Rotated BRIEF)</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ORB特征描述符(Oriented FAST and Rotated BRIEF) </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中，</p>
+<ul>
+<li>我们将学习ORB的基础</li>
+</ul>
+<h2>理论基础</h2>
+<p>作为OpenCV爱好者，关于ORB最重要的是它来自“OpenCV实验室”。</p>
+<p>这个算法是由Ethan Rublee，Vincent Rabaud，Kurt Konolige和Gary R. Bradski在他们的论文《ORB: An efficient alternative to SIFT or SURF》[^1 ]提出。正如标题所说，这是一个在计算成本，匹配性能和，最重要的，专利方面，SIFT和SURF的一个很好的替代品。</p>
+<p>是的，SIFT和SURF已经获得专利，使用它们时应该付钱。 但ORB则不是这样！！</p>
+<p>ORB基本上是FAST关键点检测器和BRIEF描述符的融合，并有许多修改以提高性能。 首先使用FAST找到关键点，然后应用Harris角点测量来找到其中的最高N个点。 它也使用金字塔来产生多尺度特征。 但是有一个问题，FAST不计算方向。 那么如果需要旋转不变性怎么办？ 作者对于原有算法提出了以下修改。</p>
+<p>它计算位于中心角的片段的强度加权质心。 这个角点到质心的矢量的方向就是特征点的方向。 为了改善旋转不变性，用x和y来计算矩，其应该在半径为$r$的圆形区域中，其中$r$是片段的大小。</p>
+<p>现在来看看描述符，ORB使用BRIEF描述符。 但是我们已经看到，对于旋转，BRIEF表现不佳。 ORB所做的就是根据关键点的方向来“引导”BRIEF。 对于在位置$(x_i,y_i)$的$n$个二进制测试的任何特征集合，定义包含这些像素的坐标的$2*n$的矩阵$S$。 然后使用片段的方向$$，找到它的旋转矩阵并旋转$S$以得到导向（旋转）过的版本$S_$。</p>
+<p>ORB将该角度离散为$ {2} {30}$（12度）的增量，并构建一个预先计算好的BRIEF模式的查找表。只要关键点取向$$在视图之间是一致的，正确的一组点$S_$将被用来计算它的描述符。</p>
+<p>BRIEF具有一个重要的特点，即每个位特征具有很大的方差和接近0.5的平均值。但一旦以关键点为导向，就会失去这种属性，变得更加分散。</p>
+<p>高的方差使得特征更具有区别性，因为它对输入有不同的响应。</p>
+<p>另一个理想的特性是使测试不相关，因为每个测试都会对测试结果产生影响。为了解决所有这些问题，ORB在所有可能的二进制测试中运行一个贪婪的搜索，以找到具有高的方差、值平均接近0.5以及测试不相关的的那些。</p>
+<p>结果被称为**rBRIEF**。</p>
+<p>对于描述符匹配，使用了从传统LSH改进而来的多探针LSH。这篇论文说ORB比SURF和SIFT快得多，ORB描述符比SURF更好。 ORB是低功耗设备进行全景拼接等计算的理想选择。</p>
+<h2>OpenCV中的ORB</h2>
+<p>像往常一样，我们必须使用函数<code>cv2.ORB()</code>或使用feature2d的通用接口来创建一个ORB对象。 它有一些可选的参数。 最有用的是<code>nFeatures</code>，表示要保留的特征的最大数量（默认为500），<code>scoreType</code>表示是否使用Harris分数或FAST分数来排列特征（默认为Harris分数）。另一个参数<code>WTA_K</code>决定产生定向的BRIEF描述符的每个元素的点数。 默认情况下，这个值是2，即一次选择两个点。 在这种情况下，匹配使用<code>NORM_HAMMING</code>距离。</p>
+<p>如果<code>WTA_K</code>是3或者4，那么需要3或者4个点来生成BRIEF描述符，那么匹配就使用<code>NORM_HAMMING2</code>。</p>
+<p>下面是一个显示ORB使用的简单代码。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;simple.jpg&#39;,0)</div><div class="line"># 初始化ORB检测器</div><div class="line">orb = cv2.ORB_create()</div><div class="line"># 用ORB查找关键点</div><div class="line">kp = orb.detect(img,None)</div><div class="line"># 用ORB计算描述子</div><div class="line">kp, des = orb.compute(img, kp)</div><div class="line"># 只绘制关键点位置，不绘制大小和方向</div><div class="line">img2 = cv2.drawKeypoints(img, kp, None, color=(0,255,0), flags=0)</div><div class="line">plt.imshow(img2), plt.show()</div></div><!-- fragment --><p>可以看见下面的结果：</p>
+<div class="image">
+<img src="../../images/orb_kp.jpg" alt="image"/>
+</div>
+<p>我们将在其他章节中讲解使用ORB特征来做匹配。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:10 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

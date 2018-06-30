@@ -1,0 +1,244 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: OpenCV-Python简介教程</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d4/d6d/tutorial_py_table_of_contents_setup_cn.html">介绍OpenCV</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">OpenCV-Python简介教程 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>OpenCV</h2>
+<p>OpenCV于1999年由**Gary Bradsky**在英特尔开始开发，于2000年首次发布。</p>
+<p>**Vadim Pisarevsky**加入了Gary Bradsky来管理俄罗斯英特尔软件OpenCV团队。 在赢得2005年DARPA大挑战的车辆Stanley上使用了OpenCV。后来，在Willow Garage的支持和在Gary Bradsky、Vadim Pisarevsky的领导下这个项目继续活跃发展。 OpenCV现在支持多种与计算机视觉和机器学习有关的算法，并且正在日益扩大。</p>
+<p>OpenCV支持多种编程语言，如C++，Python，Java等，可在不同的平台上使用，包括Windows，Linux，OS X，Android和iOS。基于CUDA和OpenCL的高速GPU运算接口也在活跃开发之中。</p>
+<p>OpenCV-Python是OpenCV的Python API，结合了OpenCV C++ API和Python语言的优势。</p>
+<h2>OpenCV-Python</h2>
+<p>OpenCV-Python是为解决计算机视觉问题而设计的Python绑定库。</p>
+<p>Python是一种通用编程语言，由**Guido van Rossum**开发，它很快变得非常流行，主要是因为它的简单性和代码可读性。它使程序员能够用更少的代码行表达想法，而不会降低可读性。</p>
+<p>与C/C ++等语言相比，Python更慢。但是Python可以很容易地用C/C++进行扩展，这允许我们用C/C++编写计算密集的代码，并创建作为Python模块使用的Python包装器。这带给我们两个好处：第一，代码和原来的C/C++代码一样快（因为在后台工作的实际上是C++代码），第二，写Python比写C/C++代码更容易。 OpenCV-Python是原始OpenCV C++实现的Python包装器。</p>
+<p>OpenCV-Python使用了**Numpy**，一个高度优化的数组操作库，它使用MATLAB风格的语法。所有的OpenCV数组结构都转换会转换成Numpy数组或自Numpy数组转换而来。</p>
+<p>这也使得OpenCV-Python与其他使用Numpy的库（如SciPy和Matplotlib）更容易集成。</p>
+<h2>OpenCV-Python教程</h2>
+<p>OpenCV引入了一套新的教程，将指导您学会OpenCV-Python中的各种功能。本教程主要使用OpenCV 3.x版本（尽管大部分教程也适用于OpenCV 2.x）。</p>
+<p>建议先学习Python和Numpy的知识，因为本指南不会涉及它们。</p>
+<p><b>为了使用OpenCV-Python编写最优化的代码，熟练使用Numpy是必须的。</b></p>
+<p>本教程最初由Abid Rahman K.开始编写，作为Alexander Mordvintsev指导下的Google Summer of Code 2013计划的一部分。</p>
+<h2>OpenCV需要你！！！</h2>
+<p>由于OpenCV是一个开源计划，欢迎任何人为库，文档和教程作出贡献。如果您在本教程中发现任何错误（从小的拼写错误到代码或概念中的严重错误），请随时通过在<a href="https://github.com/opencv/opencv">GitHub</a>上clone OpenCV并提交pull request来纠正错误。 OpenCV开发人员将检查您的pull request，给您重要的反馈，并且（一旦通过审阅者批准），它将被合并到OpenCV中。您将成为开源贡献者:-)</p>
+<p>当新的模块被添加到OpenCV-Python中时，本教程将不得不被扩展。如果你熟悉一个特定的算法，可以写一个包括算法的基本理论和示例用法的代码的教程，请这样做。</p>
+<p>请记住，我们**一起努力**可以使这个项目取得巨大的成功！</p>
+<h2>贡献者</h2>
+<p>以下是提交OpenCV-Python教程的贡献者列表。</p>
+<ul>
+<li>Alexander Mordvintsev（GSoC-2013导师）</li>
+<li>Abid Rahman K.（GSoC-2013实习生）</li>
+</ul>
+<h2>更多资源</h2>
+<ol type="1">
+<li>A Quick guide to Python - <a href="http://swaroopch.com/notes/python/">A Byte of Python</a></li>
+<li><a href="http://wiki.scipy.org/Tentative_NumPy_Tutorial">Basic Numpy Tutorials</a></li>
+<li><a href="http://wiki.scipy.org/Numpy_Example_List">Numpy Examples List</a></li>
+<li><a href="http://docs.opencv.org/">OpenCV Documentation</a></li>
+<li><a href="http://answers.opencv.org/questions/">OpenCV Forum</a> </li>
+</ol>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:11 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

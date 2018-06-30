@@ -1,0 +1,231 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 特征匹配和使用单应性匹配来搜索物体</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">特征匹配和使用单应性匹配来搜索物体 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中，</p>
+<ul>
+<li>我们将混合特征匹配和来自<code>calib3d</code>的单应性匹配来从一个复杂的图像中寻找已知的物体。</li>
+</ul>
+<h2>基础</h2>
+<p>我们在上节课做了什么？我们使用了一个queryImage，在其中找到了一些特征点，我们又拿了一个trainImage，在那个图像中也找到了这些特征，并且找到了它们之间最好的匹配。</p>
+<p>总之，我们在另一个混乱的图像中发现了一个物体某些部分的位置。这些信息足以在trainImage上准确找到对象。</p>
+<p>为此，我们可以使用calib3d模块的函数<code>cv2.findHomography()</code>。如果我们传入这两个图像的点集，它会找到该对象的变换。然后我们可以使用<code>cv2.perspectiveTransform()</code>来查找对象。它需要至少四个正确的点来找到变换。</p>
+<p>我们已经看到，可能会有一些可能的错误匹配来影响结果。为了解决这个问题，算法使用<code>RANSAC</code>或<code>LEAST_MEDIAN</code>（可以由标志决定）。提供正确估计的好匹配被称为inlier，其余被称为outlier。</p>
+<p><code>cv2.findHomography()</code>返回一个确定了inlier和outlier的掩码。</p>
+<p>让我们来动手吧！</p>
+<h2>代码</h2>
+<p>首先，像往常一样，让我们找到图像中的SIFT特征，并应用比率测试来找到最佳匹配。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">MIN_MATCH_COUNT = 10</div><div class="line">img1 = cv2.imread(&#39;box.png&#39;,0)          # queryImage</div><div class="line">img2 = cv2.imread(&#39;box_in_scene.png&#39;,0) # trainImage</div><div class="line"># 初始化SIFT检测器</div><div class="line">sift = cv2.xfeatures2d.SIFT_create()</div><div class="line"># 用SIFT检测器搜索关键点和描述子</div><div class="line">kp1, des1 = sift.detectAndCompute(img1,None)</div><div class="line">kp2, des2 = sift.detectAndCompute(img2,None)</div><div class="line">FLANN_INDEX_KDTREE = 1</div><div class="line">index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)</div><div class="line">search_params = dict(checks = 50)</div><div class="line">flann = cv2.FlannBasedMatcher(index_params, search_params)</div><div class="line">matches = flann.knnMatch(des1,des2,k=2)</div><div class="line"># 对所有好的匹配进行Lowe&#39;s比率测试</div><div class="line">good = []</div><div class="line">for m,n in matches:</div><div class="line">    if m.distance &lt; 0.7*n.distance:</div><div class="line">        good.append(m)</div></div><!-- fragment --><p>现在我们设置一个条件，至少有10个匹配（由<code>MIN_MATCH_COUNT</code>定义）才能确定找到了对象。 否则，只需显示一条消息，告诉用户不存在足够的匹配。</p>
+<p>如果找到足够的匹配，我们提取两个图像中匹配关键点的位置。 寻找他们之间的变换关系。 一旦我们得到这个3x3转换矩阵，我们用它来将queryImage的角点转换成trainImage中相应的点。 然后我们绘制它。</p>
+<div class="fragment"><div class="line">if len(good)&gt;MIN_MATCH_COUNT:</div><div class="line">    src_pts = np.float32([ kp1[m.queryIdx].pt for m in good ]).reshape(-1,1,2)</div><div class="line">    dst_pts = np.float32([ kp2[m.trainIdx].pt for m in good ]).reshape(-1,1,2)</div><div class="line"></div><div class="line">    M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)</div><div class="line">    matchesMask = mask.ravel().tolist()</div><div class="line"></div><div class="line">    h,w,d = img1.shape</div><div class="line">    pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)</div><div class="line">    dst = cv2.perspectiveTransform(pts,M)</div><div class="line"></div><div class="line">    img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)</div><div class="line">else:</div><div class="line">    print( &quot;Not enough matches are found - {}/{}&quot;.format(len(good), MIN_MATCH_COUNT) )</div><div class="line">matchesMask = None</div></div><!-- fragment --><p>最后，我们绘制我们的inlier（如果成功找到物体）或匹配关键点（如果没找到）。</p>
+<div class="fragment"><div class="line">draw_params = dict(matchColor = (0,255,0), # 用绿色画出匹配点</div><div class="line">                    singlePointColor = None,</div><div class="line">                    matchesMask = matchesMask, # 只画出inliers</div><div class="line">                    flags = 2)</div><div class="line">img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)</div><div class="line">plt.imshow(img3, &#39;gray&#39;),plt.show()</div></div><!-- fragment --><p>看下面的结果。 对象在混乱的图像中以白色标记：</p>
+<div class="image">
+<img src="../../images/homography_findobj.jpg" alt="image"/>
+</div>
+ </div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:10 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

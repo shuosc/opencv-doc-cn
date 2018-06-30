@@ -1,0 +1,248 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 二维直方图</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li><li class="navelem"><a class="el" href="../../d3/d46/tutorial_py_table_of_contents_histograms_cn.html">OpenCV中的直方图</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">二维直方图 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在本章中，我们将学习查找和绘制二维直方图。这将在未来的章节中有所帮助。</p>
+<h2>介绍</h2>
+<p>在第一篇文章中，我们计算和绘制了一维直方图。它是一维的，因为我们只考虑一个特征，即像素的灰度强度值。但是在二维直方图中，您会考虑两个特征。通常在查找颜色直方图时，这两个特征是每个像素的色调和饱和度值。</p>
+<p>有一个python示例（samples/python/color_histogram.py）已经用于展示如何查找颜色直方图。我们将尝试了解如何创建这样一个颜色直方图，这将有助于理解进一步的主题，如直方图反向投影。</p>
+<h2>OpenCV中的2D直方图</h2>
+<p>这很简单，同样使用函数<code>cv2.calcHist()</code>进行计算。对于颜色直方图，我们需要将图像从BGR转换为HSV。 （请记住，对于一维直方图，我们从BGR转换为灰度）。对于2D直方图，其参数将被修改如下：</p>
+<ul>
+<li><code>channels = [0,1]</code>，因为我们需要处理H和S平面。</li>
+<li><code>bins = [180,256]</code>，180 for H平面，256 for S平面。</li>
+<li><code>range = [0,180,0,256]</code>，色调值介于0和180之间，饱和度介于0和256之间。</li>
+</ul>
+<p>现在看看下面的代码：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;home.jpg&#39;)</div><div class="line">hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)</div><div class="line">hist = cv2.calcHist([hsv], [0, 1], None, [180, 256], [0, 180, 0, 256])</div></div><!-- fragment --><p>就是这样。</p>
+<h2>Numpy中的二维直方图</h2>
+<p>Numpy还为此提供了一个专用函数：<code>np.histogram2d()</code>。 （请记住，对于一维直方图，我们使用<code>np.histogram()</code>）。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;home.jpg&#39;)</div><div class="line">hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)</div><div class="line">hist, xbins, ybins = np.histogram2d(h.ravel(),s.ravel(),[180,256],[[0,180],[0,256]])</div></div><!-- fragment --><p>第一个参数是H平面，第二个是S平面，第三个是面元的数量，第四个是他们的范围。</p>
+<p>现在我们可以来看看如何绘制这个颜色直方图。</p>
+<h2>绘制二维直方图</h2>
+<h3>方法1：使用<code>cv2.imshow()</code></h3>
+<p>我们得到的结果是一个尺寸为180x256的二维数组。所以我们可以使用<code>cv2.imshow()</code>函数正常显示它们。这将是一个灰度图像，它不会给出太多的颜色信息，除非你知道不同颜色的色调值。</p>
+<h3>方法2：使用Matplotlib</h3>
+<p>我们可以使用<code>matplotlib.pyplot.imshow()</code>函数来绘制不同颜色贴图的二维直方图。它给了我们关于不同像素密度的更多信息。但是，这也不能让我们一眼看出是什么颜色，除非你知道不同颜色的色调值。不过我更喜欢这种方法。这很简单，更好。</p>
+<p>使用此功能时，请记住，插值标志应该是nearest，以获得更好的结果。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;home.jpg&#39;)</div><div class="line">hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)</div><div class="line">hist = cv2.calcHist( [hsv], [0, 1], None, [180, 256], [0, 180, 0, 256] )</div><div class="line">plt.imshow(hist,interpolation = &#39;nearest&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>以下是输入图像及其颜色直方图。 X轴显示S值，Y轴显示色调。</p>
+<div class="image">
+<img src="../../images/2dhist_matplotlib.jpg" alt="image"/>
+</div>
+<p>在直方图中，您可以看到H = 100和S = 200附近的一些高值。它对应于天空的蓝色。同样，在H = 25和S = 100附近可以看到另一个峰值。它对应于宫殿的黄色。您可以使用任何图像编辑工具（如GIMP）来验证它。</p>
+<h3>方法3：OpenCV示例风格</h3>
+<p>在OpenCV-Python示例（samples/python/color_histogram.py）中有一个用于颜色直方图的示例代码。</p>
+<p>如果你运行代码，你可以看到直方图也显示相应的颜色。或者只是输出一个颜色编码的直方图。其结果是非常好的（尽管你需要添加额外的线）。</p>
+<p>在该代码中，作者在HSV中创建了一个色彩图。然后转换成BGR。得到的直方图图像与该颜色图相乘。他还使用了一些预处理步骤去除小的孤立像素，从而得到一个很好的直方图。</p>
+<p>我把运行代码，分析它，并自己hack一下的任务留给读者。下面是与上面相同的图像的代码的输出：</p>
+<div class="image">
+<img src="../../images/2dhist_opencv.jpg" alt="image"/>
+</div>
+<p>你可以在直方图中清楚地看到有什么颜色存在，蓝色在那里，黄色在那里，还有一些白色（因为图中有一个棋盘图案）在那里。Nice！ </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:38:11 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>
