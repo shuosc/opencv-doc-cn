@@ -1,0 +1,273 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 形态学转换</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">形态学转换 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>我们将学习不同的形态学操作，如腐蚀，膨胀，开启，闭合等。</li>
+<li>我们将看到不同的功能，如：<code>cv2.erode()</code>，<code>cv2.dilate()</code>，<code>cv2.morphologyEx()</code>等。</li>
+</ul>
+<h2>理论基础</h2>
+<p>形态转换是基于图像形状的一些简单操作。它通常在二值图像上执行。它需要两个输入，一个是我们的原始图像，另一个是决定操作性质的结构元素或内核。两个基本的形态学操作是腐蚀和膨胀。它们的变体形式，如打开，关闭，梯度等也会发挥很大作用。我们将在下面的图片的帮助下逐一看到他们：</p>
+<div class="image">
+<img src="../../images/j.png" alt="image"/>
+</div>
+<h3>1. 腐蚀</h3>
+<p>腐蚀的基本思想就像土壤被侵蚀，它“腐蚀”了前景物体的边界（记得要总是试图保持前景为白色）。那么它做了什么？内核在图像中滑动（就像2D卷积重那样）。只有当内核下的所有像素都是1时，原始图像（1或0）中的一个像素才会被视为1，否则会被“腐蚀”（置零）。</p>
+<p>这样做会导致图像发生什么样的变化呢？边界附近的所有像素都将被丢弃，这取决于内核的大小。所以前景物体的厚度或尺寸会减小，或者说图像中的白色区域会减小。这在去除小的白色噪音（正如我们在颜色空间章节看到的那样）、分离两个连接的物体等场合下非常有用。</p>
+<p>在这里，作为一个例子，我将使用一个5x5的全1内核。让我们看看它是如何工作的：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;j.png&#39;,0)</div><div class="line">kernel = np.ones((5,5),np.uint8)</div><div class="line">erosion = cv2.erode(img,kernel,iterations = 1)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/erosion.png" alt="image"/>
+</div>
+<h3>2. 膨胀</h3>
+<p>膨胀是的腐蚀的逆操作。如果内核下的至少一个像素是“1”，则该像素元素是“1”。所以它增加了图像中的白色区域或者说增加了前景物体的大小。</p>
+<p>通常情况下，在要消除噪音的情况下，会连着使用腐蚀和膨胀。因为腐蚀消除了白色的噪音，但它也缩小了我们的对象。所以我们要再对其进行膨胀。由于噪音已经消失了，他们不会再回来，但我们的对象面积会再增加回来。膨胀在连接对象的破碎部分时也很有用。</p>
+<div class="fragment"><div class="line">dilation = cv2.dilate(img,kernel,iterations = 1)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/dilation.png" alt="image"/>
+</div>
+<h3>3. 开启</h3>
+<p>开启只是腐蚀之后再膨胀的另一个名称。正如我们上面所解释的那样，它有助于消除噪音。这里我们使用函数<code>cv2.morphologyEx()</code>：</p>
+<div class="fragment"><div class="line">opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/opening.png" alt="image"/>
+</div>
+<h3>4. 闭合</h3>
+<p>闭合是开启的逆操作，先膨胀再腐蚀。在“闭合”前景物体上的小孔或物体上的小黑点时非常有用。</p>
+<div class="fragment"><div class="line">closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/closing.png" alt="image"/>
+</div>
+<h3>5. 形态学梯度</h3>
+<p>是一个图像的膨胀和侵蚀后的差值。</p>
+<p>结果将看起来像对象的轮廓。</p>
+<div class="fragment"><div class="line">gradient = cv2.morphologyEx（img，cv2.MORPH_GRADIENT，kernel）</div></div><!-- fragment --><p>结果：</p>
+<div class="image">
+<img src="../../images/gradient.png" alt="image"/>
+</div>
+<h3>6. 顶帽</h3>
+<p>是输入图像和开启后图像的差值。下面的例子是由9x9内核完成的。</p>
+<div class="fragment"><div class="line">tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</div></div><!-- fragment --><p>结果：</p>
+<div class="image">
+<img src="../../images/tophat.png" alt="image"/>
+</div>
+<h3>7. 黑帽</h3>
+<p>是输入图像和闭合后图像的差值。</p>
+<div class="fragment"><div class="line">blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</div></div><!-- fragment --><p>结果：</p>
+<div class="image">
+<img src="../../images/blackhat.png" alt="image"/>
+</div>
+<h2>结构元素</h2>
+<p>在Numpy的帮助下，我们在前面的例子中手动创建了一个结构元素。它是矩形的。但在某些情况下，您可能需要椭圆形/圆形的内核。为此，OpenCV有一个函数<code>cv2.getStructuringElement()</code>。你只需要传入所需内核的形状和大小，你会得到你要的内核。</p>
+<div class="fragment"><div class="line"># 矩形内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_RECT,(5,5))</div><div class="line">&gt;&gt;&gt; array([[1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1]], dtype=uint8)</div><div class="line"></div><div class="line"># 椭圆内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))</div><div class="line">&gt;&gt;&gt; array([[0, 0, 1, 0, 0],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [0, 0, 1, 0, 0]], dtype=uint8)</div><div class="line"></div><div class="line"># 十字形内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_CROSS,(5,5))</div><div class="line">&gt;&gt;&gt; array([[0, 0, 1, 0, 0],</div><div class="line">       [0, 0, 1, 0, 0],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [0, 0, 1, 0, 0],</div><div class="line">       [0, 0, 1, 0, 0]], dtype=uint8)</div></div><!-- fragment --><h2>更多资源</h2>
+<ul>
+<li><a href="http://homepages.inf.ed.ac.uk/rbf/HIPR2/morops.htm">形态学操作</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

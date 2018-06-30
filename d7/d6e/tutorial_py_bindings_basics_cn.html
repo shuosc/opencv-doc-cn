@@ -1,0 +1,238 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: OpenCV-Python绑定如何工作？</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/dbe/tutorial_py_table_of_contents_bindings_cn.html">OpenCV-Python 绑定</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">OpenCV-Python绑定如何工作？ </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>学习：</p>
+<ul>
+<li>如何OpenCV-Python绑定是如何生成的？</li>
+<li>如何扩展新的OpenCV模块到Python？</li>
+</ul>
+<h2>OpenCV-Python绑定是如何生成的？</h2>
+<p>在OpenCV中，所有的算法都是用C++实现的。但是这些算法可以在Python，Java等不同的语言中使用，这是通过绑定生成器实现的。这些生成器在C++和Python之间建立了桥梁，使用户可以从Python调用C++函数。为了全面了解后台发生的事情，需要熟悉Python/C API。有关将C++函数扩展到Python的一个简单示例，请参见Python官方文档。</p>
+<p>通过手动编写包装函数将OpenCV中的所有函数扩展为Python是一项非常耗时的任务。所以OpenCV以更智能的方式做到这一点。 OpenCV使用位于modules/python/src2中的一些Python脚本从C++头文件自动生成这些包装函数。我们会看看他们做了什么。</p>
+<p>首先，modules/python/CMakeFiles.txt是一个CMake脚本，用于检查要扩展到Python的模块。它会自动检查所有要扩展的模块并抓取它们的头文件。</p>
+<p>这些头文件包含特定模块的所有类，函数，常量等的列表。</p>
+<p>其次，这些头文件被传递给Python脚本modules/python/src2/gen2.py。这是Python绑定生成器脚本。它调用另一个Python脚本modules/python/src2/hdr_parser.py。</p>
+<p>这是头文件解析器脚本。这个头解析器将完整的头文件分割成小的Python列表。因此，这些列表包含关于特定函数，类等的所有细节。例如，函数将被解析以获取包含函数名称，返回类型，输入参数，参数类型等的列表。最终列表包含所有函数，结构，头文件中的类等。</p>
+<p>但是头文件解析器不会解析头文件中的所有函数/类。开发者必须指定哪些函数应该被导出到Python。为此，在这些声明的开始处添加了一些宏，使得头文件解析器能够识别要解析的函数。这些宏由编程特定功能的开发人员添加。总之，开发人员决定哪些功能应该扩展到Python，哪些不是。这些宏的细节将在下一章中提供。</p>
+<p>所以头解析器返回一个解析函数的最终大列表。我们的生成器脚本（gen2.py）将为头文件解析器分析的所有函数/类/枚举/结构创建包装函数（可以在编译过程中在build/modules/python/文件夹中找到这些头文件，如pyopencv_generated _*.h 文件）。但是可能会有一些基本的OpenCV数据类型，如Mat，Vec4i，Size。他们需要手动扩展。例如，Mat类型应该扩展为Numpy数组，Size应该扩展为两个整数的元组等等。类似地，可能有一些复杂的结构/类/函数等需要手动扩展。所有这些手动包装函数都放在modules/python/src2/cv2.cpp中。</p>
+<p>所以现在唯一剩下要做的事就是编译这些包装文件，它给了我们<code>cv2</code>模块。所以，当你在Python中调用一个函数，例如<code>res = equalizeHist(img1,img2)</code>，你传入了两个numpy数组，你期望另一个numpy数组作为输出。所以这些numpy数组被转换为<code>cv::Mat</code>，然后在C ++中调用<code>equalizeHist()</code>函数。最终的结果是，res会被转换回一个Numpy数组。所以简而言之，几乎所有的操作都是用C++来完成的，它的速度几乎和C++一样。</p>
+<p>所以这是如何生成OpenCV-Python绑定的基本版本。</p>
+<h2>如何扩展新的模块到Python？</h2>
+<p>头文件解析器根据添加到函数声明中的一些包装宏解析头文件。</p>
+<p>枚举常量不需要任何包装宏。他们被自动包装。但是剩下的函数，类等需要包装宏。</p>
+<p>函数使用<code>CV_EXPORTS_W</code>宏进行扩展。一个例子如下所示。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">CV_EXPORTS_W void equalizeHist( InputArray src, OutputArray dst );</div></div><!-- fragment --><p>头文件解析器可以理解InputArray，OutputArray等关键字的输入和输出参数。但有时，我们可能需要对输入和输出进行硬编码。为此，使用像<code>CV_OUT</code>，<code>CV_IN_OUT</code>等宏。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">CV_EXPORTS_W void minEnclosingCircle( InputArray points,</div><div class="line">                                     CV_OUT Point2f&amp; center, CV_OUT float&amp; radius );</div></div><!-- fragment --><p>对于大的Class，也使用<code>CV_EXPORTS_W</code>。为了扩展类方法，使用了<code>CV_WRAP</code>。</p>
+<p>同样，<code>CV_PROP</code>用于类字段。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">class CV_EXPORTS_W CLAHE : public Algorithm</div><div class="line">{</div><div class="line">public:</div><div class="line">    CV_WRAP virtual void apply(InputArray src, OutputArray dst) = 0;</div><div class="line"></div><div class="line">    CV_WRAP virtual void setClipLimit(double clipLimit) = 0;</div><div class="line">    CV_WRAP virtual double getClipLimit() const = 0;</div><div class="line">}</div></div><!-- fragment --><p>重载函数可以使用<code>CV_EXPORTS_AS</code>进行扩展。 但是我们需要传递一个新的名字，这样每个函数都会在Python中被这个名字所调用。 以下是<code>integral</code>函数的情况。 有三个函数可用，所以每个函数都用Python中的后缀命名。 同样，<code>CV_WRAP_AS</code>可以用来包装重载的方法。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">//! 计算图像积分</div><div class="line">CV_EXPORTS_W void integral( InputArray src, OutputArray sum, int sdepth = -1 );</div><div class="line"></div><div class="line">//! 计算平方图像的积分和原图像的积分</div><div class="line">CV_EXPORTS_AS(integral2) void integral( InputArray src, OutputArray sum,</div><div class="line">                                        OutputArray sqsum, int sdepth = -1, int sqdepth = -1 );</div><div class="line"></div><div class="line">//! 计算图像积分，平方图像积分和倾斜图像积分</div><div class="line">CV_EXPORTS_AS(integral3) void integral( InputArray src, OutputArray sum,</div><div class="line">                                        OutputArray sqsum, OutputArray tilted,</div><div class="line">                                        int sdepth = -1, int sqdepth = -1 );</div></div><!-- fragment --><p>小的类/结构体使用<code>CV_EXPORTS_W_SIMPLE</code>进行扩展。 这些结构被传递给C++函数。 例如<code>KeyPoint</code>，<code>Match</code>等。它们的方法由<code>CV_WRAP</code>扩展，字段由<code>CV_PROP_RW</code>扩展。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">class CV_EXPORTS_W_SIMPLE DMatch</div><div class="line">{</div><div class="line">public:</div><div class="line">    CV_WRAP DMatch();</div><div class="line">    CV_WRAP DMatch(int _queryIdx, int _trainIdx, float _distance);</div><div class="line">    CV_WRAP DMatch(int _queryIdx, int _trainIdx, int _imgIdx, float _distance);</div><div class="line"></div><div class="line">    CV_PROP_RW int queryIdx; // query descriptor index</div><div class="line">    CV_PROP_RW int trainIdx; // train descriptor index</div><div class="line">    CV_PROP_RW int imgIdx;   // train image index</div><div class="line"></div><div class="line">    CV_PROP_RW float distance;</div><div class="line">};</div></div><!-- fragment --><p>其他一些小的类/结构可以使用<code>CV_EXPORTS_W_MAP</code>导出到Python本地字典中。 <code>Moments()</code>就是一个例子。</p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">class CV_EXPORTS_W_MAP Moments</div><div class="line">{</div><div class="line">public:</div><div class="line">    //! 空间矩</div><div class="line">    CV_PROP_RW double  m00, m10, m01, m20, m11, m02, m30, m21, m12, m03;</div><div class="line">    //! 中心矩</div><div class="line">    CV_PROP_RW double  mu20, mu11, mu02, mu30, mu21, mu12, mu03;</div><div class="line">    //! 中心归一化矩</div><div class="line">    CV_PROP_RW double  nu20, nu11, nu02, nu30, nu21, nu12, nu03;</div><div class="line">};</div></div><!-- fragment --><p>所以这些是OpenCV中可用的主要扩展宏。 通常情况下，开发人员必须将适当的宏放在适当的位置。 剩余工作是由生成器脚本完成的。 有时候，可能会有一些例外的情况，即生成器脚本不能创建包装器。 这样的函数需要手动处理，为此请编写自己的pyopencv _*.hpp扩展头文件，并将它们放到模块的misc/python子目录中。 但是大多数情况下，根据OpenCV编码准则编写的代码将被生成器脚本自动包装。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

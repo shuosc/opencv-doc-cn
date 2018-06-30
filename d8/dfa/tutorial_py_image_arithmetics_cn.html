@@ -1,0 +1,240 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图像算术操作</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d0/d6b/tutorial_py_table_of_contents_core_cn.html">核心操作</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图像算术操作 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<ul>
+<li>学习几个图像算术操作，例如加、减、位操作等等。</li>
+<li>你会学到这些函数：<code>cv2.add()</code>、<code>cv2.addWeighted()</code>等等。</li>
+</ul>
+<h2>图片相加</h2>
+<p>你可以通过OpenCV函数<code>cv2.add()</code>将两个图像相加，或者简单地通过Numpy操作符<code>res = img1 + img2</code>将两个图像相加。这两个图像应该有相同的深度和类型，或者第二个“图像”也可以只是一个标量值。</p>
+<p>OpenCV加法和Numpy加法是有区别的。在结果超出数据范围时OpenCV加法执行一个饱和操作（即将结果限制到一定范围内），而Numpy加法执行一个模操作（即将结果对某个数取模）。</p>
+<p>例如，请考虑下面的示例：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; x = np.uint8([250])</div><div class="line">&gt;&gt;&gt; y = np.uint8([10])</div><div class="line"></div><div class="line">&gt;&gt;&gt; print( cv2.add(x,y) ) # 250 + 10 = 260 =&gt; 255</div><div class="line">&gt;&gt;&gt; [[255]]</div><div class="line"></div><div class="line">&gt;&gt;&gt; print( x+y )          # 250 + 10 = 260 % 256 = 4</div><div class="line">&gt;&gt;&gt; [4]</div></div><!-- fragment --><p>当你将两个图像相加时，区别会更加明显。 OpenCV函数将提供更好的结果。所以最好总是坚持使用OpenCV函数。</p>
+<h2>图像混合</h2>
+<p>这其实也是图像相加的一种，但所不同的是会对图像赋予不同的权重，以便体现出混合或透明的感觉。图像按照以下公式相加： $$ g(x)=(1-)f_{0}(x)+  f_{1}(x) $$</p>
+<p>通过将$$从$0  1$，你可以在两个图像之间执行一个很酷的转换。</p>
+<p>在这里，我把两个图像混合在一起。第一个图像的权重为0.7，第二个图像的权重为0.3。<code>cv2.addWeighted()</code>在图像上应用以下公式。 $$ dst =   img1 +   img2 +  $$</p>
+<p>在这里$$被视为零。</p>
+<div class="fragment"><div class="line">img1 = cv2.imread(&#39;ml.png&#39;)</div><div class="line">img2 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line"></div><div class="line">dst = cv2.addWeighted(img1,0.7,img2,0.3,0)</div><div class="line"></div><div class="line">cv2.imshow(&#39;dst&#39;,dst)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是运行结果：</p>
+<div class="image">
+<img src="../../images/blending.jpg" alt="image"/>
+</div>
+<h2>位操作</h2>
+<p>包括按位AND，OR，NOT和XOR操作。在提取图像的某个部分（正如我们将在后面的章节中看到的那样）或定义和处理非矩形的ROI等等的时候，它们将非常有用。下面我们将看到一个关于如何更改图像的特定区域的示例。</p>
+<p>我想把OpenCV标志放在图片的上方。如果我直接将两个图像相加，它会改变颜色。如果我把它混合，我会得到一个半透明的效果。但我希望它是不透明的。如果这是一个矩形区域，我可以像上一章那样使用ROI。但OpenCV标志不是矩形的。所以你需要通过位操作来完成，如下所示：</p>
+<div class="fragment"><div class="line"># 读入两张图片</div><div class="line">img1 = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">img2 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line"># 我想把图片放在左上角，所以我创建了一个ROI</div><div class="line">rows,cols,channels = img2.shape</div><div class="line">roi = img1[0:rows, 0:cols]</div><div class="line"># 现在创建一个标志的mask，同时也创建其反mask</div><div class="line">img2gray = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)</div><div class="line">ret, mask = cv2.threshold(img2gray, 10, 255, cv2.THRESH_BINARY)</div><div class="line">mask_inv = cv2.bitwise_not(mask)</div><div class="line"># 将ROI中的logo区域变黑</div><div class="line">img1_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)</div><div class="line"># 从logo的图片中获取logo</div><div class="line">img2_fg = cv2.bitwise_and(img2,img2,mask = mask)</div><div class="line"># 将logo放入ROI并修改原来的图片</div><div class="line">dst = cv2.add(img1bg,img2fg)</div><div class="line">img1[0:rows, 0:cols ] = dst</div><div class="line">cv2.imshow(&#39;res&#39;,img1)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是结果。左图显示了我们创建的mask。右图显示了最终结果。为了更好理解，在上面的代码显示了所有的中间图片，也就是<code>img1_bg</code>和<code>img2_fg</code>。</p>
+<div class="image">
+<img src="../../images/overlay.jpg" alt="image"/>
+</div>
+<h2>练习</h2>
+<ul>
+<li>使用<code>cv2.addWeighted()</code>函数，创建文件夹中图像的平滑过渡的幻灯片放映。 </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

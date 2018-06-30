@@ -1,0 +1,259 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: OpenCV中的绘图函数</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../db/d84/tutorial_py_table_of_contents_gui_cn.html">OpenCV中的GUI功能</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">OpenCV中的绘图函数 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<ul>
+<li>学习如何在OpenCV中绘制不同的几何图形</li>
+<li>你将会学到这些函数：<code>cv2.line()</code>、<code>cv2.circle()</code> 、<code>cv2.rectangle()</code>、<code>cv2.ellipse()</code>, <code>cv2.putText()</code>等</li>
+</ul>
+<h2>代码</h2>
+<p>在上面的所有函数中，您将看到如下所示的一些常见参数：</p>
+<ul>
+<li><code>img</code>：要在其上绘制图形的图像</li>
+<li><code>color</code>：图形的颜色。 对于BGR图像，将其作为元组传递，例如：（255,0,0）为蓝色。 对于灰度图像，只需传递标量值即可。</li>
+<li><code>thickness</code>：线或圆的粗细等。如果在绘制像圆这样的闭合图形时传递**-1**，将会填充满图形。 默认thickness = 1</li>
+<li><code>lineType</code>：线的类型，是否8-connected，反锯齿等。默认为8-connected。 <code>cv2.LINE_AA</code>表示反锯齿的曲线，效果看起来很棒。</li>
+</ul>
+<h3>绘制线条</h3>
+<p>要绘制线条，你需要向函数中传入线条的起始和结束坐标。 我们将创建一个黑色的图像，并从左上角到右下角画一条蓝线。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line"># 创建黑色图片</div><div class="line">img = np.zeros((512,512,3), np.uint8)</div><div class="line"></div><div class="line"># 绘制宽为5px的蓝色对角线</div><div class="line">cv2.line(img,(0,0),(511,511),(255,0,0),5)</div></div><!-- fragment --><h3>绘制矩形</h3>
+<p>要绘制矩形，需要向函数中传入矩形的左上角和右下角。 这一次，我们将在图像的右上角画一个绿色的矩形。</p>
+<div class="fragment"><div class="line">cv2.rectangle(img,(384,0),(510,128),(0,255,0),3)</div></div><!-- fragment --><h3>绘制圆</h3>
+<p>要绘制一个圆，您需要它的中心坐标和半径。 我们将在上面绘制的矩形内绘制一个圆。</p>
+<div class="fragment"><div class="line">cv2.circle(img,(447,63), 63, (0,0,255), -1)</div></div><!-- fragment --><h3>绘制椭圆</h3>
+<p>为了绘制椭圆，我们需要传递几个参数。 第一个参数是中心位置(x,y)。</p>
+<p>第二个参数是轴长度：(长轴长度,短轴长度)。 <code>angle</code>是逆时针方向的椭圆的旋转角度。 <code>startAngle</code>和<code>endAngle</code>表示从长轴顺时针方向测量的椭圆弧的起点和终点。 输入0和360将给出完整的椭圆。 有关更多详细信息，请查看<code>cv2.ellipse()</code>的文档。 下面的示例在图像的中心绘制一个只有一半的椭圆。</p>
+<div class="fragment"><div class="line">cv2.ellipse(img,(256,256),(100,50),0,0,180,255,-1)</div></div><!-- fragment --><h3>绘制多边形</h3>
+<p>要绘制多边形，首先需要将各个顶点的坐标传入函数。 将这些点转换为ROWSx1x2形状的数组，其中ROWS是顶点数，这个数组应该是int32类型的。 在这里，我们绘制了一个黄色四个顶点的小多边形。</p>
+<div class="fragment"><div class="line">pts = np.array([[10,5],[20,30],[70,20],[50,10]], np.int32)</div><div class="line">pts = pts.reshape((-1,1,2))</div><div class="line">cv2.polylines(img,[pts],True,(0,255,255))</div></div><!-- fragment --><p>如果第三个参数是False，你将会得到一个连接所有点的多段线，而不是一个闭合的形状。</p>
+<p><code>cv2.polylines()</code>可以用来绘制多段线。 只要创建一个你想绘制的所有线的列表，并将其传递给函数。 所有线路都将被单独绘制。 绘制一组线比每段线都调用一次<code>cv2.line()</code>要快得多。</p>
+<h3>向图片中增加文字</h3>
+<p>要在图像中放置文本，您需要指定以下内容。</p>
+<ul>
+<li>你想写的文本数据</li>
+<li>要放置的位置坐标（文字位置的左下角）。</li>
+<li>字体类型（阅读<code>cv2.putText()</code>文档来查看支持的字体）</li>
+<li>字体大小</li>
+<li>常规的东西，如颜色，厚度，线型等。为了更好的显示效果，推荐使用<code>lineType = cv2.LINE_AA</code>。</li>
+</ul>
+<p>我们将在图像上写下白色的**OpenCV**。</p>
+<div class="fragment"><div class="line">font = cv2.FONT_HERSHEY_SIMPLEX</div><div class="line">cv2.putText(img,&#39;OpenCV&#39;,(10,500), font, 4,(255,255,255),2,cv2.LINE_AA)</div></div><!-- fragment --><h3>结果</h3>
+<p>是时候来看看我们绘图的最终结果了。 利用您在之前的文章中所学的知识，显示图像来查看它。</p>
+<div class="image">
+<img src="../../images/drawing_result.jpg" alt="image"/>
+</div>
+<h2>更多资源</h2>
+<ul>
+<li>椭圆函数中使用的角度和通常理解的角度有所不同。 有关更多详细信息，请访问<a href="http://answers.opencv.org/question/14541/angles-in-ellipse-function/">此讨论</a>。</li>
+</ul>
+<h2>练习</h2>
+<ul>
+<li>试着用OpenCV中的绘图函数画一个OpenCV的图标。 </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

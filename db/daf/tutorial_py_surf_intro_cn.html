@@ -1,0 +1,250 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 介绍SURF（加速稳健特征）</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">介绍SURF（加速稳健特征） </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中，</p>
+<ul>
+<li>我们将学习SURF的基础知识</li>
+<li>我们将学习OpenCV中的SURF</li>
+</ul>
+<h2>理论基础</h2>
+<p>在上一章中，我们学习了SIFT的关键点检测和描述。 但是速度比较慢，人们需要更加快速的算法。 2006年，Bay, H. , Tuytelaars, T. 和 Van Gool, L,三人发表了另一篇名为《SURF: Speeded Up Robust Features》<a href="http://www.vision.ee.ethz.ch/~surf/eccv06.pdf">^1</a>的论文，其中介绍了一种名为SURF的新算法。 顾名思义，这是SIFT的加速版本。</p>
+<p>在SIFT中，Lowe 用高斯差分来近似拉普拉斯高斯算子来寻找尺度空间。 SURF走得更远一点，用盒式滤波器逼近LoG。 下图是这种近似的演示。 这种近似的一大优点是，利用积分图像可以容易地计算与盒式滤波器的卷积。 它可以在不同的尺度上并行完成。 SURF依赖于Hessian矩阵的行列式和位置的行列式。</p>
+<div class="image">
+<img src="../../images/surf_boxfilter.jpg" alt="image"/>
+</div>
+<p>对于方向分配，SURF使用水平和垂直方向的小波响应来确定6s的邻域。 适当的高斯权值也适用于它。 然后将它们绘制在下图中给出的空间中。 通过计算在角度60度的滑窗内的所有响应的总和来估计主导方向。 有趣的是，可以很容易地在任何尺度上使用积分图像找出小波响应。 对于许多应用来说，旋转不变是不需要的，所以不需要找到这个方向，这就加快了这个过程。 SURF提供了称为Upright-SURF或U-SURF的功能。 它提高了速度，并且在$ 15^{}$之中稳健的。 OpenCV两种都支持，取决于标志，<code>upright</code>。 如果是0，则计算方向。 如果是1，则不计算方向，速度更快。</p>
+<div class="image">
+<img src="../../images/surf_orientation.jpg" alt="image"/>
+</div>
+<p>对于特征描述，SURF使用水平和垂直方向的小波响应（再一次地，我们使用积分图像使其更容易）。 大小为20s×20s的邻域是围绕s的大小的关键点。 它被分为4x4个分区域。 对于每个子区域，采取水平和垂直小波响应，并且形成像这样的矢量，</p>
+<p>$$ v=( {d_x}， {d_y}， {| d_x |}， {| d_y |}) $$ 这表示为一个向量，SURF特征描述符总共有64个维度。 维度越低，计算和匹配的速度越高，也能提供更好的特征的独特性。</p>
+<p>为了更好的独特性，SURF特征描述符具有扩展的128维版本。   $d_y &lt;0$和$d_y 0$对应的$d_x$和$|d_x|$的总和被分别计算出来。 类似地，$d_y$和$|d_y|$的总和也按照$d_x$的符号进行分割，从而使特征的数量加倍。 它不会增加太多的计算复杂性。 OpenCV支持通过设置标志<code>extended</code>的值分别为0和1，来分别表述使用64-dim和128-dim的SURF描述符（默认为128-dim）。</p>
+<p>另一个重要的改进是使用拉普拉斯符号（Hessian矩阵的转置）作为潜在兴趣点。 它不会增加计算成本，因为它在检测期间已经被计算。 拉普拉斯的标志在黑暗的背景下将明亮的斑点与相反的情况区分开来。 在匹配阶段，我们只比较具有相同类型对比度的特征（如下图所示）。 这个最小的信息允许更快的匹配，而不降低描述符的性能。</p>
+<div class="image">
+<img src="../../images/surf_matching.jpg" alt="image"/>
+</div>
+<p>总之，SURF增加了很多功能来提高每一步的速度。 分析显示，它比SIFT快3倍，而性能与SIFT相当。 SURF擅长处理模糊和旋转的图像，但不擅长处理视点变化和光照变化。</p>
+<h2>OpenCV中的SURF</h2>
+<p>OpenCV的SURF功能就像SIFT一样。你用一些可选的条件来初始化一个SURF对象，比如64/128-dim描述符，Upright/Normal SURF等等。所有的细节在文档中都有很好的解释。 然后就像我们在SIFT中所做的那样，我们可以使用<code>SURF.detect()</code>，<code>SURF.compute()</code>等来查找关键点和描述符。</p>
+<p>首先，我们将看到一个关于如何找到SURF关键点和描述符并绘制的简单演示。</p>
+<div class="fragment"><div class="line">img = cv2.imread(&#39;fly.png&#39;,0)</div><div class="line"># 创建一个SURF对象。你可以就在这里写明参数或者等以后再写</div><div class="line"># 这里我们设置Hessian阈值为400</div><div class="line">surf = cv2.xfeatures2d.SURF_create(400)</div><div class="line"># 直接寻找关键点和描述符</div><div class="line">kp, des = surf.detectAndCompute(img,None)</div><div class="line">len(kp) # 699</div></div><!-- fragment --><p>在图片中显示1199个关键点显得有些太多了。我们把这一数字减小到50。</p>
+<div class="fragment"><div class="line"># 检测现有的Hessian阈值</div><div class="line">print(surf.getHessianThreshold()) # 400.0</div><div class="line"># 我们将其设置为50000</div><div class="line"># 这仅仅是为了显示方便</div><div class="line"># 在实际使用中，这个值最好是300-500中的一个值</div><div class="line">surf.setHessianThreshold(50000)</div><div class="line"># 重新计算关键点和描述符</div><div class="line">kp, des = surf.detectAndCompute(img,None)</div><div class="line">print(len(kp)) # 47</div></div><!-- fragment --><p>小于50个，我们可以在图上把它画出来了。</p>
+<div class="fragment"><div class="line">img2 = cv2.drawKeypoints(img,kp,None,(255,0,0),4)</div><div class="line">plt.imshow(img2)</div><div class="line">plt.show()</div></div><!-- fragment --><p>看下面的结果，你可以看出SURF更像一个斑点检测器。它检测出了蝴蝶翅膀上的白色斑点。你可以在其他图片上尝试一下。</p>
+<div class="image">
+<img src="../../images/surf_kp1.jpg" alt="image"/>
+</div>
+<p>现在我们想要使用U-SURF，这样找到的特征就不会包含方向信息了。</p>
+<div class="fragment"><div class="line"># 检查upright标志，如果它是False，置为True</div><div class="line">print(surf.getUpright()) # False</div><div class="line">surf.setUpright(True)</div><div class="line"># 重新计算关键点和描述符，并绘制图像</div><div class="line">kp = surf.detect(img,None)</div><div class="line">img2 = cv2.drawKeypoints(img,kp,None,(255,0,0),4)</div><div class="line">plt.imshow(img2)</div><div class="line">plt.show()</div></div><!-- fragment --><p>看看下面的结果。所有的方向都指向了同一方向。这样做大大加快了速度。如果对于你现在在做的事来说方向不那么重要（全景拼接等），这么做更好。</p>
+<div class="image">
+<img src="../../images/surf_kp2.jpg" alt="image"/>
+</div>
+<p>最后，我们检测描述符的大小，如果是64-dim的，就将其更改为182-dim。</p>
+<div class="fragment"><div class="line"># 检测描述符大小</div><div class="line">print(surf.descriptorSize()) # 64</div><div class="line"># 这意味着“extended”标志是False</div><div class="line">surf.getExtended() # False</div><div class="line"># 我们将其置为True来获得128-dim的描述符。</div><div class="line">surf.extended = True</div><div class="line">kp, des = surf.detectAndCompute(img,None)</div><div class="line">print(surf.descriptorSize()) # 128</div><div class="line">print(des.shape) # (47, 128)</div></div><!-- fragment --><p>接下来要做的事就是匹配特征点了，我们将在另外一章中讲述相关内容。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

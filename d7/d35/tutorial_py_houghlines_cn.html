@@ -1,0 +1,259 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 霍夫直线变换</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">霍夫直线变换 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>我们将理解霍夫变换的概念。</li>
+<li>我们将看到如何使用它来检测图像中的线条。</li>
+<li>我们将看到以下函数：<code>cv2.HoughLines()</code>，<code>cv2.HoughLinesP()</code></li>
+</ul>
+<h2>理论基础</h2>
+<p>霍夫变换是一种用来检测形状的流行的技术，如果你能以数学形式来表示这种形状的话。它可以检测到形状，即使它被破坏或扭曲了一点。我们将看到它是如何检测出一条线。</p>
+<p>一条线可以表示为$y = mx+c$，或以参数方程表示，$ = x   + y  $其中$$是从原点到线的垂直距离，$$是这根直线与水平轴所形成的角度，角度是逆时针测量的（这个方向随您如何表示坐标系而变化，上面说的这个表示方法在OpenCV中使用）。检查下面的图像：</p>
+<div class="image">
+<object type="image/svg+xml" data="../../images/houghlines1.svg" alt="image"></object>
+</div>
+<p>所以如果这条线在原点以下经过，它将有一个正的$$和一个小于180的角度。如果它在原点以上，这里不取大于180的角度，而是仍然取一个小于180的角度，但$$取负值。垂直线是0度，水平线是90度。</p>
+<p>现在让我们来看看霍夫变换是如何工作的。任何一条线都可以用这两个值来表示$(, )$。所以首先创建一个二维数组或者说累加器（来保存这两个参数的值），并将其设置为0。让行表示$$，而列表示$$。数组的大小取决于你需要的精度。假设你想要角度的准确度是1度，你将需要180列。对于$$，可能的最大距离是图像的对角线长度。因此，以精度为一个像素为例，行数可以是图像的对角线长度。</p>
+<p>考虑在水平线中间的100x100图像。看线上的第一点。你知道它的$(x,y)$值。现在在行方程中，把值$ = 0,1,2，…，180$带入，并检查你得到的$$。对于每个$(,)$对，您在我们的累加器中的相应$(,)$单元格中将值递增1。所以现在在累加器中，单元$(50,90)= 1$。</p>
+<p>现在看线上的第二点。像上面一样做。递增对应于$(,)$的单元格中的值。这一次，单元格$(50,90)= 2$。你实际上做的是对$(,)$值投票。继续对每一个点应用这个操作。在每个点上，单元格(50,90)的票数都会递增，而其他单元格可能会被投票或者不投票。这样，最后，单元（50,90）将获得最多的选票。因此，如果您搜索累加器获得最大的选票，您将得到值（50,90），即在该图像中距离原点50度，角度90度处有一条线。它在下面的动画中很好地显示（图片提供者：<a href="http://homepages.inf.ed.ac.uk/amos/hough.html">Amos Storkey</a>）</p>
+<div class="image">
+<img src="../../images/houghlinesdemo.gif"/>
+</div>
+<p>这就是霍夫变换对线条的工作原理。这很简单，也许你可以使用Numpy自己实现它。以下是显示累加器的图像。某些位置的亮点表示它们是图像中可能线条的参数。 （图片提供者： <a href="http://en.wikipedia.org/wiki/Hough_transform">维基百科</a>）</p>
+<div class="image">
+<img src="../../images/houghlines2.jpg"/>
+</div>
+<h2>OpenCV中的霍夫变换</h2>
+<p>上面解释的一切都封装在OpenCV函数<code>cv2.HoughLines()</code>)中。它只是返回一个数组的$(, )$。 $$以像素为单位进行测量，$$以弧度测量。第一个参数是输入图像，应该是一个二值图像，所以在应用霍夫变换之前应用阈值或者使用canny边缘检测。第二和第三个参数分别是$$和$$精度。第四个参数是阈值，这意味着被视为一条线所需要的最低的投票。记住，得票数取决于线上的点数。所以它代表了应该检测到的线的最小长度。</p>
+<div class="fragment"></div><!-- fragment --><p>下面是结果：</p>
+<div class="image">
+<img src="../../images/houghlines3.jpg" alt="image"/>
+</div>
+<h2>概率霍夫变换</h2>
+<p>在霍夫变换中，即使对于有两个参数的行，也可以看到很多计算。概率霍夫变换是我们看到的霍夫变换的一个优化。它没有考虑到所有的要点。相反，它只需要一个随机子集，足以进行在线检测。只是我们必须降低门槛。请参阅下面的图像，比较霍夫空间中的霍夫变换和概率霍夫变换。 （图片提供者：<a href="http://phdfb1.free.fr/robot/mscthesis/node14.html">Franck Bettinger的主页</a>）</p>
+<div class="image">
+<img src="../../images/houghlines4.png" alt="image"/>
+</div>
+<p>OpenCV的实现是基于Robust Detection of Lines Using the Progressive Probabilistic Hough Transform by Matas, J. and Galambos, C. and Kittler, J.V. <b>[Matas00.。使用的函数是]</b><code>cv2.HoughLinesP()</code>。它有两个新的参数。</p>
+<ul>
+<li><b>minLineLength</b> - 行的最小长度。比这更短的线段被拒绝。</li>
+<li><b>maxLineGap</b> - 线段之间允许的最大间隔来处理它们</li>
+</ul>
+<p>最好事情的是，它直接返回行的两个端点。 在前面的例子中，你只有线的参数，你必须找到所有的点。 在这里，一切都是直接和简单的。</p>
+<div class="fragment"></div><!-- fragment --><p>看下面的结果：</p>
+<div class="image">
+<img src="../../images/houghlines5.jpg" alt="image"/>
+</div>
+<h2>更多资源</h2>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/霍夫变换">Wikipedia上的霍夫变换</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

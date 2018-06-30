@@ -1,0 +1,262 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图像去噪</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d6/d6d/tutorial_py_table_of_contents_photo_cn.html">计算摄影学</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图像去噪 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>您将了解非局部均值消噪算法，以消除图像中的噪声。</li>
+<li>你会看到几个不同的函数，如<code>cv2.fastNlMeansDenoising()</code>， <code>cv2.fastNlMeansDenoisingColored()</code>等</li>
+</ul>
+<h2>理论基础</h2>
+<p>在前面的章节中，我们看到了许多像高斯模糊，中值模糊等图像平滑技术，它们在一定程度上消除了少量的噪声。在这些技术中，我们在像素周围采取了一个小的邻域，并进行了一些像高斯加权平均值，取中位数等操作，用结果来代替中心元素。总之，一个像素处的噪声消除被限制在其邻域内。</p>
+<p>噪声有一个属性。噪声通常被认为是零均值的随机变量。考虑有噪声的像素，$p = p_0 + n$，其中$p_0$是像素的真实值，$n$是该像素中的噪声。您可以从不同的图像中获取大量相同的像素（比如说$N$个）并计算它们的平均值。理想情况下，你应该得到$p = p_0$，因为噪声的均值为零。</p>
+<p>您可以通过简单的设置自行验证。拿一个静态摄像头，将它放在一个特定的位置几秒钟。这会给你很多的帧，或者是同一场景的很多图像。然后写一段代码找到视频中所有帧的平均值（现在这对你来说应该太简单了）。比较最终结果和第一帧。你可以看到噪声的减少。不幸的是，这种简单的方法不适用于相机和场景的运动。同时往往也只有一幅嘈杂的图像可用。</p>
+<p>所以想法很简单，我们需要一组相似的图像来平均噪音。考虑图像中的一个小窗口（比如5x5窗口）。相同的图像片很有可能在图像中的其他地方。有时在一个小的领域周围。如何将这些相似的图像片一起使用并找到它们的平均值？对于特定的窗口，这样做效果很好。看下面的示例图片：</p>
+<div class="image">
+<img src="../../images/nlm_patch.jpg" alt="image"/>
+</div>
+<p>图像中的蓝色图像块看起来相似。绿色图像块看起来相似。所以我们取一个像素，取围绕它周围的小窗口，在图像中搜索相似的窗口，平均所有的窗口，并用我们得到的结果取代像素。这种方法是非局部的去噪。与我们之前看到的模糊技术相比，它需要更多的时间，但是结果非常好。更多的细节和在线演示可以在更多资源的第一个链接。</p>
+<p>对于彩色图像，图像将会转换为CIELAB色彩空间，然后分别去除L和AB分量。</p>
+<h2>OpenCV中的图像去噪</h2>
+<p>OpenCV提供了这种技术的四种变体。</p>
+<ul>
+<li><code>cv2.fastNlMeansDenoising()</code> - 适用于单个灰度图像</li>
+<li><code>cv2.fastNlMeansDenoisingColored()</code>- 适用于彩色图像。</li>
+<li><code>cv2.fastNlMeansDenoisingMulti()</code> - 适用于短时间捕获的图像序列（灰度图像）</li>
+<li><code>cv2.fastNlMeansDenoisingColoredMulti()</code> - 与上面相同，但是是彩色图像。</li>
+</ul>
+<p>它们共同的参数是：</p>
+<ul>
+<li><code>h</code>：参数决定滤波强度。较高的h值可以更好地去除噪点，但也会去除图像的细节。 （一般来说10是一个好的值）</li>
+<li><code>hForColorComponents</code>：与h相同，但仅适用于彩色图像。 （通常与h相同）</li>
+<li><code>templateWindowSize</code>：应该是奇数。 （推荐7）</li>
+<li><code>searchWindowSize</code>：应该是奇数。 （推荐21）</li>
+</ul>
+<p>有关这些参数的更多详细信息，请访问更多资源的第一个链接。</p>
+<p>我们将在这里展示2和3。其他留给你。</p>
+<h3>1. <code>cv2.fastNlMeansDenoisingColored()</code></h3>
+<p>如上所述，它用于去除彩色图像中的噪声。 （噪音预计是高斯噪声）。</p>
+<p>看下面的例子：</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;die.png&#39;)</div><div class="line">dst = cv2.fastNlMeansDenoisingColored(img,None,10,10,7,21)</div><div class="line">plt.subplot(121),plt.imshow(img)</div><div class="line">plt.subplot(122),plt.imshow(dst)</div><div class="line">plt.show()</div></div><!-- fragment --><p>以下是结果缩放过的版本。 我的输入图像具有$ = 25$的高斯噪声。查看结果：</p>
+<div class="image">
+<img src="../../images/nlm_result1.jpg" alt="image"/>
+</div>
+<h3>2. <code>cv2.fastNlMeansDenoisingMulti()</code></h3>
+<p>现在我们将对视频使用相同的方法。 第一个参数是有噪声的帧的列表。 第二个参数<code>imgToDenoiseIndex</code>指定我们需要去噪的帧，因为我们在输入列表中传递了帧的索引。 第三个是<code>temporalWindowSize</code>，它指定了用于去噪的附近帧的数量。 这应该是个奇数。 在那种情况下，总共使用<code>temporalWindowSize</code>帧，其中中央帧是要被去噪的帧。 例如，您传递了5个框架的列表作为输入。 让<code>imgToDenoiseIndex = 2</code>和<code>temporalWindowSize = 3</code>。那么将会使用frame-1，frame-2和frame-3来消除frame-2中的噪声。 我们来看一个例子。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;vtest.avi&#39;)</div><div class="line"></div><div class="line"># 创建一个有5个帧的列表</div><div class="line">img = [cap.read()[1] for i in xrange(5)]</div><div class="line"></div><div class="line"># 全部转换到灰度图</div><div class="line">gray = [cv2.cvtColor(i, cv2.COLOR_BGR2GRAY) for i in img]</div><div class="line"></div><div class="line"># 全部转换到float64</div><div class="line">gray = [np.float64(i) for i in gray]</div><div class="line"></div><div class="line"># 创建一个标准差为25的噪声</div><div class="line">noise = np.random.randn(*gray[1].shape)*10</div><div class="line"></div><div class="line"># 向图像中添加噪声</div><div class="line">noisy = [i+noise for i in gray]</div><div class="line"></div><div class="line"># 转回uint8</div><div class="line">noisy = [np.uint8(np.clip(i,0,255)) for i in noisy]</div><div class="line"></div><div class="line"># 使用全部5帧来为第三帧去噪</div><div class="line">dst = cv2.fastNlMeansDenoisingMulti(noisy, 2, 5, None, 4, 7, 35)</div><div class="line"></div><div class="line">plt.subplot(131),plt.imshow(gray[2],&#39;gray&#39;)</div><div class="line">plt.subplot(132),plt.imshow(noisy[2],&#39;gray&#39;)</div><div class="line">plt.subplot(133),plt.imshow(dst,&#39;gray&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>下图显示了我们得到的结果的缩放版本：</p>
+<div class="image">
+<img src="../../images/nlm_multi.jpg" alt="image"/>
+</div>
+<p>计算需要相当长的时间。 在结果图像中，第一个图像是原始图像，第二个图像是添加了噪声的图像，第三个图像是去噪后的图像。</p>
+<h2>更多资源</h2>
+<ul>
+<li><a href="http://www.ipol.im/pub/art/2011/bcm_nlm/">http://www.ipol.im/pub/art/2011/bcm_nlm/</a>（详细信息，在线演示等，强烈建议访问，我们的测试图像是从这个链接生成的）</li>
+<li><a href="https://www.coursera.org/course/images">coursera的在线课程</a>（第一张图片是从这里获得的） </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

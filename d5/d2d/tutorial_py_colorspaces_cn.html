@@ -1,0 +1,242 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 更换颜色空间</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">更换颜色空间 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<ul>
+<li>在这一教程中，你将会学到如何将图像从一个颜色空间变换到另外一个，像BGR $$ Gray, BGR $$ HSV等等。</li>
+<li>另外，我们还将编写一个程序来从一段视频中提取出一个有颜色的物体。</li>
+<li>你会学到这些函数：<code>cv2.cvtColor()</code>、<code>cv2.inRange()</code>等等。</li>
+</ul>
+<h2>更换颜色空间</h2>
+<p>OpenCV中有150多种颜色空间转换方法。 但是我们只会详细研究最广泛使用的两个，BGR $$ Gray和BGR $$ HSV。</p>
+<p>要颜色转换，我们可以使用函数<code>cv2.cvtColor(input_image,flag)</code>，其中<code>flag</code>确定了转换的类型。</p>
+<p>对于BGR $$Gray转换，我们使用flag<code>cv2.COLOR_BGR2GRAY</code>。 同样对于BGR$$HSV，我们使用flag<code>cv2.COLOR_BGR2HSV</code>。 要获得其他flag，只需在Python控制台中运行以下命令：</p>
+<div class="fragment"><div class="line">&gt;&gt; import cv2</div><div class="line">&gt;&gt; flags = [i for i in dir(cv2) if i.startswith(&#39;COLOR_&#39;)]</div><div class="line">&gt;&gt; print( flags )</div></div><!-- fragment --><p>对于HSV，色调范围是[0,179]，饱和度范围是[0,255]，色值范围是[0,255]。</p>
+<p>不同的软件使用不同的比例。 因此，如果你正在将OpenCV得到的值和它们的值比较，你需要规范化这些范围。</p>
+<h2>物体追踪</h2>
+<p>现在我们知道如何将BGR图像转换为HSV了，我们可以使用这个方法来提取一个有色物体。 在HSV颜色空间中，表现颜色比在BGR颜色空间中更容易。 在我们的应用程序中，我们将尝试提取一个蓝色的对象。 下面是方法：</p>
+<ul>
+<li>得到视频的每一帧</li>
+<li>从BGR转换到HSV色彩空间</li>
+<li>我们将HSV图像限定为（一定范围内的）蓝色</li>
+<li>现在单独提取蓝色的对象，我们可以对任何我们想要的图像这样做。</li>
+</ul>
+<p>下面是有详细注释的代码：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(0)</div><div class="line"></div><div class="line">while(1):</div><div class="line">    # 获取每一帧</div><div class="line">    _, frame = cap.read()</div><div class="line">    # BGR转HSV</div><div class="line">    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">    # 在HSV空间中定义蓝色</div><div class="line">    lower_blue = np.array([110,50,50])</div><div class="line">    upper_blue = np.array([130,255,255]) </div><div class="line">    # 从HSV图片中截取出蓝色</div><div class="line">    mask = cv2.inRange(hsv, lower_blue, upper_blue)</div><div class="line">    # 将原图像和mask进行按位与</div><div class="line">    res = cv2.bitwise_and(frame,frame, mask= mask)</div><div class="line">    cv2.imshow(&#39;frame&#39;,frame)</div><div class="line">    cv2.imshow(&#39;mask&#39;,mask)</div><div class="line">    cv2.imshow(&#39;res&#39;,res)</div><div class="line">    k = cv2.waitKey(5) &amp; 0xFF</div><div class="line">    if k == 27:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面的图片展示了追踪蓝色的物体的结果：</p>
+<div class="image">
+<img src="../../images/frame.jpg" alt="image"/>
+</div>
+<p>图像中有一些噪音。 我们将在后面的章节中看到如何移除它们。</p>
+<p>这是对象跟踪中最简单的方法。 一旦你学习了如何找到轮廓，你可以做很多事情，如找到这个对象的质心，并使用它来跟踪对象，在相机前面移动你的手来绘制图表等，还有许多其他有趣的东西可以做。</p>
+<h2>如何找到要跟踪的HSV值？</h2>
+<p>这是<a href="http://www.stackoverflow.com">stackoverflow.com</a>上的常见问题。 这非常简单，你可以使用相同的函数<code>cv2.cvtColor()</code>。 您只需传递您想要的BGR值，而不是传递图像。 例如，要查找Green的HSV值，试试看在Python控制台中执行以下命令：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; green = np.uint8([[[0,255,0 ]]])</div><div class="line">&gt;&gt;&gt; hsv_green = cv2.cvtColor(green,cv2.COLOR_BGR2HSV)</div><div class="line">&gt;&gt;&gt; print( hsv_green ) # [[[ 60 255 255]]]</div></div><!-- fragment --><p>现在分别取[H-10,100,100]和[H + 10,255,255]作为下限和上限。 除了这种方法以外，你可以使用任何图像编辑工具，如GIMP或任何在线转换器来找到这些值，但不要忘记调整HSV范围。</p>
+<h2>练习</h2>
+<p>尝试找到一种方法来提取多个有色物体，例如，同时提取红色，蓝色，绿色物体。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

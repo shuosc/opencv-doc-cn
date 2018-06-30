@@ -1,0 +1,248 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 对图像进行几何变换</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">对图像进行几何变换 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<ul>
+<li>学习对图像应用不同的几何变换，如平移，旋转，仿射变换等。</li>
+<li>你会学到这些函数：<code>cv2.getPerspectiveTransform</code></li>
+</ul>
+<h2>变换</h2>
+<p>OpenCV提供了两个转换函数，<code>cv2.warpAffine</code>和<code>cv2.warpPerspective</code>，可以进行各种变换。 <code>cv2.warpAffine</code>采用2x3变换矩阵，而<code>cv2.warpPerspective</code>采用3x3变换矩阵作为输入。</p>
+<h3>缩放</h3>
+<p>缩放只是调整图像的大小。 OpenCV为此提供了一个函数<code>cv2.resize()</code>。 图像的大小可以手动指定，也可以指定比例因子。</p>
+<p>可以使用不同的插值方法。 优选的插值方法是用<code>cv2.INTER_AREA</code>来缩小图像，用<code>cv2.INTER_CUBIC</code>（慢）和用<code>cv2.INTER_LINEAR</code>来放大图像。 默认情况下，所有调整大小的插值方法都是<code>cv2.INTER_LINEAR</code>。 您可以使用以下方法调整输入图像大小：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">res = cv2.resize(img,None,fx=2, fy=2, interpolation = cv2.INTER_CUBIC)</div><div class="line"># 或者</div><div class="line">height, width = img.shape[:2]</div><div class="line">res = cv2.resize(img,(2*width, 2*height), interpolation = cv2.INTER_CUBIC)</div></div><!-- fragment --><h3>平移</h3>
+<p>平移就是移动对象的位置。 如果你知道了$(x,y)$方向上移动的距离是$(t_x,t_y)$，则可以创建如下的变换矩阵$ {M}$：</p>
+<p>$$  M = {bmatrix} 1 &amp; 0 &amp; t_x \ 0 &amp; 1 &amp; t_y {bmatrix} $$</p>
+<p>你可以把它变成<code>np.float32</code>类型的Numpy数组，并将它传递给<code>cv2.warpAffine()</code>函数。 下面是移动$(100,50)$的例子：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">rows,cols = img.shape</div><div class="line">M = np.float32([[1,0,100],[0,1,50]])</div><div class="line">dst = cv2.warpAffine(img,M,(cols,rows))</div><div class="line">cv2.imshow(&#39;img&#39;,dst)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p><b>警告</b></p>
+<p><code>cv2.warpAffine()</code>函数的第三个参数是输出图像的大小，它应该是&lt;tt&gt;(width,height)的形式。 其中width是列数，height是行数。</p>
+<p>下面是平移的结果：</p>
+<div class="image">
+<img src="../../images/translation.jpg" alt="image"/>
+</div>
+<h3>旋转</h3>
+<p>通过如下形式的变换矩阵来实现旋转角度为$$的图像旋转: $$ M = {bmatrix} cos &amp; -sin \ sin &amp; cos {bmatrix} $$ OpenCV提供了可调整旋转中心的缩放旋转，以便您可以在任何您喜欢的位置旋转。 修改后的变换矩阵由下式给出： $$ {bmatrix}  &amp;   &amp; (1-  )   center.x -    center.y \ -  &amp;   &amp;    center.x + (1-  )   center.y {bmatrix} \ where \ {array}{l}  = scale    , \  = scale    {array} $$ 为了找到这个转换矩阵，OpenCV提供了一个函数cv2.getRotationMatrix2D。 请看下面的例子，它将图像相对于中心旋转90度，而没有任何缩放。</p>
+<h3>仿射变换</h3>
+<p>在仿射变换中，原始图像中的所有平行线在输出图像中仍然是平行的。 为了找到变换矩阵，我们需要输入图像中的三个点和它们在输出图像中的相应位置。 然后<code>cv2.getAffineTransform</code>将创建一个2x3矩阵，将其传递给<code>cv2.warpAffine</code>。</p>
+<p>看下面的例子，并且可以看看我选择的点（用绿色标记）：</p>
+<div class="fragment"><div class="line">img = cv2.imread(&#39;drawing.png&#39;)</div><div class="line">rows,cols,ch = img.shape</div><div class="line">pts1 = np.float32([[50,50],[200,50],[50,200]])</div><div class="line">pts2 = np.float32([[10,100],[200,50],[100,250]])</div><div class="line">M = cv2.getAffineTransform(pts1,pts2)</div><div class="line">dst = cv2.warpAffine(img,M,(cols,rows))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Input&#39;)</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Output&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
+<div class="image">
+<img src="../../images/affine.jpg" alt="image"/>
+</div>
+<h3>透视变换</h3>
+<p>对于透视变换，您需要一个3x3变换矩阵。 即使在变换之后，直线仍为直线。 要找到这个变换矩阵，你需要输入图像上的4个点和输出图像上的对应点。 在这4点中，不能有三点共线。 然后可以通过函数<code>cv2.getPerspectiveTransform</code>找到变换矩阵。 然后将<code>cv2.warpPerspective</code>应用于这个3x3转换矩阵。</p>
+<p>请看下面的代码：</p>
+<div class="fragment"><div class="line">img = cv2.imread(&#39;sudoku.png&#39;)</div><div class="line">rows,cols,ch = img.shape</div><div class="line">pts1 = np.float32([[56,65],[368,52],[28,387],[389,390]])</div><div class="line">pts2 = np.float32([[0,0],[300,0],[0,300],[300,300]])</div><div class="line">M = cv2.getPerspectiveTransform(pts1,pts2)</div><div class="line">dst = cv2.warpPerspective(img,M,(300,300))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Input&#39;)</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Output&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../images/perspective.jpg" alt="image"/>
+</div>
+<h2>更多资源</h2>
+<p><a href="https://books.google.com/books?hl=zh-CN&amp;lr=&amp;id=bXzAlkODwa8C&amp;oi=fnd&amp;pg=PR4&amp;dq=Computer+Vision:+Algorithms+and+Applications&amp;ots=g_Y470nDCF&amp;sig=iFX7bOCsAefVolxa9Yk0fIC-HQc#v=onepage&amp;q=Computer%20Vision%3A%20Algorithms%20and%20Applications&amp;f=false">Computer Vision: Algorithms and Applications</a> </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>
