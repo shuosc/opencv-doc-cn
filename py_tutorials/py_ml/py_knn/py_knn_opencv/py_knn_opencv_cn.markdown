@@ -1,6 +1,6 @@
-#使用kNN进行手写字符的OCR {#tutorial_py_knn_opencv_cn}
+# 使用kNN进行手写字符的OCR {#tutorial_py_knn_opencv_cn}
 
-##目标
+## 目标
 
 在这一章当中
 

@@ -2,6 +2,6 @@
 
 在这里，您将学到OpenCV-Python绑定是如何生成的。
 
-- @subpage tutorial_py_bindings_basics
+- @subpage tutorial_py_bindings_basics_cn
 
   了解如何OpenCV-Python绑定是如何生成的。

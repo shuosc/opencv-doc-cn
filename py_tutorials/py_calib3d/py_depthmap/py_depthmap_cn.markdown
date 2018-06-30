@@ -1,4 +1,4 @@
-#来自立体图像的深度图{#tutorial_py_depthmap_cn}
+# 来自立体图像的深度图{#tutorial_py_depthmap_cn}
 
 ##目标
 

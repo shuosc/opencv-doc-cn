@@ -1,4 +1,4 @@
-#OpenCV中的K-Means聚类{#tutorial_py_kmeans_opencv_cn}
+# OpenCV中的K-Means聚类{#tutorial_py_kmeans_opencv_cn}
 
 ## 目标
 
