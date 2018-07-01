@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -145,8 +145,9 @@ $(function() {
 <li>选取一个合适的阈值$t$。</li>
 <li><p class="startli">考虑这个像素周围的16个像素的圆圈。 （见下图）</p>
 <div class="image">
-<img src="../../images/fast_speedtest.jpg" alt="image"/>
-</div>
+<img src="../../fast_speedtest.jpg" alt="fast_speedtest.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">如果在这个圆圈（或者说这16个像素）中存在一组（设为$n$个）连续像素亮度都比$I_p+t$亮或者都比$I_p-t$暗，那么像素$p$就是一个角点。</p>
 <p class="startli">这个圆圈在上图中用白色虚线圆圈表示。此处选取$n=12$。</p>
@@ -167,8 +168,9 @@ $(function() {
 <li>对于每个特征点，将它周围的16个像素作为一个向量保存起来。对每个图像执行这个步骤来获取特征向量$P$。</li>
 <li><p class="startli">这16个像素中的每一个一定处于下面三种状态中：</p>
 <div class="image">
-<img src="../../images/fast_eqns.jpg" alt="image"/>
-</div>
+<img src="../../fast_eqns.jpg" alt="fast_eqns.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li>根据像素的状态，特征向量$P$被分成三个子集：$P_d$、$P_s$和$P_b$。</li>
 <li>定义一个新的boolean变量$K_p$，若$p$是一个角点，则$K_p$为true，否则为false。</li>
@@ -193,13 +195,14 @@ $(function() {
 <p>下面是检测和画出FAST检测得到的特征点的样例代码：</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;simple.jpg&#39;,0)</div><div class="line"># 用默认值初始化FAST检测器对象</div><div class="line">fast = cv2.FastFeatureDetector_create()</div><div class="line"># 查找并画出关键点</div><div class="line">kp = fast.detect(img,None)</div><div class="line">img2 = cv2.drawKeypoints(img, kp, None, color=(255,0,0))</div><div class="line"># 输出所有默认参数</div><div class="line">print( &quot;Threshold: {}&quot;.format(fast.getThreshold()) )</div><div class="line">print( &quot;nonmaxSuppression:{}&quot;.format(fast.getNonmaxSuppression()) )</div><div class="line">print( &quot;neighborhood: {}&quot;.format(fast.getType()) )</div><div class="line">print( &quot;Total Keypoints with nonmaxSuppression: {}&quot;.format(len(kp)) )</div><div class="line">cv2.imwrite(&#39;fast_true.png&#39;,img2)</div><div class="line"># 禁用非最大抑制</div><div class="line">fast.setNonmaxSuppression(0)</div><div class="line">kp = fast.detect(img,None)</div><div class="line">print( &quot;Total Keypoints without nonmaxSuppression: {}&quot;.format(len(kp)) )</div><div class="line">img3 = cv2.drawKeypoints(img, kp, None, color=(255,0,0))</div><div class="line">cv2.imwrite(&#39;fast_false.png&#39;,img3)</div></div><!-- fragment --><p>下面是这个程序的运行结果。第一幅图是开启了非最大抑制的FAST算法的结果，第二幅图是关闭了非最大抑制的FAST算法的结果：</p>
 <div class="image">
-<img src="../../images/fast_kp.jpg" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../fast_kp.jpg" alt="fast_kp.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

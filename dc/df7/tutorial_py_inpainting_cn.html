@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -138,9 +138,10 @@ $(function() {
 <h2>基础知识</h2>
 <p>你们大多数人会在家里看到一些老旧的照片，上面有一些黑点，一些划痕等等。你有没有想过去修复它？我们不能简单地在绘画工具中抹去它们，因为它只是用白色的结构来代替黑色的结构，这是没有用的。在这些情况下，使用了一种称为图像修复的技术。基本的想法很简单：用相邻的像素替换那些不好的标记，使其看起来像其邻居。考虑下面显示的图片（取自<a href="https://zh.wikipedia.org/wiki/图像修复">维基百科</a>）：</p>
 <div class="image">
-<img src="../../images/inpaint_basics.jpg" alt="image"/>
-</div>
-<p>为此目的设计了几种算法，OpenCV提供了两种算法。两者都可以通过相同的函数<code>cv2.inpaint()</code>来访问</p>
+<img src="../../inpaint_basics.jpg" alt="inpaint_basics.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 为此目的设计了几种算法，OpenCV提供了两种算法。两者都可以通过相同的函数<code>cv2.inpaint()</code>来访问</p>
 <p>第一种算法是基于Alexandru Telea在2004年发表的论文《An Image Inpainting Technique Based on the Fast Marching Method》。它基于快速前进法。考虑图像中的将被修复的一个区域。算法从这个区域的边界开始，并在该区域内逐渐填充边界中的所有内容。在邻居的像素周围需要一个小的邻域进行修补。这个像素被邻域中所有已知像素的归一化加权和所取代。选择权重是一个重要的事情。对位于该点附近的那些像素，靠近边界的法线以及位于边界轮廓上的那些像素将会赋予更大的权重。一旦一个像素被修补，它将使用快速前进法移动到下一个最近的像素。 快速前进法确保已知像素附近的像素首先被修补，以便它像一个手动启发式操作一样工作。该算法通过使用标志<code>cv2.INPAINT_TELEA</code>来启用。</p>
 <p>第二种算法是基于Bertalmio，Marcelo，Andrea L. Bertozzi和Guillermo Sapiro在2001年发表的《Navier-Stokes, Fluid Dynamics, and Image and Video Inpainting》论文。该算法基于流体动力学并利用偏微分方程。基本原理是启发式。它首先沿着已知区域的边缘行进到未知区域（因为边缘是连续的）。它继续等照度（连接相同强度点的线，就像轮廓连接具有相同高度的点），同时匹配修补区边界处的梯度向量。为此，使用流体动力学的一些方法。一旦获得，就会填充颜色以减少该区域的最小偏差。该算法通过使用标志<code>cv2.INPAINT_NS</code>来启用。</p>
 <h2>代码</h2>
@@ -160,7 +161,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

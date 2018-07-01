@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -134,9 +134,10 @@ $(function() {
 <h2>理论基础</h2>
 <p>kNN是可用于监督学习的最简单的分类算法之一。这个想法是在特征空间中搜索最接近的测试数据。我们用下面的图片来看看它是怎么工作的。</p>
 <div class="image">
-<img src="../../images/knn_theory.png" alt="image"/>
-</div>
-<p>在图像中，有两类家庭，蓝色方块和红色三角形。我们称每种家庭为一个为**Class**。他们的房子被显示在他们的城镇地图上，我们称之为特征空间。</p>
+<img src="../../knn_theory.png" alt="knn_theory.png"/>
+<div class="caption">
+image</div></div>
+<p> 在图像中，有两类家庭，蓝色方块和红色三角形。我们称每种家庭为一个为**Class**。他们的房子被显示在他们的城镇地图上，我们称之为特征空间。</p>
 <p>(您可以将一个特征空间视为所有数据投影的空间，例如，考虑一个二维坐标空间，每个数据有两个特征，x和y坐标，您可以在二维坐标空间中表示这个数据，对吗？现在想象一下，如果有三个特征，就需要3D空间，现在考虑N个特征，需要N维空间，对吗？这个N维空间就是它的特征空间。在我们的图像中，您可以将其视为具有两个特征的2D空间。)</p>
 <p>现在一个新成员来到这个城镇，创建一个新的家，这个家被表现为绿色的圆圈。他应该被添加到蓝色/红色这两类家庭之一。我们把这个过程称为**Classification**。我们该怎么做？由于我们正在学习kNN，让我们应用这个算法。</p>
 <p>一种方法是检查谁是他最近的邻居。从图象上来看，很明显是红三角家庭。所以他也被加入了红三角。这种方法被称为**简单最近邻**，因为分类只取决于最近的邻居。</p>
@@ -165,9 +166,10 @@ $(function() {
 <div class="fragment"><div class="line">newcomer = np.random.randint(0,100,(1,2)).astype(np.float32)</div><div class="line">plt.scatter(newcomer[:,0],newcomer[:,1],80,&#39;g&#39;,&#39;o&#39;)</div><div class="line">knn = cv2.ml.KNearest_create()</div><div class="line">knn.train(trainData, cv2.ml.ROW_SAMPLE, responses)</div><div class="line">ret, results, neighbours ,dist = knn.findNearest(newcomer, 3)</div><div class="line">print( &quot;result:  {}\n&quot;.format(results) )</div><div class="line">print( &quot;neighbours:  {}\n&quot;.format(neighbours) )</div><div class="line">print( &quot;distance:  {}\n&quot;.format(dist) )</div><div class="line">plt.show()</div></div><!-- fragment --><p>我得到了下面的结果：</p>
 <div class="fragment"><div class="line">result:  [[ 1.]]</div><div class="line">neighbours:  [[ 1.  1.  1.]]</div><div class="line">distance:  [[ 53.  58.  61.]]</div></div><!-- fragment --><p>它说，我们新来的人有3个邻居，都来自蓝色家庭。 因此，他被称归类到蓝色家庭。 从下图可以看出：</p>
 <div class="image">
-<img src="../../images/knn_simple.png" alt="image"/>
-</div>
-<p>如果你有大量的数据，你可以将它作为数组传递。 相应的结果也可以作为数组获得。</p>
+<img src="../../knn_simple.png" alt="knn_simple.png"/>
+<div class="caption">
+image</div></div>
+<p> 如果你有大量的数据，你可以将它作为数组传递。 相应的结果也可以作为数组获得。</p>
 <div class="fragment"><div class="line"># 10个新来的</div><div class="line">newcomers = np.random.randint(0,100,(10,2)).astype(np.float32)</div><div class="line">ret, results,neighbours,dist = knn.findNearest(newcomer, 3)</div><div class="line"># 结果也会包含10个labels</div></div><!-- fragment --><h2>更多资源</h2>
 <ul>
 <li><a href="http://www.nptel.iitm.ac.in/courses/106108057/12">NPTEL notes on Pattern Recognition, Chapter 11</a> </li>
@@ -176,7 +178,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

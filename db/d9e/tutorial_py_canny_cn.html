@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -147,9 +147,10 @@ $(function() {
 <li><p class="startli"><b>非最大抑制</b></p>
 <p class="startli">在得到梯度的大小和方向后，我们将对图像进行一次完整的扫描以去除不可能构成边缘的任何不需要的像素。为此，在每个像素处，检查像素是否是在其梯度方向上的邻域中的局部最大值。看下面的图像：</p>
 <p class="startli">    </p><div class="image">
-<img src="../../images/nms.jpg" alt="image"/>
-</div>
-<p class="startli">​</p>
+<img src="../../nms.jpg" alt="nms.jpg"/>
+<div class="caption">
+image</div></div>
+<p> ​</p>
 <p class="startli">点A在垂直方向的边缘上。梯度方向与边缘垂直。 B点和C点处于梯度方向。所以点A和点B、C比较以检查它是否是一个局部最大值。如果是，则进行下一阶段，否则它将被抑制（置零）。</p>
 <p class="startli">总之，你得到的结果是一个有着“薄边缘”的二值图像。</p>
 </li>
@@ -157,9 +158,10 @@ $(function() {
 <p class="startli">这个阶段决定哪些边缘是真正的边缘，哪些不是边缘。为此，我们需要两个阈值<code>minVal</code>和<code>maxVal</code>。强度梯度大于<code>maxVal</code>的肯定是边缘，低于<code>minVal</code>的肯定不是边缘，因此被丢弃。位于这两个阈值之间的像素基于其连接性分为边缘或非边缘。如果它们连接到“确定边缘”的像素，则它们被认为是边缘的一部分。否则，他们也将被丢弃。</p>
 <p class="startli">看下面的图片：</p>
 <div class="image">
-<img src="../../images/hysteresis.jpg" alt="image"/>
-</div>
-<p class="startli">边缘A在maxVal之上，因此被认为是“确定边缘”。虽然边C低于maxVal，但它连接到边A，所以也被认为是有效的边，我们得到了完整的曲线。边B虽然在minVal以上，与边C的区域相同，但没有连接到任何“确定边缘”，因此被丢弃。所以我们必须仔细选择<code>minVal</code>和<code>maxVal</code>以得到正确的结果，这十分重要。</p>
+<img src="../../hysteresis.jpg" alt="hysteresis.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 边缘A在maxVal之上，因此被认为是“确定边缘”。虽然边C低于maxVal，但它连接到边A，所以也被认为是有效的边，我们得到了完整的曲线。边B虽然在minVal以上，与边C的区域相同，但没有连接到任何“确定边缘”，因此被丢弃。所以我们必须仔细选择<code>minVal</code>和<code>maxVal</code>以得到正确的结果，这十分重要。</p>
 <p class="startli">假如边缘是长的线条，这个阶段也能消除小的像素噪声。</p>
 <p class="startli">所以我们最终得到的是图像中的强边缘。</p>
 </li>
@@ -169,9 +171,10 @@ $(function() {
 <p>第三个参数是<code>aperture_size</code>。是用于查找图像梯度的索贝尔内核的大小。默认情况下，它是3。最后一个参数是<code>L2gradient</code>，它指定了求梯度大小的公式。如果它是<code>True</code>，它会使用上面提到的更准确的方程，否则会使用这个函数：$Edge_Gradient \; (G) = |G_x| + |G_y|$。默认情况下它为<code>False</code>。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">edges = cv2.Canny(img,100,200)</div><div class="line">plt.subplot(121),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Original Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(edges,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Edge Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>看下面的结果：</p>
 <div class="image">
-<img src="../../images/canny1.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../canny1.jpg" alt="canny1.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/Canny算子">Wikipedia</a>上的Canny边缘检测。</li>
 <li><a href="http://dasl.mem.drexel.edu/alumni/bGreen/www.pages.drexel.edu/_weg22/can_tut.html">Canny边缘检测教程</a> by Bill Green, 2002。</li>
@@ -184,7 +187,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

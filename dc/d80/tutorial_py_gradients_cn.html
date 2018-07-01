@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -146,17 +146,19 @@ $(function() {
 <p>下面的代码在单个图表中显示了所有操作的运算结果。 所有内核都是5x5大小。 输出图像的深度传递-1以得到<code>np.uint8</code>类型的结果。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;dave.jpg&#39;,0)</div><div class="line">laplacian = cv2.Laplacian(img,cv2.CV_64F)</div><div class="line">sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)</div><div class="line">sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)</div><div class="line">plt.subplot(2,2,1),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Original&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,2),plt.imshow(laplacian,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Laplacian&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,3),plt.imshow(sobelx,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel X&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(2,2,4),plt.imshow(sobely,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel Y&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/gradients.jpg" alt="image"/>
-</div>
-<h2>一件重要的事</h2>
+<img src="../../gradients.jpg" alt="gradients.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>一件重要的事</h2>
 <p>在我们的最后一个例子中，输出数据类型是<code>cv2.CV_8U</code>或<code>np.uint8</code>。 但是有一个小问题。 黑白转换为正斜率（正值），白转黑转换为负斜率（负值）。 所以当你把数据转换成np.uint8时，所有的负斜率都会变成零。 简而言之，你会忽略了这个边缘。</p>
 <p>如果黑到白和白到黑两边你都想检测，更好的选择是保持输出数据类型的一些更多位数的形式，如<code>cv2.CV16S</code>，<code>cv2.CV64F</code>等，取其绝对值，然后转换回<code>cv2.CV_8U</code>。</p>
 <p>下面的代码演示了水平Sobel滤波器的这个过程和结果的差异。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;box.png&#39;,0)</div><div class="line"></div><div class="line"># Output dtype = cv2.CV_8U</div><div class="line">sobelx8u = cv2.Sobel(img,cv2.CV_8U,1,0,ksize=5)</div><div class="line"></div><div class="line"># Output dtype = cv2.CV_64F. Then take its absolute and convert to cv2.CV_8U</div><div class="line">sobelx64f = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)</div><div class="line">abs_sobel64f = np.absolute(sobelx64f)</div><div class="line">sobel_8u = np.uint8(abs_sobel64f)</div><div class="line"></div><div class="line">plt.subplot(1,3,1),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Original&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(1,3,2),plt.imshow(sobelx8u,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel CV_8U&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(1,3,3),plt.imshow(sobel_8u,cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Sobel abs(CV_64F)&#39;), plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/double_edge.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../double_edge.jpg" alt="double_edge.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/索貝爾算子">索贝尔算子</a></li>
 <li><a href="https://zh.wikipedia.org/wiki/拉普拉斯算子">拉普拉斯算子</a> </li>
@@ -165,7 +167,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -137,18 +137,20 @@ $(function() {
 <p>基本</p>
 <p>在上一章中，我们看到了极线约束等相关术语的基本概念。我们也看到，如果我们有两个相同的场景图像，我们可以直观地从中获取深度信息。下面是一个图像和一些简单的数学公式，证明了这个直觉。</p>
 <div class="image">
-<img src="../../images/stereo_depth.jpg" alt="image"/>
-</div>
-<p>上图包含全等三角形。写出它们的等价方程将得到以下结果：</p>
+<img src="../../stereo_depth.jpg" alt="stereo_depth.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 上图包含全等三角形。写出它们的等价方程将得到以下结果：</p>
 <p>$$ disparity = x - x' = {Bf}{Z} $$ $x$和$x'$是对应于场景点3D的图像平面中的点与其相机中心之间的距离。 $B$是两台摄像机之间的距离（这个距离我们已经是知道的），$f$是摄像机的焦距（也是已知的）。所以简而言之，上面的等式说明了一个场景中一个点的深度与相应的图像点和它们的相机中心之间的距离的差值成反比。因此，利用这些信息，我们可以导出图像中所有像素的深度。</p>
 <p>所以它能找到两个图像之间的相应匹配。我们已经看到了极线约束如何使这个操作更快，更准确。一旦找到匹配，就会找到disparity。让我们看看我们如何使用OpenCV来做到这一点。</p>
 <h2>代码</h2>
 <p>下面的代码片段显示了创建disparity图的简单过程。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">imgL = cv2.imread(&#39;tsukuba_l.png&#39;,0)</div><div class="line">imgR = cv2.imread(&#39;tsukuba_r.png&#39;,0)</div><div class="line"></div><div class="line">stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)</div><div class="line">disparity = stereo.compute(imgL,imgR)</div><div class="line">plt.imshow(disparity,&#39;gray&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>下面的图像包含原始图像（左）和它的视差图（右）。正如你所看到的，结果被高度的噪音污染。通过调整<code>numDisparities</code>和<code>blockSize</code>的值，可以获得更好的结果。</p>
 <div class="image">
-<img src="../../images/disparity_map.jpg" alt="image"/>
-</div>
-<dl class="section note"><dt>注解</dt><dd>更多细节需要被添加</dd></dl>
+<img src="../../disparity_map.jpg" alt="disparity_map.jpg"/>
+<div class="caption">
+image</div></div>
+ <dl class="section note"><dt>注解</dt><dd>更多细节需要被添加</dd></dl>
 <h2>练习</h2>
 <ul>
 <li>OpenCV示例包含生成视差图及其三维重建的示例。查看OpenCV-Python示例中的stereo_match.py​​。 </li>
@@ -157,7 +159,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

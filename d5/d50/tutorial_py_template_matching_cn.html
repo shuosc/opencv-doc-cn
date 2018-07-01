@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -142,40 +142,47 @@ $(function() {
 <h2>OpenCV中的模板匹配</h2>
 <p>在这里，作为一个例子，我们将在照片中搜索梅西的脸。所以我创建了一个模板如下：</p>
 <div class="image">
-<img src="../../images/messi_face.jpg" alt="image"/>
-</div>
-<p>我们将尝试所有的比较方法，以便我们可以看到他们的结果如何：</p>
+<img src="../../messi_face.jpg" alt="messi_face.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 我们将尝试所有的比较方法，以便我们可以看到他们的结果如何：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">img2 = img.copy()</div><div class="line">template = cv2.imread(&#39;template.jpg&#39;,0)</div><div class="line">w, h = template.shape[::-1]</div><div class="line"></div><div class="line"># 所有6种比较方法的列表</div><div class="line">methods = [&#39;cv2.TM_CCOEFF&#39;, &#39;cv2.TM_CCOEFF_NORMED&#39;, &#39;cv2.TM_CCORR&#39;, &#39;cv2.TM_CCORR_NORMED&#39;, &#39;cv2.TM_SQDIFF&#39;, &#39;cv2.TM_SQDIFF_NORMED&#39;]</div><div class="line"></div><div class="line">for meth in methods:</div><div class="line">    img = img2.copy()</div><div class="line">    method = eval(meth)</div><div class="line"></div><div class="line">    # 应用模版匹配</div><div class="line">    res = cv2.matchTemplate(img,template,method)</div><div class="line">    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)</div><div class="line">        # 如果方法是 TM_SQDIFF或者TM_SQDIFF_NORMED取最小值</div><div class="line">    if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:</div><div class="line">        top_left = min_loc</div><div class="line">    else:</div><div class="line">        top_left = max_loc</div><div class="line">    bottom_right = (top_left[0] + w, top_left[1] + h)</div><div class="line"></div><div class="line">    cv2.rectangle(img,top_left, bottom_right, 255, 2)</div><div class="line"></div><div class="line">    plt.subplot(121),plt.imshow(res,cmap = &#39;gray&#39;)</div><div class="line">    plt.title(&#39;Matching Result&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">    plt.subplot(122),plt.imshow(img,cmap = &#39;gray&#39;)</div><div class="line">    plt.title(&#39;Detected Point&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">    plt.suptitle(meth)</div><div class="line"></div><div class="line">    plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
 <ul>
 <li><p class="startli"><code>cv2.TM_CCOEFF</code></p>
 <div class="image">
-<img src="../../images/template_ccoeff_1.jpg" alt="image"/>
-</div>
+<img src="../../template_ccoeff_1.jpg" alt="template_ccoeff_1.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli"><code>cv2.TM_CCOEFF_NORMED</code></p>
 <div class="image">
-<img src="../../images/template_ccoeffn_2.jpg" alt="image"/>
-</div>
+<img src="../../template_ccoeffn_2.jpg" alt="template_ccoeffn_2.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli"><code>cv2.TM_CCORR</code></p>
 <div class="image">
-<img src="../../images/template_ccorr_3.jpg" alt="image"/>
-</div>
+<img src="../../template_ccorr_3.jpg" alt="template_ccorr_3.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli"><code>cv2.TM_CCORR_NORMED</code></p>
 <div class="image">
-<img src="../../images/template_ccorrn_4.jpg" alt="image"/>
-</div>
+<img src="../../template_ccorrn_4.jpg" alt="template_ccorrn_4.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli"><code>cv2.TM_SQDIFF</code></p>
 <div class="image">
-<img src="../../images/template_sqdiff_5.jpg" alt="image"/>
-</div>
+<img src="../../template_sqdiff_5.jpg" alt="template_sqdiff_5.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli"><code>cv2.TM_SQDIFF_NORMED</code></p>
 <div class="image">
-<img src="../../images/template_sqdiffn_6.jpg" alt="image"/>
-</div>
+<img src="../../template_sqdiffn_6.jpg" alt="template_sqdiffn_6.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 </ul>
 <p>你可以看到使用<code>cv2.TM_CCORR</code>的结果并不像我们预期的那样好。</p>
@@ -183,13 +190,14 @@ $(function() {
 <p>在之前的章节中，我们搜索了梅西的脸部图像，该图像只出现了一次。假设你正在搜索一个对象的多个实例，<code>cv2.minMaxLoc()</code>不会给你所有的位置。在这种情况下，我们将使用阈值。所以在这个例子中，我们将使用着名的游戏“马里奥”的截图，我们将在其中找到硬币。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img_rgb = cv2.imread(&#39;mario.png&#39;)</div><div class="line">img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)</div><div class="line">template = cv2.imread(&#39;mario_coin.png&#39;,0)</div><div class="line">w, h = template.shape[::-1]</div><div class="line"></div><div class="line">res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)</div><div class="line">threshold = 0.8</div><div class="line">loc = np.where( res &gt;= threshold)</div><div class="line">for pt in zip(*loc[::-1]):</div><div class="line">    cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 2)</div><div class="line"></div><div class="line">cv2.imwrite(&#39;res.png&#39;,img_rgb)</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/res_mario.jpg" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../res_mario.jpg" alt="res_mario.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

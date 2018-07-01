@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -175,38 +175,45 @@ $(function() {
 <li>点击 **Configure**。</li>
 </ul>
 <div class="image">
-<img src="../../images/Capture1.jpg" alt="image"/>
-</div>
-<p>​ 它会打开一个新窗口来让你选择编译器，选择合适的编译器（这里是Visual Studio 11）并点击**Finish**。</p>
+<img src="../../Capture1.jpg" alt="Capture1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> ​ 它会打开一个新窗口来让你选择编译器，选择合适的编译器（这里是Visual Studio 11）并点击**Finish**。</p>
 <div class="image">
-<img src="../../images/Capture2.png" alt="image"/>
-</div>
+<img src="../../Capture2.png" alt="Capture2.png"/>
+<div class="caption">
+image</div></div>
 <ul>
 <li>等待analysis过程结束</li>
 <li><p class="startli">你可以看到所有的fields都是红的。点击**WITH**展开它。它决定了你需要什么额外的特性。钩上合适的fields。见下图：</p>
 <div class="image">
-<img src="../../images/Capture3.png" alt="image"/>
-</div>
+<img src="../../Capture3.png" alt="Capture3.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">点击**BUILD**展开他。一开始的一些fields配置了构建方法。见下图：</p>
 <div class="image">
-<img src="../../images/Capture5.png" alt="image"/>
-</div>
+<img src="../../Capture5.png" alt="Capture5.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">剩下的fields指明了要构建哪些模组。因为GPU模组还没有被OpenCV-Python支持，你可以完全不构建他们来节约编译时间（但如果你需要在其他语言绑定中使用有GPU支持的OpenCV，你可以保留他们）。见下图：</p>
 <div class="image">
-<img src="../../images/Capture6.png" alt="image"/>
-</div>
+<img src="../../Capture6.png" alt="Capture6.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">展开**ENABLE**，确保**ENABLE_SOLUTION_FOLDERS**没有被勾选（Solution folders并不被Visual Studio Express edition支持）。见下图：</p>
 <div class="image">
-<img src="../../images/Capture7.png" alt="image"/>
-</div>
+<img src="../../Capture7.png" alt="Capture7.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">确保在**PYTHON**一栏中，一切都被填充好了。（忽略<code>PYTHON_DEBUG_LIBRARY</code>）。见下图。</p>
 <div class="image">
-<img src="../../images/Capture80.png" alt="image"/>
-</div>
+<img src="../../Capture80.png" alt="Capture80.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li>最终点击**Generate**按钮。</li>
 <li>现在进入opencv/build文件夹。你将会发现OpenCV.sln文件。用Visual Studio打开它。</li>
@@ -224,7 +231,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

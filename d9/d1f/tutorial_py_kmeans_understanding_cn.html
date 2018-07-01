@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -136,36 +136,42 @@ $(function() {
 <h3>T恤大小问题</h3>
 <p>考虑一家正在向市场推出新款T恤的公司。显然，他们将不得不制造不同大小的模型来满足各种身材的人。因此，公司提供了一个人的身高和体重的数据，并将其绘制在一张图上，如下所示：</p>
 <div class="image">
-<img src="../../images/tshirt.jpg" alt="image"/>
-</div>
-<p>公司不能制作所有尺码的T恤。相反，他们把人们分为小，中，大三种尺寸，只制造出适合所有人的三种尺寸。这种把人分成三组的操作可以通过k-means聚类来完成，算法提供了最好的3个大小，这将满足所有的人。如果他没有让所有人满意，公司可以把人分成更多的组，可能是五个，等等。检查图像如下：</p>
+<img src="../../tshirt.jpg" alt="tshirt.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 公司不能制作所有尺码的T恤。相反，他们把人们分为小，中，大三种尺寸，只制造出适合所有人的三种尺寸。这种把人分成三组的操作可以通过k-means聚类来完成，算法提供了最好的3个大小，这将满足所有的人。如果他没有让所有人满意，公司可以把人分成更多的组，可能是五个，等等。检查图像如下：</p>
 <div class="image">
-<img src="../../images/tshirt_grouped.jpg" alt="image"/>
-</div>
-<h3>它是如何工作的 ？</h3>
+<img src="../../tshirt_grouped.jpg" alt="tshirt_grouped.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>它是如何工作的 ？</h3>
 <p>这个算法是一个迭代的过程。我们将在图像的帮助下逐步解释它。</p>
 <p>考虑下面的一组数据（你可以把它看作是T恤问题）。我们需要将这些数据分成两组。</p>
 <div class="image">
-<img src="../../images/testdata.jpg" alt="image"/>
-</div>
-<p><b>步骤：1</b> - 算法随机选择两个质心，$C1$和$C2$（有时任意两个数据会被选为质心）。</p>
+<img src="../../testdata.jpg" alt="testdata.jpg"/>
+<div class="caption">
+image</div></div>
+<p> <b>步骤：1</b> - 算法随机选择两个质心，$C1$和$C2$（有时任意两个数据会被选为质心）。</p>
 <p><b>步骤：2</b> - 计算从每个点到两个质心的距离。如果测试数据更多更接近C1，那么这个数据被标记为“0”。如果它靠近C2，则标记为“1”（如果有更多的质心，标记为“2”，“3”等）。在我们的例子中，我们将用红色标记所有“0”，用蓝色标记“1”。所以我们在上面的操作之后得到下图。</p>
 <div class="image">
-<img src="../../images/initial_labelling.jpg" alt="image"/>
-</div>
-<p>第3步：接下来，我们分别计算所有蓝色点和红色点的平均值，这将是我们的新质心。这是$C1$和$C2$转移到新计算的质心。 （请记住，所显示的图像不是真正的值，也不是真正的比例尺，仅用于演示）。</p>
+<img src="../../initial_labelling.jpg" alt="initial_labelling.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 第3步：接下来，我们分别计算所有蓝色点和红色点的平均值，这将是我们的新质心。这是$C1$和$C2$转移到新计算的质心。 （请记住，所显示的图像不是真正的值，也不是真正的比例尺，仅用于演示）。</p>
 <p>再一次，执行步骤2，将新质心和标签数据设置为“0”和“1”。</p>
 <p>所以我们得到的结果如下：</p>
 <div class="image">
-<img src="../../images/update_centroid.jpg" alt="image"/>
-</div>
-<p>现在迭代**步骤-2**和**步骤03**，直到两个质心收敛到固定点。 （或者根据我们提供的标准，例如最大迭代次数，或者达到特定的准确度等等。）这些点是这样的：测试数据与它们对应的质心之间的距离之和是最小的。或者简单地说，$C1  Red_Points$和C2 $C2  Blue_Points$之间的距离之和是最小的。</p>
+<img src="../../update_centroid.jpg" alt="update_centroid.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在迭代**步骤-2**和**步骤03**，直到两个质心收敛到固定点。 （或者根据我们提供的标准，例如最大迭代次数，或者达到特定的准确度等等。）这些点是这样的：测试数据与它们对应的质心之间的距离之和是最小的。或者简单地说，$C1  Red_Points$和C2 $C2  Blue_Points$之间的距离之和是最小的。</p>
 <p>$$ minimize \;[J = {All\: Red_Points}distance(C1,Red_Point) + {All\: Blue_Points}distance(C2,Blue_Point)] $$</p>
 <p>最终结果大概如下所示：</p>
 <div class="image">
-<img src="../../images/final_clusters.jpg" alt="image"/>
-</div>
-<p>所以这只是对K-Means Clustering的直观理解。有关更多详细信息和数学解释，请阅读任何标准机器学习教科书或查看其他资源中的链接。这只是K-Means聚类的最高层。这个算法有很多修改过的版本，比如如何选择初始质心，如何加快迭代过程等。</p>
+<img src="../../final_clusters.jpg" alt="final_clusters.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 所以这只是对K-Means Clustering的直观理解。有关更多详细信息和数学解释，请阅读任何标准机器学习教科书或查看其他资源中的链接。这只是K-Means聚类的最高层。这个算法有很多修改过的版本，比如如何选择初始质心，如何加快迭代过程等。</p>
 <h2>更多资源</h2>
 <ul>
 <li><a href="https://www.coursera.org/course/ml">机器学习课程</a>, Video lectures by Prof. Andrew Ng（部分图片来源于此） </li>
@@ -174,7 +180,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

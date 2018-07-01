@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -163,13 +163,14 @@ $(function() {
 <p>如果你传递了<code>cv2.CHAIN_APPROX_NONE</code>，所有的边界点都会被存储。但实际上我们需要所有的边界点吗？例如，你找到了一条直线的轮廓。你需要线上的所有点来代表那条线吗？不，我们只需要该线的两个端点。这是<code>cv2.CHAIN_APPROX_SIMPLE</code>所做的。它删除所有冗余点并压缩轮廓，从而节省内存。</p>
 <p>下面的矩形图像显示了这种技术。只需在轮廓数组中的所有坐标上绘制一个圆圈（用蓝色绘制）即可。第一张图片显示了我用<code>cv2.CHAIN_APPROX_NONE</code>（734个点）得到的点，第二张图显示了用<code>cv2.CHAIN_APPROX_SIMPLE</code>（只有4个点）的图片。看，它节省了多少内存！</p>
 <div class="image">
-<img src="../../images/none.jpg" alt="image"/>
-</div>
+<img src="../../none.jpg" alt="none.jpg"/>
+<div class="caption">
+image</div></div>
  </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

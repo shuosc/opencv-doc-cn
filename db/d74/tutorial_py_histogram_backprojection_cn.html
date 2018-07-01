@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -153,9 +153,10 @@ $(function() {
 <p>OpenCV提供了一个内置函数<code>cv2.calcBackProject()</code>。它的参数几乎和<code>cv2.calcHist()</code>函数相同。其中一个参数是直方图，它是要寻找对象的直方图，我们必须自己找到它。另外，在传递给反投影函数之前，对象直方图应该被归一化。它返回概率图像。然后，我们用圆形内核卷积图像并二值化。下面是我的代码和输出：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">roi = cv2.imread(&#39;rose_red.png&#39;)</div><div class="line">hsv = cv2.cvtColor(roi,cv2.COLOR_BGR2HSV)</div><div class="line"></div><div class="line">target = cv2.imread(&#39;rose.png&#39;)</div><div class="line">hsvt = cv2.cvtColor(target,cv2.COLOR_BGR2HSV)</div><div class="line"></div><div class="line"># 计算对象的直方图</div><div class="line">roihist = cv2.calcHist([hsv],[0, 1], None, [180, 256], [0, 180, 0, 256] )</div><div class="line"></div><div class="line"># 直方图均衡化，并应用backprojection</div><div class="line">cv2.normalize(roihist,roihist,0,255,cv2.NORM_MINMAX)</div><div class="line">dst = cv2.calcBackProject([hsvt],[0,1],roihist,[0,180,0,256],1)</div><div class="line"></div><div class="line"># 使用圆形内核卷积</div><div class="line">disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))</div><div class="line">cv2.filter2D(dst,-1,disc,dst)</div><div class="line"></div><div class="line"># 二值化，按位与</div><div class="line">ret,thresh = cv2.threshold(dst,50,255,0)</div><div class="line">thresh = cv2.merge((thresh,thresh,thresh))</div><div class="line">res = cv2.bitwise_and(target,thresh)</div><div class="line"></div><div class="line">res = np.vstack((target,thresh,res))</div><div class="line">cv2.imwrite(&#39;res.jpg&#39;,res)</div></div><!-- fragment --><p>下面是我做的一个例子。我用蓝色矩形内的区域作为样本对象，提取了完整的地面。</p>
 <div class="image">
-<img src="../../images/backproject_opencv.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../backproject_opencv.jpg" alt="backproject_opencv.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li><a href="http://scholar.google.co.jp/scholar_url?url=https://pdfs.semanticscholar.org/37d7/9bba495703fb250f1f834328d44c9292aaff.pdf&amp;hl=zh-CN&amp;sa=X&amp;scisig=AAGBfm03sMABUmWk_NnWhcmSE1zcfnQXjQ&amp;nossl=1&amp;oi=scholarr&amp;ved=0ahUKEwienNzxsPzXAhXLS7wKHZqXBQEQgAMIKSgAMAA">"Indexing via color histograms", Swain, Michael J. , Third international conference on computer vision,1990</a> </li>
 </ul>
@@ -163,7 +164,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

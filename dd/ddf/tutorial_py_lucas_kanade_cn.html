@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -138,9 +138,10 @@ $(function() {
 <h2>光流</h2>
 <p>光流是由物体或相机的运动引起的图像对象在两个连续帧之间的视在运动模式。它是2D矢量场，其中每个矢量是一个位移矢量，表示点从第一帧到第二帧的移动。考虑下面的图片（图片提供：<a href="https://zh.wikipedia.org/wiki/光流法">维基百科关于光流的文章</a>）。</p>
 <div class="image">
-<img src="../../images/optical_flow_basic1.jpg" alt="image"/>
-</div>
-<p>它显示了一个连续5帧移动的球。箭头显示其位移矢量。光流在许多领域中有应用，像：</p>
+<img src="../../optical_flow_basic1.jpg" alt="optical_flow_basic1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 它显示了一个连续5帧移动的球。箭头显示其位移矢量。光流在许多领域中有应用，像：</p>
 <ul>
 <li>动作结构</li>
 <li>视频压缩</li>
@@ -164,16 +165,18 @@ $(function() {
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;slow.flv&#39;)</div><div class="line"></div><div class="line"># ShiTomasi角点检测参数</div><div class="line">feature_params = dict( maxCorners = 100,</div><div class="line">                       qualityLevel = 0.3,</div><div class="line">                       minDistance = 7,</div><div class="line">                       blockSize = 7 )</div><div class="line"></div><div class="line"># lucas kanade光流参数</div><div class="line">lk_params = dict( winSize  = (15,15),</div><div class="line">                  maxLevel = 2,</div><div class="line">                  criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))</div><div class="line"></div><div class="line"># 一些随机颜色</div><div class="line">color = np.random.randint(0,255,(100,3))</div><div class="line"></div><div class="line"># 取第一帧，寻找角点</div><div class="line">ret, old_frame = cap.read()</div><div class="line">old_gray = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)</div><div class="line">p0 = cv2.goodFeaturesToTrack(old_gray, mask = None, **feature_params)</div><div class="line"></div><div class="line"># 创建一个mask，为了绘图方便</div><div class="line">mask = np.zeros_like(old_frame)</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret,frame = cap.read()</div><div class="line">    frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</div><div class="line"></div><div class="line">    # 计算光流</div><div class="line">    p1, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0, None, **lk_params)</div><div class="line"></div><div class="line">    # 选择较好的点</div><div class="line">    good_new = p1[st==1]</div><div class="line">    good_old = p0[st==1]</div><div class="line"></div><div class="line">    # 画出轨迹</div><div class="line">    for i,(new,old) in enumerate(zip(good_new,good_old)):</div><div class="line">        a,b = new.ravel()</div><div class="line">        c,d = old.ravel()</div><div class="line">        mask = cv2.line(mask, (a,b),(c,d), color[i].tolist(), 2)</div><div class="line">        frame = cv2.circle(frame,(a,b),5,color[i].tolist(),-1)</div><div class="line">    img = cv2.add(frame,mask)</div><div class="line"></div><div class="line">    cv2.imshow(&#39;frame&#39;,img)</div><div class="line">    k = cv2.waitKey(30) &amp; 0xff</div><div class="line">    if k == 27:</div><div class="line">        break</div><div class="line"></div><div class="line">    # 更新前面的帧和点</div><div class="line">    old_gray = frame_gray.copy()</div><div class="line">    p0 = good_new.reshape(-1,1,2)</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div><div class="line">cap.release()</div></div><!-- fragment --><p>（这个代码并没有检查下一个关键点的正确性，所以即使任何特征点在图像中消失了，光流也有可能找到可能看起来接近它的下一个点。所以要做一个健壮的追踪程序的话，就要在特定的时间间隔内检测一次角点，OpenCV示例中每隔5帧就会采集一次样本，找出特征点，并对所得到的光流点进行反向检查，只选择好的样本点，见samples/python/lk_track.py）。</p>
 <p>下面是我们的到的结果：</p>
 <div class="image">
-<img src="../../images/opticalflow_lk.jpg" alt="image"/>
-</div>
-<h2>OpenCV中的密集光流</h2>
+<img src="../../opticalflow_lk.jpg" alt="opticalflow_lk.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>OpenCV中的密集光流</h2>
 <p>Lucas-Kanade方法计算稀疏特征集的光流（在我们的例子中，使用Shi-Tomasi算法检测角点）。 OpenCV提供了另一种算法来查找密集光流。它计算帧中所有点的光流。它基于Gunner Farneback的算法，该算法在Gunner Farneback于2003年的《Two-Frame Motion Estimation Based on Polynomial Expansion》中有所解释。</p>
 <p>以下示例显示如何使用上述算法找到密集的光流。我们得到一个带有光流矢量的双通道阵列，$(u,v)$。我们查找他们的幅度和方向。我们对结果进行颜色编码以实现更好的可视化。方向对应于图像的色调值。 幅度对应于价值平面。 请参阅下面的代码：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">cap = cv2.VideoCapture(&quot;vtest.avi&quot;)</div><div class="line"></div><div class="line">ret, frame1 = cap.read()</div><div class="line">prvs = cv2.cvtColor(frame1,cv2.COLOR_BGR2GRAY)</div><div class="line">hsv = np.zeros_like(frame1)</div><div class="line">hsv[...,1] = 255</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret, frame2 = cap.read()</div><div class="line">    next = cv2.cvtColor(frame2,cv2.COLOR_BGR2GRAY)</div><div class="line"></div><div class="line">    flow = cv2.calcOpticalFlowFarneback(prvs,next, None, 0.5, 3, 15, 3, 5, 1.2, 0)</div><div class="line"></div><div class="line">    mag, ang = cv2.cartToPolar(flow[...,0], flow[...,1])</div><div class="line">    hsv[...,0] = ang*180/np.pi/2</div><div class="line">    hsv[...,2] = cv2.normalize(mag,None,0,255,cv2.NORM_MINMAX)</div><div class="line">    bgr = cv2.cvtColor(hsv,cv2.COLOR_HSV2BGR)</div><div class="line"></div><div class="line">    cv2.imshow(&#39;frame2&#39;,bgr)</div><div class="line">    k = cv2.waitKey(30) &amp; 0xff</div><div class="line">    if k == 27:</div><div class="line">        break</div><div class="line">    elif k == ord(&#39;s&#39;):</div><div class="line">        cv2.imwrite(&#39;opticalfb.png&#39;,frame2)</div><div class="line">        cv2.imwrite(&#39;opticalhsv.png&#39;,bgr)</div><div class="line">    prvs = next</div><div class="line"></div><div class="line">cap.release()</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/opticalfb.jpg" alt="image"/>
-</div>
-<p>OpenCV在密集光流上有一个高级的示例，请参阅samples/python/opt_flow.py。</p>
+<img src="../../opticalfb.jpg" alt="opticalfb.jpg"/>
+<div class="caption">
+image</div></div>
+<p> OpenCV在密集光流上有一个高级的示例，请参阅samples/python/opt_flow.py。</p>
 <h2>练习</h2>
 <ul>
 <li>查看samples/python/lk_track.py中的代码。尝试理解代码。</li>
@@ -183,7 +186,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -142,23 +142,27 @@ $(function() {
 <p>高斯金字塔中的较高层（低分辨率）是通过去除较低层（较高分辨率）图像中的连续行和列而形成的。然后，高层中的每个像素由高斯权重下的5个像素构成。通过这样做，$M  N$大小的图像变成了$ M 2   N 2$大小的图像。所以面积减少到原来面积的四分之一。这被称为Octave。随着我们走上金字塔（即分辨率下降），同样的模式将继续下去。同样在分辨率上升的时候，每个区域变成4倍。我们可以使用<code>cv2.pyrDown()</code>和<code>cv2.pyrUp()</code>函数查找到高斯金字塔中的每一层。</p>
 <div class="fragment"><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">lower_reso = cv2.pyrDown(higher_reso)</div></div><!-- fragment --><p>下面是金字塔中的四层：</p>
 <div class="image">
-<img src="../../images/messipyr.jpg" alt="image"/>
-</div>
-<p>现在，您可以使用<code>cv2.pyrUp()</code>函数在图像金字塔中向下走。</p>
+<img src="../../messipyr.jpg" alt="messipyr.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在，您可以使用<code>cv2.pyrUp()</code>函数在图像金字塔中向下走。</p>
 <div class="fragment"><div class="line">higher_reso2 = cv2.pyrUp(lower_reso)</div></div><!-- fragment --><p>请记住，<code>higher_reso2</code>不等于<code>higher_reso</code>，因为一旦降低了分辨率，就会丢失信息。下面的图像是从金字塔中最小的图像创建的金字塔的第3级。将其与原始图像进行比较：</p>
 <div class="image">
-<img src="../../images/messiup.jpg" alt="image"/>
-</div>
-<p>拉普拉斯金字塔由高斯金字塔形成。没有专用的函数来构造拉普拉斯金字塔。拉普拉斯金字塔图像看起来像是边缘图像。其大部分元素是零。它们用于图像压缩。拉普拉斯金字塔的等级由高斯金字塔等级与高斯金字塔等级的高等级之间的差异形成。拉普拉斯金字塔的第3级如下（对比度被调整以增强内容）：</p>
+<img src="../../messiup.jpg" alt="messiup.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 拉普拉斯金字塔由高斯金字塔形成。没有专用的函数来构造拉普拉斯金字塔。拉普拉斯金字塔图像看起来像是边缘图像。其大部分元素是零。它们用于图像压缩。拉普拉斯金字塔的等级由高斯金字塔等级与高斯金字塔等级的高等级之间的差异形成。拉普拉斯金字塔的第3级如下（对比度被调整以增强内容）：</p>
 <div class="image">
-<img src="../../images/lap.jpg" alt="image"/>
-</div>
-<h2>使用金字塔进行图像混合</h2>
+<img src="../../lap.jpg" alt="lap.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>使用金字塔进行图像混合</h2>
 <p>金字塔的一个应用是图像混合。例如，在图像拼接中，您需要将两个图像叠加在一起，但由于图像之间的不连续性，这可能看起来不太好。在这种情况下，使用金字塔图像进行混合可以实现无缝混合，而不会在图像中留下太多数据。其中一个典型的例子是两种水果橙子和苹果的混合。现在看看结果来明白我在说什么：</p>
 <div class="image">
-<img src="../../images/orapple.jpg" alt="image"/>
-</div>
-<p>请查看附加资源中的第一个参考资料，它有关于图像混合，拉普拉斯金字塔等的完整详细的图解信息。简单来说只需完成以下步骤：</p>
+<img src="../../orapple.jpg" alt="orapple.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 请查看附加资源中的第一个参考资料，它有关于图像混合，拉普拉斯金字塔等的完整详细的图解信息。简单来说只需完成以下步骤：</p>
 <ol type="1">
 <li>加载苹果和橙子的两个图像</li>
 <li>找到苹果和橙子的高斯金字塔（在这个特定的例子中，层数是6）</li>
@@ -175,7 +179,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

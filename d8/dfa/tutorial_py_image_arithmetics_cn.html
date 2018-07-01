@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -146,16 +146,18 @@ $(function() {
 <p>在这里$$被视为零。</p>
 <div class="fragment"><div class="line">img1 = cv2.imread(&#39;ml.png&#39;)</div><div class="line">img2 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line"></div><div class="line">dst = cv2.addWeighted(img1,0.7,img2,0.3,0)</div><div class="line"></div><div class="line">cv2.imshow(&#39;dst&#39;,dst)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是运行结果：</p>
 <div class="image">
-<img src="../../images/blending.jpg" alt="image"/>
-</div>
-<h2>位操作</h2>
+<img src="../../blending.jpg" alt="blending.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>位操作</h2>
 <p>包括按位AND，OR，NOT和XOR操作。在提取图像的某个部分（正如我们将在后面的章节中看到的那样）或定义和处理非矩形的ROI等等的时候，它们将非常有用。下面我们将看到一个关于如何更改图像的特定区域的示例。</p>
 <p>我想把OpenCV标志放在图片的上方。如果我直接将两个图像相加，它会改变颜色。如果我把它混合，我会得到一个半透明的效果。但我希望它是不透明的。如果这是一个矩形区域，我可以像上一章那样使用ROI。但OpenCV标志不是矩形的。所以你需要通过位操作来完成，如下所示：</p>
 <div class="fragment"><div class="line"># 读入两张图片</div><div class="line">img1 = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">img2 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line"># 我想把图片放在左上角，所以我创建了一个ROI</div><div class="line">rows,cols,channels = img2.shape</div><div class="line">roi = img1[0:rows, 0:cols]</div><div class="line"># 现在创建一个标志的mask，同时也创建其反mask</div><div class="line">img2gray = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)</div><div class="line">ret, mask = cv2.threshold(img2gray, 10, 255, cv2.THRESH_BINARY)</div><div class="line">mask_inv = cv2.bitwise_not(mask)</div><div class="line"># 将ROI中的logo区域变黑</div><div class="line">img1_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)</div><div class="line"># 从logo的图片中获取logo</div><div class="line">img2_fg = cv2.bitwise_and(img2,img2,mask = mask)</div><div class="line"># 将logo放入ROI并修改原来的图片</div><div class="line">dst = cv2.add(img1bg,img2fg)</div><div class="line">img1[0:rows, 0:cols ] = dst</div><div class="line">cv2.imshow(&#39;res&#39;,img1)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是结果。左图显示了我们创建的mask。右图显示了最终结果。为了更好理解，在上面的代码显示了所有的中间图片，也就是<code>img1_bg</code>和<code>img2_fg</code>。</p>
 <div class="image">
-<img src="../../images/overlay.jpg" alt="image"/>
-</div>
-<h2>练习</h2>
+<img src="../../overlay.jpg" alt="overlay.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>练习</h2>
 <ul>
 <li>使用<code>cv2.addWeighted()</code>函数，创建文件夹中图像的平滑过渡的幻灯片放映。 </li>
 </ul>
@@ -163,7 +165,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -140,9 +140,10 @@ $(function() {
 <p>OpenCV提供了一个函数<code>cv2.filter2D()</code>来将一个内核与一个图像进行卷积。作为例子，我们将尝试在图像上使用平均过滤器。一个5x5的平均滤波器内核如下所示： $$ K = {1}{25} {bmatrix} 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 {bmatrix} $$ 滤波的过程是这样的：将该卷积核的中心放在一个像素之上，将该卷积核之下的所有25个像素加起来，取其平均值，用新的平均值代替中心像素。它会对图像中的所有像素执行此操作。试试这个代码并查看结果：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;opencv_logo.png&#39;)</div><div class="line">kernel = np.ones((5,5),np.float32)/25</div><div class="line">dst = cv2.filter2D(img,-1,kernel)</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Original&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Averaging&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/filter.jpg" alt="image"/>
-</div>
-<h2>图像模糊化（图像平滑）</h2>
+<img src="../../filter.jpg" alt="filter.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>图像模糊化（图像平滑）</h2>
 <p>图像模糊化是通过将图像与低通滤波器内核进行卷积来实现的。消除噪音非常有用。它实际上是从图像中去除了高频内容（例如：噪声，边缘）。所以这个操作会使边缘模糊一点。 （好吧，有些模糊化的技术也不会模糊边缘）。 OpenCV主要提供四种模糊技术。</p>
 <h3>1. 平均值法</h3>
 <p>这是通过使用归一化的box过滤器进行图像卷积来完成的。它只取卷积核的区域内所有像素的平均值，并替换中心元素。这是由函数<code>cv2.blur()</code>或<code>cv2.boxFilter()</code>完成的。查看文档以获取关于卷积核的更多细节。我们应该指定内核的宽度和高度。一个3x3归一化box过滤器如下所示： $$ K = {1}{9} {bmatrix} 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 {bmatrix} $$</p>
@@ -150,32 +151,36 @@ $(function() {
 <p>下面是使用5x5大小的卷积核的例子：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;opencv-logo-white.png&#39;)</div><div class="line">blur = cv2.blur(img,(5,5))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Original&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(blur),plt.title(&#39;Blurred&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/blur.jpg" alt="image"/>
-</div>
-<h3>2. 高斯模糊法</h3>
+<img src="../../blur.jpg" alt="blur.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>2. 高斯模糊法</h3>
 <p>这个方法使用高斯核而不是box过滤器。它是用函数<code>cv2.GaussianBlur()</code>完成的。我们需要指定内核的宽度和高度，这两个值应该是正的奇数。我们还应该分别指定X和Y方向的标准差<code>sigmaX</code>和<code>sigmaY</code>。如果只指定<code>sigmaX</code>，则默认<code>sigmaY</code>与<code>sigmaX</code>相同。如果两者都是零，则会从从内核大小计算出来。高斯模糊对于从图像中去除高斯噪声非常有效。</p>
 <p>如果需要，可以使用函数<code>cv2.getGaussianKernel()</code>创建一个高斯内核。</p>
 <p>上面的代码可以修改为使用高斯模糊：</p>
 <div class="fragment"><div class="line">blur = cv2.GaussianBlur(img,(5,5),0)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/gaussian.jpg" alt="image"/>
-</div>
-<h3>3. 中位数模糊法</h3>
+<img src="../../gaussian.jpg" alt="gaussian.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>3. 中位数模糊法</h3>
 <p>在这里，函数<code>cv2.medianBlur()</code>取卷积核区域下的所有像素的中位数，中心元素被这个中值取代。这对于图像中的“椒盐噪音”非常有效。有趣的是，在前面说的两个滤波器中，中心元素是新计算的值，它可以等于图像中的像素值或者就是新的值。但是在中值模糊的情况下，中心元素总是被图像中的某个像素值替代。它有效地降低了噪音。它的内核大小应该是一个正奇数。</p>
 <p>在这个演示中，我添加了50％的噪声，我们的原始图像和应用中位模糊。看看结果：</p>
 <div class="fragment"><div class="line">median = cv2.medianBlur(img,5)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/median.jpg" alt="image"/>
-</div>
-<h3>4. 双边过滤法</h3>
+<img src="../../median.jpg" alt="median.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>4. 双边过滤法</h3>
 <p><code>cv2.bilateralFilter()</code>在消除噪音方面非常有效，同时它能保持边缘清晰。但与其他过滤器相比速度较慢。我们已经看到，高斯滤波器取像素周围的一个邻域，并找到它的高斯加权平均值。这个高斯滤波器是空间独立的函数，也就是在滤波时考虑了附近所有的像素。它不考虑像素是否具有几乎相同的强度。它不考虑像素是否是边缘像素。所以它也模糊了我们不想模糊的边缘。</p>
 <p>双边滤波器也需要使用一个空间中的高斯滤波器，而另外一个高斯滤波器是像素差的函数。空间的高斯函数确保在模糊时只考虑附近的像素，而亮度差异高斯函数确保那些与中心像素具有相似亮度的像素才被认为是需要被模糊的。所以它会保留边缘，因为在边缘的像素将具有较大的亮度变化。</p>
 <p>以下示例显示使用双边过滤器（有关参数的详细信息，请查阅文档）。</p>
 <div class="fragment"><div class="line">blur = cv2.bilateralFilter(img,9,75,75)</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/bilateral.jpg" alt="image"/>
-</div>
-<p>看，图像表面上的纹理消失了，但边缘仍然清晰。</p>
+<img src="../../bilateral.jpg" alt="bilateral.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 看，图像表面上的纹理消失了，但边缘仍然清晰。</p>
 <h2>其他资源</h2>
 <ul>
 <li><a href="http://people.csail.mit.edu/sparis/bf_course/">关于双边过滤的详细信息</a> </li>
@@ -184,7 +189,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -159,15 +159,17 @@ $(function() {
 <p class="startli">第三张图片显示了epsilon = 1％弧长的情况。</p>
 <p class="startli">第三个参数指定曲线是否关闭。</p>
 <div class="image">
-<img src="../../images/approx.jpg" alt="image"/>
-</div>
+<img src="../../approx.jpg" alt="approx.jpg"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">凸包</p>
 <p class="startli">凸包看起来与轮廓近似类似，但它们不是完全一样的（虽然两者在某些情况下可能确实会给出相同的结果）。<code>cv2.convexHull()</code>函数用来检查曲线的凸度缺陷并纠正它。一般来说，凸曲线总是凸出或者至少是平坦的曲线。如果它向内部凸起，则称为凸面缺陷。例如，看看下面的图像中的手。红线显示手的凸包。双向箭头标记显示凸面缺陷，这是凸包与轮廓的局部最大偏差。</p>
 <div class="image">
-<img src="../../images/convexitydefects.jpg" alt="image"/>
-</div>
-<p class="startli">​</p>
+<img src="../../convexitydefects.jpg" alt="convexitydefects.jpg"/>
+<div class="caption">
+image</div></div>
+<p> ​</p>
 <p class="startli">关于这个函数的语法有一些事情要讨论：</p>
 <p class="startli">```python hull = cv2.convexHull(points[, hull[, clockwise[, returnPoints]] ```</p>
 <p class="startli">参数详情：</p><ul>
@@ -208,27 +210,30 @@ $(function() {
 <p class="startli">接下来我们使用函数<code>cv2.minEnclosingCircle()</code>来找到对象的外接圆。 它是一个完全覆盖物体的面积最小的圆。</p>
 <p class="startli">```python (x,y),radius = cv2.minEnclosingCircle(cnt) center = (int(x),int(y)) radius = int(radius) cv2.circle(img,center,radius,(0,255,0),2) ```</p>
 <div class="image">
-<img src="../../images/circumcircle.png" alt="image"/>
-</div>
+<img src="../../circumcircle.png" alt="circumcircle.png"/>
+<div class="caption">
+image</div></div>
 </li>
 <li><p class="startli">拟合椭圆</p>
 <p class="startli">接下来是将椭圆拟合到一个对象。 它将返回椭圆所在的旋转矩形。</p>
 </li>
 </ol>
 <div class="fragment"><div class="line">ellipse = cv2.fitEllipse(cnt)</div><div class="line">cv2.ellipse(img,ellipse,(0,255,0),2)</div></div><!-- fragment --><div class="image">
-<img src="../../images/fitellipse.png" alt="image"/>
-</div>
+<img src="../../fitellipse.png" alt="fitellipse.png"/>
+<div class="caption">
+image</div></div>
 <ol type="1">
 <li>拟合一条线 同样，我们可以将一条线放在一组点上。 下面的图像包含一组白点。 我们可以拟合一条直线。</li>
 </ol>
 <div class="fragment"><div class="line">rows,cols = img.shape[:2]</div><div class="line">[vx,vy,x,y] = cv2.fitLine(cnt, cv2.DIST_L2,0,0.01,0.01)</div><div class="line">lefty = int((-x*vy/vx) + y)</div><div class="line">righty = int(((cols-x)*vy/vx)+y)</div><div class="line">cv2.line(img,(cols-1,righty),(0,lefty),(0,255,0),2)</div></div><!-- fragment --><div class="image">
-<img src="../../images/fitline.jpg" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../fitline.jpg" alt="fitline.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

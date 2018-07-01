@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -148,13 +148,14 @@ $(function() {
 <div class="fragment"><div class="line">if len(good)&gt;MIN_MATCH_COUNT:</div><div class="line">    src_pts = np.float32([ kp1[m.queryIdx].pt for m in good ]).reshape(-1,1,2)</div><div class="line">    dst_pts = np.float32([ kp2[m.trainIdx].pt for m in good ]).reshape(-1,1,2)</div><div class="line"></div><div class="line">    M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)</div><div class="line">    matchesMask = mask.ravel().tolist()</div><div class="line"></div><div class="line">    h,w,d = img1.shape</div><div class="line">    pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)</div><div class="line">    dst = cv2.perspectiveTransform(pts,M)</div><div class="line"></div><div class="line">    img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)</div><div class="line">else:</div><div class="line">    print( &quot;Not enough matches are found - {}/{}&quot;.format(len(good), MIN_MATCH_COUNT) )</div><div class="line">matchesMask = None</div></div><!-- fragment --><p>最后，我们绘制我们的inlier（如果成功找到物体）或匹配关键点（如果没找到）。</p>
 <div class="fragment"><div class="line">draw_params = dict(matchColor = (0,255,0), # 用绿色画出匹配点</div><div class="line">                    singlePointColor = None,</div><div class="line">                    matchesMask = matchesMask, # 只画出inliers</div><div class="line">                    flags = 2)</div><div class="line">img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)</div><div class="line">plt.imshow(img3, &#39;gray&#39;),plt.show()</div></div><!-- fragment --><p>看下面的结果。 对象在混乱的图像中以白色标记：</p>
 <div class="image">
-<img src="../../images/homography_findobj.jpg" alt="image"/>
-</div>
+<img src="../../homography_findobj.jpg" alt="homography_findobj.jpg"/>
+<div class="caption">
+image</div></div>
  </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

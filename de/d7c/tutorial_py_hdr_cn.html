@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -158,23 +158,27 @@ $(function() {
 <p>你可以看到不同的结果，但记住每个算法都有额外的参数，你应该尝试不同方法来得到你想要的结果。最好的做法是尝试不同的方法，看看哪一个最适合你的场景。</p>
 <h3>Debvec:</h3>
 <div class="image">
-<img src="../../images/ldr_debvec.jpg" alt="image"/>
-</div>
-<h3>Robertson:</h3>
+<img src="../../ldr_debvec.jpg" alt="ldr_debvec.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>Robertson:</h3>
 <div class="image">
-<img src="../../images/ldr_robertson.jpg" alt="image"/>
-</div>
-<h3>Mertenes 融合:</h3>
+<img src="../../ldr_robertson.jpg" alt="ldr_robertson.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>Mertenes 融合:</h3>
 <div class="image">
-<img src="../../images/fusion_mertens.jpg" alt="image"/>
-</div>
-<h2>估计相机响应函数</h2>
+<img src="../../fusion_mertens.jpg" alt="fusion_mertens.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>估计相机响应函数</h2>
 <p>相机响应函数（CRF）使我们能够将场景辐射与测量的强度值连接起来。 CRF在一些计算机视觉算法中非常重要，包括HDR算法。在这里，我们估计反向相机响应函数，并将其用于HDR合并。</p>
 <div class="fragment"><div class="line"># 估计相机响应函数 (CRF)</div><div class="line">cal_debvec = cv2.createCalibrateDebevec()</div><div class="line">crf_debvec = cal_debvec.process(img_list, times=exposure_times)</div><div class="line">hdr_debvec = merge_debvec.process(img_list, times=exposure_times.copy(), response=crf_debvec.copy())</div><div class="line">cal_robertson = cv2.createCalibrateRobertson()</div><div class="line">crf_robertson = cal_robertson.process(img_list, times=exposure_times)</div><div class="line">hdr_robertson = merge_robertson.process(img_list, times=exposure_times.copy(), response=crf_robertson.copy())</div></div><!-- fragment --><p>相机响应函数由每个颜色通道的256长度矢量表示。对于这个序列，我们得到了以下的估计：</p>
 <div class="image">
-<img src="../../images/crf.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../crf.jpg" alt="crf.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ol type="1">
 <li>Paul E Debevec and Jitendra Malik. Recovering high dynamic range radiance maps from photographs. In ACM SIGGRAPH 2008 classes, page 31. ACM, 2008.</li>
 <li>Mark A Robertson, Sean Borman, and Robert L Stevenson. Dynamic range improvement through multiple exposures. In Image Processing, 1999. ICIP 99. Proceedings. 1999 International Conference on, volume 3, pages 159–163. IEEE, 1999.</li>
@@ -190,7 +194,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

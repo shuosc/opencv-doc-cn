@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -138,9 +138,10 @@ $(function() {
 <h2>理论基础</h2>
 <p>在前几章中，我们看到了一些像Harris这样的角点检测器。它们是旋转不变的，这意味着，即使图像旋转了，我们也可以找到相同的角点。 这是显而易见的，因为边角在图像旋转后也是边角。 但是缩放呢？ 如果图像缩放，边角可能不再是一个边角。 例如，请看下面的简单图片。 放大后，小窗口内的图像中一个原先是边角的地方现在看起来是平滑的。 所以Harris角点检测不是比例不变的。</p>
 <div class="image">
-<img src="../../images/sift_scale_invariant.jpg" alt="image"/>
-</div>
-<p>因此，在2004年，不列颠哥伦比亚大学的 D.Lowe 在他的论文中提出了一种新的算法：尺度不变特征变换（SIFT），《Distinctive Image Features from Scale-Invariant Keypoints》<a href="http://citeseer.ist.psu.edu/lowe04distinctive.html">^2</a>，这个算法提取关键点并计算其描述符。*（这篇论文很容易理解，并被认为是在SIFT方面最好的资料，所以这个解释只是论文的一个简短摘要）*。</p>
+<img src="../../sift_scale_invariant.jpg" alt="sift_scale_invariant.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 因此，在2004年，不列颠哥伦比亚大学的 D.Lowe 在他的论文中提出了一种新的算法：尺度不变特征变换（SIFT），《Distinctive Image Features from Scale-Invariant Keypoints》<a href="http://citeseer.ist.psu.edu/lowe04distinctive.html">^2</a>，这个算法提取关键点并计算其描述符。*（这篇论文很容易理解，并被认为是在SIFT方面最好的资料，所以这个解释只是论文的一个简短摘要）*。</p>
 <p>SIFT算法主要涉及四个步骤。 我们会一一看到他们。</p>
 <ol type="1">
 <li><p class="startli">尺度空间极值检测</p>
@@ -149,13 +150,15 @@ $(function() {
 <p class="startli">但是LoG性能开销比较大，所以SIFT算法使用LoG的近似：高斯滤波器的差值。 高斯滤波器差值就是高斯模糊过的有两个不同$$的同一幅图片的差值，设这两个$$值为$$和$k$。这个过程对每组不同的图像金字塔中的“octave”执行。</p>
 <p class="startli">下面的图像展示了它的过程：</p>
 <div class="image">
-<img src="../../images/sift_dog.jpg" alt="image"/>
-</div>
-<p class="startli">一旦找到这个DoG，就会在空间和规模上搜索图像的局部极值。 例如，图像中的一个像素与其8个邻居以及下一个尺度的9个像素和先前尺度的9个像素进行比较。 如果是局部极值，这就是一个潜在的关键点。 这基本上意味着在这个尺度上关键点是最好的。 如下图所示：</p>
+<img src="../../sift_dog.jpg" alt="sift_dog.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 一旦找到这个DoG，就会在空间和规模上搜索图像的局部极值。 例如，图像中的一个像素与其8个邻居以及下一个尺度的9个像素和先前尺度的9个像素进行比较。 如果是局部极值，这就是一个潜在的关键点。 这基本上意味着在这个尺度上关键点是最好的。 如下图所示：</p>
 <div class="image">
-<img src="../../images/sift_local_extrema.jpg" alt="image"/>
-</div>
-<p class="startli">关于不同的参数，论文给出了一些经验数据，可以概括为：octaves = 4，比例级数 = 5，初始$ = 1.6 $，$k =  {2} $等作为最佳值。</p>
+<img src="../../sift_local_extrema.jpg" alt="sift_local_extrema.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 关于不同的参数，论文给出了一些经验数据，可以概括为：octaves = 4，比例级数 = 5，初始$ = 1.6 $，$k =  {2} $等作为最佳值。</p>
 </li>
 <li><p class="startli">关键点定位</p>
 <p class="startli">一旦找到潜在的关键点位置，就必须对其进行改进以获得更准确的结果。</p>
@@ -179,9 +182,10 @@ $(function() {
 <p>OpenCV还提供<code>cv2.drawKeyPoints()</code>函数，用于绘制关键点位置的小圆圈。 如果你传递一个标志<code>cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS</code>给它，它将绘制一个大小为keypoint的圆，它甚至会显示它的方向。 看下面的例子。</p>
 <div class="fragment"><div class="line">img=cv2.drawKeypoints(gray,kp,img,flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)</div><div class="line"></div><div class="line">cv2.imwrite(&#39;sift_keypoints.jpg&#39;,img)</div></div><!-- fragment --><p>看下面的结果：</p>
 <div class="image">
-<img src="../../images/sift_keypoints.jpg" alt="image"/>
-</div>
-<p>现在我们来计算描述符，OpenCV提供了两种方法。</p>
+<img src="../../sift_keypoints.jpg" alt="sift_keypoints.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在我们来计算描述符，OpenCV提供了两种方法。</p>
 <ul>
 <li>既然已经找到了关键点，你可以调用<code>sift.compute()</code>来计算我们找到的关键点的描述符。 例如：<code>kp,des = sift.compute(gray,kp)</code></li>
 <li>如果没有找到关键点，可以用函数<code>sift.detectAndCompute()</code>直接找到关键点和描述符。</li>
@@ -194,7 +198,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

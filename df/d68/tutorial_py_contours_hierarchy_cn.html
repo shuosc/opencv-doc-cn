@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -140,9 +140,10 @@ $(function() {
 <p>这种关系的表示称为**层次结构（Hierarchy）**。</p>
 <p>看下面的示例图片：</p>
 <div class="image">
-<img src="../../images/hierarchy.png" alt="image"/>
-</div>
-<p>在这个图像中，有几个我从**0-5**编号的形状。 2和2a表示最外面方形的外部和内部轮廓。</p>
+<img src="../../hierarchy.png" alt="hierarchy.png"/>
+<div class="caption">
+image</div></div>
+<p> 在这个图像中，有几个我从**0-5**编号的形状。 2和2a表示最外面方形的外部和内部轮廓。</p>
 <p>这里，轮廓0,1,2是**外部的或者最外面的**。我们可以说，他们在**第0层**中，或是在**同一个层次上**。</p>
 <p>接下来是**轮廓2a**。它可以被认为是**轮廓2的子轮廓**（或者相反，轮廓2是轮廓2a的**父轮廓**）。所以它在**第1层**。类似地，轮廓3是轮廓2的子轮廓，并且进入下一层。最后轮廓4,5是轮廓3a的子轮廓，他们进入最后一个层次。从我对盒子进行编号的方式来看，我会说轮廓4是轮廓3a的第一个子轮廓（如果编号方式不同，也可以是轮廓5）。</p>
 <p>我写出了这些东西来方便我们理解**相同的层次**，**外部轮廓**，**子轮廓**，**父轮廓**，**第一个子轮廓**等术语。现在让我们来看看OpenCV中的轮廓层次。</p>
@@ -177,9 +178,10 @@ $(function() {
 <p class="startli">只要考虑在黑色背景上的“大的白色的零字符”的形象。零的外圈属于第一层次，零的内圈属于第二层次。</p>
 <p class="startli">我们可以用一个简单的图像来解释它。在这里，我已经用红色标出了轮廓的顺序，用绿色标出了它们的层次（1或者2）。顺序与OpenCV检测轮廓的顺序相同。</p>
 <div class="image">
-<img src="../../images/ccomp_hierarchy.png" alt="image"/>
-</div>
-<p class="startli">​</p>
+<img src="../../ccomp_hierarchy.png" alt="ccomp_hierarchy.png"/>
+<div class="caption">
+image</div></div>
+<p> ​</p>
 <p class="startli">考虑第一个轮廓，即轮廓0。它处于层次结构1。它有两个孔，轮廓1和2，属于等级2。因此，对于轮廓0，同一层级中的下一轮廓是轮廓3。没有上一个轮廓。其第一个是子轮廓是等级2中的轮廓1。它没有父轮廓，因为它在层次1中。所以它的hierarchy数组是<code>[3, -1, 1, -1]</code>。</p>
 <p class="startli">现在看轮廓1。它在层次2中。下一个在相同的层次（在轮廓1的父轮廓下）是轮廓2。没有上一个轮廓。没有子轮廓，但父轮廓是轮廓0。所以数组是<code>[2, -1, -1, 0]</code>。</p>
 <p class="startli">同样对于轮廓2：它在层次2中。轮廓0下的同一层次中没有下一个轮廓。所以没有<code>Next</code>。上一个轮廓是轮廓1。没有子轮廓，父轮廓是轮廓0。所以数组是<code>[-1, 1, -1, 0]</code>。</p>
@@ -194,9 +196,10 @@ $(function() {
 <p class="startli">这是最后一个“完美先生”。它检索所有的轮廓，并创建一个完整的家庭层次列表。它会告诉你爷爷，父亲，儿子，孙子是谁，甚至更多... :)。</p>
 <p class="startli">例如，把上面的图像重新用<code>cv2.RETR_TREE</code>进行轮廓检测，按照OpenCV给出的结果对轮廓重新排序并分析。再一次，红色字母给出了轮廓号，绿色字母给出了层次结构的顺序。</p>
 <div class="image">
-<img src="../../images/tree_hierarchy.png" alt="image"/>
-</div>
-<p class="startli">看轮廓0：它在层次结构0中。相同层次中的下一个轮廓是轮廓-。没有上一个轮廓。孩子是轮廓1。没有父轮廓。所以数组是<code>[7,-1,1,-1]</code>。</p>
+<img src="../../tree_hierarchy.png" alt="tree_hierarchy.png"/>
+<div class="caption">
+image</div></div>
+<p> 看轮廓0：它在层次结构0中。相同层次中的下一个轮廓是轮廓-。没有上一个轮廓。孩子是轮廓1。没有父轮廓。所以数组是<code>[7,-1,1,-1]</code>。</p>
 <p class="startli">看轮廓2：它在层次1。没有在同一级别的轮廓。没有上一个轮廓。子轮廓是轮廓3。父轮廓是轮廓1。所以数组是<code>[-1,-1,3,1]</code>。</p>
 <p class="startli">剩下的可以自己试试。以下是完整的结果：</p>
 <p class="startli">```python &gt;&gt;&gt; hierarchy &gt;&gt;&gt; array([[[ 7, -1, 1, -1], [-1, -1, 2, 0], [-1, -1, 3, 1], [-1, -1, 4, 2], [-1, -1, 5, 3], [ 6, -1, -1, 4], [-1, 5, -1, 4], [ 8, 0, -1, -1], [-1, 7, -1, -1]]]) ```</p>
@@ -207,7 +210,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

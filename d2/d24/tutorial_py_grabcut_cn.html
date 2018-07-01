@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -141,9 +141,10 @@ $(function() {
 <p>看到下面的图片。一开始球员和足球被围在一个蓝色的矩形中。然后做一些白色笔画（表示前景）和黑色笔画（表示背景）的修饰。</p>
 <p>我们得到一个不错的结果。</p>
 <div class="image">
-<img src="../../images/grabcut_output1.jpg" alt="image"/>
-</div>
-<p>那么后台发生了什么？</p>
+<img src="../../grabcut_output1.jpg" alt="grabcut_output1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 那么后台发生了什么？</p>
 <ul>
 <li>用户输入矩形。这个矩形之外的所有东西都将被视为确定的背景（这就是之前提到你的矩形应该包含所有对象的原因）。矩形内的所有东西都是未知的。类似地，任何指定前景和背景的用户输入都被认为是硬标签，这意味着它们在该过程中不会改变。</li>
 <li>计算机根据我们提供的数据进行初始标注。它标记前景和背景像素（或硬标签）</li>
@@ -155,9 +156,10 @@ $(function() {
 </ul>
 <p>如下图所示（图片提供者：http://www.cs.ru.ac.za/research/g02m1682/）</p>
 <div class="image">
-<img src="../../images/grabcut_scheme.jpg" alt="image"/>
-</div>
-<h2>演示</h2>
+<img src="../../grabcut_scheme.jpg" alt="grabcut_scheme.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>演示</h2>
 <p>现在我们开始使用OpenCV中的的grabcut算法。 OpenCV有这个函数：<code>cv2.grabCut()</code>。我们首先来看看它的参数：</p>
 <ul>
 <li><code>img</code> - 输入图像</li>
@@ -170,15 +172,17 @@ $(function() {
 <p>首先让我们看看<code>GC_INIT_WITH_RECT</code>模式。我们加载图像，创建一个类似的蒙版图像。我们创建<code>fgdModel</code>和<code>bgdModel</code>。我们给矩形参数。这些都是是直截了当的。让算法运行5次。由于我们使用的是矩形，所以模式应该是<code>cv2.GC_INIT_WITH_RECT</code>。然后运行grabCut。它会修改蒙版图像。在新的mask图像中，像素将被标记为具有如上所述的表示背景/前景的四个标记。所以我们修改mask，使所有的0像素和2像素被置为0（即背景），并且所有1像素和3像素被置于1（即前景像素）。现在我们最后的mask已经准备好了，只要将它与输入图像相乘即可获得分割过的图像。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">mask = np.zeros(img.shape[:2],np.uint8)</div><div class="line">bgdModel = np.zeros((1,65),np.float64)</div><div class="line">fgdModel = np.zeros((1,65),np.float64)</div><div class="line">rect = (50,50,450,290)</div><div class="line">cv2.grabCut(img,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)</div><div class="line">mask2 = np.where((mask2)|(mask0),0,1).astype(&#39;uint8&#39;)</div><div class="line">img = img*mask2[:,:,np.newaxis]</div><div class="line">plt.imshow(img),plt.colorbar(),plt.show()</div></div><!-- fragment --><p>看下面的结果：</p>
 <div class="image">
-<img src="../../images/grabcut_rect.jpg" alt="image"/>
-</div>
-<p>哎呀，梅西的头发不见了。谁喜欢没有头发的梅西？我们需要把它弄回来。所以我们会给出一个很好的值为1的像素的修正（确定前景）。与此同时，地上的一部分进入了图片中，这是我们不想要的，并且一些logo也是这样。我们需要删除它们。在那里，我们给出一些值为0的像素（确定的背景）。所以我们在前面的例子中修改了我们所得到的mask。</p>
+<img src="../../grabcut_rect.jpg" alt="grabcut_rect.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 哎呀，梅西的头发不见了。谁喜欢没有头发的梅西？我们需要把它弄回来。所以我们会给出一个很好的值为1的像素的修正（确定前景）。与此同时，地上的一部分进入了图片中，这是我们不想要的，并且一些logo也是这样。我们需要删除它们。在那里，我们给出一些值为0的像素（确定的背景）。所以我们在前面的例子中修改了我们所得到的mask。</p>
 <p>我真正做的是，我在绘画应用程序中打开输入图像，并添加另一个图层的图像。在绘画中使用画笔工具，我用白色和不需要的背景（如标志，地面等）在这个新层上标记错过的前景（头发，鞋子，球等）。然后用灰色填充剩余的背景。然后在OpenCV中加载该遮罩图像，编辑原来的遮罩图像，并在新添加的遮罩图像中得到相应的值。检查下面的代码：</p>
 <div class="fragment"><div class="line"># newmask 是一个我手动打好标签的图片</div><div class="line">newmask = cv2.imread(&#39;newmask.png&#39;,0)</div><div class="line"></div><div class="line"># 被标记为白色的部分（确定的前景），将mask改为1</div><div class="line"># 被标记为黑色的部分（确定的背景），将mask改为0</div><div class="line">mask[newmask == 0] = 0</div><div class="line">mask[newmask == 255] = 1</div><div class="line"></div><div class="line">mask, bgdModel, fgdModel = cv2.grabCut(img,mask,None,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_MASK)</div><div class="line"></div><div class="line">mask = np.where((mask==2)|(mask==0),0,1).astype(&#39;uint8&#39;)</div><div class="line">img = img*mask[:,:,np.newaxis]</div><div class="line">plt.imshow(img),plt.colorbar(),plt.show()</div></div><!-- fragment --><p>看下面的结果：</p>
 <div class="image">
-<img src="../../images/grabcut_mask.jpg" alt="image"/>
-</div>
-<p>就是这样了。在这里，如果不想在矩形模式下初始化，你可以直接使用掩码模式。只需用值为2的像素或值为3的像素（可能的背景/前景）标记掩模图像中的矩形区域即可。然后像我们在第二个例子中那样用值为1的像素标记我们的sure_foreground。然后直接使用mask模式的grabCut功能。</p>
+<img src="../../grabcut_mask.jpg" alt="grabcut_mask.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 就是这样了。在这里，如果不想在矩形模式下初始化，你可以直接使用掩码模式。只需用值为2的像素或值为3的像素（可能的背景/前景）标记掩模图像中的矩形区域即可。然后像我们在第二个例子中那样用值为1的像素标记我们的sure_foreground。然后直接使用mask模式的grabCut功能。</p>
 <h2>练习</h2>
 <ul>
 <li>OpenCV示例包含一个样例grabcut.py，它是一个使用grabcut的交互式工具。去试试看。另外看一下这个关于如何使用它的<a href="http://www.youtube.com/watch?v=kAwxLTDDAwU">YouTube的视频</a>。</li>
@@ -188,7 +192,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

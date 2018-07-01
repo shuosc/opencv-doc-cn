@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -139,9 +139,10 @@ $(function() {
 <p>现代的的便宜针孔相机引起了很多图像畸变。两个主要的畸变方式是径向畸变和切向畸变。</p>
 <p>径向畸变会使直线出现弯曲。当我们离开图像的中心时，它的效果就更明显了。例如，下面显示了一个图像，棋盘的两个边缘用红线标出。但是你可以看到边框不是一条直线，与红线不匹配。所有预期中的直线都变得凸出来了。访问维基百科<a href="https://zh.wikipedia.org/wiki/畸變">畸变</a>页面了解更多详情。</p>
 <div class="image">
-<img src="../../images/calib_radial.jpg" alt="image"/>
-</div>
-<p>这个畸变表示如下：</p>
+<img src="../../calib_radial.jpg" alt="calib_radial.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 这个畸变表示如下：</p>
 <p>$$ x_{distorted} = x( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6) \ y_{distorted} = y( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6)\ $$</p>
 <p>类似地，另一种畸变是由于图像摄取镜头没有完全平行于成像平面对准而发生的切向畸变。因此，图像中的某些区域可能看起来比预期更近。它表示如下：</p>
 <p>$$ x_{distorted} = x + [ 2p_1xy + p_2(r^2+2x^2)] \ y_{distorted} = y + [ p_1(r^2+ 2y^2)+ 2p_2xy] $$</p>
@@ -162,9 +163,10 @@ $(function() {
 <p>一旦我们找到了角落，我们可以使用<code>cv2.cornerSubPix()</code>来提高它们的准确性。我们也可以使用<code>cv2.drawChessboardCorners()</code>来绘制模式。所有这些步骤都包含在下面的代码中：</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">import glob</div><div class="line"></div><div class="line"># 确定精度</div><div class="line">criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)</div><div class="line"></div><div class="line"># 准备点的坐标 (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)</div><div class="line">objp = np.zeros((6*7,3), np.float32)</div><div class="line">objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)</div><div class="line"></div><div class="line"># 对象点和图像点</div><div class="line">objpoints = [] # 真实空间中的3d点</div><div class="line">imgpoints = [] # 图像平面中的2d点</div><div class="line"></div><div class="line">images = glob.glob(&#39;*.jpg&#39;)</div><div class="line"></div><div class="line">for fname in images:</div><div class="line">    img = cv2.imread(fname)</div><div class="line">    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</div><div class="line"></div><div class="line">    # 查找棋盘格点</div><div class="line">    ret, corners = cv2.findChessboardCorners(gray, (7,6), None)</div><div class="line"></div><div class="line">    # 如果找到了，将其优化并加入</div><div class="line">    if ret == True:</div><div class="line">        objpoints.append(objp)</div><div class="line"></div><div class="line">        corners2=cv2.cornerSubPix(gray,corners, (11,11), (-1,-1), criteria)</div><div class="line">        imgpoints.append(corners)</div><div class="line"></div><div class="line">        # 绘制显示角点</div><div class="line">        cv2.drawChessboardCorners(img, (7,6), corners2, ret)</div><div class="line">        cv2.imshow(&#39;img&#39;, img)</div><div class="line">        cv2.waitKey(500)</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面显示了一个有模式的图案：</p>
 <div class="image">
-<img src="../../images/calib_pattern.jpg" alt="image"/>
-</div>
-<h2>校准</h2>
+<img src="../../calib_pattern.jpg" alt="calib_pattern.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>校准</h2>
 <p>所以现在我们有我们的目标点和图像点了，我们可以准备去校准相机了。为此我们使用函数<code>cv2.calibrateCamera()</code>。它返回相机矩阵，失真系数，旋转和平移向量等。</p>
 <div class="fragment"><div class="line">ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)</div></div><!-- fragment --><h2>复原失真图像</h2>
 <p>我们已经得到了我们尝试要找到的东西。现在我们可以来复原一个扭曲过的图像。 OpenCV有两种方法，我们都将会看到。但在此之前，我们可以使用<code>cv2.getOptimalNewCameraMatrix()</code>根据一个自由缩放参数来细化相机矩阵。如果缩放参数$ = 0$，则返回不失真的图像，其中不需要的像素最少。所以它甚至可能会删除图像角落的一些像素。如果$ = 1$，所有像素都会保留，还会出现一些额外的黑色图像。它还会返回一个可用于裁剪结果的图像ROI。</p>
@@ -181,9 +183,10 @@ $(function() {
 </ol>
 <div class="fragment"><div class="line"># undistort</div><div class="line">mapx, mapy = cv2.initUndistortRectifyMap(mtx, dist, None, newcameramtx, (w,h), 5)</div><div class="line">dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)</div><div class="line"></div><div class="line"># 裁剪图像</div><div class="line">x, y, w, h = roi</div><div class="line">dst = dst[y:y+h, x:x+w]</div><div class="line">cv2.imwrite(&#39;calibresult.png&#39;, dst)</div></div><!-- fragment --><p>两种方法的结果是一样的，看下面的结果：</p>
 <div class="image">
-<img src="../../images/calib_result.jpg" alt="image"/>
-</div>
-<p>你可以看到所有的边缘现在都是直的了。</p>
+<img src="../../calib_result.jpg" alt="calib_result.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 你可以看到所有的边缘现在都是直的了。</p>
 <p>现在你可以用Numpy中的写入文件的函数（<code>np.savez</code>, <code>np.savetxt</code>等）来将相机矩阵和畸变系数保存起来，以备未来使用了。</p>
 <h2>反向投影误差</h2>
 <p>反向投影误差可以很好地估计出找到的参数的确切程度。这应尽可能接近于零。给定内在的，扭曲的，旋转和平移矩阵，我们首先使用<code>cv2.projectPoints()</code>将对象点转换成图像点。然后我们计算我们的变换和角点搜索算法之间的绝对规范。为了找到平均误差，我们计算所有校准图像的误差的算术平均值。</p>
@@ -195,7 +198,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

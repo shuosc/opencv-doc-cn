@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -146,8 +146,9 @@ $(function() {
 <p>它返回一个数组，每行包含这些值 - <code>[起点，终点，最远点，到最远点的近似距离]</code>。我们可以使用图像对其进行可视化。我们可以画一条连线起点和终点，然后在最远点画一个圆。记得前三个返回的值是cnt的索引。所以我们必须从cnt中提取这些值。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;star.jpg&#39;)</div><div class="line">img_gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">ret,thresh = cv2.threshold(img_gray, 127, 255,0)</div><div class="line">im2,contours,hierarchy = cv2.findContours(thresh,2,1)</div><div class="line">cnt = contours[0]</div><div class="line"></div><div class="line">hull = cv2.convexHull(cnt,returnPoints = False)</div><div class="line">defects = cv2.convexityDefects(cnt,hull)</div><div class="line"></div><div class="line">for i in range(defects.shape[0]):</div><div class="line">    s,e,f,d = defects[i,0]</div><div class="line">    start = tuple(cnt[s][0])</div><div class="line">    end = tuple(cnt[e][0])</div><div class="line">    far = tuple(cnt[f][0])</div><div class="line">    cv2.line(img,start,end,[0,255,0],2)</div><div class="line">    cv2.circle(img,far,5,[0,0,255],-1)</div><div class="line"></div><div class="line">cv2.imshow(&#39;img&#39;,img)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/defects.jpg" alt="image"/>
-</div>
+<img src="../../defects.jpg" alt="defects.jpg"/>
+<div class="caption">
+image</div></div>
 <ol type="1">
 <li><p class="startli">点-多边形测试</p>
 <p class="startli">OpenCV中的<code>pointPolygonTest</code>函数可以找到图像中的一个点与轮廓之间的最短距离。当点在轮廓外时，返回负值的距离，点在内部时返回正值，如果点在轮廓上，则返回零。</p>
@@ -164,9 +165,10 @@ $(function() {
 </ol>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img1 = cv2.imread(&#39;star.jpg&#39;,0)</div><div class="line">img2 = cv2.imread(&#39;star2.jpg&#39;,0)</div><div class="line"></div><div class="line">ret, thresh = cv2.threshold(img1, 127, 255,0)</div><div class="line">ret, thresh2 = cv2.threshold(img2, 127, 255,0)</div><div class="line">im2,contours,hierarchy = cv2.findContours(thresh,2,1)</div><div class="line">cnt1 = contours[0]</div><div class="line">im2,contours,hierarchy = cv2.findContours(thresh2,2,1)</div><div class="line">cnt2 = contours[0]</div><div class="line"></div><div class="line">ret = cv2.matchShapes(cnt1,cnt2,1,0.0)</div><div class="line">print( ret )</div></div><!-- fragment --><p>我试着匹配了下面给出的不同形状：</p>
 <div class="image">
-<img src="../../images/matchshapes.jpg" alt="image"/>
-</div>
-<p>我得到了以下结果：</p>
+<img src="../../matchshapes.jpg" alt="matchshapes.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 我得到了以下结果：</p>
 <ul>
 <li>匹配图像A和其本身= 0.0</li>
 <li>匹配图像A和图像B = 0.001946</li>
@@ -183,7 +185,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

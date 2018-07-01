@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -153,14 +153,15 @@ $(function() {
 <p>下面是一个显示ORB使用的简单代码。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;simple.jpg&#39;,0)</div><div class="line"># 初始化ORB检测器</div><div class="line">orb = cv2.ORB_create()</div><div class="line"># 用ORB查找关键点</div><div class="line">kp = orb.detect(img,None)</div><div class="line"># 用ORB计算描述子</div><div class="line">kp, des = orb.compute(img, kp)</div><div class="line"># 只绘制关键点位置，不绘制大小和方向</div><div class="line">img2 = cv2.drawKeypoints(img, kp, None, color=(0,255,0), flags=0)</div><div class="line">plt.imshow(img2), plt.show()</div></div><!-- fragment --><p>可以看见下面的结果：</p>
 <div class="image">
-<img src="../../images/orb_kp.jpg" alt="image"/>
-</div>
-<p>我们将在其他章节中讲解使用ORB特征来做匹配。 </p>
+<img src="../../orb_kp.jpg" alt="orb_kp.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 我们将在其他章节中讲解使用ORB特征来做匹配。 </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

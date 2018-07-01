@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -139,13 +139,14 @@ $(function() {
 <p>我们在这里使用的函数是<code>cv2.HoughCircles()</code>。它有很多参数，在文档中有很好的解释。所以我们直接上代码。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;opencv-logo-white.png&#39;,0)</div><div class="line">img = cv2.medianBlur(img,5)</div><div class="line">cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)</div><div class="line"></div><div class="line">circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=0,maxRadius=0)</div><div class="line"></div><div class="line"></div><div class="line">circles = np.uint16(np.around(circles))</div><div class="line">for i in circles[0,:]:</div><div class="line">    # 画出外面的圆</div><div class="line">    cv2.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)</div><div class="line">    # 画出圆心</div><div class="line">    cv2.circle(cimg,(i[0],i[1]),2,(0,0,255),3)</div><div class="line"></div><div class="line">cv2.imshow(&#39;detected circles&#39;,cimg)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>结果如下所示：</p>
 <div class="image">
-<img src="../../images/houghcircles2.jpg" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../houghcircles2.jpg" alt="houghcircles2.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

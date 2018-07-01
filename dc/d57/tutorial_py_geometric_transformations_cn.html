@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -147,31 +147,34 @@ $(function() {
 <p><code>cv2.warpAffine()</code>函数的第三个参数是输出图像的大小，它应该是&lt;tt&gt;(width,height)的形式。 其中width是列数，height是行数。</p>
 <p>下面是平移的结果：</p>
 <div class="image">
-<img src="../../images/translation.jpg" alt="image"/>
-</div>
-<h3>旋转</h3>
+<img src="../../translation.jpg" alt="translation.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>旋转</h3>
 <p>通过如下形式的变换矩阵来实现旋转角度为$$的图像旋转: $$ M = {bmatrix} cos &amp; -sin \ sin &amp; cos {bmatrix} $$ OpenCV提供了可调整旋转中心的缩放旋转，以便您可以在任何您喜欢的位置旋转。 修改后的变换矩阵由下式给出： $$ {bmatrix}  &amp;   &amp; (1-  )   center.x -    center.y \ -  &amp;   &amp;    center.x + (1-  )   center.y {bmatrix} \ where \ {array}{l}  = scale    , \  = scale    {array} $$ 为了找到这个转换矩阵，OpenCV提供了一个函数cv2.getRotationMatrix2D。 请看下面的例子，它将图像相对于中心旋转90度，而没有任何缩放。</p>
 <h3>仿射变换</h3>
 <p>在仿射变换中，原始图像中的所有平行线在输出图像中仍然是平行的。 为了找到变换矩阵，我们需要输入图像中的三个点和它们在输出图像中的相应位置。 然后<code>cv2.getAffineTransform</code>将创建一个2x3矩阵，将其传递给<code>cv2.warpAffine</code>。</p>
 <p>看下面的例子，并且可以看看我选择的点（用绿色标记）：</p>
 <div class="fragment"><div class="line">img = cv2.imread(&#39;drawing.png&#39;)</div><div class="line">rows,cols,ch = img.shape</div><div class="line">pts1 = np.float32([[50,50],[200,50],[50,200]])</div><div class="line">pts2 = np.float32([[10,100],[200,50],[100,250]])</div><div class="line">M = cv2.getAffineTransform(pts1,pts2)</div><div class="line">dst = cv2.warpAffine(img,M,(cols,rows))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Input&#39;)</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Output&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/affine.jpg" alt="image"/>
-</div>
-<h3>透视变换</h3>
+<img src="../../affine.jpg" alt="affine.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>透视变换</h3>
 <p>对于透视变换，您需要一个3x3变换矩阵。 即使在变换之后，直线仍为直线。 要找到这个变换矩阵，你需要输入图像上的4个点和输出图像上的对应点。 在这4点中，不能有三点共线。 然后可以通过函数<code>cv2.getPerspectiveTransform</code>找到变换矩阵。 然后将<code>cv2.warpPerspective</code>应用于这个3x3转换矩阵。</p>
 <p>请看下面的代码：</p>
 <div class="fragment"><div class="line">img = cv2.imread(&#39;sudoku.png&#39;)</div><div class="line">rows,cols,ch = img.shape</div><div class="line">pts1 = np.float32([[56,65],[368,52],[28,387],[389,390]])</div><div class="line">pts2 = np.float32([[0,0],[300,0],[0,300],[300,300]])</div><div class="line">M = cv2.getPerspectiveTransform(pts1,pts2)</div><div class="line">dst = cv2.warpPerspective(img,M,(300,300))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Input&#39;)</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Output&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/perspective.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../perspective.jpg" alt="perspective.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <p><a href="https://books.google.com/books?hl=zh-CN&amp;lr=&amp;id=bXzAlkODwa8C&amp;oi=fnd&amp;pg=PR4&amp;dq=Computer+Vision:+Algorithms+and+Applications&amp;ots=g_Y470nDCF&amp;sig=iFX7bOCsAefVolxa9Yk0fIC-HQc#v=onepage&amp;q=Computer%20Vision%3A%20Algorithms%20and%20Applications&amp;f=false">Computer Vision: Algorithms and Applications</a> </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

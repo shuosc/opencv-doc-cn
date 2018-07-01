@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -151,20 +151,22 @@ $(function() {
 </div>
 <p>这就是霍夫变换对线条的工作原理。这很简单，也许你可以使用Numpy自己实现它。以下是显示累加器的图像。某些位置的亮点表示它们是图像中可能线条的参数。 （图片提供者： <a href="http://en.wikipedia.org/wiki/Hough_transform">维基百科</a>）</p>
 <div class="image">
-<img src="../../images/houghlines2.jpg"/>
+<img src="../../houghlines2.jpg" alt="houghlines2.jpg"/>
 </div>
 <h2>OpenCV中的霍夫变换</h2>
 <p>上面解释的一切都封装在OpenCV函数<code>cv2.HoughLines()</code>)中。它只是返回一个数组的$(, )$。 $$以像素为单位进行测量，$$以弧度测量。第一个参数是输入图像，应该是一个二值图像，所以在应用霍夫变换之前应用阈值或者使用canny边缘检测。第二和第三个参数分别是$$和$$精度。第四个参数是阈值，这意味着被视为一条线所需要的最低的投票。记住，得票数取决于线上的点数。所以它代表了应该检测到的线的最小长度。</p>
 <div class="fragment"></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/houghlines3.jpg" alt="image"/>
-</div>
-<h2>概率霍夫变换</h2>
+<img src="../../houghlines3.jpg" alt="houghlines3.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>概率霍夫变换</h2>
 <p>在霍夫变换中，即使对于有两个参数的行，也可以看到很多计算。概率霍夫变换是我们看到的霍夫变换的一个优化。它没有考虑到所有的要点。相反，它只需要一个随机子集，足以进行在线检测。只是我们必须降低门槛。请参阅下面的图像，比较霍夫空间中的霍夫变换和概率霍夫变换。 （图片提供者：<a href="http://phdfb1.free.fr/robot/mscthesis/node14.html">Franck Bettinger的主页</a>）</p>
 <div class="image">
-<img src="../../images/houghlines4.png" alt="image"/>
-</div>
-<p>OpenCV的实现是基于Robust Detection of Lines Using the Progressive Probabilistic Hough Transform by Matas, J. and Galambos, C. and Kittler, J.V. <b>[Matas00.。使用的函数是]</b><code>cv2.HoughLinesP()</code>。它有两个新的参数。</p>
+<img src="../../houghlines4.png" alt="houghlines4.png"/>
+<div class="caption">
+image</div></div>
+<p> OpenCV的实现是基于Robust Detection of Lines Using the Progressive Probabilistic Hough Transform by Matas, J. and Galambos, C. and Kittler, J.V. <b>[Matas00.。使用的函数是]</b><code>cv2.HoughLinesP()</code>。它有两个新的参数。</p>
 <ul>
 <li><b>minLineLength</b> - 行的最小长度。比这更短的线段被拒绝。</li>
 <li><b>maxLineGap</b> - 线段之间允许的最大间隔来处理它们</li>
@@ -172,9 +174,10 @@ $(function() {
 <p>最好事情的是，它直接返回行的两个端点。 在前面的例子中，你只有线的参数，你必须找到所有的点。 在这里，一切都是直接和简单的。</p>
 <div class="fragment"></div><!-- fragment --><p>看下面的结果：</p>
 <div class="image">
-<img src="../../images/houghlines5.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../houghlines5.jpg" alt="houghlines5.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/霍夫变换">Wikipedia上的霍夫变换</a> </li>
 </ul>
@@ -182,7 +185,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

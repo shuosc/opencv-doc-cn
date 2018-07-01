@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -140,35 +140,41 @@ $(function() {
 <h2>代码</h2>
 <p>下面我们将看到一个关于如何使用距离变换和分水岭来分割相互接触的对象的例子。 考虑下面的硬币图像，硬币互相接触。即使你进行了二值化，它也会触及对方。</p>
 <div class="image">
-<img src="../../images/water_coins.jpg" alt="image"/>
-</div>
-<p>我们首先找到硬币的大致分割。为此，我们可以使用Otsu二值化。</p>
+<img src="../../water_coins.jpg" alt="water_coins.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 我们首先找到硬币的大致分割。为此，我们可以使用Otsu二值化。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;coins.png&#39;)</div><div class="line">gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">ret, thresh = cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/water_thresh.jpg" alt="image"/>
-</div>
-<p>现在我们需要去除图像中的任何小的白色噪音。为此，我们可以使用形态学开启。要删除对象中的任何小孔，我们可以使用形态学闭合。所以，现在我们可以肯定，靠近物体中心的区域是前景区域，远离物体的区域是背景。只有我们不确定的地区是硬币的边界地区。</p>
+<img src="../../water_thresh.jpg" alt="water_thresh.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在我们需要去除图像中的任何小的白色噪音。为此，我们可以使用形态学开启。要删除对象中的任何小孔，我们可以使用形态学闭合。所以，现在我们可以肯定，靠近物体中心的区域是前景区域，远离物体的区域是背景。只有我们不确定的地区是硬币的边界地区。</p>
 <p>所以我们需要提取我们确信它们是硬币的区域。腐蚀消除了边界像素。所以，无论剩下什么，我们可以肯定这是硬币。如果物体不相互接触，那将是有效的。但是由于它们彼此接触，另一个好的选择是找到距离变换并应用适当的阈值。接下来我们需要找到我们确信他们不是硬币的区域。为此，我们对结果进行膨胀操作。膨胀将对象边界向背景方向增加。这样，我们可以确定结果背景中的任何区域是真正的背景，因为边界区域被删除了。看到下面的图片。</p>
 <div class="image">
-<img src="../../images/water_fgbg.jpg" alt="image"/>
-</div>
-<p>其余的地区是我们对其是硬币还是背景一无所知的地方。分水岭算法应该会找到它。这些区域通常在前景和背景相遇的硬币的边界附近（或者甚至是两个不同的硬币相遇）。我们称之为边界。它可以通过从sure_bg区域中减去sure_fg区域来获得。</p>
+<img src="../../water_fgbg.jpg" alt="water_fgbg.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 其余的地区是我们对其是硬币还是背景一无所知的地方。分水岭算法应该会找到它。这些区域通常在前景和背景相遇的硬币的边界附近（或者甚至是两个不同的硬币相遇）。我们称之为边界。它可以通过从sure_bg区域中减去sure_fg区域来获得。</p>
 <div class="fragment"><div class="line"># 噪音消除</div><div class="line">kernel = np.ones((3,3),np.uint8)</div><div class="line">opening = cv2.morphologyEx(thresh,cv2.MORPH_OPEN,kernel, iterations = 2)</div><div class="line"></div><div class="line"># 确定的背景区域</div><div class="line">sure_bg = cv2.dilate(opening,kernel,iterations=3)</div><div class="line"></div><div class="line"># 找到确定的前景区域</div><div class="line">dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,5)</div><div class="line">ret, sure_fg = cv2.threshold(dist_transform,0.7*dist_transform.max(),255,0)</div><div class="line"></div><div class="line"># 找到不确定的区域</div><div class="line">sure_fg = np.uint8(sure_fg)</div><div class="line">unknown = cv2.subtract(sure_bg,sure_fg)</div></div><!-- fragment --><p>看结果。在这个二值化的图像中，我们得到了一些硬币的区域，我们确信这些硬币是现在被分离的。 （在某些情况下，您可能只对前景分割感兴趣，而不是分离相互接触的对象，这种情况下，不需要使用距离变换，只要侵蚀就足够了，侵蚀只是提取前景区域的另一种方法。）</p>
 <div class="image">
-<img src="../../images/water_dt.jpg" alt="image"/>
-</div>
-<p>现在我们肯定地知道哪些是背景的区域，哪些是硬币的区域。所以我们创建标记（它是一个与原始图像大小相同的数组，但是是int32数据类型）并在其中标记区域。我们知道的区域（无论是前景还是背景）都可以使用用任何不同的正整数标记，我们不知道的区域使用零。为此我们使用<code>cv2.connectedComponents()</code>。它用0标记图像的背景，然后用从1开始的整数标记其他对象。</p>
+<img src="../../water_dt.jpg" alt="water_dt.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在我们肯定地知道哪些是背景的区域，哪些是硬币的区域。所以我们创建标记（它是一个与原始图像大小相同的数组，但是是int32数据类型）并在其中标记区域。我们知道的区域（无论是前景还是背景）都可以使用用任何不同的正整数标记，我们不知道的区域使用零。为此我们使用<code>cv2.connectedComponents()</code>。它用0标记图像的背景，然后用从1开始的整数标记其他对象。</p>
 <p>但是我们知道，如果背景标记为0，分水岭会将其视为未知区域。所以我们要用不同的整数来标记它。相反，我们将未知区域定义为unknown，用0表示。</p>
 <div class="fragment"><div class="line"># 标记标签</div><div class="line">ret, markers = cv2.connectedComponents(sure_fg)</div><div class="line"></div><div class="line"># 为所有标签+1，以确保背景不是0，而是1</div><div class="line">markers = markers+1</div><div class="line"></div><div class="line"># 现在，用零标记未知区域</div><div class="line">markers[unknown==255] = 0</div></div><!-- fragment --><p>查看JET颜色映射中显示的结果。深蓝色的地区显示未知的区域。硬币用不同的颜色着色。确定是背景的区域以浅蓝色显示。</p>
 <div class="image">
-<img src="../../images/water_marker.jpg" alt="image"/>
-</div>
-<p>现在我们的标记已经准备就绪，现在是最后一步，应用分水岭算法的时候了。 然后标记图像将被修改。 边界区域将标记为-1。</p>
+<img src="../../water_marker.jpg" alt="water_marker.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在我们的标记已经准备就绪，现在是最后一步，应用分水岭算法的时候了。 然后标记图像将被修改。 边界区域将标记为-1。</p>
 <div class="fragment"><div class="line">markers = cv2.watershed(img,markers)</div><div class="line">img[markers == -1] = [255,0,0]</div></div><!-- fragment --><p>看下面的结果。对于一些硬币，他们所接触的区域被正确地分割，有些则不是这样。</p>
 <div class="image">
-<img src="../../images/water_result.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../water_result.jpg" alt="water_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li>关于 <a href="http://cmm.ensmp.fr/~beucher/wtshed.html">分水岭变换</a> 的CMM页面</li>
 </ul>
@@ -180,7 +186,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

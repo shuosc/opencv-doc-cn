@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -159,9 +159,10 @@ $(function() {
 <p>ROI也是用Numpy索引来表示的。这里我们选择这幅图里的球并将它复制到图片的另外一个区域里：</p>
 <div class="fragment"><div class="line">&gt;&gt;&gt; ball = img[280:340, 330:390]</div><div class="line">&gt;&gt;&gt; img[273:333, 100:160] = ball</div></div><!-- fragment --><p>下面是运行结果：</p>
 <div class="image">
-<img src="../../images/roi.jpg" alt="image"/>
-</div>
-<h2>分割和合并图片的通道</h2>
+<img src="../../roi.jpg" alt="roi.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>分割和合并图片的通道</h2>
 <p>有时候你需要分割开图片的B、G、R通道来完成工作。这时候你就需要将BGR颜色的图片分成不同的层。另一些时候，你需要把独立的通道合并成BGR的图片，你可以简单地这样做：</p>
 <div class="fragment"><div class="line">&gt;&gt;&gt; b,g,r = cv2.split(img)</div><div class="line">&gt;&gt;&gt; img = cv2.merge((b,g,r))</div></div><!-- fragment --><p>或者</p>
 <div class="fragment"><div class="line">&gt;&gt;&gt; b = img[:,:,0]</div></div><!-- fragment --><p>假如你要把所有像素的红色值设置为0，你不需要将它分离开来然后再将其置为0，你只需要简单地使用Numpy索引，这样做更快。</p>
@@ -185,13 +186,14 @@ $(function() {
 <p>下面是为了更好地理解而创建的代码示例：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">BLUE = [255,0,0]</div><div class="line">img1 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line">replicate = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REPLICATE)</div><div class="line">reflect = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REFLECT)</div><div class="line">reflect101 = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REFLECT_101)</div><div class="line">wrap = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_WRAP)</div><div class="line">constant= cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_CONSTANT,value=BLUE)</div><div class="line">plt.subplot(231),plt.imshow(img1,&#39;gray&#39;),plt.title(&#39;ORIGINAL&#39;)</div><div class="line">plt.subplot(232),plt.imshow(replicate,&#39;gray&#39;),plt.title(&#39;REPLICATE&#39;)</div><div class="line">plt.subplot(233),plt.imshow(reflect,&#39;gray&#39;),plt.title(&#39;REFLECT&#39;)</div><div class="line">plt.subplot(234),plt.imshow(reflect101,&#39;gray&#39;),plt.title(&#39;REFLECT_101&#39;)</div><div class="line">plt.subplot(235),plt.imshow(wrap,&#39;gray&#39;),plt.title(&#39;WRAP&#39;)</div><div class="line">plt.subplot(236),plt.imshow(constant,&#39;gray&#39;),plt.title(&#39;CONSTANT&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下（由于使用Matplotlib显示图像，红色和蓝色是反的）:</p>
 <div class="image">
-<img src="../../images/border.jpg" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../border.jpg" alt="border.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

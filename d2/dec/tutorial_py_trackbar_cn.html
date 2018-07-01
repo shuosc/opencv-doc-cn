@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -140,9 +140,10 @@ $(function() {
 <p>滑块控制条的另一个重要应用是将其用作按钮或开关。 OpenCV默认情况下不具有按钮功能。所以你可以使用滑块控制条来获得这样的功能。在我们的应用程序中，我们创建了一个开关，应用程序只有在开关打开时才起作用，否则屏幕始终是黑色的。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">def nothing(x):</div><div class="line">    pass</div><div class="line"></div><div class="line"># 创建一张黑色图片和一个窗口</div><div class="line">img = np.zeros((300,512,3), np.uint8)</div><div class="line">cv2.namedWindow(&#39;image&#39;)</div><div class="line"></div><div class="line"># 创建控制颜色的滑块控制条</div><div class="line">cv2.createTrackbar(&#39;R&#39;,&#39;image&#39;,0,255,nothing)</div><div class="line">cv2.createTrackbar(&#39;G&#39;,&#39;image&#39;,0,255,nothing)</div><div class="line">cv2.createTrackbar(&#39;B&#39;,&#39;image&#39;,0,255,nothing)</div><div class="line"></div><div class="line"># 创建ON/OFF的开关</div><div class="line">switch = &#39;0 : OFF \n1 : ON&#39;</div><div class="line">cv2.createTrackbar(switch, &#39;image&#39;,0,1,nothing)</div><div class="line">while(1):</div><div class="line">    cv2.imshow(&#39;image&#39;,img)</div><div class="line">    k = cv2.waitKey(1) &amp; 0xFF</div><div class="line">    if k == 27:</div><div class="line">        break</div><div class="line"></div><div class="line">    # 获取滑块控制条的位置</div><div class="line">    r = cv2.getTrackbarPos(&#39;R&#39;,&#39;image&#39;)</div><div class="line">    g = cv2.getTrackbarPos(&#39;G&#39;,&#39;image&#39;)</div><div class="line">    b = cv2.getTrackbarPos(&#39;B&#39;,&#39;image&#39;)</div><div class="line">    s = cv2.getTrackbarPos(switch,&#39;image&#39;)</div><div class="line"></div><div class="line">    if s == 0:</div><div class="line">        img[:] = 0</div><div class="line">    else:</div><div class="line">        img[:] = [b,g,r]</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>这个程序的截屏看起来像这样：</p>
 <div class="image">
-<img src="../../images/trackbar_screenshot.jpg" alt="image"/>
-</div>
-<h2>练习</h2>
+<img src="../../trackbar_screenshot.jpg" alt="trackbar_screenshot.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>练习</h2>
 <ul>
 <li>使用滑块控制条创建一个具有可调颜色和画笔半径的Paint应用程序。 对于绘图功能，请参阅前面的鼠标处理的教程。 </li>
 </ul>
@@ -150,7 +151,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -152,9 +152,10 @@ $(function() {
 </ul>
 <p>它可以用一张漂亮的图片来表示：</p>
 <div class="image">
-<img src="../../images/harris_region.jpg" alt="image"/>
-</div>
-<p>所以Harris角点检测的结果是一张包含了这些分数的灰度图像，取图像超过一个阈值的部分，你会得到图片的边角。我们将会在一张简单的图片上实践一下。</p>
+<img src="../../harris_region.jpg" alt="harris_region.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 所以Harris角点检测的结果是一张包含了这些分数的灰度图像，取图像超过一个阈值的部分，你会得到图片的边角。我们将会在一张简单的图片上实践一下。</p>
 <h2>OpenCV中的Harris角点检测</h2>
 <p>OpenCV 有 <code>cv2.cornerHarris()</code>函数来进行Harris角点检测。</p>
 <p>参数如下：</p>
@@ -167,19 +168,21 @@ $(function() {
 <p>下面是样例代码：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">filename = &#39;chessboard.png&#39;</div><div class="line">img = cv2.imread(filename)</div><div class="line">gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">gray = np.float32(gray)</div><div class="line">dst = cv2.cornerHarris(gray,2,3,0.04)</div><div class="line"># 结果被膨胀来显示出边缘，这不重要</div><div class="line">dst = cv2.dilate(dst,None)</div><div class="line"># 取图像超过一个最优化的阈值的部分，阈值根据图像会有所不同</div><div class="line">img[dst&gt;0.01*dst.max()]=[0,0,255]</div><div class="line">cv2.imshow(&#39;dst&#39;,img)</div><div class="line">if cv2.waitKey(0) &amp; 0xff == 27:</div><div class="line">    cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面是三个结果：</p>
 <div class="image">
-<img src="../../images/harris_result.jpg" alt="image"/>
-</div>
-<h2>亚像素精确度级别的角点检测</h2>
+<img src="../../harris_result.jpg" alt="harris_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>亚像素精确度级别的角点检测</h2>
 <p>有时候，你可能需要找到最准确的边角。 OpenCV带有一个函数 <code>cv2.cornerSubPix()</code>，它进一步细化了以亚像素精度检测到的角点。 下面是一个例子。 像往常一样，我们需要先找到Harris角点。 然后我们通过这些角的质心（一个角点可能包含多个像素，我们取它们的质心）来改进它们。 Harris角点用红色像素标出，改进过的角点用绿色像素标出。 对于这个函数，我们必须定义何时停止迭代。 我们在达到指定的迭代次数或达到一定的准确度后停止，以先达到者为准。 我们还需要定义要搜索角点的邻域的大小。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">filename = &#39;chessboard2.jpg&#39;</div><div class="line">img = cv2.imread(filename)</div><div class="line">gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line"># 寻找Harris角点</div><div class="line">gray = np.float32(gray)</div><div class="line">dst = cv2.cornerHarris(gray,2,3,0.04)</div><div class="line">dst = cv2.dilate(dst,None)</div><div class="line">ret, dst = cv2.threshold(dst,0.01*dst.max(),255,0)</div><div class="line">dst = np.uint8(dst)</div><div class="line"># 寻找质心</div><div class="line">ret, labels, stats, centroids = cv2.connectedComponentsWithStats(dst)</div><div class="line"># 定义停止标准并改进角点</div><div class="line">criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.001)</div><div class="line">corners = cv2.cornerSubPix(gray,np.float32(centroids),(5,5),(-1,-1),criteria)</div><div class="line"># 把它们画出来</div><div class="line">res = np.hstack((centroids,corners))</div><div class="line">res = np.int0(res)</div><div class="line">img[res[:,1],res[:,0]]=[0,0,255]</div><div class="line">img[res[:,3],res[:,2]] = [0,255,0]</div><div class="line">cv2.imwrite(&#39;subpixel5.png&#39;,img)</div></div><!-- fragment --><p>下面是运行结果，为了结果清晰，一些重要的位置被放大了：</p>
 <div class="image">
-<img src="../../images/subpixel3.png" alt="image"/>
-</div>
- </div></div><!-- contents -->
+<img src="../../subpixel3.png" alt="subpixel3.png"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -138,55 +138,63 @@ $(function() {
 <h2>理论基础</h2>
 <p>形态转换是基于图像形状的一些简单操作。它通常在二值图像上执行。它需要两个输入，一个是我们的原始图像，另一个是决定操作性质的结构元素或内核。两个基本的形态学操作是腐蚀和膨胀。它们的变体形式，如打开，关闭，梯度等也会发挥很大作用。我们将在下面的图片的帮助下逐一看到他们：</p>
 <div class="image">
-<img src="../../images/j.png" alt="image"/>
-</div>
-<h3>1. 腐蚀</h3>
+<img src="../../j.png" alt="j.png"/>
+<div class="caption">
+image</div></div>
+ <h3>1. 腐蚀</h3>
 <p>腐蚀的基本思想就像土壤被侵蚀，它“腐蚀”了前景物体的边界（记得要总是试图保持前景为白色）。那么它做了什么？内核在图像中滑动（就像2D卷积重那样）。只有当内核下的所有像素都是1时，原始图像（1或0）中的一个像素才会被视为1，否则会被“腐蚀”（置零）。</p>
 <p>这样做会导致图像发生什么样的变化呢？边界附近的所有像素都将被丢弃，这取决于内核的大小。所以前景物体的厚度或尺寸会减小，或者说图像中的白色区域会减小。这在去除小的白色噪音（正如我们在颜色空间章节看到的那样）、分离两个连接的物体等场合下非常有用。</p>
 <p>在这里，作为一个例子，我将使用一个5x5的全1内核。让我们看看它是如何工作的：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">img = cv2.imread(&#39;j.png&#39;,0)</div><div class="line">kernel = np.ones((5,5),np.uint8)</div><div class="line">erosion = cv2.erode(img,kernel,iterations = 1)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/erosion.png" alt="image"/>
-</div>
-<h3>2. 膨胀</h3>
+<img src="../../erosion.png" alt="erosion.png"/>
+<div class="caption">
+image</div></div>
+ <h3>2. 膨胀</h3>
 <p>膨胀是的腐蚀的逆操作。如果内核下的至少一个像素是“1”，则该像素元素是“1”。所以它增加了图像中的白色区域或者说增加了前景物体的大小。</p>
 <p>通常情况下，在要消除噪音的情况下，会连着使用腐蚀和膨胀。因为腐蚀消除了白色的噪音，但它也缩小了我们的对象。所以我们要再对其进行膨胀。由于噪音已经消失了，他们不会再回来，但我们的对象面积会再增加回来。膨胀在连接对象的破碎部分时也很有用。</p>
 <div class="fragment"><div class="line">dilation = cv2.dilate(img,kernel,iterations = 1)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/dilation.png" alt="image"/>
-</div>
-<h3>3. 开启</h3>
+<img src="../../dilation.png" alt="dilation.png"/>
+<div class="caption">
+image</div></div>
+ <h3>3. 开启</h3>
 <p>开启只是腐蚀之后再膨胀的另一个名称。正如我们上面所解释的那样，它有助于消除噪音。这里我们使用函数<code>cv2.morphologyEx()</code>：</p>
 <div class="fragment"><div class="line">opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/opening.png" alt="image"/>
-</div>
-<h3>4. 闭合</h3>
+<img src="../../opening.png" alt="opening.png"/>
+<div class="caption">
+image</div></div>
+ <h3>4. 闭合</h3>
 <p>闭合是开启的逆操作，先膨胀再腐蚀。在“闭合”前景物体上的小孔或物体上的小黑点时非常有用。</p>
 <div class="fragment"><div class="line">closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/closing.png" alt="image"/>
-</div>
-<h3>5. 形态学梯度</h3>
+<img src="../../closing.png" alt="closing.png"/>
+<div class="caption">
+image</div></div>
+ <h3>5. 形态学梯度</h3>
 <p>是一个图像的膨胀和侵蚀后的差值。</p>
 <p>结果将看起来像对象的轮廓。</p>
 <div class="fragment"><div class="line">gradient = cv2.morphologyEx（img，cv2.MORPH_GRADIENT，kernel）</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/gradient.png" alt="image"/>
-</div>
-<h3>6. 顶帽</h3>
+<img src="../../gradient.png" alt="gradient.png"/>
+<div class="caption">
+image</div></div>
+ <h3>6. 顶帽</h3>
 <p>是输入图像和开启后图像的差值。下面的例子是由9x9内核完成的。</p>
 <div class="fragment"><div class="line">tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/tophat.png" alt="image"/>
-</div>
-<h3>7. 黑帽</h3>
+<img src="../../tophat.png" alt="tophat.png"/>
+<div class="caption">
+image</div></div>
+ <h3>7. 黑帽</h3>
 <p>是输入图像和闭合后图像的差值。</p>
 <div class="fragment"><div class="line">blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/blackhat.png" alt="image"/>
-</div>
-<h2>结构元素</h2>
+<img src="../../blackhat.png" alt="blackhat.png"/>
+<div class="caption">
+image</div></div>
+ <h2>结构元素</h2>
 <p>在Numpy的帮助下，我们在前面的例子中手动创建了一个结构元素。它是矩形的。但在某些情况下，您可能需要椭圆形/圆形的内核。为此，OpenCV有一个函数<code>cv2.getStructuringElement()</code>。你只需要传入所需内核的形状和大小，你会得到你要的内核。</p>
 <div class="fragment"><div class="line"># 矩形内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_RECT,(5,5))</div><div class="line">&gt;&gt;&gt; array([[1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1]], dtype=uint8)</div><div class="line"></div><div class="line"># 椭圆内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))</div><div class="line">&gt;&gt;&gt; array([[0, 0, 1, 0, 0],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [0, 0, 1, 0, 0]], dtype=uint8)</div><div class="line"></div><div class="line"># 十字形内核</div><div class="line">&gt;&gt;&gt; cv2.getStructuringElement(cv2.MORPH_CROSS,(5,5))</div><div class="line">&gt;&gt;&gt; array([[0, 0, 1, 0, 0],</div><div class="line">       [0, 0, 1, 0, 0],</div><div class="line">       [1, 1, 1, 1, 1],</div><div class="line">       [0, 0, 1, 0, 0],</div><div class="line">       [0, 0, 1, 0, 0]], dtype=uint8)</div></div><!-- fragment --><h2>更多资源</h2>
 <ul>
@@ -196,7 +204,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -147,24 +147,27 @@ $(function() {
 <p>现在一旦得到结果，零频率分量（DC分量）将位于左上角。如果要将它置于中间，则需要在两个方向上将结果移动$ {N} {2}$。这只需要调用函数<code>np.fft.fftshift()</code>就能完成。 （这样更容易分析）。一旦你找到频率变换，你也可以找到幅度谱。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">f = np.fft.fft2(img)</div><div class="line">fshift = np.fft.fftshift(f)</div><div class="line">magnitude_spectrum = 20*np.log(np.abs(fshift))</div><div class="line">plt.subplot(121),plt.imshow(img, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Input Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(magnitude_spectrum, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Magnitude Spectrum&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下所示：</p>
 <div class="image">
-<img src="../../images/fft1.jpg" alt="image"/>
-</div>
-<p>看，你可以在中心看到更多白色的区域，这显示出低频内容更多。</p>
+<img src="../../fft1.jpg" alt="fft1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 看，你可以在中心看到更多白色的区域，这显示出低频内容更多。</p>
 <p>所以你找到了频率变换，现在你可以在频域做一些操作，如高通滤波和重构图像，即找到逆DFT。为此，您只需通过使用尺寸为60x60的矩形窗口进行mask来消除低频。然后使用np.fft.ifftshift（）应用反转，使DC分量再次出现在左上角。然后使用np.ifft2*(函数找到反FFT。结果也是一个复杂的数字。你可以取它的绝对值。</p>
 <div class="fragment"><div class="line">rows, cols = img.shape</div><div class="line">crow,ccol = rows/2 , cols/2</div><div class="line">fshift[crow-30:crow+30, ccol-30:ccol+30] = 0</div><div class="line">f_ishift = np.fft.ifftshift(fshift)</div><div class="line">img_back = np.fft.ifft2(f_ishift)</div><div class="line">img_back = np.abs(img_back)</div><div class="line">plt.subplot(131),plt.imshow(img, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Input Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(132),plt.imshow(img_back, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Image after HPF&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(133),plt.imshow(img_back)</div><div class="line">plt.title(&#39;Result in JET&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下所示：</p>
 <div class="image">
-<img src="../../images/fft2.jpg" alt="image"/>
-</div>
-<p>结果显示高通滤波是一个边缘检测操作。这就是我们在“图像梯度”一章中看到的。这也表明大部分图像数据存在于频谱的低频区域中。无论如何，我们已经看到如何在Numpy中找到DFT，IDFT等。现在让我们看看如何在OpenCV中完成它。</p>
+<img src="../../fft2.jpg" alt="fft2.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 结果显示高通滤波是一个边缘检测操作。这就是我们在“图像梯度”一章中看到的。这也表明大部分图像数据存在于频谱的低频区域中。无论如何，我们已经看到如何在Numpy中找到DFT，IDFT等。现在让我们看看如何在OpenCV中完成它。</p>
 <p>如果仔细观察结果，尤其是JET颜色中的最后一个图像，则可以看到一些artifacts（我用红色箭头标记了一个实例）。它在那里显示出一些波纹状的结构，这被称为 **ringing effects**。这是由我们用于mask的矩形窗口引起的。这个mask被转换成正弦形状，从而导致了这个问题。所以矩形窗口不适用于过滤。更好的选择是高斯窗口。</p>
 <h2>OpenCV中的傅立叶变换</h2>
 <p>OpenCV为此提供了函数<code>cv2.dft()</code>和<code>cv2.idft()</code>。它返回与前面相同的结果，但有两个通道。第一个通道包含结果的实部，第二个通道包含结果的虚部。输入图像应先转换为<code>np.float32</code>。我们将看到如何做到这一点。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">dft = cv2.dft(np.float32(img),flags = cv2.DFT_COMPLEX_OUTPUT)</div><div class="line">dft_shift = np.fft.fftshift(dft)</div><div class="line">magnitude_spectrum = 20*np.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1]))</div><div class="line">plt.subplot(121),plt.imshow(img, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Input Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(magnitude_spectrum, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Magnitude Spectrum&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>所以，现在我们必须做逆DFT。在之前的教程中，我们创建了一个高通过滤器，这次我们将看到如何去除图像中的高频内容，即将低通过滤器应用于图像。它实际上模糊了图像。为此，我们首先在低频处创建一个高值（1）的掩模，即我们让低频内容通过，并在高频区域传递0。</p>
 <div class="fragment"><div class="line">rows, cols = img.shape</div><div class="line">crow,ccol = rows/2 , cols/2</div><div class="line"></div><div class="line"># 先创造一个mask，中间的方块是1，其他全是0</div><div class="line">mask = np.zeros((rows,cols,2),np.uint8)</div><div class="line">mask[crow-30:crow+30, ccol-30:ccol+30] = 1</div><div class="line"></div><div class="line"># 使用mask并进行反向DFT</div><div class="line">fshift = dft_shift*mask</div><div class="line">f_ishift = np.fft.ifftshift(fshift)</div><div class="line">img_back = cv2.idft(f_ishift)</div><div class="line">img_back = cv2.magnitude(img_back[:,:,0],img_back[:,:,1])</div><div class="line"></div><div class="line">plt.subplot(121),plt.imshow(img, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Input Image&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(img_back, cmap = &#39;gray&#39;)</div><div class="line">plt.title(&#39;Magnitude Spectrum&#39;), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/fft4.jpg" alt="image"/>
-</div>
-<p>像往常一样，OpenCV函数<code>cv2.dft()</code>和<code>cv2.idft()</code>比Numpy中的等价的函数更快。但是Numpy函数更加用户友好。有关性能问题的更多细节，请参阅下面的部分。</p>
+<img src="../../fft4.jpg" alt="fft4.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 像往常一样，OpenCV函数<code>cv2.dft()</code>和<code>cv2.idft()</code>比Numpy中的等价的函数更快。但是Numpy函数更加用户友好。有关性能问题的更多细节，请参阅下面的部分。</p>
 <h2>DFT的性能优化</h2>
 <p>DFT计算性能对于某些数组大小来说会更好。当数组大小是2的幂时，它是最快的。大小为2，3，和5的乘积的数组也被相当有效地处理。所以如果你担心你的代码的性能，您可以在查找DFT之前将数组大小修改为任何最佳大小（通过填充零）。对于OpenCV，您必须手动填充零。但是对于Numpy来说，你可以指定FFT计算的新大小，它会自动为你填充零。</p>
 <p>这个性能优化方法适用于<code>cv2.dft()</code>和<code>np.fft.fft2()</code>。让我们使用IPython魔术命令<code>％timeit</code>来检查它们的性能。</p>
@@ -176,9 +179,10 @@ $(function() {
 <h2>为什么拉普拉斯是高通滤波器？</h2>
 <p>一个类似的问题常常在论坛上被问到。 为什么拉普拉斯是一个高通滤波器？ 为什么Sobel滤波器是高通滤波器？ 等等。第一个答案是傅立叶变换中的术语。 只要对拉普拉斯算子进行傅立叶变换，就可以得到更高的FFT。 分析：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line"># 简单平均滤波器内核</div><div class="line">mean_filter = np.ones((3,3))</div><div class="line"></div><div class="line"># 高斯滤波器</div><div class="line">x = cv2.getGaussianKernel(5,10)</div><div class="line">gaussian = x*x.T</div><div class="line"></div><div class="line"># 不同的边缘检测滤波器</div><div class="line"># x方向上的scharr</div><div class="line">scharr = np.array([[-3, 0, 3],</div><div class="line">                   [-10,0,10],</div><div class="line">                   [-3, 0, 3]])</div><div class="line"># x方向上的sobel</div><div class="line">sobel_x= np.array([[-1, 0, 1],</div><div class="line">                   [-2, 0, 2],</div><div class="line">                   [-1, 0, 1]])</div><div class="line"># y方向上的sobel</div><div class="line">sobel_y= np.array([[-1,-2,-1],</div><div class="line">                   [0, 0, 0],</div><div class="line">                   [1, 2, 1]])</div><div class="line"># 拉普拉斯</div><div class="line">laplacian=np.array([[0, 1, 0],</div><div class="line">                    [1,-4, 1],</div><div class="line">                    [0, 1, 0]])</div><div class="line"></div><div class="line">filters = [mean_filter, gaussian, laplacian, sobel_x, sobel_y, scharr]</div><div class="line">filter_name = [&#39;mean_filter&#39;, &#39;gaussian&#39;,&#39;laplacian&#39;, &#39;sobel_x&#39;, &#39;sobel_y&#39;, &#39;scharr_x&#39;]</div><div class="line">fft_filters = [np.fft.fft2(x) for x in filters]</div><div class="line">fft_shift = [np.fft.fftshift(y) for y in fft_filters]</div><div class="line">mag_spectrum = [np.log(np.abs(z)+1) for z in fft_shift]</div><div class="line"></div><div class="line">for i in xrange(6):</div><div class="line">    plt.subplot(2,3,i+1),plt.imshow(mag_spectrum[i],cmap = &#39;gray&#39;)</div><div class="line">    plt.title(filter_name[i]), plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">plt.show()</div></div><!-- fragment --><div class="image">
-<img src="../../images/fft5.jpg" alt="image"/>
-</div>
-<p>从图像中，可以看到每个内核阻塞的频率范围，以及它不阻塞的区域。 从这些信息中，我们可以说为什么一个个内核是高通或低通滤波器。</p>
+<img src="../../fft5.jpg" alt="fft5.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 从图像中，可以看到每个内核阻塞的频率范围，以及它不阻塞的区域。 从这些信息中，我们可以说为什么一个个内核是高通或低通滤波器。</p>
 <h2>更多资源</h2>
 <ul>
 <li><a href="http://cns-alumni.bu.edu/~slehar/fourier/fourier.html">傅立叶理论的一个直观解释</a> by Steven Lehar</li>
@@ -189,7 +193,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

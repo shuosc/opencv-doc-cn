@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -143,22 +143,24 @@ $(function() {
 <div class="fragment"><div class="line">criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)</div><div class="line">objp = np.zeros((6*7,3), np.float32)</div><div class="line">objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)</div><div class="line"></div><div class="line">axis = np.float32([[3,0,0], [0,3,0], [0,0,-3]]).reshape(-1,3)</div></div><!-- fragment --><p>现在像往常一样，我们加载每个图像。搜索7x6网格。如果找到，我们使用小角点像素进行细化。然后为了计算旋转和平移，我们使用函数<code>cv2.solvePnPRansac()</code>。一旦我们找到了这些变换矩阵，我们使用它们将我们的轴点投影到图像平面。简单地说，我们在三维空间中找到对应于(3,0,0)，(0,3,0)，(0,0,3)中的每一个的图像平面上的点。一旦我们得到它们，我们使用<code>draw()</code>函数从第一个角点到这每一个点画一条线。完成！</p>
 <div class="fragment"><div class="line">for fname in glob.glob(&#39;left*.jpg&#39;):</div><div class="line">    img = cv2.imread(fname)</div><div class="line">    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">    ret, corners = cv2.findChessboardCorners(gray, (7,6),None)</div><div class="line"></div><div class="line">    if ret == True:</div><div class="line">        corners2 = cv2.cornerSubPix(gray,corners,(11,11),(-1,-1),criteria)</div><div class="line"></div><div class="line">        # 寻找旋转和变换向量</div><div class="line">        ret,rvecs, tvecs, inliers = cv2.solvePnP(objp, corners2, mtx, dist)</div><div class="line"></div><div class="line">        # 将3D点投影到图像平面上</div><div class="line">        imgpts, jac = cv2.projectPoints(axis, rvecs, tvecs, mtx, dist)</div><div class="line"></div><div class="line">        img = draw(img,corners2,imgpts)</div><div class="line">        cv2.imshow(&#39;img&#39;,img)</div><div class="line">        k = cv2.waitKey(0) &amp; 0xFF</div><div class="line">        if k == ord(&#39;s&#39;):</div><div class="line">            cv2.imwrite(fname[:6]+&#39;.png&#39;, img)</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>看下面的一些结果。请注意，每个轴的长度是3个方块。</p>
 <div class="image">
-<img src="../../images/pose_1.jpg" alt="image"/>
-</div>
-<h3>渲染一个立方体</h3>
+<img src="../../pose_1.jpg" alt="pose_1.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>渲染一个立方体</h3>
 <p>如果要绘制立方体，请按如下所示修改<code>draw()</code>函数和轴点。</p>
 <p>修改<code>draw()</code>函数：</p>
 <div class="fragment"><div class="line">def draw(img, corners, imgpts):</div><div class="line">    imgpts = np.int32(imgpts).reshape(-1,2)</div><div class="line"></div><div class="line">    # draw ground floor in green</div><div class="line">    img = cv2.drawContours(img, [imgpts[:4]],-1,(0,255,0),-3)</div><div class="line"></div><div class="line">    # draw pillars in blue color</div><div class="line">    for i,j in zip(range(4),range(4,8)):</div><div class="line">        img = cv2.line(img, tuple(imgpts[i]), tuple(imgpts[j]),(255),3)</div><div class="line"></div><div class="line">    # draw top layer in red color</div><div class="line">    img = cv2.drawContours(img, [imgpts[4:]],-1,(0,0,255),3)</div><div class="line"></div><div class="line">    return img</div></div><!-- fragment --><p> 修改轴点。它们是3D空间中立方体的8个角：</p>
 <div class="fragment"><div class="line">axis = np.float32([[0,0,0], [0,3,0], [3,3,0], [3,0,0],</div><div class="line">                   [0,0,-3],[0,3,-3],[3,3,-3],[3,0,-3] ])</div></div><!-- fragment --><p> 看看下面的结果：</p>
 <div class="image">
-<img src="../../images/pose_2.jpg" alt="image"/>
-</div>
-<p>如果你对图形，增强现实等感兴趣，你可以使用OpenGL渲染更复杂的图形。 </p>
+<img src="../../pose_2.jpg" alt="pose_2.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 如果你对图形，增强现实等感兴趣，你可以使用OpenGL渲染更复杂的图形。 </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

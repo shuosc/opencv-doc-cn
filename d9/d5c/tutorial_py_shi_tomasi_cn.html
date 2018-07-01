@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -139,9 +139,10 @@ $(function() {
 <p>上一章中，我们看到了Harris角点检测器。在1994年晚些时候， J. Shi 和 C. Tomasi在它们的论文《Good Features to Track》<a href="http://citeseer.ist.psu.edu/shi94good.html">^1</a>对其进行了一个小小的改动来产生更佳的效果。</p>
 <p>Harris角点检测器的评分函数是这样的： $$ R =   - k(+)^2 $$ 与此不同的是，Shi-Tomasi使用： $$ R = min(, ) $$ 如果这里的$R$比一个特定的阈值大，那么这个点就是一个角点。如果我们像在Harris角点检测器中做的那样将其在$ - $平面内画出来，我们将得到这样的图像：</p>
 <div class="image">
-<img src="../../images/shitomasi_space.png" alt="image"/>
-</div>
-<p>从图像中，你可以看出只有当$$和$$都比一个最小值${min}$大的时候，这个点才会被当作是一个角点（即位于图中的绿区）。</p>
+<img src="../../shitomasi_space.png" alt="shitomasi_space.png"/>
+<div class="caption">
+image</div></div>
+<p> 从图像中，你可以看出只有当$$和$$都比一个最小值${min}$大的时候，这个点才会被当作是一个角点（即位于图中的绿区）。</p>
 <h2>代码</h2>
 <p>OpenCV有一个函数<code>cv2.goodFeaturesToTrack()</code>。 它用Shi-Tomasi方法（或Harris角点检测，如果手动指定的话）在图像中找到N个最强的角点。 像往常一样，图像应该是一个灰度图像。 然后你需要指定需要的角点的数量。 然后你要指定质量等级，这是一个介于0-1之间的值，每个质量小于这个值的焦点都会被丢弃。 然后要提供检测到的角点之间的最小欧几里得距离。</p>
 <p>利用所有这些信息，该函数在图像中找到角点。 质量水平以下的所有角点都被丢弃。 然后对剩余的角点根据质量按降序排列。</p>
@@ -149,14 +150,15 @@ $(function() {
 <p>在下面的例子中，我们将尝试找到25个最好的角点：</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;blox.jpg&#39;)</div><div class="line">gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">corners = cv2.goodFeaturesToTrack(gray,25,0.01,10)</div><div class="line">corners = np.int0(corners)</div><div class="line">for i in corners:</div><div class="line">    x,y = i.ravel()</div><div class="line">    cv2.circle(img,(x,y),3,255,-1)</div><div class="line">plt.imshow(img)</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
 <div class="image">
-<img src="../../images/shitomasi_block1.jpg" alt="image"/>
-</div>
-<p>这个函数更适合用于跟踪。当时机到来时我们将看到这一点。 </p>
+<img src="../../shitomasi_block1.jpg" alt="shitomasi_block1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 这个函数更适合用于跟踪。当时机到来时我们将看到这一点。 </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -152,9 +152,10 @@ $(function() {
 <p>下面是有详细注释的代码：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(0)</div><div class="line"></div><div class="line">while(1):</div><div class="line">    # 获取每一帧</div><div class="line">    _, frame = cap.read()</div><div class="line">    # BGR转HSV</div><div class="line">    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">    # 在HSV空间中定义蓝色</div><div class="line">    lower_blue = np.array([110,50,50])</div><div class="line">    upper_blue = np.array([130,255,255]) </div><div class="line">    # 从HSV图片中截取出蓝色</div><div class="line">    mask = cv2.inRange(hsv, lower_blue, upper_blue)</div><div class="line">    # 将原图像和mask进行按位与</div><div class="line">    res = cv2.bitwise_and(frame,frame, mask= mask)</div><div class="line">    cv2.imshow(&#39;frame&#39;,frame)</div><div class="line">    cv2.imshow(&#39;mask&#39;,mask)</div><div class="line">    cv2.imshow(&#39;res&#39;,res)</div><div class="line">    k = cv2.waitKey(5) &amp; 0xFF</div><div class="line">    if k == 27:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>下面的图片展示了追踪蓝色的物体的结果：</p>
 <div class="image">
-<img src="../../images/frame.jpg" alt="image"/>
-</div>
-<p>图像中有一些噪音。 我们将在后面的章节中看到如何移除它们。</p>
+<img src="../../frame.jpg" alt="frame.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 图像中有一些噪音。 我们将在后面的章节中看到如何移除它们。</p>
 <p>这是对象跟踪中最简单的方法。 一旦你学习了如何找到轮廓，你可以做很多事情，如找到这个对象的质心，并使用它来跟踪对象，在相机前面移动你的手来绘制图表等，还有许多其他有趣的东西可以做。</p>
 <h2>如何找到要跟踪的HSV值？</h2>
 <p>这是<a href="http://www.stackoverflow.com">stackoverflow.com</a>上的常见问题。 这非常简单，你可以使用相同的函数<code>cv2.cvtColor()</code>。 您只需传递您想要的BGR值，而不是传递图像。 例如，要查找Green的HSV值，试试看在Python控制台中执行以下命令：</p>
@@ -165,7 +166,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

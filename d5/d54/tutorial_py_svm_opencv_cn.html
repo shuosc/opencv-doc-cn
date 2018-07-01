@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -139,9 +139,10 @@ $(function() {
 <p>在这里，在找到HOG之前，我们使用它的二阶矩来歪斜图像。所以我们首先定义一个函数<code>deskew()</code>，他接受一个数字图像并对其进行歪斜。下面是deskew()函数：</p>
 <div class="fragment"></div><!-- fragment --><p> 下图显示了上面的deskew函数作用于零图像。左图是原始图像，右图是去歪斜的图像。</p>
 <div class="image">
-<img src="../../images/deskew.jpg" alt="image"/>
-</div>
-<p>接下来我们必须找到每个单元格的HOG描述符。为此，我们在X和Y方向上找到每个单元的Sobel导数。然后在每个像素处找到它们的梯度大小和方向。这个梯度量化为16个整数值。将此图像分为四个子方块。对于每个子方块，计算以其大小加权的方向（16个bin）的直方图。每个子方块给你一个包含16个值的矢量。四个这样的矢量（四个子方块）一起给了我们一个包含64个值的特征向量。这是我们用来训练数据的特征向量。</p>
+<img src="../../deskew.jpg" alt="deskew.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 接下来我们必须找到每个单元格的HOG描述符。为此，我们在X和Y方向上找到每个单元的Sobel导数。然后在每个像素处找到它们的梯度大小和方向。这个梯度量化为16个整数值。将此图像分为四个子方块。对于每个子方块，计算以其大小加权的方向（16个bin）的直方图。每个子方块给你一个包含16个值的矢量。四个这样的矢量（四个子方块）一起给了我们一个包含64个值的特征向量。这是我们用来训练数据的特征向量。</p>
 <div class="fragment"></div><!-- fragment --><p> 最后，和前面的例子一样，我们首先将我们的大数据集分解成单独的单元格。对于每个数字，保留250个单元用于训练数据，剩下的250个数据被保留用于测试。完整的代码如下，你也可以从这里下载：</p>
 <div class="fragment"></div><!-- fragment --><p>这个技术给了我近94％的准确性。您可以尝试使用不同的SVM参数值来检查是否有更高的准确性。或者你可以阅读这方面的技术文件，并尝试实施它们。</p>
 <h2>其他资源</h2>
@@ -156,7 +157,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

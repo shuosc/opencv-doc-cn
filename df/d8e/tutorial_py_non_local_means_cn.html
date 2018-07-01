@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -141,9 +141,10 @@ $(function() {
 <p>您可以通过简单的设置自行验证。拿一个静态摄像头，将它放在一个特定的位置几秒钟。这会给你很多的帧，或者是同一场景的很多图像。然后写一段代码找到视频中所有帧的平均值（现在这对你来说应该太简单了）。比较最终结果和第一帧。你可以看到噪声的减少。不幸的是，这种简单的方法不适用于相机和场景的运动。同时往往也只有一幅嘈杂的图像可用。</p>
 <p>所以想法很简单，我们需要一组相似的图像来平均噪音。考虑图像中的一个小窗口（比如5x5窗口）。相同的图像片很有可能在图像中的其他地方。有时在一个小的领域周围。如何将这些相似的图像片一起使用并找到它们的平均值？对于特定的窗口，这样做效果很好。看下面的示例图片：</p>
 <div class="image">
-<img src="../../images/nlm_patch.jpg" alt="image"/>
-</div>
-<p>图像中的蓝色图像块看起来相似。绿色图像块看起来相似。所以我们取一个像素，取围绕它周围的小窗口，在图像中搜索相似的窗口，平均所有的窗口，并用我们得到的结果取代像素。这种方法是非局部的去噪。与我们之前看到的模糊技术相比，它需要更多的时间，但是结果非常好。更多的细节和在线演示可以在更多资源的第一个链接。</p>
+<img src="../../nlm_patch.jpg" alt="nlm_patch.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 图像中的蓝色图像块看起来相似。绿色图像块看起来相似。所以我们取一个像素，取围绕它周围的小窗口，在图像中搜索相似的窗口，平均所有的窗口，并用我们得到的结果取代像素。这种方法是非局部的去噪。与我们之前看到的模糊技术相比，它需要更多的时间，但是结果非常好。更多的细节和在线演示可以在更多资源的第一个链接。</p>
 <p>对于彩色图像，图像将会转换为CIELAB色彩空间，然后分别去除L和AB分量。</p>
 <h2>OpenCV中的图像去噪</h2>
 <p>OpenCV提供了这种技术的四种变体。</p>
@@ -167,15 +168,17 @@ $(function() {
 <p>看下面的例子：</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;die.png&#39;)</div><div class="line">dst = cv2.fastNlMeansDenoisingColored(img,None,10,10,7,21)</div><div class="line">plt.subplot(121),plt.imshow(img)</div><div class="line">plt.subplot(122),plt.imshow(dst)</div><div class="line">plt.show()</div></div><!-- fragment --><p>以下是结果缩放过的版本。 我的输入图像具有$ = 25$的高斯噪声。查看结果：</p>
 <div class="image">
-<img src="../../images/nlm_result1.jpg" alt="image"/>
-</div>
-<h3>2. <code>cv2.fastNlMeansDenoisingMulti()</code></h3>
+<img src="../../nlm_result1.jpg" alt="nlm_result1.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>2. <code>cv2.fastNlMeansDenoisingMulti()</code></h3>
 <p>现在我们将对视频使用相同的方法。 第一个参数是有噪声的帧的列表。 第二个参数<code>imgToDenoiseIndex</code>指定我们需要去噪的帧，因为我们在输入列表中传递了帧的索引。 第三个是<code>temporalWindowSize</code>，它指定了用于去噪的附近帧的数量。 这应该是个奇数。 在那种情况下，总共使用<code>temporalWindowSize</code>帧，其中中央帧是要被去噪的帧。 例如，您传递了5个框架的列表作为输入。 让<code>imgToDenoiseIndex = 2</code>和<code>temporalWindowSize = 3</code>。那么将会使用frame-1，frame-2和frame-3来消除frame-2中的噪声。 我们来看一个例子。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;vtest.avi&#39;)</div><div class="line"></div><div class="line"># 创建一个有5个帧的列表</div><div class="line">img = [cap.read()[1] for i in xrange(5)]</div><div class="line"></div><div class="line"># 全部转换到灰度图</div><div class="line">gray = [cv2.cvtColor(i, cv2.COLOR_BGR2GRAY) for i in img]</div><div class="line"></div><div class="line"># 全部转换到float64</div><div class="line">gray = [np.float64(i) for i in gray]</div><div class="line"></div><div class="line"># 创建一个标准差为25的噪声</div><div class="line">noise = np.random.randn(*gray[1].shape)*10</div><div class="line"></div><div class="line"># 向图像中添加噪声</div><div class="line">noisy = [i+noise for i in gray]</div><div class="line"></div><div class="line"># 转回uint8</div><div class="line">noisy = [np.uint8(np.clip(i,0,255)) for i in noisy]</div><div class="line"></div><div class="line"># 使用全部5帧来为第三帧去噪</div><div class="line">dst = cv2.fastNlMeansDenoisingMulti(noisy, 2, 5, None, 4, 7, 35)</div><div class="line"></div><div class="line">plt.subplot(131),plt.imshow(gray[2],&#39;gray&#39;)</div><div class="line">plt.subplot(132),plt.imshow(noisy[2],&#39;gray&#39;)</div><div class="line">plt.subplot(133),plt.imshow(dst,&#39;gray&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>下图显示了我们得到的结果的缩放版本：</p>
 <div class="image">
-<img src="../../images/nlm_multi.jpg" alt="image"/>
-</div>
-<p>计算需要相当长的时间。 在结果图像中，第一个图像是原始图像，第二个图像是添加了噪声的图像，第三个图像是去噪后的图像。</p>
+<img src="../../nlm_multi.jpg" alt="nlm_multi.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 计算需要相当长的时间。 在结果图像中，第一个图像是原始图像，第二个图像是添加了噪声的图像，第三个图像是去噪后的图像。</p>
 <h2>更多资源</h2>
 <ul>
 <li><a href="http://www.ipol.im/pub/art/2011/bcm_nlm/">http://www.ipol.im/pub/art/2011/bcm_nlm/</a>（详细信息，在线演示等，强烈建议访问，我们的测试图像是从这个链接生成的）</li>
@@ -185,7 +188,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -137,9 +137,10 @@ $(function() {
 <h2>Meanshift</h2>
 <p>Meanshift背后的想法很简单。 考虑你有一组点。 （它可以是像直方图反投影那样的像素分布）。 给出一个小窗口（可能是一个圆圈），你必须将窗口移动到最大像素密度（或最多点数）的区域。 下面给出了简单的图像：</p>
 <div class="image">
-<img src="../../images/meanshift_basics.jpg" alt="image"/>
-</div>
-<p>初始窗口是蓝色圆圈“C1”。 它的原始中心被标记为蓝色矩形，名为“C1_o”。 但是如果你寻找窗口内的点的质心，你会得到点“C1_r”（用小蓝圈标记），这是窗口的真实质心。 当然，他们不匹配。 所以，移动你的窗口，使新圆与以前的质心匹配。 再次找到新的质心。 最有可能的情况是，它还是不匹配。 所以再次移动它，继续迭代，使得窗口的中心和它的质心落在相同的位置（或者只有很小的期望误差）。 所以最后你得到的是一个最大像素分布的窗口。 标有绿色圆圈，名为“C2”。 正如你在图像中看到的，它有最多的点数。 整个过程在下面的图像中演示：</p>
+<img src="../../meanshift_basics.jpg" alt="meanshift_basics.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 初始窗口是蓝色圆圈“C1”。 它的原始中心被标记为蓝色矩形，名为“C1_o”。 但是如果你寻找窗口内的点的质心，你会得到点“C1_r”（用小蓝圈标记），这是窗口的真实质心。 当然，他们不匹配。 所以，移动你的窗口，使新圆与以前的质心匹配。 再次找到新的质心。 最有可能的情况是，它还是不匹配。 所以再次移动它，继续迭代，使得窗口的中心和它的质心落在相同的位置（或者只有很小的期望误差）。 所以最后你得到的是一个最大像素分布的窗口。 标有绿色圆圈，名为“C2”。 正如你在图像中看到的，它有最多的点数。 整个过程在下面的图像中演示：</p>
 <div class="image">
 <img src="../../images/meanshift_face.gif" alt="image"/>
 </div>
@@ -147,18 +148,20 @@ $(function() {
 <p>为了在OpenCV中使用meanshift，首先我们需要设置目标，找到它的直方图，以便我们可以在每个帧上使用反向投影以计算meanshift。 我们还需要提供窗口的初始位置。 对于直方图，这里只考虑色调。 此外，为了避免由于低光照造成的错误值，要先使用<code>cv2.inRange()</code>函数丢弃低亮度值。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;slow.flv&#39;)</div><div class="line"></div><div class="line"># 取视频第一帧</div><div class="line">ret,frame = cap.read()</div><div class="line"></div><div class="line"># 设置窗口的初始位置</div><div class="line">r,h,c,w = 250,90,400,125  # 简单地使用硬编码的值</div><div class="line">track_window = (c,r,w,h)</div><div class="line"></div><div class="line"># 简单地使用硬编码的值</div><div class="line">roi = frame[r:r+h, c:c+w]</div><div class="line">hsv_roi =  cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)</div><div class="line">mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))</div><div class="line">roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])</div><div class="line">cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)</div><div class="line"></div><div class="line"># 设置终止条件，10次迭代或者只移动1个pt</div><div class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret ,frame = cap.read()</div><div class="line"></div><div class="line">    if ret == True:</div><div class="line">        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)</div><div class="line"></div><div class="line">        # 进行一次MeanShift来找到新的窗口位置</div><div class="line">        ret, track_window = cv2.meanShift(dst, track_window, term_crit)</div><div class="line"></div><div class="line">        # 画到图像上</div><div class="line">        x,y,w,h = track_window</div><div class="line">        img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)</div><div class="line">        cv2.imshow(&#39;img2&#39;,img2)</div><div class="line"></div><div class="line">        k = cv2.waitKey(60) &amp; 0xff</div><div class="line">        if k == 27:</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            cv2.imwrite(chr(k)+&quot;.jpg&quot;,img2)</div><div class="line"></div><div class="line">    else:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div><div class="line">cap.release()</div></div><!-- fragment --><p>我使用的视频中的三个帧如下所示：</p>
 <div class="image">
-<img src="../../images/meanshift_result.jpg" alt="image"/>
-</div>
-<h2>Camshift</h2>
+<img src="../../meanshift_result.jpg" alt="meanshift_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>Camshift</h2>
 <p>你有没有仔细看过上一个结果？ 有一个问题。 无论在车距离摄像头较远时还是较近时，我们的车窗总是有相同的大小。 这是不好的。 我们需要根据目标的大小和旋转来调整窗口大小。 这个解决方案再一次来自于“OpenCV实验室”，它由Gary Bradsky在他1988年的论文《Computer Vision Face Tracking for Use in a Perceptual User Interface》中被称为CAMshift（连续自适应Meanshift）。</p>
 <p>它首先应用Meanshift。 一旦meanshift收敛，它将窗口大小更新为$s = 2   { {M_{00}} {256}}$。 它也计算最佳拟合椭圆的方向。 同样，它将新的缩放过的搜索窗口和之前的窗口位置应用于方法转换。 这个过程一直持续到满足要求的准确度。</p>
 <h3>OpenCV中的Camshift</h3>
 <p>它和meanshift几乎相同，但是它返回一个旋转的矩形（这是我们的结果）和box参数（在下一次迭代时用作搜索窗口）。 请参阅下面的代码：</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;slow.flv&#39;)</div><div class="line"></div><div class="line"># 取视频第一帧</div><div class="line">ret,frame = cap.read()</div><div class="line"></div><div class="line"># 设置窗口的初始位置</div><div class="line">r,h,c,w = 250,90,400,125  # 简单地使用硬编码的值</div><div class="line">track_window = (c,r,w,h)</div><div class="line"></div><div class="line"># 设置ROI</div><div class="line">roi = frame[r:r+h, c:c+w]</div><div class="line">hsv_roi =  cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)</div><div class="line">mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))</div><div class="line">roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])</div><div class="line">cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)</div><div class="line"></div><div class="line"># 设置终止条件，10次迭代或者只移动1个pt</div><div class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret ,frame = cap.read()</div><div class="line"></div><div class="line">    if ret == True:</div><div class="line">        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)</div><div class="line"></div><div class="line">        # 进行一次MeanShift来找到新的窗口位置</div><div class="line">        ret, track_window = cv2.CamShift(dst, track_window, term_crit)</div><div class="line"></div><div class="line">        # 画到图像上</div><div class="line">        pts = cv2.boxPoints(ret)</div><div class="line">        pts = np.int0(pts)</div><div class="line">        img2 = cv2.polylines(frame,[pts],True, 255,2)</div><div class="line">        cv2.imshow(&#39;img2&#39;,img2)</div><div class="line"></div><div class="line">        k = cv2.waitKey(60) &amp; 0xff</div><div class="line">        if k == 27:</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            cv2.imwrite(chr(k)+&quot;.jpg&quot;,img2)</div><div class="line"></div><div class="line">    else:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div><div class="line">cap.release()</div></div><!-- fragment --><p>下面是结果：</p>
 <div class="image">
-<img src="../../images/camshift_result.jpg" alt="image"/>
-</div>
-<h2>更多资源</h2>
+<img src="../../camshift_result.jpg" alt="camshift_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
 <ul>
 <li><a href="http://fr.wikipedia.org/wiki/Camshift">Camshift</a>的法文wiki页面。 (两幅动图就是从这里拿来的)</li>
 <li>Bradski, G.R., 《<a href="http://ieeexplore.ieee.org/iel4/5940/15812/00732882.pdf">Real time face and object tracking as a component of a perceptual user interface</a>》 Applications of Computer Vision, 1998. WACV '98. Proceedings., Fourth IEEE Workshop on , vol., no., pp.214,219, 19-21 Oct 1998</li>
@@ -169,7 +172,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

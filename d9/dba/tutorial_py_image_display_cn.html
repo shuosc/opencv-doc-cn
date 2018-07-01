@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -154,9 +154,10 @@ $(function() {
 <p>第一个参数是窗口的名字（字符串）。第二个参数是我们的图片。你可以创建任意数量的窗口，但必须要给他们不同的窗口名字。</p>
 <div class="fragment"><div class="line">cv2.imshow(&#39;image&#39;,img)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>一个窗口的截屏应该会像这样（在Fedora-Gnome机器上）：</p>
 <div class="image">
-<img src="../../images/opencv_screenshot.jpg" alt="image"/>
-</div>
-<p><code>cv2.waitKey()</code>是一个键盘操作函数。它的参数是以毫秒为单位的时间值。这个函数在一段时间（指定的毫秒数）内等待键盘被按下，如果你在这段时间内按下了任何按键，程序将会继续执行。如果传入$0$，它将会一直等待一个键被按下。它也能用来拦截特定按键被按下的事件等等，我们会在下面说到这一点。</p>
+<img src="../../opencv_screenshot.jpg" alt="opencv_screenshot.jpg"/>
+<div class="caption">
+image</div></div>
+<p> <code>cv2.waitKey()</code>是一个键盘操作函数。它的参数是以毫秒为单位的时间值。这个函数在一段时间（指定的毫秒数）内等待键盘被按下，如果你在这段时间内按下了任何按键，程序将会继续执行。如果传入$0$，它将会一直等待一个键被按下。它也能用来拦截特定按键被按下的事件等等，我们会在下面说到这一点。</p>
 <p>除了绑定键盘事件外这个函数还要处理很多其他GUI事件，所以你必须使用它来“真正地”显示出图片。</p>
 <p><code>cv2.destroyAllWindows()</code>简单地销毁你创建的所有窗口。如果你希望销毁特定的某一个窗口，你需要使用<code>cv2.destroyWindow()</code>，这个函数接受窗口的名字作为参数。</p>
 <p>有一种特别的情况，就是你要先创建一个窗口然后再在稍后为其加载图片。在这种情况下，你可以声明这个窗口是否可以改变大小。这是通过函数<code>cv2.namedWindow()</code>来完成的。默认情况下，这个标志是<code>cv2.WINDOW_AUTOSIZE</code>。但你如果你使用<code>cv2.WINDOW_NORMAL</code>，你就可以手动改变窗口的大小。这对于尺寸太大的图片和创建滑块控制条很有帮助。</p>
@@ -173,9 +174,10 @@ $(function() {
 <p>Matplotlib是一个Python绘图库，它给予了你很多种不同的绘图方式。你将在下面的文章中看到它们。在这里，你会学到如何使用Matplotlib显示图片。你可以使用Matplotlib缩放图片、保存它等等。</p>
 <div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">plt.imshow(img, cmap = &#39;gray&#39;, interpolation = &#39;bicubic&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])  # 在x和y轴上隐藏刻度</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果看起来像这样：</p>
 <div class="image">
-<img src="../../images/matplotlib_screenshot.jpg" alt="image"/>
-</div>
-<p>Matplotlib有很多绘图选项，欲知更多细节，请查询Matplotlib文档。我们在学习过程中也会接触其中一些。</p>
+<img src="../../matplotlib_screenshot.jpg" alt="matplotlib_screenshot.jpg"/>
+<div class="caption">
+image</div></div>
+<p> Matplotlib有很多绘图选项，欲知更多细节，请查询Matplotlib文档。我们在学习过程中也会接触其中一些。</p>
 <p><b>警告</b></p>
 <p>OpenCV读取的图片的颜色模式是BGR。但Matplotlib显示图片的颜色模式是RGB。因此有用OpenCV打开的有颜色的图片在Matplotlib中并不会正确地显示。请看练习部分来获取更多相关细节。</p>
 <h2>更多资源</h2>
@@ -190,7 +192,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

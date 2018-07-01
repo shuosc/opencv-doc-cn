@@ -36,7 +36,7 @@ MathJax.Hub.Config(
 }
 );
 //]]>
-</script><script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -149,9 +149,10 @@ $(function() {
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;gradient.png&#39;,0)</div><div class="line">ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)</div><div class="line">ret,thresh2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)</div><div class="line">ret,thresh3 = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)</div><div class="line">ret,thresh4 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)</div><div class="line">ret,thresh5 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)</div><div class="line"></div><div class="line">titles = [&#39;Original Image&#39;,&#39;BINARY&#39;,&#39;BINARY_INV&#39;,&#39;TRUNC&#39;,&#39;TOZERO&#39;,&#39;TOZERO_INV&#39;]</div><div class="line">images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]</div><div class="line"></div><div class="line">for i in xrange(6):</div><div class="line">    plt.subplot(2,3,i+1),plt.imshow(images[i],&#39;gray&#39;)</div><div class="line">    plt.title(titles[i])</div><div class="line">    plt.xticks([]),plt.yticks([])</div><div class="line"></div><div class="line">plt.show()</div></div><!-- fragment --><p>要绘制多个图像，我们使用了<code>plt.subplot()</code>函数。请检查Matplotlib文档的来获取更多细节。</p>
 <p>结果如下：</p>
 <div class="image">
-<img src="../../images/threshold.jpg" alt="image"/>
-</div>
-<h2>自适应阈值</h2>
+<img src="../../threshold.jpg" alt="threshold.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>自适应阈值</h2>
 <p>在前一节中，我们对于整张图像应用了同一个阈值。但是在不同的图像区域，在光照条件不同的条件下，这样做可能并不好。在这样的情况下，我们应该使用自适应阈值。该算法会计算图像的小区域的阈值。因此，对于同一图像的不同区域，我们可以得到不同的阈值，并且对于具有变化的照明的图像给出更好的结果。</p>
 <p>它有三个“特殊”的输入参数和一个输出参数。</p>
 <ul>
@@ -166,9 +167,10 @@ $(function() {
 <p>下面的一段代码比较了全局阈值和自适应阈值对于不同亮度的图像的不同效果：</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;sudoku.png&#39;,0)</div><div class="line">img = cv2.medianBlur(img,5)</div><div class="line"></div><div class="line">ret,th1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)</div><div class="line">th2 = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)</div><div class="line">th3 = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)</div><div class="line"></div><div class="line">titles = [&#39;Original Image&#39;, &#39;Global Thresholding (v = 127)&#39;,</div><div class="line">            &#39;Adaptive Mean Thresholding&#39;, &#39;Adaptive Gaussian Thresholding&#39;]</div><div class="line">images = [img, th1, th2, th3]</div><div class="line"></div><div class="line">for i in xrange(4):</div><div class="line">    plt.subplot(2,2,i+1),plt.imshow(images[i],&#39;gray&#39;)</div><div class="line">    plt.title(titles[i])</div><div class="line">    plt.xticks([]),plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/ada_threshold.jpg" alt="image"/>
-</div>
-<h2>Otsu二值化</h2>
+<img src="../../ada_threshold.jpg" alt="ada_threshold.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>Otsu二值化</h2>
 <p>在第一部分中，我告诉过你<code>cv2.threshold</code>有第二个参数<code>retVal</code>。当我们使用Otsu二值化时要使用到它。那它到底是什么呢？</p>
 <p>在使用全局阈值的二值化过程中，我们使用了一个任意的值作为阈值，对吧？那么，我们怎么能知道我们选择的阈值是好还是不好呢？答案是，试错。但如果有一个双峰图像（简单来说，双峰图像是一个直方图有两个峰值的图像），对于这个图像，我们可以近似地将这些峰值的中间值作为阈值，对吗？</p>
 <p>这就是Otsu二值化所做的。简单来说，它会自动计算一个双峰图像的图像直方图阈值。 （对于不是双峰图像的图像，二值化将不准确。）</p>
@@ -176,9 +178,10 @@ $(function() {
 <p>看看下面的例子。输入图像是一个混乱的图像。在第一种情况下，我使用了阈值为127的简单二值化。第二种情况，我直接应用了Otsu二值化。在第三种情况下，我用5x5高斯核来对图像进行滤波来去除噪声，然后应用Otsu阈值。看看噪声过滤是如何改善结果的。</p>
 <div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;noisy2.png&#39;,0)</div><div class="line"></div><div class="line"># 全局阈值二值化</div><div class="line">ret1,th1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)</div><div class="line"></div><div class="line"># Otsu二值化</div><div class="line">ret2,th2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)</div><div class="line"></div><div class="line"># 高斯滤波后再进行Otsu二值化</div><div class="line">blur = cv2.GaussianBlur(img,(5,5),0)</div><div class="line">ret3,th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)</div><div class="line"></div><div class="line"># 画出所有图片和它们的直方图</div><div class="line">images = [img, 0, th1,</div><div class="line">          img, 0, th2,</div><div class="line">          blur, 0, th3]</div><div class="line">titles = [&#39;Original Noisy Image&#39;,&#39;Histogram&#39;,&#39;Global Thresholding (v=127)&#39;,</div><div class="line">          &#39;Original Noisy Image&#39;,&#39;Histogram&#39;,&quot;Otsu&#39;s Thresholding&quot;,</div><div class="line">          &#39;Gaussian filtered Image&#39;,&#39;Histogram&#39;,&quot;Otsu&#39;s Thresholding&quot;]</div><div class="line"></div><div class="line">for i in xrange(3):</div><div class="line">    plt.subplot(3,3,i*3+1),plt.imshow(images[i*3],&#39;gray&#39;)</div><div class="line">    plt.title(titles[i*3]), plt.xticks([]), plt.yticks([])</div><div class="line">    plt.subplot(3,3,i*3+2),plt.hist(images[i*3].ravel(),256)</div><div class="line">    plt.title(titles[i*3+1]), plt.xticks([]), plt.yticks([])</div><div class="line">    plt.subplot(3,3,i*3+3),plt.imshow(images[i*3+2],&#39;gray&#39;)</div><div class="line">    plt.title(titles[i*3+2]), plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果：</p>
 <div class="image">
-<img src="../../images/otsu.jpg" alt="image"/>
-</div>
-<h3>Otsu二值化是怎么工作的？</h3>
+<img src="../../otsu.jpg" alt="otsu.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>Otsu二值化是怎么工作的？</h3>
 <p>本节演示Otsu二值化的Python实现，以显示其实际工作原理。如果你对此不感兴趣，你可以跳过这些。</p>
 <p>由于我们正在处理双峰图像，所以Otsu的算法试图找到一个阈值（t），这个阈值（t）使由以下关系给出的**加权的类内方差**最小化： $$ ^2(t) = q_1(t)^2(t)+q_2(t)^2(t) \ where\ q_1(t) = {i=1}^{t} P(i)  &amp;  q_1(t) = {i=t+1}^{I} P(i)\ (t) = {i=1}^{t} {iP(i)}{q_1(t)}  &amp;  (t) = {i=t+1}^{I} {iP(i)}{q_2(t)}\ ^2(t) = {i=1}^{t} [i-(t)]^2 {P(i)}{q_1(t)}  &amp;  ^2(t) = {i=t+1}^{I} [i-(t)]^2 {P(i)}{q_2(t)} $$</p>
 <p>它实际上找到了一个位于两个峰之间的t值，这样两个类的方差都是最小的。它可以简单地在Python中实现如下：</p>
@@ -193,7 +196,7 @@ $(function() {
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-生成于 2018年 六月 30日 星期六 17:46:57 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
