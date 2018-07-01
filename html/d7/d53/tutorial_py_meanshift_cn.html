@@ -1,0 +1,249 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: Meanshift和Camshift</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d3/d2c/tutorial_py_table_of_contents_video_cn.html">视频分析</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Meanshift和Camshift </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>我们将学习使用Meanshift和Camshift算法来查找和跟踪视频中的对象。</li>
+</ul>
+<h2>Meanshift</h2>
+<p>Meanshift背后的想法很简单。 考虑你有一组点。 （它可以是像直方图反投影那样的像素分布）。 给出一个小窗口（可能是一个圆圈），你必须将窗口移动到最大像素密度（或最多点数）的区域。 下面给出了简单的图像：</p>
+<div class="image">
+<img src="../../meanshift_basics.jpg" alt="meanshift_basics.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 初始窗口是蓝色圆圈“C1”。 它的原始中心被标记为蓝色矩形，名为“C1_o”。 但是如果你寻找窗口内的点的质心，你会得到点“C1_r”（用小蓝圈标记），这是窗口的真实质心。 当然，他们不匹配。 所以，移动你的窗口，使新圆与以前的质心匹配。 再次找到新的质心。 最有可能的情况是，它还是不匹配。 所以再次移动它，继续迭代，使得窗口的中心和它的质心落在相同的位置（或者只有很小的期望误差）。 所以最后你得到的是一个最大像素分布的窗口。 标有绿色圆圈，名为“C2”。 正如你在图像中看到的，它有最多的点数。 整个过程在下面的图像中演示：</p>
+<div class="image">
+<img src="../../images/meanshift_face.gif" alt="image"/>
+</div>
+<h2>OpenCV中的Meanshift</h2>
+<p>为了在OpenCV中使用meanshift，首先我们需要设置目标，找到它的直方图，以便我们可以在每个帧上使用反向投影以计算meanshift。 我们还需要提供窗口的初始位置。 对于直方图，这里只考虑色调。 此外，为了避免由于低光照造成的错误值，要先使用<code>cv2.inRange()</code>函数丢弃低亮度值。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;slow.flv&#39;)</div><div class="line"></div><div class="line"># 取视频第一帧</div><div class="line">ret,frame = cap.read()</div><div class="line"></div><div class="line"># 设置窗口的初始位置</div><div class="line">r,h,c,w = 250,90,400,125  # 简单地使用硬编码的值</div><div class="line">track_window = (c,r,w,h)</div><div class="line"></div><div class="line"># 简单地使用硬编码的值</div><div class="line">roi = frame[r:r+h, c:c+w]</div><div class="line">hsv_roi =  cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)</div><div class="line">mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))</div><div class="line">roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])</div><div class="line">cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)</div><div class="line"></div><div class="line"># 设置终止条件，10次迭代或者只移动1个pt</div><div class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret ,frame = cap.read()</div><div class="line"></div><div class="line">    if ret == True:</div><div class="line">        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)</div><div class="line"></div><div class="line">        # 进行一次MeanShift来找到新的窗口位置</div><div class="line">        ret, track_window = cv2.meanShift(dst, track_window, term_crit)</div><div class="line"></div><div class="line">        # 画到图像上</div><div class="line">        x,y,w,h = track_window</div><div class="line">        img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)</div><div class="line">        cv2.imshow(&#39;img2&#39;,img2)</div><div class="line"></div><div class="line">        k = cv2.waitKey(60) &amp; 0xff</div><div class="line">        if k == 27:</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            cv2.imwrite(chr(k)+&quot;.jpg&quot;,img2)</div><div class="line"></div><div class="line">    else:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div><div class="line">cap.release()</div></div><!-- fragment --><p>我使用的视频中的三个帧如下所示：</p>
+<div class="image">
+<img src="../../meanshift_result.jpg" alt="meanshift_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>Camshift</h2>
+<p>你有没有仔细看过上一个结果？ 有一个问题。 无论在车距离摄像头较远时还是较近时，我们的车窗总是有相同的大小。 这是不好的。 我们需要根据目标的大小和旋转来调整窗口大小。 这个解决方案再一次来自于“OpenCV实验室”，它由Gary Bradsky在他1988年的论文《Computer Vision Face Tracking for Use in a Perceptual User Interface》中被称为CAMshift（连续自适应Meanshift）。</p>
+<p>它首先应用Meanshift。 一旦meanshift收敛，它将窗口大小更新为$s = 2   { {M_{00}} {256}}$。 它也计算最佳拟合椭圆的方向。 同样，它将新的缩放过的搜索窗口和之前的窗口位置应用于方法转换。 这个过程一直持续到满足要求的准确度。</p>
+<h3>OpenCV中的Camshift</h3>
+<p>它和meanshift几乎相同，但是它返回一个旋转的矩形（这是我们的结果）和box参数（在下一次迭代时用作搜索窗口）。 请参阅下面的代码：</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">cap = cv2.VideoCapture(&#39;slow.flv&#39;)</div><div class="line"></div><div class="line"># 取视频第一帧</div><div class="line">ret,frame = cap.read()</div><div class="line"></div><div class="line"># 设置窗口的初始位置</div><div class="line">r,h,c,w = 250,90,400,125  # 简单地使用硬编码的值</div><div class="line">track_window = (c,r,w,h)</div><div class="line"></div><div class="line"># 设置ROI</div><div class="line">roi = frame[r:r+h, c:c+w]</div><div class="line">hsv_roi =  cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)</div><div class="line">mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))</div><div class="line">roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])</div><div class="line">cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)</div><div class="line"></div><div class="line"># 设置终止条件，10次迭代或者只移动1个pt</div><div class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )</div><div class="line"></div><div class="line">while(1):</div><div class="line">    ret ,frame = cap.read()</div><div class="line"></div><div class="line">    if ret == True:</div><div class="line">        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)</div><div class="line">        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)</div><div class="line"></div><div class="line">        # 进行一次MeanShift来找到新的窗口位置</div><div class="line">        ret, track_window = cv2.CamShift(dst, track_window, term_crit)</div><div class="line"></div><div class="line">        # 画到图像上</div><div class="line">        pts = cv2.boxPoints(ret)</div><div class="line">        pts = np.int0(pts)</div><div class="line">        img2 = cv2.polylines(frame,[pts],True, 255,2)</div><div class="line">        cv2.imshow(&#39;img2&#39;,img2)</div><div class="line"></div><div class="line">        k = cv2.waitKey(60) &amp; 0xff</div><div class="line">        if k == 27:</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            cv2.imwrite(chr(k)+&quot;.jpg&quot;,img2)</div><div class="line"></div><div class="line">    else:</div><div class="line">        break</div><div class="line"></div><div class="line">cv2.destroyAllWindows()</div><div class="line">cap.release()</div></div><!-- fragment --><p>下面是结果：</p>
+<div class="image">
+<img src="../../camshift_result.jpg" alt="camshift_result.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>更多资源</h2>
+<ul>
+<li><a href="http://fr.wikipedia.org/wiki/Camshift">Camshift</a>的法文wiki页面。 (两幅动图就是从这里拿来的)</li>
+<li>Bradski, G.R., 《<a href="http://ieeexplore.ieee.org/iel4/5940/15812/00732882.pdf">Real time face and object tracking as a component of a perceptual user interface</a>》 Applications of Computer Vision, 1998. WACV '98. Proceedings., Fourth IEEE Workshop on , vol., no., pp.214,219, 19-21 Oct 1998</li>
+</ul>
+<h2>练习</h2>
+<p>OpenCV中附带一个Python示例进行了camshift的交互式演示。 使用它，hack它并理解它。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

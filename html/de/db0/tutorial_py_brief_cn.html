@@ -1,0 +1,227 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: BRIEF特征点描述算法[^1]</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">BRIEF特征点描述算法[^1] </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中：</p>
+<ul>
+<li>我们将学习BRIEF算法的基础知识</li>
+</ul>
+<h2>理论基础</h2>
+<p>SIFT<a href="https://zh.wikipedia.org/wiki/尺度不變特徵轉換">^2</a>算法使用128维的向量描述符。由于它使用的是浮点数，因此它至少需要512字节。相似地，SURF<a href="https://zh.wikipedia.org/wiki/加速稳健特征">^3</a>算法也至少需要256字节（64维）。创建这样一个数以千计的特征向量需要大量的内存，这对于一个资源有限的应用，尤其是嵌入式系统上的应用来说是不可接受的。而且所消耗的内存空间越多，匹配花费的时间也越长。</p>
+<p>但是实际匹配可能不需要所有这些维度。我们可以使用几个像PCA<a href="https://zh.wikipedia.org/wiki/主成分分析">^5</a>，LDA<a href="https://zh.wikipedia.org/wiki/線性判別分析">^6</a>这样的方法压缩它。甚至还有一些方法像是使用LSH<a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">^4</a>进行哈希的方法来将浮点数表示的这些SIFT描述符转换为二进制向量。这些二进制向量可以用Hamming距离<a href="https://zh.wikipedia.org/wiki/汉明距离">^7</a>来进行特征匹配。这进一步提升了速度，因为计算Hamming距离只是执行异或指令和进行位计数，在有SSE指令集的现代计算机上这是相当快的。但是如果要使用这种方法，我们需要先找到描述符，然后才能使用哈希算法，这代表这种方法并不能解决我们最初的内存问题。</p>
+<p>此时BRIEF算法就可以发挥作用了。它可以不寻找描述符而直接得到二进制向量。 它接受平滑过的图像集并以一种独特的方式（在论文中有解释）选择几组$n_d$$(x,y)$坐标。 然后进行像素强度比较。 例如，假设第一个位置对是$p$和$q$。 如果$I(p)&lt;I(q)$，那么结果是1，否则是0。对所有的$n_d$坐标进行这样的比较之后，我们就可以得到一个$n_d$维的二进制向量。</p>
+<p>这里的$n_d$可以是128、256或512。OpenCV支持所有这些值，但默认情况下$n_d$是256（OpenCV使用字节来计算$n_d$的大小，所以这些值在OpenCV中就是16、32和64）。只要你得到了这个结果，你就能使用Hamming距离来匹配这些描述符。</p>
+<p>重要的一点是BRIEF是一个特征描述符，它没有提供任何方法来查找特征。 因此，你需要使用其他特征检测器，如SIFT，SURF等。论文推荐使用CenSurE，这是一种快速特征检测器，而且使用它检测得到的特征点来执行BRIEF算法相对于使用SURF检测到的点来说效果会稍好一些。</p>
+<p>简而言之，BRIEF是一种更快的进行特征描述符计算和匹配的方法。 除非有很剧烈的平面内旋转，否则它的识别率也很高。</p>
+<h2>OpenCV中的BRIEF</h2>
+<p>下面的代码展示了如何使用CenSurE检测器获取的特征点来计算BRIEF描述符。</p>
+<p>(在OpenCV中CenSurE检测器被称作STAR检测器)。</p>
+<p>注意，你需要<a href="https://github.com/opencv/opencv_contrib">OpenCV contrib</a>来使用这些代码。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;simple.jpg&#39;,0)</div><div class="line"># 初始化Star检测器</div><div class="line">star = cv2.xfeatures2d.StarDetector_create()</div><div class="line"># 初始化BRIEF提取器</div><div class="line">brief = cv2.xfeatures2d.BriefDescriptorExtractor_create()</div><div class="line"># 用STAR找到关键点</div><div class="line">kp = star.detect(img,None)</div><div class="line"># 计算出BRIEF描述符</div><div class="line">kp, des = brief.compute(img, kp)</div><div class="line">print( brief.descriptorSize() )</div><div class="line">print( des.shape )</div></div><!-- fragment --><p><code>brief.getDescriptorSize()</code>获取$n_d$的大小（以字节为单位）。默认值是32。接下来要做的事就是匹配，我们将会在另外一章中介绍它。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

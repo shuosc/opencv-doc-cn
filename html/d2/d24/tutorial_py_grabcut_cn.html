@@ -1,0 +1,269 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 使用GrabCut算法交互式前景提取</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">使用GrabCut算法交互式前景提取 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中</p>
+<ul>
+<li>我们将看到GrabCut算法提取图像中的前景</li>
+<li>我们将为此创建一个交互式应用程序。</li>
+</ul>
+<h2>理论基础</h2>
+<p>GrabCut算法由英国剑桥微软研究院的Carsten Rother，Vladimir Kolmogorov和Andrew Blake设计，并发表在他们的论文《<a href="http://dl.acm.org/citation.cfm?id=1015720">"GrabCut": interactive foreground extraction using iterated graph cuts</a>》中。如果你一个只需要最少量用户交互的前景提取算法，那么GrabCut就是你所需要的。</p>
+<p>从用户的角度来看它是如何工作的？最初用户围绕着前景区域绘制一个矩形（前景区域应该完全在矩形内）。然后算法对其进行迭代分割以获得最佳结果。但在某些情况下，分割不会很好，例如，它可能标记了一些前景区域作为背景，或反之。在这种情况下，用户需要做一些修改。只需在图像上点击一些错误的结果就可以了。基本上是这样的：“嘿，这个区域应该是前景的，你把它标记为背景，在下一次迭代中纠正它”，或者对于背景来说正相反。然后在下一次迭代中，你会得到更好的结果。</p>
+<p>看到下面的图片。一开始球员和足球被围在一个蓝色的矩形中。然后做一些白色笔画（表示前景）和黑色笔画（表示背景）的修饰。</p>
+<p>我们得到一个不错的结果。</p>
+<div class="image">
+<img src="../../grabcut_output1.jpg" alt="grabcut_output1.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 那么后台发生了什么？</p>
+<ul>
+<li>用户输入矩形。这个矩形之外的所有东西都将被视为确定的背景（这就是之前提到你的矩形应该包含所有对象的原因）。矩形内的所有东西都是未知的。类似地，任何指定前景和背景的用户输入都被认为是硬标签，这意味着它们在该过程中不会改变。</li>
+<li>计算机根据我们提供的数据进行初始标注。它标记前景和背景像素（或硬标签）</li>
+<li>现在使用高斯混合模型（GMM）来模拟前景和背景。</li>
+<li>根据我们提供的数据，GMM学习并创建新的像素分布。也就是说，未知像素在颜色统计方面根据其与其他硬标记像素之间的关系被标记为可能的前景或可能的背景（就像聚类一样）。</li>
+<li>从这个像素分布构建一个图形。图中的节点是像素。另外增加两个节点，**Source节点**和**Sink节点**。每个前景像素连接到Source节点，每个背景像素连接到Sink节点。</li>
+<li>将像素连接到Sorce节点/Sink节点的边的权重由像素为前景/背景的概率定义。像素之间的权重由边缘信息或像素相似性定义。如果像素颜色差异很大，那么它们之间的边的权值将会变得很低。 然后使用mincut算法来分割图形。它将图形切割成两个分离的源节点和最小代价函数的汇聚节点。成本函数是剪切边的所有权重的总和。剪切之后，连接到源节点的所有像素变为前景，连接到源节点的像素变为背景。</li>
+<li>过程一直持续到分类收敛。</li>
+</ul>
+<p>如下图所示（图片提供者：http://www.cs.ru.ac.za/research/g02m1682/）</p>
+<div class="image">
+<img src="../../grabcut_scheme.jpg" alt="grabcut_scheme.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>演示</h2>
+<p>现在我们开始使用OpenCV中的的grabcut算法。 OpenCV有这个函数：<code>cv2.grabCut()</code>。我们首先来看看它的参数：</p>
+<ul>
+<li><code>img</code> - 输入图像</li>
+<li><code>mask</code>-这是一个mask图像，我们指定哪些区域是背景，前景或可能的背景/前景等。它由以下标志完成：<code>cv2.GC_BGD</code>，<code>cv2.GC_FGD</code>，<code>cv2.GC_PR_BGD</code>，<code>cv2.GC_PR_FGD</code>或简单地将0,1,2,3传递给图像。</li>
+<li><code>rect</code> - 它是矩形的坐标，格式为（x，y，w，h），其中包括前景对象。</li>
+<li><code>bdgModel</code>，<code>fgdModel</code> - 这是内部算法使用的数组。您只需创建两个大小为(1,65)的np.float64类型的全零数组。</li>
+<li><code>iterCount</code> - 算法应该运行的迭代次数。</li>
+<li><code>mode</code> - 它应该是<code>cv2.GC_INIT_WITH_RECT</code>或<code>cv2.GC_INIT_WITH_MASK</code>或其组合，这个参数决定我们是否绘制矩形或最终的触觉笔触。</li>
+</ul>
+<p>首先让我们看看<code>GC_INIT_WITH_RECT</code>模式。我们加载图像，创建一个类似的蒙版图像。我们创建<code>fgdModel</code>和<code>bgdModel</code>。我们给矩形参数。这些都是是直截了当的。让算法运行5次。由于我们使用的是矩形，所以模式应该是<code>cv2.GC_INIT_WITH_RECT</code>。然后运行grabCut。它会修改蒙版图像。在新的mask图像中，像素将被标记为具有如上所述的表示背景/前景的四个标记。所以我们修改mask，使所有的0像素和2像素被置为0（即背景），并且所有1像素和3像素被置于1（即前景像素）。现在我们最后的mask已经准备好了，只要将它与输入图像相乘即可获得分割过的图像。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">mask = np.zeros(img.shape[:2],np.uint8)</div><div class="line">bgdModel = np.zeros((1,65),np.float64)</div><div class="line">fgdModel = np.zeros((1,65),np.float64)</div><div class="line">rect = (50,50,450,290)</div><div class="line">cv2.grabCut(img,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)</div><div class="line">mask2 = np.where((mask2)|(mask0),0,1).astype(&#39;uint8&#39;)</div><div class="line">img = img*mask2[:,:,np.newaxis]</div><div class="line">plt.imshow(img),plt.colorbar(),plt.show()</div></div><!-- fragment --><p>看下面的结果：</p>
+<div class="image">
+<img src="../../grabcut_rect.jpg" alt="grabcut_rect.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 哎呀，梅西的头发不见了。谁喜欢没有头发的梅西？我们需要把它弄回来。所以我们会给出一个很好的值为1的像素的修正（确定前景）。与此同时，地上的一部分进入了图片中，这是我们不想要的，并且一些logo也是这样。我们需要删除它们。在那里，我们给出一些值为0的像素（确定的背景）。所以我们在前面的例子中修改了我们所得到的mask。</p>
+<p>我真正做的是，我在绘画应用程序中打开输入图像，并添加另一个图层的图像。在绘画中使用画笔工具，我用白色和不需要的背景（如标志，地面等）在这个新层上标记错过的前景（头发，鞋子，球等）。然后用灰色填充剩余的背景。然后在OpenCV中加载该遮罩图像，编辑原来的遮罩图像，并在新添加的遮罩图像中得到相应的值。检查下面的代码：</p>
+<div class="fragment"><div class="line"># newmask 是一个我手动打好标签的图片</div><div class="line">newmask = cv2.imread(&#39;newmask.png&#39;,0)</div><div class="line"></div><div class="line"># 被标记为白色的部分（确定的前景），将mask改为1</div><div class="line"># 被标记为黑色的部分（确定的背景），将mask改为0</div><div class="line">mask[newmask == 0] = 0</div><div class="line">mask[newmask == 255] = 1</div><div class="line"></div><div class="line">mask, bgdModel, fgdModel = cv2.grabCut(img,mask,None,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_MASK)</div><div class="line"></div><div class="line">mask = np.where((mask==2)|(mask==0),0,1).astype(&#39;uint8&#39;)</div><div class="line">img = img*mask[:,:,np.newaxis]</div><div class="line">plt.imshow(img),plt.colorbar(),plt.show()</div></div><!-- fragment --><p>看下面的结果：</p>
+<div class="image">
+<img src="../../grabcut_mask.jpg" alt="grabcut_mask.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 就是这样了。在这里，如果不想在矩形模式下初始化，你可以直接使用掩码模式。只需用值为2的像素或值为3的像素（可能的背景/前景）标记掩模图像中的矩形区域即可。然后像我们在第二个例子中那样用值为1的像素标记我们的sure_foreground。然后直接使用mask模式的grabCut功能。</p>
+<h2>练习</h2>
+<ul>
+<li>OpenCV示例包含一个样例grabcut.py，它是一个使用grabcut的交互式工具。去试试看。另外看一下这个关于如何使用它的<a href="http://www.youtube.com/watch?v=kAwxLTDDAwU">YouTube的视频</a>。</li>
+<li>你可以把它做成一个交互式的示例，用鼠标绘制矩形和笔画，创建轨迹栏来调整笔画宽度等。 </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 角点检测的FAST算法</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">角点检测的FAST算法 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中：</p>
+<ul>
+<li>我们将理解FAST算法的基础</li>
+<li>我们将使用OpenCV中的FAST算法来找出角点</li>
+</ul>
+<h2>理论基础</h2>
+<p>我们已经看过了几个特征检测器，而且其中许多效果相当好，但是从实时应用程序的角度看，他们还不够快，一个最好的例子就是SLAM<a href="https://zh.wikipedia.org/wiki/即时定位与地图构建">^3</a>（即时定位与地图构建），在这种情况下，机器人只有有限的计算资源。</p>
+<p>作为这种情况的一种解决方案，FAST（Features from accelerated segment test）算法在 Edward Rosten 和 Tom Drummond 2006年的论文 《Machine learning for high-speed corner detection<a href="http://www.edwardrosten.com/work/rosten_2006_machine.pdf">^1</a>》中被提出（这一论文在2010年被修订）。下面是这个算法的一个简要概述，请参阅原论文来获得更多细节。</p>
+<p>（所有的图片都是从原论文中提取的）。</p>
+<h3>使用FAST算法进行特征检测</h3>
+<ol type="1">
+<li>在图像中选择一个要被识别是否为兴趣点的像素$p$。 假设它的亮度是$I_p$。</li>
+<li>选取一个合适的阈值$t$。</li>
+<li><p class="startli">考虑这个像素周围的16个像素的圆圈。 （见下图）</p>
+<div class="image">
+<img src="../../fast_speedtest.jpg" alt="fast_speedtest.jpg"/>
+<div class="caption">
+image</div></div>
+</li>
+<li><p class="startli">如果在这个圆圈（或者说这16个像素）中存在一组（设为$n$个）连续像素亮度都比$I_p+t$亮或者都比$I_p-t$暗，那么像素$p$就是一个角点。</p>
+<p class="startli">这个圆圈在上图中用白色虚线圆圈表示。此处选取$n=12$。</p>
+</li>
+<li><p class="startli">一个**高速测试**被用来排出大量非角点。这个测试只检查1、9、5和13四个像素。（先检查像素1和9是不是比中间像素亮或暗，然后检查5和13）。如果$p$是一个角点，那么这四个像素中至少有三个都比$I_p+t$亮或者都比$I_p-t$暗。如果不符合这个特点，那么$p$就不可能是一个角点。对于通过了这个测试的像素我们才需要检测检测这个圆圈上所有的像素来最终确定它是不是一个角点。这个检测方式本身性能很好，但有几个缺陷：</p><ul>
+<li>对于选取$n&lt;12$的情况，这种算法不适用。</li>
+<li>像素的选取不是最佳的，因为它的效率取决于查询的顺序和边缘的外观。</li>
+<li>高速测试的结果没有在后面的检测中被使用到。</li>
+<li>会检测出多个相邻的特征点。</li>
+</ul>
+<p class="startli">前三个缺陷是用机器学习方法解决的。 最后一个是使用非最大抑制来解决的。</p>
+</li>
+</ol>
+<h3>用机器学习训练一个角点检测器</h3>
+<ol type="1">
+<li>选择一组用于训练的图像（最好来自程序要应用到的领域）。</li>
+<li>对其中每个图像运行FAST算法来找到特征点。</li>
+<li>对于每个特征点，将它周围的16个像素作为一个向量保存起来。对每个图像执行这个步骤来获取特征向量$P$。</li>
+<li><p class="startli">这16个像素中的每一个一定处于下面三种状态中：</p>
+<div class="image">
+<img src="../../fast_eqns.jpg" alt="fast_eqns.jpg"/>
+<div class="caption">
+image</div></div>
+</li>
+<li>根据像素的状态，特征向量$P$被分成三个子集：$P_d$、$P_s$和$P_b$。</li>
+<li>定义一个新的boolean变量$K_p$，若$p$是一个角点，则$K_p$为true，否则为false。</li>
+<li>使用ID3算法<a href="https://zh.wikipedia.org/wiki/ID3算法">^2</a>（决策树分类器）使用变量$K_p$来查询每个子集以获得关于真实分类的信息。 它选择由K_p的熵测量的，产生关于候选像素是否是角的最多信息的$x$。</li>
+<li>这个算法递归地应用在所有子集上，直至其熵为0。</li>
+<li>这样创建的决策树可以用于其他图像的快速检测。</li>
+</ol>
+<h3>非最大抑制</h3>
+<p>另一个问题是检测出多个相邻的兴趣点。 这个问题通过使用非最大抑制来解决。</p>
+<ol type="1">
+<li>计算所有检测到的特征点的得分函数$V$。 $V$是$p$和16个周围像素值之间绝对差值的总和。</li>
+<li>考虑两个相邻的关键点，计算它们的$V$值。</li>
+<li>丢弃$V$值较低的关键点。</li>
+</ol>
+<h3>总结</h3>
+<p>这种算法比其他已经存在的角点检测算法快数倍。</p>
+<p>但这种算法对高水平的噪声敏感。它依赖于一个阈值。</p>
+<h2>OpenCV中的FAST特征检测</h2>
+<p>FAST特征检测的调用方式就和OpenCV中的其他特征检测器一样。如果需要，你可以指定阈值，指定是否应用非最大抑制，要使用非最大抑制的范围等。</p>
+<p>对于要使用非最大抑制的范围，有三个预先定义好的标志变量：</p>
+<p><code>cv2.FAST_FEATURE_DETECTOR_TYPE58</code>、<code>cv2.FAST_FEATURE_DETECTOR_TYPE712</code>和<code>cv2.FAST_FEATURE_DETECTOR_TYPE916</code>。</p>
+<p>下面是检测和画出FAST检测得到的特征点的样例代码：</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;simple.jpg&#39;,0)</div><div class="line"># 用默认值初始化FAST检测器对象</div><div class="line">fast = cv2.FastFeatureDetector_create()</div><div class="line"># 查找并画出关键点</div><div class="line">kp = fast.detect(img,None)</div><div class="line">img2 = cv2.drawKeypoints(img, kp, None, color=(255,0,0))</div><div class="line"># 输出所有默认参数</div><div class="line">print( &quot;Threshold: {}&quot;.format(fast.getThreshold()) )</div><div class="line">print( &quot;nonmaxSuppression:{}&quot;.format(fast.getNonmaxSuppression()) )</div><div class="line">print( &quot;neighborhood: {}&quot;.format(fast.getType()) )</div><div class="line">print( &quot;Total Keypoints with nonmaxSuppression: {}&quot;.format(len(kp)) )</div><div class="line">cv2.imwrite(&#39;fast_true.png&#39;,img2)</div><div class="line"># 禁用非最大抑制</div><div class="line">fast.setNonmaxSuppression(0)</div><div class="line">kp = fast.detect(img,None)</div><div class="line">print( &quot;Total Keypoints without nonmaxSuppression: {}&quot;.format(len(kp)) )</div><div class="line">img3 = cv2.drawKeypoints(img, kp, None, color=(255,0,0))</div><div class="line">cv2.imwrite(&#39;fast_false.png&#39;,img3)</div></div><!-- fragment --><p>下面是这个程序的运行结果。第一幅图是开启了非最大抑制的FAST算法的结果，第二幅图是关闭了非最大抑制的FAST算法的结果：</p>
+<div class="image">
+<img src="../../fast_kp.jpg" alt="fast_kp.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

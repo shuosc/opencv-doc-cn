@@ -1,0 +1,269 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 开始使用图像</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../db/d84/tutorial_py_table_of_contents_gui_cn.html">OpenCV中的GUI功能</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">开始使用图像 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<ul>
+<li>在这里，你将会学到如何加载一副图像，如何显示它，如何保存它</li>
+<li>你将会学到这些函数：<code>cv2.imread()</code>、<code>cv2.imshow()</code>、<code>cv2.imwrite()</code></li>
+<li>可选的，你会学到如何使用Matplotlib显示图像</li>
+</ul>
+<h2>使用OpenCV</h2>
+<h3>读取一幅图像</h3>
+<p>使用<code>cv2.imread()</code>来读取一副图像。图像应该在工作目录下，否则就需要输入图像的完整目录。</p>
+<p>使用Unix-based操作系统的同学请注意，在OpenCV中输入图像路径时<code>~</code>并不能用来指代家目录！</p>
+<p>第二个参数是标记了应该以何种方式来读取图像的一个标志。</p>
+<ul>
+<li><code>cv2.IMREAD_COLOR</code>：读取一副有颜色的图片。图片的任何透明度都将被忽略，这是默认的标志。</li>
+<li><code>cv2.IMREAD_GRAYSCALE</code>：图片会以灰度格式被读入。</li>
+<li><code>cv2.IMREAD_UNCHANGED</code>：按照图片本身的颜色设置读入，包含alpha通道。</li>
+</ul>
+<p>如果你觉得这三个标志太长了，你可以简单地传入1、0或是-1。</p>
+<p>看下面的代码：</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"># 读一幅灰度格式的图像</div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div></div><!-- fragment --><p><b>警告</b></p>
+<p>即使图片路径错误，<code>imread</code>函数也不会抛出任何错误，但是<code>print img</code>将会输出<code>None</code>。</p>
+<h3>显示一幅图片</h3>
+<p>使用函数<code>cv2.imshow()</code>来在一个窗口中显示一幅图片。窗口会自动适应图片的大小。</p>
+<p>第一个参数是窗口的名字（字符串）。第二个参数是我们的图片。你可以创建任意数量的窗口，但必须要给他们不同的窗口名字。</p>
+<div class="fragment"><div class="line">cv2.imshow(&#39;image&#39;,img)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>一个窗口的截屏应该会像这样（在Fedora-Gnome机器上）：</p>
+<div class="image">
+<img src="../../opencv_screenshot.jpg" alt="opencv_screenshot.jpg"/>
+<div class="caption">
+image</div></div>
+<p> <code>cv2.waitKey()</code>是一个键盘操作函数。它的参数是以毫秒为单位的时间值。这个函数在一段时间（指定的毫秒数）内等待键盘被按下，如果你在这段时间内按下了任何按键，程序将会继续执行。如果传入$0$，它将会一直等待一个键被按下。它也能用来拦截特定按键被按下的事件等等，我们会在下面说到这一点。</p>
+<p>除了绑定键盘事件外这个函数还要处理很多其他GUI事件，所以你必须使用它来“真正地”显示出图片。</p>
+<p><code>cv2.destroyAllWindows()</code>简单地销毁你创建的所有窗口。如果你希望销毁特定的某一个窗口，你需要使用<code>cv2.destroyWindow()</code>，这个函数接受窗口的名字作为参数。</p>
+<p>有一种特别的情况，就是你要先创建一个窗口然后再在稍后为其加载图片。在这种情况下，你可以声明这个窗口是否可以改变大小。这是通过函数<code>cv2.namedWindow()</code>来完成的。默认情况下，这个标志是<code>cv2.WINDOW_AUTOSIZE</code>。但你如果你使用<code>cv2.WINDOW_NORMAL</code>，你就可以手动改变窗口的大小。这对于尺寸太大的图片和创建滑块控制条很有帮助。</p>
+<p>看下面的代码：</p>
+<div class="fragment"><div class="line">cv2.namedWindow(&#39;image&#39;, cv2.WINDOW_NORMAL)</div><div class="line">cv2.imshow(&#39;image&#39;,img)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><h3>写入一幅图片</h3>
+<p>使用函数<code>cv2.imwrite()</code>来保存一幅图片。</p>
+<p>第一个参数是文件名，第二个参数是你要保存的图片。</p>
+<div class="fragment"><div class="line">cv2.imwrite(&#39;messigray.png&#39;,img)</div></div><!-- fragment --><p>者将会把png格式的图片保存到工作目录下。</p>
+<h3>把它们结合起来</h3>
+<p>下面的代码读取灰度格式的图片，显示它，如果你按下's'键，则保存并退出，如果你按下ESC键则只退出不保存。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">cv2.imshow(&#39;image&#39;,img)</div><div class="line">k = cv2.waitKey(0)</div><div class="line">if k == 27:         # 按下ESC键，直接退出</div><div class="line">    cv2.destroyAllWindows()</div><div class="line">elif k == ord(&#39;s&#39;): # 按下&#39;s&#39;键，保存并退出</div><div class="line">    cv2.imwrite(&#39;messigray.png&#39;,img)</div><div class="line">    cv2.destroyAllWindows()</div></div><!-- fragment --><p><b>警告</b></p>
+<p>如果你在使用64位机，你需要把<code>k = cv2.waitKey(0)</code>改成：<code>k = cv2.waitKey(0) &amp; 0xFF</code></p>
+<h2>使用Matplotlib</h2>
+<p>Matplotlib是一个Python绘图库，它给予了你很多种不同的绘图方式。你将在下面的文章中看到它们。在这里，你会学到如何使用Matplotlib显示图片。你可以使用Matplotlib缩放图片、保存它等等。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;,0)</div><div class="line">plt.imshow(img, cmap = &#39;gray&#39;, interpolation = &#39;bicubic&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])  # 在x和y轴上隐藏刻度</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果看起来像这样：</p>
+<div class="image">
+<img src="../../matplotlib_screenshot.jpg" alt="matplotlib_screenshot.jpg"/>
+<div class="caption">
+image</div></div>
+<p> Matplotlib有很多绘图选项，欲知更多细节，请查询Matplotlib文档。我们在学习过程中也会接触其中一些。</p>
+<p><b>警告</b></p>
+<p>OpenCV读取的图片的颜色模式是BGR。但Matplotlib显示图片的颜色模式是RGB。因此有用OpenCV打开的有颜色的图片在Matplotlib中并不会正确地显示。请看练习部分来获取更多相关细节。</p>
+<h2>更多资源</h2>
+<ul>
+<li><a href="http://matplotlib.org/api/pyplot_api.html">Matplotlib绘图样式和特性</a></li>
+</ul>
+<h2>练习</h2>
+<ul>
+<li>当你试着用OpenCV读取有颜色的图片，然后用Matplotlib显示它的时候会出现问题，阅读<a href="http://stackoverflow.com/a/15074748/1134940">这个讨论</a>来理解这个问题。 </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

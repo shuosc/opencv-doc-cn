@@ -1,0 +1,275 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 介绍SIFT（尺度不变特征转换）[^1]</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html">特征检测和描述符</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">介绍SIFT（尺度不变特征转换）[^1] </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章中：</p>
+<ul>
+<li>我们将学习SIFT算法的概念。</li>
+<li>我们将学习找到SIFT关键点和描述符。</li>
+</ul>
+<h2>理论基础</h2>
+<p>在前几章中，我们看到了一些像Harris这样的角点检测器。它们是旋转不变的，这意味着，即使图像旋转了，我们也可以找到相同的角点。 这是显而易见的，因为边角在图像旋转后也是边角。 但是缩放呢？ 如果图像缩放，边角可能不再是一个边角。 例如，请看下面的简单图片。 放大后，小窗口内的图像中一个原先是边角的地方现在看起来是平滑的。 所以Harris角点检测不是比例不变的。</p>
+<div class="image">
+<img src="../../sift_scale_invariant.jpg" alt="sift_scale_invariant.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 因此，在2004年，不列颠哥伦比亚大学的 D.Lowe 在他的论文中提出了一种新的算法：尺度不变特征变换（SIFT），《Distinctive Image Features from Scale-Invariant Keypoints》<a href="http://citeseer.ist.psu.edu/lowe04distinctive.html">^2</a>，这个算法提取关键点并计算其描述符。*（这篇论文很容易理解，并被认为是在SIFT方面最好的资料，所以这个解释只是论文的一个简短摘要）*。</p>
+<p>SIFT算法主要涉及四个步骤。 我们会一一看到他们。</p>
+<ol type="1">
+<li><p class="startli">尺度空间极值检测</p>
+<p class="startli">从上图中可以看出，我们不能用同一个窗口来检测不同尺度的关键点。 小的边角也许可以。 但要检测更大的边角，我们需要更大的窗口。</p>
+<p class="startli">为此，需要使用缩放空间过滤。 这个过程中会寻找图片的不同$$值的高斯拉普拉斯算子。 LoG作为一个斑点检测器，它可以检测由于$$中的变化而产生的各种大小的斑点。 简而言之，$$在此充当了一个缩放参数。 例如，在上面的图像中，低$$的高斯核为小边角赋值较高，而高$$的高斯核适合较大的角。 所以，我们可以找到跨越尺度和空间的局部最大值，它给出了一个$(x,y,)$值的列表，这意味着在$(x,y)$处有一个潜在比例为$$的关键点。</p>
+<p class="startli">但是LoG性能开销比较大，所以SIFT算法使用LoG的近似：高斯滤波器的差值。 高斯滤波器差值就是高斯模糊过的有两个不同$$的同一幅图片的差值，设这两个$$值为$$和$k$。这个过程对每组不同的图像金字塔中的“octave”执行。</p>
+<p class="startli">下面的图像展示了它的过程：</p>
+<div class="image">
+<img src="../../sift_dog.jpg" alt="sift_dog.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 一旦找到这个DoG，就会在空间和规模上搜索图像的局部极值。 例如，图像中的一个像素与其8个邻居以及下一个尺度的9个像素和先前尺度的9个像素进行比较。 如果是局部极值，这就是一个潜在的关键点。 这基本上意味着在这个尺度上关键点是最好的。 如下图所示：</p>
+<div class="image">
+<img src="../../sift_local_extrema.jpg" alt="sift_local_extrema.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 关于不同的参数，论文给出了一些经验数据，可以概括为：octaves = 4，比例级数 = 5，初始$ = 1.6 $，$k =  {2} $等作为最佳值。</p>
+</li>
+<li><p class="startli">关键点定位</p>
+<p class="startli">一旦找到潜在的关键点位置，就必须对其进行改进以获得更准确的结果。</p>
+<p class="startli">他们使用尺度空间的泰勒级数展开来获得更精确的极值位置，如果这个极值的强度小于阈值（按照论文，这个阈值是0.03），则被丢弃。 这个阈值在OpenCV中被称为<code>contrastThreshold</code>。</p>
+<p class="startli">DoG对边缘的响应更高，所以边缘也需要去除。 为此，使用了与Harris角点检测器相似的概念。 他们用一个2×2的Hessian矩阵（$H$）来计算主要曲率。 我们从Harris角点检测器知道，对于边缘来说，一个特征值比另一个大。 所以在这里他们使用了一个简单的函数，如果这个比值大于一个在OpenCV中被称为 <code>edgeThreshold</code>的阈值，那么这个关键点被丢弃。 在论文中这个阈值是10。</p>
+<p class="startli">所以它消除了任何低对比度的关键点和边缘关键点，剩下的就是强的兴趣点。</p>
+</li>
+<li><p class="startli">方向分配</p>
+<p class="startli">现在为每个关键点分配一个方向，以实现图像旋转的不变性。 根据规模在关键位置周围采取邻里关系，并计算该地区的梯度大小和方向。 创建一个方向直方图，其中36个方框覆盖360度。 它是通过梯度幅度和高斯加权循环窗口加权的， $$等于关键点的1.5倍。 取直方图中的最高峰值，并且任何高于80％的峰值也被认为是计算方向。 它创建具有相同位置和规模的关键点，但方向不同。 它有助于匹配的稳定性。</p>
+</li>
+<li><p class="startli">关键点描述符</p>
+<p class="startli">现在创建关键点描述符。 关键点附近有一个16x16的块。 它分为16个4x4大小的子块。 对于每个子块，创建8个方向直方图。</p>
+<p class="startli">所以总共有128个二进制值可用。 它被表示为形成关键点描述符的向量。 除此之外，还采取了多种措施来实现对光照变化，旋转等的鲁棒性。</p>
+</li>
+<li>关键点匹配 两幅图像之间的关键点通过识别最近的邻居来匹配。 但在某些情况下，第二个最接近的匹配可能非常接近第一个。 这可能是由于噪音或其他原因。 在这种情况下，取最近距离与第二近距离的比率。 如果它大于0.8，则被丢弃。 根据论文，这排除了大约90％的错误匹配，而只会丢弃5％的正确匹配。</li>
+</ol>
+<p>所以这就是SIFT算法的一个摘要。为了获取更多信息和更好的理解，我们强烈建议阅读论文原文。记住这个算法有专利保护，所以这个算法被包含在<a href="https://github.com/opencv/opencv_contrib">the opencv contrib repo</a>中。</p>
+<h2>OpenCV中的SIFT</h2>
+<p>现在让我们来看看OpenCV中的SIFT功能。 我们从检测出关键点并绘制它们开始。 首先，我们必须构建一个SIFT对象。 我们可以传递不同的参数给它，这些参数是可选的，并且在文档中有很好的解释。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">img = cv2.imread(&#39;home.jpg&#39;)</div><div class="line">gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</div><div class="line">sift = cv2.xfeatures2d.SIFT_create()</div><div class="line">kp = sift.detect(gray,None)</div><div class="line">img=cv2.drawKeypoints(gray,kp,img)</div><div class="line">cv2.imwrite(&#39;sift_keypoints.jpg&#39;,img)</div></div><!-- fragment --><p><code>sift.detect()</code>函数在图像中找到关键点。 如果您只想搜索图像的一部分，则可以传递mask。 每个关键点是一个特殊的结构体，它具有许多属性，如它的$(x,y)$坐标，有意义的邻域的大小，其方向的角度，指定关键点的强度等。</p>
+<p>OpenCV还提供<code>cv2.drawKeyPoints()</code>函数，用于绘制关键点位置的小圆圈。 如果你传递一个标志<code>cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS</code>给它，它将绘制一个大小为keypoint的圆，它甚至会显示它的方向。 看下面的例子。</p>
+<div class="fragment"><div class="line">img=cv2.drawKeypoints(gray,kp,img,flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)</div><div class="line"></div><div class="line">cv2.imwrite(&#39;sift_keypoints.jpg&#39;,img)</div></div><!-- fragment --><p>看下面的结果：</p>
+<div class="image">
+<img src="../../sift_keypoints.jpg" alt="sift_keypoints.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在我们来计算描述符，OpenCV提供了两种方法。</p>
+<ul>
+<li>既然已经找到了关键点，你可以调用<code>sift.compute()</code>来计算我们找到的关键点的描述符。 例如：<code>kp,des = sift.compute(gray,kp)</code></li>
+<li>如果没有找到关键点，可以用函数<code>sift.detectAndCompute()</code>直接找到关键点和描述符。</li>
+</ul>
+<p>我们来看一下第二种方法：</p>
+<div class="fragment"><div class="line">sift = cv2.xfeatures2d.SIFT_create()</div><div class="line">kp, des = sift.detectAndCompute(gray,None)</div></div><!-- fragment --><p>这里<code>kp</code> 是一个关键点的列表， <code>des</code> 是一个shape为$Number_of_Keypoints  128$的numpy array。</p>
+<p>我们得到了关键点，描述符等等。现在我们要看看如何匹配不同图像中的关键点。</p>
+<p>我们将在接下来的章节中学习这些。 </p>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

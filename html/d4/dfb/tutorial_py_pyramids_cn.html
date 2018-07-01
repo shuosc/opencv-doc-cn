@@ -1,0 +1,256 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图像金字塔</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图像金字塔 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>我们将学习图像金字塔</li>
+<li>我们将使用图像金字塔来创建一个新的水果，“Orapple”</li>
+<li>我们将学到这些函数：<code>cv2.pyrUp()</code>，<code>cv2.pyrDown()</code></li>
+</ul>
+<h2>理论基础</h2>
+<p>通常，我们习惯使用一个大小不变的图像。但在某些时候，我们需要处理不同分辨率的同一图像。例如，当在图像中搜索某物时，我们不确定图像中物体的大小。在这种情况下，我们需要创建一组不同分辨率的图像，并在所有图像中搜索对象。这些具有不同分辨率的图像被合称为图像金字塔（因为它们中的最大图像被保存在最底层，最小图像被保存在最顶层，看起来像金字塔）。</p>
+<p>有两种图像金字塔。 1）高斯金字塔和 2）拉普拉斯金字塔。</p>
+<p>高斯金字塔中的较高层（低分辨率）是通过去除较低层（较高分辨率）图像中的连续行和列而形成的。然后，高层中的每个像素由高斯权重下的5个像素构成。通过这样做，$M  N$大小的图像变成了$ M 2   N 2$大小的图像。所以面积减少到原来面积的四分之一。这被称为Octave。随着我们走上金字塔（即分辨率下降），同样的模式将继续下去。同样在分辨率上升的时候，每个区域变成4倍。我们可以使用<code>cv2.pyrDown()</code>和<code>cv2.pyrUp()</code>函数查找到高斯金字塔中的每一层。</p>
+<div class="fragment"><div class="line">img = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">lower_reso = cv2.pyrDown(higher_reso)</div></div><!-- fragment --><p>下面是金字塔中的四层：</p>
+<div class="image">
+<img src="../../messipyr.jpg" alt="messipyr.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 现在，您可以使用<code>cv2.pyrUp()</code>函数在图像金字塔中向下走。</p>
+<div class="fragment"><div class="line">higher_reso2 = cv2.pyrUp(lower_reso)</div></div><!-- fragment --><p>请记住，<code>higher_reso2</code>不等于<code>higher_reso</code>，因为一旦降低了分辨率，就会丢失信息。下面的图像是从金字塔中最小的图像创建的金字塔的第3级。将其与原始图像进行比较：</p>
+<div class="image">
+<img src="../../messiup.jpg" alt="messiup.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 拉普拉斯金字塔由高斯金字塔形成。没有专用的函数来构造拉普拉斯金字塔。拉普拉斯金字塔图像看起来像是边缘图像。其大部分元素是零。它们用于图像压缩。拉普拉斯金字塔的等级由高斯金字塔等级与高斯金字塔等级的高等级之间的差异形成。拉普拉斯金字塔的第3级如下（对比度被调整以增强内容）：</p>
+<div class="image">
+<img src="../../lap.jpg" alt="lap.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>使用金字塔进行图像混合</h2>
+<p>金字塔的一个应用是图像混合。例如，在图像拼接中，您需要将两个图像叠加在一起，但由于图像之间的不连续性，这可能看起来不太好。在这种情况下，使用金字塔图像进行混合可以实现无缝混合，而不会在图像中留下太多数据。其中一个典型的例子是两种水果橙子和苹果的混合。现在看看结果来明白我在说什么：</p>
+<div class="image">
+<img src="../../orapple.jpg" alt="orapple.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 请查看附加资源中的第一个参考资料，它有关于图像混合，拉普拉斯金字塔等的完整详细的图解信息。简单来说只需完成以下步骤：</p>
+<ol type="1">
+<li>加载苹果和橙子的两个图像</li>
+<li>找到苹果和橙子的高斯金字塔（在这个特定的例子中，层数是6）</li>
+<li>从高斯金字塔找到他们的拉普拉斯金字塔</li>
+<li>现在加入拉普拉斯金字塔各层苹果的左半部分和橙子的右半部分</li>
+<li>最后从这个联合图像金字塔重建原始图像。</li>
+</ol>
+<p>以下是完整的代码。 （为了简单起见，每个步骤都是单独完成的，这可能需要更多内存。如果你愿意，你可以优化它）。</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np,sys</div><div class="line"></div><div class="line">A = cv2.imread(&#39;apple.jpg&#39;)</div><div class="line">B = cv2.imread(&#39;orange.jpg&#39;)</div><div class="line"></div><div class="line"># 为A生成高斯金字塔</div><div class="line">G = A.copy()</div><div class="line">gpA = [G]</div><div class="line">for i in xrange(6):</div><div class="line">    G = cv2.pyrDown(G)</div><div class="line">    gpA.append(G)</div><div class="line"></div><div class="line"># 为B生成高斯金字塔</div><div class="line">G = B.copy()</div><div class="line">gpB = [G]</div><div class="line">for i in xrange(6):</div><div class="line">    G = cv2.pyrDown(G)</div><div class="line">    gpB.append(G)</div><div class="line"></div><div class="line"># 为A生成拉普拉斯金字塔</div><div class="line">lpA = [gpA[5]]</div><div class="line">for i in xrange(5,0,-1):</div><div class="line">    GE = cv2.pyrUp(gpA[i])</div><div class="line">    L = cv2.subtract(gpA[i-1],GE)</div><div class="line">    lpA.append(L)</div><div class="line"></div><div class="line"># 为B生成拉普拉斯金字塔</div><div class="line">lpB = [gpB[5]]</div><div class="line">for i in xrange(5,0,-1):</div><div class="line">    GE = cv2.pyrUp(gpB[i])</div><div class="line">    L = cv2.subtract(gpB[i-1],GE)</div><div class="line">    lpB.append(L)</div><div class="line"></div><div class="line"># 现在把每一层图像的左半边和右半边拼合起来</div><div class="line">LS = []</div><div class="line">for la,lb in zip(lpA,lpB):</div><div class="line">    rows,cols,dpt = la.shape</div><div class="line">    ls = np.hstack((la[:,0:cols/2], lb[:,cols/2:]))</div><div class="line">    LS.append(ls)</div><div class="line"></div><div class="line"># 重建图像</div><div class="line">ls_ = LS[0]</div><div class="line">for i in xrange(1,6):</div><div class="line">    ls_ = cv2.pyrUp(ls_)</div><div class="line">    ls_ = cv2.add(ls_, LS[i])</div><div class="line"></div><div class="line"># 直接拼接的图像</div><div class="line">real = np.hstack((A[:,:cols/2],B[:,cols/2:]))</div><div class="line"></div><div class="line">cv2.imwrite(&#39;Pyramid_blending2.jpg&#39;,ls_)</div><div class="line">cv2.imwrite(&#39;Direct_blending.jpg&#39;,real)</div></div><!-- fragment --><h2>更多资源</h2>
+<ul>
+<li><a href="http://pages.cs.wisc.edu/~csverma/CS766_09/ImageMosaic/imagemosaic.html">图像混合</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

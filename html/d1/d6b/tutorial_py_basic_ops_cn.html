@@ -1,0 +1,270 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图片基本操作</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d0/d6b/tutorial_py_table_of_contents_core_cn.html">核心操作</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图片基本操作 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>学会：</p>
+<ul>
+<li>获取像素的值并更改它们</li>
+<li>获取图像属性</li>
+<li>设置感兴趣的区域（Region of Interest，ROI）</li>
+<li>分割和合并图像</li>
+</ul>
+<p>几乎所有这些操作都和Numpy相关而和OpenCV没什么关系。精通Numpy对于写高度优化的OpenCV代码是必要的。</p>
+<p><em>（例子将使用Python控制台，因为它们中大多数程序都只是一行代码）</em></p>
+<h2>获取和更改像素的值</h2>
+<p>让我们先读取一个彩色图片：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; import cv2</div><div class="line">&gt;&gt;&gt; import numpy as np</div><div class="line"></div><div class="line">&gt;&gt;&gt; img = cv2.imread(&#39;messi5.jpg&#39;)</div></div><!-- fragment --><p>你可以使用一个像素的横纵坐标获取一个像素。对于BGR格式的图片，它会返回一个由蓝色、绿色和红色值组成的数组。对于灰度图片，只会返回对应的亮度。</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; px = img[100,100]</div><div class="line">&gt;&gt;&gt; print(px) # [157 166 200]</div><div class="line"></div><div class="line"># 只获取蓝色的像素</div><div class="line">&gt;&gt;&gt; blue = img[100,100,0]</div><div class="line">&gt;&gt;&gt; print( blue ) # 157</div></div><!-- fragment --><p>你可以用同样的方式修改像素的值。</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; img[100,100] = [255,255,255]</div><div class="line">&gt;&gt;&gt; print(img[100,100]) # [255 255 255]</div></div><!-- fragment --><p><b>警告</b></p>
+<p>Numpy是一个针对数组计算高度优化过的库。所以简单地获取每个像素的值并修改它是很慢的，我们不推荐这样做。</p>
+<p>上面提到的方法常常用来选择数组的一个区域，比如说前5行或者最后三列这样。对于单个像素，Numpy数组方法<code>array.item()</code>和<code>array.itemset()</code>更合适些。但这两个函数总是返回一个标量。所以如果你想要获取所有B、G、R的值，你需要对每种颜色分别调用<code>array.item()</code>。</p>
+<p>更好地像素获取和编辑方法：</p>
+<div class="fragment"><div class="line"># 获取红色的值</div><div class="line">&gt;&gt;&gt; img.item(10,10,2) # 59</div><div class="line"></div><div class="line"># 修改红色的值</div><div class="line">&gt;&gt;&gt; img.itemset((10,10,2),100)</div><div class="line">&gt;&gt;&gt; img.item(10,10,2) # 100</div></div><!-- fragment --><h2>获取图片信息</h2>
+<p>图片信息包含行数、列数、通道数、图像数据类型、像素数量等等。</p>
+<p>图片的形状使用<code>img.shape</code>获取。它返回一个包含行数、列数和通道数（如果图片是彩色的）的元组。</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; print( img.shape ) # (342, 548, 3)</div></div><!-- fragment --><p>如果图片是灰度图像，这个元组只会包含行数和列数。所以这是个检查图片是彩色图还是灰度图的好方法。</p>
+<p>可以通过<code>img.size</code>查询像素总数：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; print( img.size ) # 562248</div></div><!-- fragment --><p> 图片数据的类型是用<code>img.dtype</code>表示的:</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; print( img.dtype ) # uint8</div></div><!-- fragment --><p>注意<code>img.dtype</code>在调试程序的过程中是很重要的，因为很多OpenCV-Python代码中的问题都是不合法的数据类型造成的。</p>
+<h2>图片的ROI</h2>
+<p>有时候，你会希望只关注图片的某一个部分。例如对于在图片中检测眼睛，首先可以先进行面部检测，当发现面部时，我们会选择面部区域，然后只在这个区域里检测眼睛，而非搜索整个图片。这能提高我们程序的准确率（因为眼睛总长在脸上:D ）和运行效率（因为我们寻找的区域减小了）。</p>
+<p>ROI也是用Numpy索引来表示的。这里我们选择这幅图里的球并将它复制到图片的另外一个区域里：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; ball = img[280:340, 330:390]</div><div class="line">&gt;&gt;&gt; img[273:333, 100:160] = ball</div></div><!-- fragment --><p>下面是运行结果：</p>
+<div class="image">
+<img src="../../roi.jpg" alt="roi.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>分割和合并图片的通道</h2>
+<p>有时候你需要分割开图片的B、G、R通道来完成工作。这时候你就需要将BGR颜色的图片分成不同的层。另一些时候，你需要把独立的通道合并成BGR的图片，你可以简单地这样做：</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; b,g,r = cv2.split(img)</div><div class="line">&gt;&gt;&gt; img = cv2.merge((b,g,r))</div></div><!-- fragment --><p>或者</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; b = img[:,:,0]</div></div><!-- fragment --><p>假如你要把所有像素的红色值设置为0，你不需要将它分离开来然后再将其置为0，你只需要简单地使用Numpy索引，这样做更快。</p>
+<div class="fragment"><div class="line">&gt;&gt;&gt; img[:,:,2] = 0</div></div><!-- fragment --><p><b>警告</b></p>
+<p><code>cv2.split()</code>会花费很多时间。所以只在你真的需要的时候再使用它。否则就使用Numpy索引。</p>
+<h2>给图片加边框（Padding）</h2>
+<p>如果你想要给图片加一个边框，像相框那样，你可以使用<code>cv2.copyMakeBorder()</code>函数。这个函数也有其他应用，像卷积操作、用0值进行padding等等。这个函数接受下面的参数：</p>
+<ul>
+<li><code>src</code> - 输入图片</li>
+<li><code>top</code>、<code>button</code>、<code>left</code>、<code>right</code> - 相应方向上的边框宽度</li>
+<li><code>borderType</code> - 决定边框类型的Flag，可以取下面这些值：<ul>
+<li><code>cv2.BORDER_CONSTANT</code> - 加一个单色边框，边框颜色需要在下一个参数中给出</li>
+<li><code>cv2.BORDER_REFLECT</code> - 边缘将会是边缘元素的镜像，像这样：*fedcba|abcdefgh|hgfedcb*</li>
+<li><code>cv2.BORDER_REFLECT_101</code>或<code>cv2.BORDER_REFLECT_101</code> - 和上面的方法只有一个细微的差别，像这样：*gfedcb|abcdefgh|gfedcba*</li>
+<li><code>cv2.BORDER_REPLICATE</code> - 最后一个元素被不断地重复，像这样：*aaaaaa|abcdefgh|hhhhhhh*</li>
+<li><code>cv2.BORDER_WRAP</code> - 非常复杂，难以描述，看例子，像这样：*cdefgh|abcdefgh|abcdefg*</li>
+</ul>
+</li>
+<li><code>value</code> - <code>cv2.BORDER_CONSTANT</code>所需要的的颜色值</li>
+</ul>
+<p>下面是为了更好地理解而创建的代码示例：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line">BLUE = [255,0,0]</div><div class="line">img1 = cv2.imread(&#39;opencv-logo.png&#39;)</div><div class="line">replicate = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REPLICATE)</div><div class="line">reflect = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REFLECT)</div><div class="line">reflect101 = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_REFLECT_101)</div><div class="line">wrap = cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_WRAP)</div><div class="line">constant= cv2.copyMakeBorder(img1,10,10,10,10,cv2.BORDER_CONSTANT,value=BLUE)</div><div class="line">plt.subplot(231),plt.imshow(img1,&#39;gray&#39;),plt.title(&#39;ORIGINAL&#39;)</div><div class="line">plt.subplot(232),plt.imshow(replicate,&#39;gray&#39;),plt.title(&#39;REPLICATE&#39;)</div><div class="line">plt.subplot(233),plt.imshow(reflect,&#39;gray&#39;),plt.title(&#39;REFLECT&#39;)</div><div class="line">plt.subplot(234),plt.imshow(reflect101,&#39;gray&#39;),plt.title(&#39;REFLECT_101&#39;)</div><div class="line">plt.subplot(235),plt.imshow(wrap,&#39;gray&#39;),plt.title(&#39;WRAP&#39;)</div><div class="line">plt.subplot(236),plt.imshow(constant,&#39;gray&#39;),plt.title(&#39;CONSTANT&#39;)</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下（由于使用Matplotlib显示图像，红色和蓝色是反的）:</p>
+<div class="image">
+<img src="../../border.jpg" alt="border.jpg"/>
+<div class="caption">
+image</div></div>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

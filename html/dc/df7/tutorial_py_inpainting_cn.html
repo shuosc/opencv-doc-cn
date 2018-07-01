@@ -1,0 +1,238 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 图像修复</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d6/d6d/tutorial_py_table_of_contents_photo_cn.html">计算摄影学</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">图像修复 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在这一章当中，</p>
+<ul>
+<li>我们将学习如何通过一种叫做“图像修复（inpainting）”的方法来去除旧照片中的小噪音，划痕等等</li>
+<li>我们将看到OpenCV中的功能。</li>
+</ul>
+<h2>基础知识</h2>
+<p>你们大多数人会在家里看到一些老旧的照片，上面有一些黑点，一些划痕等等。你有没有想过去修复它？我们不能简单地在绘画工具中抹去它们，因为它只是用白色的结构来代替黑色的结构，这是没有用的。在这些情况下，使用了一种称为图像修复的技术。基本的想法很简单：用相邻的像素替换那些不好的标记，使其看起来像其邻居。考虑下面显示的图片（取自<a href="https://zh.wikipedia.org/wiki/图像修复">维基百科</a>）：</p>
+<div class="image">
+<img src="../../inpaint_basics.jpg" alt="inpaint_basics.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 为此目的设计了几种算法，OpenCV提供了两种算法。两者都可以通过相同的函数<code>cv2.inpaint()</code>来访问</p>
+<p>第一种算法是基于Alexandru Telea在2004年发表的论文《An Image Inpainting Technique Based on the Fast Marching Method》。它基于快速前进法。考虑图像中的将被修复的一个区域。算法从这个区域的边界开始，并在该区域内逐渐填充边界中的所有内容。在邻居的像素周围需要一个小的邻域进行修补。这个像素被邻域中所有已知像素的归一化加权和所取代。选择权重是一个重要的事情。对位于该点附近的那些像素，靠近边界的法线以及位于边界轮廓上的那些像素将会赋予更大的权重。一旦一个像素被修补，它将使用快速前进法移动到下一个最近的像素。 快速前进法确保已知像素附近的像素首先被修补，以便它像一个手动启发式操作一样工作。该算法通过使用标志<code>cv2.INPAINT_TELEA</code>来启用。</p>
+<p>第二种算法是基于Bertalmio，Marcelo，Andrea L. Bertozzi和Guillermo Sapiro在2001年发表的《Navier-Stokes, Fluid Dynamics, and Image and Video Inpainting》论文。该算法基于流体动力学并利用偏微分方程。基本原理是启发式。它首先沿着已知区域的边缘行进到未知区域（因为边缘是连续的）。它继续等照度（连接相同强度点的线，就像轮廓连接具有相同高度的点），同时匹配修补区边界处的梯度向量。为此，使用流体动力学的一些方法。一旦获得，就会填充颜色以减少该区域的最小偏差。该算法通过使用标志<code>cv2.INPAINT_NS</code>来启用。</p>
+<h2>代码</h2>
+<p>我们需要创建一个与输入图像大小相同的mask，其中非零像素对应于要被修补的区域。其他一切都很简单。我的图像中有一些黑色笔画（是我手动添加的）。我用Paint工具创建了相应的笔画。</p>
+<div class="fragment"><div class="line">import numpy as np</div><div class="line">import cv2</div><div class="line"></div><div class="line">img = cv2.imread(&#39;messi_2.jpg&#39;)</div><div class="line">mask = cv2.imread(&#39;mask2.png&#39;,0)</div><div class="line"></div><div class="line">dst = cv2.inpaint(img,mask,3,cv2.INPAINT_TELEA)</div><div class="line"></div><div class="line">cv2.imshow(&#39;dst&#39;,dst)</div><div class="line">cv2.waitKey(0)</div><div class="line">cv2.destroyAllWindows()</div></div><!-- fragment --><p>看下面的结果。第一张图片显示degrade后的输入。第二个图像是mask。第三个图像是第一个算法的结果，最后一个图像是第二个算法的结果。</p>
+<h2>更多资源</h2>
+<ul>
+<li>Bertalmio，Marcelo，Andrea L. Bertozzi和Guillermo Sapiro。《Navier-stokes, fluid dynamics, and image and video inpainting》。在Computer Vision and Pattern Recognition, 2001. CVPR 2001. Proceedings of the 2001 IEEE Computer Society Conference on, vol. 1, pp. I-355. IEEE, 2001.</li>
+<li>Telea, Alexandru. 《An image inpainting technique based on the fast marching method》 Journal of graphics tools 9.1 (2004): 23-34.</li>
+</ul>
+<h2>练习</h2>
+<ul>
+<li>OpenCV带有一个关于图像修复的交互式例子代码，samples/python/inpaint.py，试试吧。</li>
+<li>几个月前，我观看了Adobe Photoshop中使用的高级修补技术<a href="http://www.youtube.com/watch?v=ZtoUiplKa2A">Content-Aware Fill</a>的视频。在进一步的搜索，我能够发现，同样的技术已经在GIMP有不同的名称，“Resynthesizer”（你需要安装单独的插件）。我相信你会喜欢这项技术。 </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

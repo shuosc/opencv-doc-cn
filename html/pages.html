@@ -1,0 +1,294 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 相关页面</title>
+<link href="opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">相关页面</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">这里列出了所有相关页面:</div><div class="directory">
+<div class="levels">[详情级别 <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span><span onclick="javascript:toggleLevel(3);">3</span><span onclick="javascript:toggleLevel(4);">4</span>]</div><table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><a class="el" href="d4/dde/tutorial_py_root_cn.html" target="_self">OpenCV-Python教程</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_0_" class="arrow" onclick="toggleFolder('0_0_')">&#9660;</span><a class="el" href="d4/d6d/tutorial_py_table_of_contents_setup_cn.html" target="_self">介绍OpenCV</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dc/da6/tutorial_py_intro_cn.html" target="_self">OpenCV-Python简介教程</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d8/d51/tutorial_py_setup_in_windows_cn.html" target="_self">在Windows下安装OpenCV-Python</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d0/dbb/tutorial_py_setup_in_fedora_cn.html" target="_self">在Fedora环境下安装OpenCV-Python</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d1/d90/tutorial_py_setup_in_debian_cn.html" target="_self">在Debian（Ubuntu）中配置OpenCV-Python</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_4_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/de6/tutorial_py_setup_in_docker_cn.html" target="_self">在Docker中安装OpenCV-Python</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_5_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d2/d84/tutorial_py_setup_in_raspbian_cn.html" target="_self">在树莓派配置OpenCV-Python</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_1_" class="arrow" onclick="toggleFolder('0_1_')">&#9660;</span><a class="el" href="db/d84/tutorial_py_table_of_contents_gui_cn.html" target="_self">OpenCV中的GUI功能</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d9/dba/tutorial_py_image_display_cn.html" target="_self">开始使用图像</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dc/d3e/tutorial_py_video_display_cn.html" target="_self">开始使用视频</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d7/d6f/tutorial_py_drawing_functions_cn.html" target="_self">OpenCV中的绘图函数</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d4/d73/tutorial_py_mouse_handling_cn.html" target="_self">以鼠标为画笔</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_4_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d2/dec/tutorial_py_trackbar_cn.html" target="_self">用滑块控制条做调色板</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_2_" class="arrow" onclick="toggleFolder('0_2_')">&#9660;</span><a class="el" href="d0/d6b/tutorial_py_table_of_contents_core_cn.html" target="_self">核心操作</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d1/d6b/tutorial_py_basic_ops_cn.html" target="_self">图片基本操作</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d8/dfa/tutorial_py_image_arithmetics_cn.html" target="_self">图像算术操作</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d9/d42/tutorial_py_optimization_cn.html" target="_self">性能评估与改进技巧</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_3_" class="arrow" onclick="toggleFolder('0_3_')">&#9660;</span><a class="el" href="d5/d29/tutorial_py_table_of_contents_imgproc_cn.html" target="_self">OpenCV中的图像处理</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/d2d/tutorial_py_colorspaces_cn.html" target="_self">更换颜色空间</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dc/d57/tutorial_py_geometric_transformations_cn.html" target="_self">对图像进行几何变换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d8/db8/tutorial_py_thresholding_cn.html" target="_self">图像二值化处理</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dd/d57/tutorial_py_filtering_cn.html" target="_self">平滑图像</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/dfe/tutorial_py_morphological_ops_cn.html" target="_self">形态学转换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dc/d80/tutorial_py_gradients_cn.html" target="_self">图像梯度</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_6_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="db/d9e/tutorial_py_canny_cn.html" target="_self">Canny边缘检测</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_7_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d4/dfb/tutorial_py_pyramids_cn.html" target="_self">图像金字塔</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_8_" class="arrow" onclick="toggleFolder('0_3_8_')">&#9660;</span><a class="el" href="d4/dd5/tutorial_py_table_of_contents_contours_cn.html" target="_self">OpenCV中的轮廓</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_0_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d6/d3a/tutorial_py_contours_begin_cn.html" target="_self">轮廓：入门</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_1_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d9/d63/tutorial_py_contour_features_cn.html" target="_self">轮廓特征</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_2_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="df/d3d/tutorial_py_contour_properties_cn.html" target="_self">轮廓特性</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_3_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d3/d22/tutorial_py_contours_more_functions_cn.html" target="_self">轮廓：更多函数</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_8_4_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="df/d68/tutorial_py_contours_hierarchy_cn.html" target="_self">轮廓层次结构</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_9_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_9_" class="arrow" onclick="toggleFolder('0_3_9_')">&#9660;</span><a class="el" href="d3/d46/tutorial_py_table_of_contents_histograms_cn.html" target="_self">OpenCV中的直方图</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_9_0_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d5/dab/tutorial_py_histogram_begins_cn.html" target="_self">直方图：查找，绘制，分析！</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_9_1_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d8/d21/tutorial_py_histogram_equalization_cn.html" target="_self">直方图均衡化</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_9_2_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d7/d56/tutorial_py_2d_histogram_cn.html" target="_self">二维直方图</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_9_3_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="db/d74/tutorial_py_histogram_backprojection_cn.html" target="_self">直方图反投影</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_10_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_10_" class="arrow" onclick="toggleFolder('0_3_10_')">&#9660;</span><a class="el" href="d2/d92/tutorial_py_table_of_contents_transforms_cn.html" target="_self">OpenCV中的图像变换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_10_0_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d7/d7e/tutorial_py_fourier_transform_cn.html" target="_self">傅立叶变换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_11_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/d50/tutorial_py_template_matching_cn.html" target="_self">模板匹配</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_12_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d7/d35/tutorial_py_houghlines_cn.html" target="_self">霍夫直线变换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_13_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d8/d7f/tutorial_py_houghcircles_cn.html" target="_self">霍夫圆变换</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_14_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/df6/tutorial_py_watershed_cn.html" target="_self">基于分水岭算法的图像分割</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_15_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d2/d24/tutorial_py_grabcut_cn.html" target="_self">使用GrabCut算法交互式前景提取</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_4_" class="arrow" onclick="toggleFolder('0_4_')">&#9660;</span><a class="el" href="d2/d3e/tutorial_py_table_of_contents_feature2d_cn.html" target="_self">特征检测和描述符</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d1/dee/tutorial_py_features_meaning_cn.html" target="_self">理解特征</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/daf/tutorial_py_features_harris_cn.html" target="_self">Harris角点检测</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d9/d5c/tutorial_py_shi_tomasi_cn.html" target="_self">Shi-Tomasi 角点检测 &amp; 适合用来跟踪的特征</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d6/d51/tutorial_py_sift_intro_cn.html" target="_self">介绍SIFT（尺度不变特征转换）[^1]</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_4_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="db/daf/tutorial_py_surf_intro_cn.html" target="_self">介绍SURF（加速稳健特征）</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_5_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="da/df4/tutorial_py_fast_cn.html" target="_self">角点检测的FAST算法</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_6_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="de/db0/tutorial_py_brief_cn.html" target="_self">BRIEF特征点描述算法[^1]</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_7_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="db/d20/tutorial_py_orb_cn.html" target="_self">ORB特征描述符(Oriented FAST and Rotated BRIEF)</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_8_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d4/d00/tutorial_py_matcher_cn.html" target="_self">特征匹配</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_9_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d6/d84/tutorial_py_feature_homography_cn.html" target="_self">特征匹配和使用单应性匹配来搜索物体</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_5_" class="arrow" onclick="toggleFolder('0_5_')">&#9660;</span><a class="el" href="d3/d2c/tutorial_py_table_of_contents_video_cn.html" target="_self">视频分析</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d7/d53/tutorial_py_meanshift_cn.html" target="_self">Meanshift和Camshift</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dd/ddf/tutorial_py_lucas_kanade_cn.html" target="_self">光流</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="de/da9/tutorial_py_bg_subtraction_cn.html" target="_self">背景分割</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_6_" class="arrow" onclick="toggleFolder('0_6_')">&#9660;</span><a class="el" href="d1/df3/tutorial_py_table_of_contents_calib3d_cn.html" target="_self">相机校准和3D重建</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="da/d8f/tutorial_py_calibration_cn.html" target="_self">相机校准</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/d01/tutorial_py_pose_cn.html" target="_self">姿势估计</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d5/d4b/tutorial_py_epipolar_geometry_cn.html" target="_self">极线几何</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="de/d22/tutorial_py_depthmap_cn.html" target="_self">来自立体图像的深度图</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_7_" class="arrow" onclick="toggleFolder('0_7_')">&#9660;</span><a class="el" href="d8/dea/tutorial_py_table_of_contents_ml_cn.html" target="_self">机器学习</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_0_" class="arrow" onclick="toggleFolder('0_7_0_')">&#9660;</span><a class="el" href="d7/d0f/tutorial_py_knn_index_cn.html" target="_self">K-最近邻算法</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_0_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d7/dac/tutorial_py_knn_understanding_cn.html" target="_self">了解k-最近邻算法</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_1_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d9/de9/tutorial_py_knn_opencv_cn.html" target="_self">使用kNN进行手写字符的OCR</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_1_" class="arrow" onclick="toggleFolder('0_7_1_')">&#9660;</span><a class="el" href="db/d85/tutorial_py_svm_index_cn.html" target="_self">支持向量机（SVM）</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_1_0_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d4/d1b/tutorial_py_svm_basics_cn.html" target="_self">理解SVM</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_1_1_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d5/d54/tutorial_py_svm_opencv_cn.html" target="_self">使用SVM的手写数据的OCR</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_2_" class="arrow" onclick="toggleFolder('0_7_2_')">&#9660;</span><a class="el" href="d0/dab/tutorial_py_kmeans_index_cn.html" target="_self">K-Means聚类</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_0_"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="d9/d1f/tutorial_py_kmeans_understanding_cn.html" target="_self">理解K-Means聚类</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_1_" class="even"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><a class="el" href="de/dc3/tutorial_py_kmeans_opencv_cn.html" target="_self">OpenCV中的K-Means聚类</a></td><td class="desc"></td></tr>
+<tr id="row_0_8_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_8_" class="arrow" onclick="toggleFolder('0_8_')">&#9660;</span><a class="el" href="d6/d6d/tutorial_py_table_of_contents_photo_cn.html" target="_self">计算摄影学</a></td><td class="desc"></td></tr>
+<tr id="row_0_8_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="df/d8e/tutorial_py_non_local_means_cn.html" target="_self">图像去噪</a></td><td class="desc"></td></tr>
+<tr id="row_0_8_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="dc/df7/tutorial_py_inpainting_cn.html" target="_self">图像修复</a></td><td class="desc"></td></tr>
+<tr id="row_0_8_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="de/d7c/tutorial_py_hdr_cn.html" target="_self">高动态范围（HDR）</a></td><td class="desc"></td></tr>
+<tr id="row_0_9_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_9_" class="arrow" onclick="toggleFolder('0_9_')">&#9660;</span><a class="el" href="d6/d2c/tutorial_py_table_of_contents_objdetect_cn.html" target="_self">目标检测</a></td><td class="desc"></td></tr>
+<tr id="row_0_9_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="da/ddc/tutorial_py_face_detection_cn.html" target="_self">使用 Haar Cascades 的面部识别</a></td><td class="desc"></td></tr>
+<tr id="row_0_10_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_10_" class="arrow" onclick="toggleFolder('0_10_')">&#9660;</span><a class="el" href="d2/dbe/tutorial_py_table_of_contents_bindings_cn.html" target="_self">OpenCV-Python 绑定</a></td><td class="desc"></td></tr>
+<tr id="row_0_10_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a class="el" href="d7/d6e/tutorial_py_bindings_basics_cn.html" target="_self">OpenCV-Python绑定如何工作？</a></td><td class="desc"></td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="d0/de3/citelist.html" target="_self">参考书目</a></td><td class="desc"></td></tr>
+</table>
+</div><!-- directory -->
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

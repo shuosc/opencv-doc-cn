@@ -1,0 +1,266 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 平滑图像</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d5/d29/tutorial_py_table_of_contents_imgproc_cn.html">OpenCV中的图像处理</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">平滑图像 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>学习：</p>
+<ul>
+<li>用各种低通滤波器模糊图像</li>
+<li>将定制滤波器应用于图像（二维卷积）</li>
+</ul>
+<h2>二维卷积（图像滤波）</h2>
+<p>与一维信号一样，图像也可以用各种低通滤波器（LPF），高通滤波器（HPF）等进行滤波。LPF有助于消除噪声，模糊图像等。HPF滤波器有助于找到图片的边缘。</p>
+<p>OpenCV提供了一个函数<code>cv2.filter2D()</code>来将一个内核与一个图像进行卷积。作为例子，我们将尝试在图像上使用平均过滤器。一个5x5的平均滤波器内核如下所示： $$ K = {1}{25} {bmatrix} 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 {bmatrix} $$ 滤波的过程是这样的：将该卷积核的中心放在一个像素之上，将该卷积核之下的所有25个像素加起来，取其平均值，用新的平均值代替中心像素。它会对图像中的所有像素执行此操作。试试这个代码并查看结果：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line">from matplotlib import pyplot as plt</div><div class="line"></div><div class="line">img = cv2.imread(&#39;opencv_logo.png&#39;)</div><div class="line">kernel = np.ones((5,5),np.float32)/25</div><div class="line">dst = cv2.filter2D(img,-1,kernel)</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Original&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(dst),plt.title(&#39;Averaging&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果：</p>
+<div class="image">
+<img src="../../filter.jpg" alt="filter.jpg"/>
+<div class="caption">
+image</div></div>
+ <h2>图像模糊化（图像平滑）</h2>
+<p>图像模糊化是通过将图像与低通滤波器内核进行卷积来实现的。消除噪音非常有用。它实际上是从图像中去除了高频内容（例如：噪声，边缘）。所以这个操作会使边缘模糊一点。 （好吧，有些模糊化的技术也不会模糊边缘）。 OpenCV主要提供四种模糊技术。</p>
+<h3>1. 平均值法</h3>
+<p>这是通过使用归一化的box过滤器进行图像卷积来完成的。它只取卷积核的区域内所有像素的平均值，并替换中心元素。这是由函数<code>cv2.blur()</code>或<code>cv2.boxFilter()</code>完成的。查看文档以获取关于卷积核的更多细节。我们应该指定内核的宽度和高度。一个3x3归一化box过滤器如下所示： $$ K = {1}{9} {bmatrix} 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 \ 1 &amp; 1 &amp; 1 {bmatrix} $$</p>
+<p>如果您不想使用归一化的box滤波器，请使用<code>cv2.boxFilter()</code>。将参数<code>normalize = False</code>传递给函数。</p>
+<p>下面是使用5x5大小的卷积核的例子：</p>
+<div class="fragment"><div class="line">import cv2</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">from matplotlib import pyplot as plt</div><div class="line">img = cv2.imread(&#39;opencv-logo-white.png&#39;)</div><div class="line">blur = cv2.blur(img,(5,5))</div><div class="line">plt.subplot(121),plt.imshow(img),plt.title(&#39;Original&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.subplot(122),plt.imshow(blur),plt.title(&#39;Blurred&#39;)</div><div class="line">plt.xticks([]), plt.yticks([])</div><div class="line">plt.show()</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../blur.jpg" alt="blur.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>2. 高斯模糊法</h3>
+<p>这个方法使用高斯核而不是box过滤器。它是用函数<code>cv2.GaussianBlur()</code>完成的。我们需要指定内核的宽度和高度，这两个值应该是正的奇数。我们还应该分别指定X和Y方向的标准差<code>sigmaX</code>和<code>sigmaY</code>。如果只指定<code>sigmaX</code>，则默认<code>sigmaY</code>与<code>sigmaX</code>相同。如果两者都是零，则会从从内核大小计算出来。高斯模糊对于从图像中去除高斯噪声非常有效。</p>
+<p>如果需要，可以使用函数<code>cv2.getGaussianKernel()</code>创建一个高斯内核。</p>
+<p>上面的代码可以修改为使用高斯模糊：</p>
+<div class="fragment"><div class="line">blur = cv2.GaussianBlur(img,(5,5),0)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../gaussian.jpg" alt="gaussian.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>3. 中位数模糊法</h3>
+<p>在这里，函数<code>cv2.medianBlur()</code>取卷积核区域下的所有像素的中位数，中心元素被这个中值取代。这对于图像中的“椒盐噪音”非常有效。有趣的是，在前面说的两个滤波器中，中心元素是新计算的值，它可以等于图像中的像素值或者就是新的值。但是在中值模糊的情况下，中心元素总是被图像中的某个像素值替代。它有效地降低了噪音。它的内核大小应该是一个正奇数。</p>
+<p>在这个演示中，我添加了50％的噪声，我们的原始图像和应用中位模糊。看看结果：</p>
+<div class="fragment"><div class="line">median = cv2.medianBlur(img,5)</div></div><!-- fragment --><p>结果如下：</p>
+<div class="image">
+<img src="../../median.jpg" alt="median.jpg"/>
+<div class="caption">
+image</div></div>
+ <h3>4. 双边过滤法</h3>
+<p><code>cv2.bilateralFilter()</code>在消除噪音方面非常有效，同时它能保持边缘清晰。但与其他过滤器相比速度较慢。我们已经看到，高斯滤波器取像素周围的一个邻域，并找到它的高斯加权平均值。这个高斯滤波器是空间独立的函数，也就是在滤波时考虑了附近所有的像素。它不考虑像素是否具有几乎相同的强度。它不考虑像素是否是边缘像素。所以它也模糊了我们不想模糊的边缘。</p>
+<p>双边滤波器也需要使用一个空间中的高斯滤波器，而另外一个高斯滤波器是像素差的函数。空间的高斯函数确保在模糊时只考虑附近的像素，而亮度差异高斯函数确保那些与中心像素具有相似亮度的像素才被认为是需要被模糊的。所以它会保留边缘，因为在边缘的像素将具有较大的亮度变化。</p>
+<p>以下示例显示使用双边过滤器（有关参数的详细信息，请查阅文档）。</p>
+<div class="fragment"><div class="line">blur = cv2.bilateralFilter(img,9,75,75)</div></div><!-- fragment --><p>结果：</p>
+<div class="image">
+<img src="../../bilateral.jpg" alt="bilateral.jpg"/>
+<div class="caption">
+image</div></div>
+<p> 看，图像表面上的纹理消失了，但边缘仍然清晰。</p>
+<h2>其他资源</h2>
+<ul>
+<li><a href="http://people.csail.mit.edu/sparis/bf_course/">关于双边过滤的详细信息</a> </li>
+</ul>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:44 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>

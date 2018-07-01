@@ -1,0 +1,257 @@
+<!-- HTML header for doxygen 1.8.6-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<title>OpenCV: 性能评估与改进技巧</title>
+<link href="../../opencv.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+//<![CDATA[
+MathJax.Hub.Config(
+{
+  TeX: {
+      Macros: {
+          matTT: [ "\\[ \\left|\\begin{array}{ccc} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{array}\\right| \\]", 9],
+          fork: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ \\end{array} \\right.", 4],
+          forkthree: ["\\left\\{ \\begin{array}{l l} #1 & \\mbox{#2}\\\\ #3 & \\mbox{#4}\\\\ #5 & \\mbox{#6}\\\\ \\end{array} \\right.", 6],
+          vecthree: ["\\begin{bmatrix} #1\\\\ #2\\\\ #3 \\end{bmatrix}", 3],
+          vecthreethree: ["\\begin{bmatrix} #1 & #2 & #3\\\\ #4 & #5 & #6\\\\ #7 & #8 & #9 \\end{bmatrix}", 9],
+          hdotsfor: ["\\dots", 1],
+          mathbbm: ["\\mathbb{#1}", 1],
+          bordermatrix: ["\\matrix{#1}", 1]
+      }
+  }
+}
+);
+//]]>
+</script><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<!--#include virtual="/google-search.html"-->
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../opencv-logo-small.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">OpenCV
+   &#160;<span id="projectnumber">3.3.0</span>
+   </div>
+   <div id="projectbrief">Open Source Computer Vision</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function getLabelName(innerHTML) {
+    var str = innerHTML.toLowerCase();
+    // Replace all '+' with 'p'
+    str = str.split('+').join('p');
+    // Replace all ' ' with '_'
+    str = str.split(' ').join('_');
+    // Replace all '#' with 'sharp'
+    str = str.split('#').join('sharp');
+    // Replace other special characters with 'ascii' + code
+    for (var i = 0; i < str.length; i++) {
+        var charCode = str.charCodeAt(i);
+        if (!(charCode == 95 || (charCode > 96 && charCode < 123) || (charCode > 47 && charCode < 58)))
+            str = str.substr(0, i) + 'ascii' + charCode + str.substr(i + 1);
+    }
+    return str;
+}
+function addToggle() {
+    var $getDiv = $('div.newInnerHTML').last();
+    var buttonName = $getDiv.html();
+    var label = getLabelName(buttonName.trim());
+    $getDiv.attr("title", label);
+    $getDiv.hide();
+    $getDiv = $getDiv.next();
+    $getDiv.attr("class", "toggleable_div label_" + label);
+    $getDiv.hide();
+}
+//]]>
+</script>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../index.html">OpenCV 官方文档中文翻译（基于V3.3.0）</a></li><li class="navelem"><a class="el" href="../../d0/d6b/tutorial_py_table_of_contents_core_cn.html">核心操作</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">性能评估与改进技巧 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>目标</h2>
+<p>在图像处理中，由于您每秒需要进行大量的操作，所以您的代码不仅要提供正确的解决方案，还要以最快的方式进行处理。</p>
+<p>所以在这一章中，你将学习</p>
+<ul>
+<li>测量你的代码的性能。</li>
+<li>一些提高你的代码性能的提示。</li>
+<li>你会学到这些函数：<code>cv2.getTickCount</code>，<code>cv2.getTickFrequency</code>等。</li>
+</ul>
+<p>除了OpenCV本身之外，Python还提供了一个有助于测量执行时间的模块<code>time</code>。另一个模块<code>profile</code>有助于获得有关代码的详细报告，例如代码中每个函数占用了多少时间，函数被调用了多少次等。但是，如果使用IPython，则所有这些功能都以用户友好的方式集成起来了。我们会看到其中一些重要的功能，有关更多详细信息，请查看**附加资源**部分中的链接。</p>
+<h2>用OpenCV测量性能</h2>
+<p><code>cv2.getTickCount</code>函数返回一个参考事件（就像机器开启的瞬间）到此函数被调用之间的时钟周期数。所以如果你在一个函数执行之前和之后调用它，你会得到用来执行一个函数的时钟周期数。</p>
+<p><code>cv2.getTickFrequency</code>函数返回时钟周期的频率或每秒钟的时钟周期数。所以要以秒数为单位测量执行的时间，你可以这样做：</p>
+<div class="fragment"><div class="line">e1 = cv2.getTickCount()</div><div class="line"># 你的代码</div><div class="line">e2 = cv2.getTickCount()</div><div class="line">time = (e2 - e1)/ cv2.getTickFrequency()</div></div><!-- fragment --><p>我们将用下面的例子来演示。下面的例子运行内核大小为从5到49的奇数的中值滤波（不用担心这做的到底都是些啥，这不是我们这一章关注的内容）：</p>
+<div class="fragment"><div class="line">img1 = cv2.imread(&#39;messi5.jpg&#39;)</div><div class="line">e1 = cv2.getTickCount()</div><div class="line">for i in xrange(5,49,2):</div><div class="line">    img1 = cv2.medianBlur(img1,i)</div><div class="line">e2 = cv2.getTickCount()</div><div class="line">t = (e2 - e1)/cv2.getTickFrequency()</div><div class="line">print(t)</div><div class="line"># 我得到的结果是0.521107655秒</div></div><!-- fragment --><p>你可以使用<code>time</code>模块进行相同的操作。使用<code>time.time()</code>函数而不是<code>cv2.getTickCount</code>。然后取两次时间的差值。</p>
+<h2>OpenCV中的默认优化</h2>
+<p>许多OpenCV函数默认都使用SSE2，AVX等进行了优化。但OpenCV源码中还包含这些函数的未优化版本。</p>
+<p>所以如果我们的系统支持这些功能，我们应该利用它们（几乎所有的现代处理器都支持它们）。编译时默认启用这些功能。如果它被启用，OpenCV会运行优化过的代码，否则它会运行未优化的代码。您可以使用<code>cv2.useOptimized()</code>来检查它是否被启用/禁用，并使用<code>cv2.setUseOptimized()</code>来启用/禁用它。我们来看一个简单的例子。</p>
+<div class="fragment"><div class="line">In [5]: cv2.useOptimized()</div><div class="line">Out[5]: True</div><div class="line"></div><div class="line">In [6]: %timeit res = cv2.medianBlur(img,49)</div><div class="line">10 loops, best of 3: 34.9 ms per loop</div><div class="line"></div><div class="line"># 禁用它</div><div class="line">In [7]: cv2.setUseOptimized(False)</div><div class="line"></div><div class="line">In [8]: cv2.useOptimized()</div><div class="line">Out[8]: False</div><div class="line"></div><div class="line">In [9]: %timeit res = cv2.medianBlur(img,49)</div><div class="line">10 loops, best of 3: 64.1 ms per loop</div></div><!-- fragment --><p>看，优化的中值滤波比未优化的版本大约快两倍。如果你看看源代码，你可以看到中值滤波是SIMD优化的。所以你可以在代码顶部启用它的优化（记住它是默认启用的）。</p>
+<h2>使用IPython测量性能</h2>
+<p>有时您可能需要比较两个类似操作的性能。 IPython给你一个魔术命令<code>％timeit</code>来执行此操作。它多次运行代码以获得更准确的结果。</p>
+<p>这个魔术命令适合于测量单行代码。</p>
+<p>例如，你是否知道下面哪个加法操作更好</p>
+<div class="fragment"><div class="line">x = 5; y = x**2</div></div><!-- fragment --><div class="fragment"><div class="line">x = 5; y = x*x</div></div><!-- fragment --><div class="fragment"><div class="line">x = np.uint8([5]); y = x*x</div></div><!-- fragment --><div class="fragment"><div class="line">x = np.uint8([5]); y = np.square(x)</div></div><!-- fragment --><p>我们会在IPython shell中用<code>％timeit</code>找到答案。</p>
+<div class="fragment"><div class="line">In [10]: x = 5</div><div class="line"></div><div class="line">In [11]: %timeit y=x**2</div><div class="line">10000000 loops, best of 3: 73 ns per loop</div><div class="line"></div><div class="line">In [12]: %timeit y=x*x</div><div class="line">10000000 loops, best of 3: 58.3 ns per loop</div><div class="line"></div><div class="line">In [15]: z = np.uint8([5])</div><div class="line"></div><div class="line">In [17]: %timeit y=z*z</div><div class="line">1000000 loops, best of 3: 1.25 us per loop</div><div class="line"></div><div class="line">In [19]: %timeit y=np.square(z)</div><div class="line">1000000 loops, best of 3: 1.16 us per loop</div></div><!-- fragment --><p>你可以看到，</p>
+<div class="fragment"><div class="line">x = 5; y = x * x</div></div><!-- fragment --><p>是最快的，比Numpy快20倍左右。如果你考虑创建数组的时间，这个数值可能会达到100倍。很酷，对吧？ （Numpy开发者正在研究这个问题）</p>
+<p>Python标量操作比Numpy标量操作更快。所以对于包含一个或两个元素的操作，Python标量比Numpy数组要好。当数组的大小稍微大点时，Numpy会占据优势。</p>
+<p>我们将再尝试一个例子。这一次，我们将比较同一图像的<code>cv2.countNonZero()</code>和<code>np.count_nonzero()</code>的性能。</p>
+<div class="fragment"><div class="line">In [35]: %timeit z = cv2.countNonZero(img)</div><div class="line">100000 loops, best of 3: 15.8 us per loop</div><div class="line"></div><div class="line">In [36]: %timeit z = np.count_nonzero(img)</div></div><!-- fragment --><p>看，OpenCV函数比Numpy函数快近25倍。</p>
+<p>通常，OpenCV函数比Numpy函数更快。所以对于相同的操作，OpenCV函数应当是首选。但是，可能会有例外，尤其是当Numpy使用视图而不是副本时。</p>
+<h2>更多的IPython魔术命令</h2>
+<p>有几个其他的魔术命令来测量性能，逐行分析，测量内存用量等，他们都有完善的文档。所以这里只提供那些文档的链接（在**更多资源**中）。有兴趣的读者可以尝试一下。</p>
+<h2>性能优化技术</h2>
+<p>有几种技术和编码方法来利用Python和Numpy的最大性能。</p>
+<p>这里只给出了优化技术的提纲，并给出其来源的链接。要注意的很重要的一点就是，应当首先尝试以简单的方式实现算法。一旦它工作正常，分析它，找到性能瓶颈并优化它们。</p>
+<ol type="1">
+<li>尽可能避免在Python中使用循环，特别是双/三重循环等。它们注定很慢。</li>
+<li>尽量矢量化算法/代码，因为Numpy和OpenCV针对矢量操作进行了优化。</li>
+<li>利用缓存一致性。</li>
+<li>除非必要，否则不要复制数组。尝试使用Numpy视图。数组的复制是一个代价高昂的操作。</li>
+</ol>
+<p>在完成所有这些操作之后，如果代码仍然很慢，或者使用循环是不可避免的，那么可以使用像Cython这样的库来加快运行速度。</p>
+<h2>更多资源</h2>
+<ol type="1">
+<li><a href="http://wiki.python.org/moin/PythonSpeed/PerformanceTips">Python优化技术</a></li>
+<li>Scipy Lecture Notes - <a href="http://scipy-lectures.github.io/advanced/advanced_numpy/index.html#advanced-numpy">Advanced Numpy</a></li>
+<li><a href="http://pynash.org/2013/03/06/timing-and-profiling.html">IPython中的计时和性能分析</a> </li>
+</ol>
+</div></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.6-->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+生成于 2018年 七月 1日 星期日 11:40:43 , 为 OpenCV使用  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+<script type="text/javascript">
+//<![CDATA[
+function addButton(label, buttonName) {
+    var b = document.createElement("BUTTON");
+    b.innerHTML = buttonName;
+    b.setAttribute('class', 'toggleable_button label_' + label);
+    b.onclick = function() {
+        $('.toggleable_button').css({
+            border: '2px outset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_button.label_' + label).css({
+            border: '2px inset',
+            'border-radius': '4px'
+        });
+        $('.toggleable_div').css('display', 'none');
+        $('.toggleable_div.label_' + label).css('display', 'block');
+    };
+    b.style.border = '2px outset';
+    b.style.borderRadius = '4px';
+    b.style.margin = '2px';
+    return b;
+}
+function buttonsToAdd($elements, $heading, $type) {
+    if ($elements.length === 0) {
+        $elements = $("" + $type + ":contains(" + $heading.html() + ")").parent().prev("div.newInnerHTML");
+    }
+    var arr = jQuery.makeArray($elements);
+    var seen = {};
+    arr.forEach(function(e) {
+        var txt = e.innerHTML;
+        if (!seen[txt]) {
+            $button = addButton(e.title, txt);
+            if (Object.keys(seen).length == 0) {
+                var linebreak1 = document.createElement("br");
+                var linebreak2 = document.createElement("br");
+                ($heading).append(linebreak1);
+                ($heading).append(linebreak2);
+            }
+            ($heading).append($button);
+            seen[txt] = true;
+        }
+    });
+    return;
+}
+$("h2").each(function() {
+    $heading = $(this);
+    $smallerHeadings = $(this).nextUntil("h2").filter("h3").add($(this).nextUntil("h2").find("h3"));
+    if ($smallerHeadings.length) {
+        $smallerHeadings.each(function() {
+            var $elements = $(this).nextUntil("h2,h3").filter("div.newInnerHTML");
+            buttonsToAdd($elements, $(this), "h3");
+        });
+    } else {
+        var $elements = $(this).nextUntil("h2").filter("div.newInnerHTML");
+        buttonsToAdd($elements, $heading, "h2");
+    }
+});
+$(".toggleable_button").first().click();
+var $clickDefault = $('.toggleable_button.label_python').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+$clickDefault = $('.toggleable_button.label_cpp').first();
+if ($clickDefault.length) {
+    $clickDefault.click();
+}
+//]]>
+</script>
+</body>
+</html>
